@@ -1,0 +1,36 @@
+{
+  "schema": "terluna.external-inputs/1",
+  "status": "external inputs for the ground's rock (the globe's true colour); fetched and hash-checked by fetch_surface_inputs.py; ignored by Git",
+  "input_directory": "inputs",
+  "retrieved": "2026-11-17",
+  "files": [
+    {
+      "name": "LROC_GLOBAL_MARE_180.ZIP",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/LROC_GLOBAL_MARE/LROC_GLOBAL_MARE_180.ZIP",
+      "sha256": "a85073f6fe05a0b9b38db6cb1d2f667e51c134517debcd1f3b40fda9a58cde88",
+      "bytes": 8750199,
+      "retrieved": "2026-11-17",
+      "credit": "Global Mapping of Lunar Mare Boundaries (65N and 65S), LROC RDR extras, PDS data set LRO-L-LROC-5-RDR-V1.0 (Nelson, Koeber, Daud, Robinson, Watters, Banks and Williams 2014, Mapping lunar maria extents and lobate scarps using LROC image products, Lunar and Planetary Science Conference 45, abstract 2861; LROC Science Operations Center, Arizona State University). NASA data, no redistribution restriction; cite the paper, the LROC team and PDS.",
+      "use": "644 mare polygons digitized on the LROC WAC 643 nm and band-ratio mosaics and a Clementine colour ratio, at 1:200,000 to 1:500,000, between 66.5 S and 64.8 N, longitudes -180 to 180; geography/mare_map.py reads the shapefile from the archive and grids where the basalt lies"
+    },
+    {
+      "name": "lpgrs_high1_elem_abundance_2deg.lbl",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl",
+      "sha256": "8eb4daac25d68cfe0a9a8d778d447949ceb2239e67635207475aa87f5f3b618e",
+      "bytes": 8102,
+      "retrieved": "2026-11-17",
+      "credit": "Lunar Prospector GRS elemental abundances, PDS data set LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (Prettyman, Hagerty, Elphic, Feldman, Lawrence, McKinney and Vaniman 2006, Elemental composition of the lunar surface: analysis of gamma ray spectroscopy data from Lunar Prospector, Journal of Geophysical Research 111, E12007; producer T. H. Prettyman, Planetary Science Institute). NASA data, no redistribution restriction; cite the paper and PDS.",
+      "use": "label: the table's columns and binning"
+    },
+    {
+      "name": "lpgrs_high1_elem_abundance_2deg.tab",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab",
+      "sha256": "e866953499813ec089067f1985dfb92fe7adc8957a2121bb115a3b27ea14e946",
+      "bytes": 9949280,
+      "retrieved": "2026-11-17",
+      "credit": "Lunar Prospector GRS elemental abundances, PDS data set LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (Prettyman et al. 2006, Journal of Geophysical Research 111, E12007). NASA data, no redistribution restriction; cite the paper and PDS.",
+      "use": "weight fractions of the major oxides on 11,306 equal-area pixels 2 degrees across, from the high-altitude phase (about 100 km; the gamma-ray footprint is about 5 degrees of arc); geography/surface_composition.py grids the FeO and TiO2"
+    }
+  ],
+  "publication_note": "Retrieval and checksum verification are separate from reading the underlying publications. The mare boundaries and the oxides are in the IAU Moon 2000 frame LOLA uses."
+}

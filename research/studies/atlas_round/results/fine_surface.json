@@ -1,0 +1,40 @@
+{
+ "schema": "terluna.research.atlas-round-fine-surface/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/fine_surface.py": "be1447ac29f4645ef2d86067139ac4dd7f291a8c9931fc6ad439402d53412baf"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/globe_surface.json": "038e28557ae5d90ac26721b38b215b1058399383fc25326c7e2eea20800e1009"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "0028db20a7b57d38b0bf5f279f0e998b368022b38541a047cd48e35a6575fd93",
+  "/media/projectspace/terluna-research/atlas-round/fine_ground/inputs/ldem_64.img": "1c4958699d4cffd7e777d51421b6044bba300aa0bef286a544309efb082cdbd6",
+  "/media/projectspace/terluna-research/atlas-round/fine_ground/inputs/sldem2015/sldem2015_128_60s_60n_000_360.jp2": "8414dd0a3366852ede82d492a0180f3add6466a8353ffbf213524aafedc13bc3"
+ },
+ "evidence": "A calculation on products: the design surface (globe_surface.py) carried to 64 px/deg with its 1.9 km cells' means kept, the detail from SLDEM2015 (Barker et al. 2016; LOLA with Kaguya Terrain Camera stereo; public domain, credit NASA's LOLA Team and JAXA's SELENE/Kaguya Team) within 60 degrees and LOLA's LDEM_64 beyond, and the design's seas and lakes at their levels on those heights. The detail is today's ground shape; the young Moon keeps its landforms as LOLA shows them, barring erosion.",
+ "reading_rule": "product holds the fine grid (see its metadata). checks compares the fine grid with the design surface: the block means' largest departure (m, from the int16 rounding), and the water's share of the Moon at both grids, with the share the fine heights raise above the water inside the 1.9 km water cells and the share they flood beside it.",
+ "parameters": {
+  "ppd": 64,
+  "join_deg": [
+   57.0,
+   60.0
+  ],
+  "lift_rounds": 12
+ },
+ "checks": {
+  "block_mean_largest_off_m": 0.191,
+  "lift_last_residual_m": 0.7698,
+  "water_share_16ppd": 0.41658,
+  "water_share_fine": 0.41761,
+  "raised_to_land_share": 0.00858,
+  "flooded_beside_share": 0.00961,
+  "lake_share_fine": 0.17415
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/fine_surface/fine_surface_64ppd.npz",
+  "sha256": "2ab38037eb54d71c9d0a39f7c970efef0a5a109077214fdc27993a5d8ae37090"
+ },
+ "seconds": 109
+}

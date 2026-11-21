@@ -1,0 +1,1436 @@
+{
+ "schema": "terluna.research.atlas-round-redrawn-surface/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/redrawn_surface.py": "c028e0fb131fa677436c5ef62974f2e39491f124d883b0dc4486bf5a2fd9f99f",
+   "geography/crustal_loading.py": "b57a36e705b8b4e4294a7549ab1ccccd2086f83e9008230464adb1723491f954",
+   "geography/love_numbers.py": "1262c86a7106cecc9e3ff304562b55189828a4ad70c681a45295282f699d8b84",
+   "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
+   "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
+   "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
+   "research/studies/south_sea_ocean/inflows.py": "c51a34dd93933b125371d08ce8511776acd180c1012db31a6f65d1d8b1acfaee"
+  }
+ },
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72",
+  "research/studies/drainage_network/results/network.json": "6e4638457ea39e30337b56ec9f10a9d98a83ced101a19fdc8ee5a246964fd923",
+  "geography/results/crustal_loading.json": "e1b1b2fca964fb98d0269574c65f8a128381fb524abe038fc8c041cd49db7670",
+  "geography/crustal_loading_sources.json": "674db27ab627cf6114662fb51b1b46d8017e1eec2e02a5cabc3580cedc2bfd6d"
+ },
+ "ignored_inputs": {
+  "geography/turned_corrected/products/drainage_28pct_16ppd.npz": "f8f2d2ddcaab2908dd1d558f45ff652dca2d034ec730dcaa27a39cac54735c7a",
+  "/media/projectspace/terluna-research/geology/interior-response/interior_response_love.npz": "bd3b1626580db25d614227f0d7c7f8c91dae3755cd9d4f28c2d3a5912ab7c3c0",
+  "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+  "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+  "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d"
+ },
+ "evidence": "A calculation on committed products and published values: the sea-level equation with migrating shorelines (Farrell and Clark 1976; Mitrovica and Milne 2003) on LOLA at 16 px/deg with spherical harmonics to degree 359, the load Love numbers of geography's crustal-loading study (elastic, compressible, every degree) with the geology lane's viscoelastic change for the present Moon (degrees 2-50, incompressible) added, and the drainage network study's rims found on the deformed heights. The water arrives at once in the response; the creep's flow laws are Earth olivine's. Not validated against any observed loading on the Moon.",
+ "reading_rule": "Levels and surfaces are on the deformed Moon's equipotential, in metres against the atlas's common level on the dry Moon's geoid (level_change_m) or the redrawn common level (surface_above_the_common_level_m). The common level holds 28% of the surface as the atlas does; the three upper seas stand 1 cm under their rims over all the land their water joins. Read the design case, the central profile 100 million years after the water arrives, as the settled surface the round builds on, barring erosion; the central and stiff billion-year cases as the most the present temperatures could add; the soft case as the warm mantle's risk; the elastic and 1,000-year cases as the first years and the first millennium. Sill depths are below the common level, four-connected 16 px/deg cells. The atlas case deforms nothing. Water beyond the atlas counts the seas and the lakes against the atlas's seas at its level and the same lakes.",
+ "settings": {
+  "share": 0.28,
+  "upper_seas": [
+   "moscoviense",
+   "orientale",
+   "smythii_marginis"
+  ],
+  "rim_tolerance_m": 0.05,
+  "below_rim_m": 0.01,
+  "fine_ppd": 16,
+  "transform_ppd": 4,
+  "tolerance_m": 0.01,
+  "cases": {
+   "atlas": null,
+   "elastic": {
+    "profile": "central",
+    "years": 0.0
+   },
+   "central, 1,000 years": {
+    "profile": "central",
+    "years": 1000.0
+   },
+   "central, 100 million years": {
+    "profile": "central",
+    "years": 100000000.0
+   },
+   "central, 1 billion years": {
+    "profile": "central",
+    "years": 1000000000.0
+   },
+   "stiff, 1 billion years": {
+    "profile": "stiff",
+    "years": 1000000000.0
+   },
+   "soft, 10 million years": {
+    "profile": "soft",
+    "years": 10000000.0
+   }
+  },
+  "design": "central, 100 million years",
+  "lakes": "geography/turned_corrected/products/drainage_28pct_16ppd.npz"
+ },
+ "atlas": {
+  "seas_km3": 10716218,
+  "lakes_km3": 2652466,
+  "water_km3": 13368684
+ },
+ "level0": -1654.2,
+ "cases": {
+  "atlas": {
+   "level_change_m": 0.0,
+   "common_level_share": 0.27998,
+   "water_share": 0.30984,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5192380,
+     "volume_km3": 3371450,
+     "greatest_depth_m": 3891.2,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": -0.0
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2307272,
+     "volume_km3": 4823162,
+     "greatest_depth_m": 6795.3,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": -0.0
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 766.62,
+     "area_km2": 568208,
+     "volume_km3": 778821,
+     "greatest_depth_m": 5152.3,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": -0.0,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 358862,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 276995,
+     "volume_km3": 321673,
+     "greatest_depth_m": 4387.7,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": -0.0
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2341.57,
+     "area_km2": 288852,
+     "volume_km3": 442903,
+     "greatest_depth_m": 5285.4,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": -0.0,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 367823,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3545.14,
+     "area_km2": 837471,
+     "volume_km3": 1384650,
+     "greatest_depth_m": 7283.7,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": -0.0,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1290960,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 108.64,
+    "Fecunditatis to Crisium (Crisium passage)": 155.26,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 75.04
+   },
+   "nearside": {
+    "join_level_m": -1762.84,
+    "margin_m": 108.64,
+    "last_to_join": [
+     "Crisium",
+     "Fecunditatis"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.27998,
+    "sea_share_change": 0.0,
+    "land_share": 0.72002,
+    "shore_rsl_change_m": {
+     "median": 0.0,
+     "p05": 0.0,
+     "p95": 0.0
+    },
+    "shoreline_mean_shift_km": 0.0,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 12733863,
+   "lakes_volume_km3": 2498468,
+   "water_volume_km3": 15232331,
+   "water_beyond_the_atlas_km3": 1863647,
+   "water_beyond_the_atlas_global_layer_m": 49.13,
+   "response": null,
+   "settled": true,
+   "rounds": [],
+   "catchments": 275888,
+   "seconds": 32,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_atlas_nmax359.npz",
+    "sha256": "63663b4d16d2097638899578c9400b0cea9f0e38f8f7cb98ecb2490e9b5fcb5e"
+   }
+  },
+  "elastic": {
+   "level_change_m": 36.77,
+   "common_level_share": 0.28,
+   "water_share": 0.30931,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5083174,
+     "volume_km3": 3416188,
+     "greatest_depth_m": 3969.5,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": 6.5
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2397303,
+     "volume_km3": 5615263,
+     "greatest_depth_m": 7216.6,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 23.8
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 726.45,
+     "area_km2": 597231,
+     "volume_km3": 833630,
+     "greatest_depth_m": 5182.5,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": 3.9,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 362428,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 278702,
+     "volume_km3": 330509,
+     "greatest_depth_m": 4462.2,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 7.2
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2350.55,
+     "area_km2": 297986,
+     "volume_km3": 466962,
+     "greatest_depth_m": 5415.7,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 7.8,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 381007,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3424.05,
+     "area_km2": 823322,
+     "volume_km3": 1389267,
+     "greatest_depth_m": 7390.1,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 17.0,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1274906,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 104.83,
+    "Fecunditatis to Crisium (Crisium passage)": 203.27,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 312.74
+   },
+   "nearside": {
+    "join_level_m": -1689.57,
+    "margin_m": 72.14,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 6.72,
+     "p05": -49.15,
+     "p95": 222.99
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 13655594,
+   "lakes_volume_km3": 2505171,
+   "water_volume_km3": 16160765,
+   "water_beyond_the_atlas_km3": 2792081,
+   "water_beyond_the_atlas_global_layer_m": 73.61,
+   "response": {
+    "profile": "central",
+    "years": 0.0
+   },
+   "settled": true,
+   "rounds": [
+    {
+     "iterations": 7,
+     "last_change_m": 0.0078,
+     "level_change_m": 37.334,
+     "rims_moved_m": 87.738,
+     "rims_m": {
+      "moscoviense": 3420.08,
+      "orientale": 2352.16,
+      "smythii_marginis": 729.79
+     }
+    },
+    {
+     "iterations": 4,
+     "last_change_m": 0.0071,
+     "level_change_m": 36.745,
+     "rims_moved_m": 4.1,
+     "rims_m": {
+      "moscoviense": 3424.23,
+      "orientale": 2350.51,
+      "smythii_marginis": 726.28
+     }
+    },
+    {
+     "iterations": 3,
+     "last_change_m": 0.0037,
+     "level_change_m": 36.766,
+     "rims_moved_m": 0.217,
+     "rims_m": {
+      "moscoviense": 3424.05,
+      "orientale": 2350.56,
+      "smythii_marginis": 726.47
+     }
+    },
+    {
+     "iterations": 2,
+     "last_change_m": 0.002,
+     "level_change_m": 36.766,
+     "rims_moved_m": 0.011,
+     "rims_m": {
+      "moscoviense": 3424.06,
+      "orientale": 2350.56,
+      "smythii_marginis": 726.46
+     }
+    }
+   ],
+   "catchments": 275117,
+   "seconds": 207,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_elastic_nmax359.npz",
+    "sha256": "e0db3bf122d23aa7431fae8f113b245d4eeb8fb04e958031977322d08a9cb01d"
+   }
+  },
+  "central, 1,000 years": {
+   "level_change_m": 36.53,
+   "common_level_share": 0.28,
+   "water_share": 0.30927,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5084968,
+     "volume_km3": 3423250,
+     "greatest_depth_m": 3971.2,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": 11.0
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2404340,
+     "volume_km3": 5640563,
+     "greatest_depth_m": 7226.7,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 40.7
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 725.6,
+     "area_km2": 594500,
+     "volume_km3": 831297,
+     "greatest_depth_m": 5180.7,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": 3.2,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 360439,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 278680,
+     "volume_km3": 330416,
+     "greatest_depth_m": 4461.8,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 8.1
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2352.29,
+     "area_km2": 297976,
+     "volume_km3": 466942,
+     "greatest_depth_m": 5415.7,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 4.7,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 381147,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3424.13,
+     "area_km2": 823254,
+     "volume_km3": 1389494,
+     "greatest_depth_m": 7390.7,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 16.6,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1275088,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 104.97,
+    "Fecunditatis to Crisium (Crisium passage)": 204.93,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 318.71
+   },
+   "nearside": {
+    "join_level_m": -1689.28,
+    "margin_m": 71.6,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 6.44,
+     "p05": -50.2,
+     "p95": 227.9
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 13676298,
+   "lakes_volume_km3": 2505180,
+   "water_volume_km3": 16181478,
+   "water_beyond_the_atlas_km3": 2812794,
+   "water_beyond_the_atlas_global_layer_m": 74.15,
+   "response": {
+    "profile": "central",
+    "years": 1000.0
+   },
+   "settled": true,
+   "rounds": [
+    {
+     "iterations": 7,
+     "last_change_m": 0.0088,
+     "level_change_m": 37.065,
+     "rims_moved_m": 87.959,
+     "rims_m": {
+      "moscoviense": 3420.13,
+      "orientale": 2354.06,
+      "smythii_marginis": 728.94
+     }
+    },
+    {
+     "iterations": 4,
+     "last_change_m": 0.0077,
+     "level_change_m": 36.506,
+     "rims_moved_m": 4.153,
+     "rims_m": {
+      "moscoviense": 3424.33,
+      "orientale": 2352.26,
+      "smythii_marginis": 725.35
+     }
+    },
+    {
+     "iterations": 3,
+     "last_change_m": 0.0059,
+     "level_change_m": 36.529,
+     "rims_moved_m": 0.299,
+     "rims_m": {
+      "moscoviense": 3424.13,
+      "orientale": 2352.3,
+      "smythii_marginis": 725.62
+     }
+    },
+    {
+     "iterations": 2,
+     "last_change_m": 0.0029,
+     "level_change_m": 36.527,
+     "rims_moved_m": 0.016,
+     "rims_m": {
+      "moscoviense": 3424.14,
+      "orientale": 2352.3,
+      "smythii_marginis": 725.61
+     }
+    }
+   ],
+   "catchments": 275108,
+   "seconds": 207,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_1000_years_nmax359.npz",
+    "sha256": "7329d53c77f500c111b7115fe4cf8306372526195d6642daf6a33e582b1d9161"
+   }
+  },
+  "central, 100 million years": {
+   "level_change_m": 39.17,
+   "common_level_share": 0.28,
+   "water_share": 0.30969,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5082101,
+     "volume_km3": 3492978,
+     "greatest_depth_m": 3987.2,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": 35.5
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2410253,
+     "volume_km3": 5795592,
+     "greatest_depth_m": 7334.7,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 188.9
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 719.95,
+     "area_km2": 599348,
+     "volume_km3": 845786,
+     "greatest_depth_m": 5187.7,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": 14.3,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 362127,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 279470,
+     "volume_km3": 333401,
+     "greatest_depth_m": 4479.4,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 27.8
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2341.33,
+     "area_km2": 297889,
+     "volume_km3": 468965,
+     "greatest_depth_m": 5424.8,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 19.2,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 380872,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3448.77,
+     "area_km2": 844219,
+     "volume_km3": 1440481,
+     "greatest_depth_m": 7464.2,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 67.5,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1321496,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 107.88,
+    "Fecunditatis to Crisium (Crisium passage)": 219.72,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 367.52
+   },
+   "nearside": {
+    "join_level_m": -1683.75,
+    "margin_m": 68.72,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 2.77,
+     "p05": -55.8,
+     "p95": 255.07
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 13952392,
+   "lakes_volume_km3": 2498129,
+   "water_volume_km3": 16450522,
+   "water_beyond_the_atlas_km3": 3081838,
+   "water_beyond_the_atlas_global_layer_m": 81.25,
+   "response": {
+    "profile": "central",
+    "years": 100000000.0
+   },
+   "settled": true,
+   "rounds": [
+    {
+     "iterations": 8,
+     "last_change_m": 0.0047,
+     "level_change_m": 39.538,
+     "rims_moved_m": 59.707,
+     "rims_m": {
+      "moscoviense": 3445.9,
+      "orientale": 2343.17,
+      "smythii_marginis": 724.44
+     }
+    },
+    {
+     "iterations": 5,
+     "last_change_m": 0.0014,
+     "level_change_m": 39.155,
+     "rims_moved_m": 5.173,
+     "rims_m": {
+      "moscoviense": 3448.93,
+      "orientale": 2341.27,
+      "smythii_marginis": 719.65
+     }
+    },
+    {
+     "iterations": 3,
+     "last_change_m": 0.0096,
+     "level_change_m": 39.174,
+     "rims_moved_m": 0.354,
+     "rims_m": {
+      "moscoviense": 3448.77,
+      "orientale": 2341.34,
+      "smythii_marginis": 719.98
+     }
+    },
+    {
+     "iterations": 2,
+     "last_change_m": 0.0053,
+     "level_change_m": 39.174,
+     "rims_moved_m": 0.023,
+     "rims_m": {
+      "moscoviense": 3448.78,
+      "orientale": 2341.34,
+      "smythii_marginis": 719.96
+     }
+    }
+   ],
+   "catchments": 274985,
+   "seconds": 200,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_100_million_years_nmax359.npz",
+    "sha256": "42942b743c00594085b8eaaf54d501811fa827c206fb6e5b712f989d11833d14"
+   }
+  },
+  "central, 1 billion years": {
+   "level_change_m": 41.21,
+   "common_level_share": 0.28,
+   "water_share": 0.31034,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5083798,
+     "volume_km3": 3529682,
+     "greatest_depth_m": 4000.0,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": 51.0
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2411178,
+     "volume_km3": 5862191,
+     "greatest_depth_m": 7385.7,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 255.5
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 719.87,
+     "area_km2": 601399,
+     "volume_km3": 854894,
+     "greatest_depth_m": 5194.3,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": 19.2,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 363863,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 280448,
+     "volume_km3": 336904,
+     "greatest_depth_m": 4498.8,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 48.9
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2335.12,
+     "area_km2": 298817,
+     "volume_km3": 472579,
+     "greatest_depth_m": 5442.0,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 42.6,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 382123,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3460.66,
+     "area_km2": 871443,
+     "volume_km3": 1500359,
+     "greatest_depth_m": 7512.3,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 104.6,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1377426,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 110.53,
+    "Fecunditatis to Crisium (Crisium passage)": 230.42,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 385.07
+   },
+   "nearside": {
+    "join_level_m": -1681.4,
+    "margin_m": 68.4,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 1.69,
+     "p05": -58.02,
+     "p95": 264.67
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 14125727,
+   "lakes_volume_km3": 2494234,
+   "water_volume_km3": 16619961,
+   "water_beyond_the_atlas_km3": 3251277,
+   "water_beyond_the_atlas_global_layer_m": 85.71,
+   "response": {
+    "profile": "central",
+    "years": 1000000000.0
+   },
+   "settled": true,
+   "rounds": [
+    {
+     "iterations": 8,
+     "last_change_m": 0.0077,
+     "level_change_m": 41.273,
+     "rims_moved_m": 44.756,
+     "rims_m": {
+      "moscoviense": 3459.12,
+      "orientale": 2336.84,
+      "smythii_marginis": 725.42
+     }
+    },
+    {
+     "iterations": 4,
+     "last_change_m": 0.0074,
+     "level_change_m": 41.207,
+     "rims_moved_m": 6.013,
+     "rims_m": {
+      "moscoviense": 3460.77,
+      "orientale": 2335.07,
+      "smythii_marginis": 719.47
+     }
+    },
+    {
+     "iterations": 4,
+     "last_change_m": 0.002,
+     "level_change_m": 41.21,
+     "rims_moved_m": 0.444,
+     "rims_m": {
+      "moscoviense": 3460.66,
+      "orientale": 2335.13,
+      "smythii_marginis": 719.91
+     }
+    },
+    {
+     "iterations": 2,
+     "last_change_m": 0.0088,
+     "level_change_m": 41.208,
+     "rims_moved_m": 0.032,
+     "rims_m": {
+      "moscoviense": 3460.67,
+      "orientale": 2335.13,
+      "smythii_marginis": 719.88
+     }
+    }
+   ],
+   "catchments": 274961,
+   "seconds": 220,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_1_billion_years_nmax359.npz",
+    "sha256": "e2ffd58bdd6660918af47b6ba53ec4bc6e70a25291c85f54a14ae2001a6f179d"
+   }
+  },
+  "stiff, 1 billion years": {
+   "level_change_m": 36.63,
+   "common_level_share": 0.28,
+   "water_share": 0.30929,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5086742,
+     "volume_km3": 3431675,
+     "greatest_depth_m": 3973.0,
+     "deepest_place": [
+      13.156,
+      52.781
+     ],
+     "floor_fall_at_the_deepest_m": 14.9
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2406758,
+     "volume_km3": 5664101,
+     "greatest_depth_m": 7241.1,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 61.8
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 724.34,
+     "area_km2": 594562,
+     "volume_km3": 832248,
+     "greatest_depth_m": 5180.8,
+     "deepest_place": [
+      12.094,
+      100.219
+     ],
+     "floor_fall_at_the_deepest_m": 4.6,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 360114,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 278651,
+     "volume_km3": 330340,
+     "greatest_depth_m": 4461.8,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 8.5
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2352.2,
+     "area_km2": 297841,
+     "volume_km3": 466791,
+     "greatest_depth_m": 5415.0,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 2.6,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 381003,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3426.4,
+     "area_km2": 824562,
+     "volume_km3": 1393310,
+     "greatest_depth_m": 7397.0,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 20.6,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1278529,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 105.32,
+    "Fecunditatis to Crisium (Crisium passage)": 206.78,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 326.49
+   },
+   "nearside": {
+    "join_level_m": -1688.97,
+    "margin_m": 71.4,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 6.41,
+     "p05": -51.09,
+     "p95": 232.99
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 13709146,
+   "lakes_volume_km3": 2505143,
+   "water_volume_km3": 16214289,
+   "water_beyond_the_atlas_km3": 2845605,
+   "water_beyond_the_atlas_global_layer_m": 75.02,
+   "response": {
+    "profile": "stiff",
+    "years": 1000000000.0
+   },
+   "settled": true,
+   "rounds": [
+    {
+     "iterations": 8,
+     "last_change_m": 0.0018,
+     "level_change_m": 37.145,
+     "rims_moved_m": 85.548,
+     "rims_m": {
+      "moscoviense": 3422.46,
+      "orientale": 2354.04,
+      "smythii_marginis": 727.76
+     }
+    },
+    {
+     "iterations": 4,
+     "last_change_m": 0.0087,
+     "level_change_m": 36.605,
+     "rims_moved_m": 4.226,
+     "rims_m": {
+      "moscoviense": 3426.59,
+      "orientale": 2352.17,
+      "smythii_marginis": 724.07
+     }
+    },
+    {
+     "iterations": 3,
+     "last_change_m": 0.0067,
+     "level_change_m": 36.629,
+     "rims_moved_m": 0.314,
+     "rims_m": {
+      "moscoviense": 3426.4,
+      "orientale": 2352.21,
+      "smythii_marginis": 724.36
+     }
+    },
+    {
+     "iterations": 2,
+     "last_change_m": 0.0032,
+     "level_change_m": 36.628,
+     "rims_moved_m": 0.017,
+     "rims_m": {
+      "moscoviense": 3426.41,
+      "orientale": 2352.21,
+      "smythii_marginis": 724.35
+     }
+    }
+   ],
+   "catchments": 275105,
+   "seconds": 194,
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_stiff_1_billion_years_nmax359.npz",
+    "sha256": "1d771251dfd9fe9ba1784e46e141d3d4cc7e6b06f2547c59d97f9775b972c620"
+   }
+  },
+  "soft, 10 million years": {
+   "level_change_m": 61.06,
+   "common_level_share": 0.28,
+   "water_share": 0.31217,
+   "seas": {
+    "near_side": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 5118707,
+     "volume_km3": 3943678,
+     "greatest_depth_m": 4327.7,
+     "deepest_place": [
+      14.656,
+      54.719
+     ],
+     "floor_fall_at_the_deepest_m": 421.9
+    },
+    "south_pole_aitken": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 2408040,
+     "volume_km3": 6335399,
+     "greatest_depth_m": 7757.4,
+     "deepest_place": [
+      -70.344,
+      -172.469
+     ],
+     "floor_fall_at_the_deepest_m": 725.6
+    },
+    "smythii_marginis": {
+     "surface_above_the_common_level_m": 734.94,
+     "area_km2": 620813,
+     "volume_km3": 961841,
+     "greatest_depth_m": 5410.4,
+     "deepest_place": [
+      -3.594,
+      90.469
+     ],
+     "floor_fall_at_the_deepest_m": 470.4,
+     "joins_at_its_rim": [
+      "near_side"
+     ],
+     "rise_volume_km3": 386653,
+     "seed": [
+      -3.594,
+      90.469
+     ]
+    },
+    "humboldtianum": {
+     "surface_above_the_common_level_m": 0.0,
+     "area_km2": 294150,
+     "volume_km3": 389346,
+     "greatest_depth_m": 4821.9,
+     "deepest_place": [
+      58.906,
+      85.656
+     ],
+     "floor_fall_at_the_deepest_m": 390.6
+    },
+    "orientale": {
+     "surface_above_the_common_level_m": 2282.86,
+     "area_km2": 342434,
+     "volume_km3": 549782,
+     "greatest_depth_m": 5758.4,
+     "deepest_place": [
+      -21.781,
+      -98.219
+     ],
+     "floor_fall_at_the_deepest_m": 416.0,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 418915,
+     "seed": [
+      -21.781,
+      -98.219
+     ]
+    },
+    "moscoviense": {
+     "surface_above_the_common_level_m": 3509.14,
+     "area_km2": 917928,
+     "volume_km3": 1706241,
+     "greatest_depth_m": 8174.5,
+     "deepest_place": [
+      28.469,
+      150.344
+     ],
+     "floor_fall_at_the_deepest_m": 749.3,
+     "joins_at_its_rim": [
+      "humboldtianum",
+      "near_side",
+      "orientale",
+      "smythii_marginis",
+      "south_pole_aitken"
+     ],
+     "rise_volume_km3": 1532478,
+     "seed": [
+      28.469,
+      150.344
+     ]
+    }
+   },
+   "sills": {
+    "Fecunditatis to the Near-side Sea (western channels)": 108.27,
+    "Fecunditatis to Crisium (Crisium passage)": 338.46,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 459.94
+   },
+   "nearside": {
+    "join_level_m": -1668.22,
+    "margin_m": 75.09,
+    "last_to_join": [
+     "Cognitum",
+     "Humorum",
+     "Nubium"
+    ]
+   },
+   "shore": {
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": -6.49,
+     "p05": -65.87,
+     "p95": 381.93
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0
+   },
+   "seas_volume_km3": 15399226,
+   "lakes_volume_km3": 2482655,
+   "water_volume_km3": 17881881,
+   "water_beyond_the_atlas_km3": 4513197,
+   "water_beyond_the_atlas_global_layer_m": 118.98,
+   "response": {
+    "profile": "soft",
+    "years": 10000000.0
+   },
+   "settled": false,
+   "rounds": [
+    {
+     "iterations": 10,
+     "last_change_m": 0.007,
+     "level_change_m": 60.416,
+     "rims_moved_m": 55.777,
+     "rims_m": {
+      "moscoviense": 3510.07,
+      "orientale": 2336.94,
+      "smythii_marginis": 755.5
+     }
+    },
+    {
+     "iterations": 7,
+     "last_change_m": 0.0035,
+     "level_change_m": 61.03,
+     "rims_moved_m": 53.193,
+     "rims_m": {
+      "moscoviense": 3509.27,
+      "orientale": 2283.13,
+      "smythii_marginis": 732.9
+     }
+    },
+    {
+     "iterations": 6,
+     "last_change_m": 0.0079,
+     "level_change_m": 60.916,
+     "rims_moved_m": 6.824,
+     "rims_m": {
+      "moscoviense": 3509.06,
+      "orientale": 2290.07,
+      "smythii_marginis": 734.94
+     }
+    },
+    {
+     "iterations": 5,
+     "last_change_m": 0.0071,
+     "level_change_m": 60.766,
+     "rims_moved_m": 46.971,
+     "rims_m": {
+      "moscoviense": 3509.06,
+      "orientale": 2337.19,
+      "smythii_marginis": 734.75
+     }
+    },
+    {
+     "iterations": 7,
+     "last_change_m": 0.0024,
+     "level_change_m": 61.065,
+     "rims_moved_m": 54.021,
+     "rims_m": {
+      "moscoviense": 3509.15,
+      "orientale": 2282.87,
+      "smythii_marginis": 734.95
+     }
+    },
+    {
+     "iterations": 6,
+     "last_change_m": 0.0083,
+     "level_change_m": 60.914,
+     "rims_moved_m": 7.117,
+     "rims_m": {
+      "moscoviense": 3509.08,
+      "orientale": 2290.14,
+      "smythii_marginis": 734.8
+     }
+    },
+    {
+     "iterations": 5,
+     "last_change_m": 0.0068,
+     "level_change_m": 60.766,
+     "rims_moved_m": 46.901,
+     "rims_m": {
+      "moscoviense": 3509.06,
+      "orientale": 2337.19,
+      "smythii_marginis": 734.76
+     }
+    },
+    {
+     "iterations": 7,
+     "last_change_m": 0.0024,
+     "level_change_m": 61.065,
+     "rims_moved_m": 54.017,
+     "rims_m": {
+      "moscoviense": 3509.15,
+      "orientale": 2282.87,
+      "smythii_marginis": 734.95
+     }
+    }
+   ],
+   "catchments": 273796,
+   "seconds": 429,
+   "unsettled_rims_m": {
+    "moscoviense": [
+     3509.06,
+     3509.15
+    ],
+    "orientale": [
+     2282.87,
+     2337.19
+    ],
+    "smythii_marginis": [
+     734.76,
+     734.95
+    ]
+   },
+   "grids": {
+    "path": "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_soft_10_million_years_nmax359.npz",
+    "sha256": "4bb5c1dd7ec27c642426c1fda4c5b0d416719c349a83ffde7d0e5c130b344d33"
+   }
+  }
+ },
+ "nmax": 359,
+ "seconds": 1497
+}

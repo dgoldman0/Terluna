@@ -169,6 +169,23 @@ EXPERIMENTS = {
     # needs a cold start.
     'A28R': dict(pressure_pa=121590.0, water=28, lakes='98842fc2a648f889', shield='titania_stack', mldepth=50.0,
                  purpose='design case with the atlas seas and the rain-fed lakes of the current routing'),
+    # The atlas round's final surface (research/studies/atlas_round, 16 November): the redrawn floor at the crust's
+    # settled state, the seas at their chosen levels (Moscoviense, Orientale and Smythii-Marginis full at their rims,
+    # the near-side ocean, the salt sea and Humboldtianum at the common level) and the governed lakes of the design
+    # climate's rain, named by the governed routing's content (governed_routing.npz): 25.1% of the Moon in seas and
+    # 13.2% in lakes. It runs turned only, on the record turned_surface.py writes, from a restart carried onto it.
+    'A28S': dict(pressure_pa=121590.0, water=28, lakes='24691ded4c4a980c', shield='titania_stack', mldepth=50.0,
+                 purpose='design case on the atlas round\'s final surface: the redrawn floor at the settled state, the '
+                         'seas at their chosen levels and the governed lakes'),
+    # The atlas round's design surface (research/studies/atlas_round, 17 November): the same floor with every sea at the
+    # level the design climate's closed budget gives it (the near-side sea parted at its neck, its main part 66.6 m and
+    # its southern seas 166.3 m below the common level; the salt sea and Humboldtianum at the common level; the upper
+    # seas full at their rims) and the lakes of that budget's routing, named by the design routing's content
+    # (design_routing_16ppd.npz): 24.0% of the Moon in seas and 13.6% in lakes, at the settled turn under that water. It
+    # runs turned only, on the record design_turned_surface.py writes, from a restart carried onto it.
+    'A28D': dict(pressure_pa=121590.0, water=28, lakes='6cb410b400c6ee1b', shield='titania_stack', mldepth=50.0,
+                 purpose='design case on the atlas round\'s design surface: the redrawn floor at the settled state, '
+                         'every sea at its own level with the near-side sea parted, and the design routing\'s lakes'),
 }
 # PlaSim's model day is 1430 half-hour steps (29.8 Earth days; with the synodic Sun clock the Sun's own day
 # is the real 29.53). A model year is 12 of them, 17,160 steps (whole_lunar_days; ExoPlaSim's own year is

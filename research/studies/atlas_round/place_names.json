@@ -1,0 +1,159 @@
+{
+ "schema": "terluna.research.atlas-round-place-names/1",
+ "reading_rule": "Names pinned to anchors, which district_names.apply sets over the generated names and the calques. An anchor is what a unit is tied to that a redraw keeps: sea:<body> for one of the seven seas, feature:<IAU name> for the unit that carries a named feature, crater:<IAU name> for a district centred on that crater, region:<its largest district's anchor> for a region, and the centre's kind and place otherwise. A pin gives the name, its tongue where it differs from the unit's, and its meaning. Edit a pin and run python -m research.studies.atlas_round.district_names to rename the record without drawing it again. river:<its mouth's latitude and longitude on today's Moon> names a waterway (waterways.py), which takes the tongue of the region holding most of its course.",
+ "names": {
+  "sea:near-side sea": {
+   "name": "Uamoana",
+   "tongue": "terlunan",
+   "meaning": "Rain Sea (ua rain + moana sea), after Mare Imbrium, the Sea of Showers, its largest basin"
+  },
+  "sea:southern near-side seas": {
+   "name": "Bultengis",
+   "tongue": "dala",
+   "meaning": "Cloud Sea (bulut cloud + tengis sea), after Mare Nubium, the Sea of Clouds"
+  },
+  "sea:South Pole–Aitken Sea": {
+   "name": "H'Yamo Melaha",
+   "tongue": "olivolingvo",
+   "meaning": "the Salt Sea (h' the + yamo sea + melaha salt); in its Hebrew roots also the Dead Sea's name"
+  },
+  "sea:Mare Humboldtianum": {
+   "name": "Yuldustengis",
+   "tongue": "dala",
+   "meaning": "Star Sea (yuldus star + tengis sea), towards the northern limb"
+  },
+  "sea:Mare Moscoviense": {
+   "name": "Hanakosa",
+   "tongue": "runa",
+   "meaning": "Upper Lake (hanak upper + kosa lake), 3.4 km above the common level"
+  },
+  "sea:Mare Orientale": {
+   "name": "Bahari Masariki",
+   "tongue": "pwani",
+   "meaning": "East Sea (bahari sea + masariki east), after Mare Orientale, the Eastern Sea"
+  },
+  "sea:Smythii–Marginis Sea": {
+   "name": "Dagat na Kaseh",
+   "tongue": "tagalhebrew",
+   "meaning": "Sea of the Edge (dagat sea + na + kaseh edge), after Mare Marginis"
+  },
+  "feature:Sinus Iridum": {
+   "name": "Anuanuafanga",
+   "tongue": "terlunan",
+   "meaning": "Rainbow Bay: the Terlunan name for the Bay of Rainbows (Sinus Iridum), in the author's v0.6 reference"
+  },
+  "feature:Montes Jura": {
+   "name": "Jura",
+   "meaning": "the Jura mountains round the Bay of Rainbows, a proper name Terlunan keeps in its established form (v0.6), as in the author's song"
+  },
+  "feature:Mare Ingenii": {
+   "name": "Ingenii",
+   "meaning": "the Sea of Cleverness (Mare Ingenii) in the salt sea, a proper name Terlunan keeps in its established form (v0.6)"
+  },
+  "river:-22.9,173.3": {
+   "name": "Hatunmayu",
+   "tongue": "runa",
+   "meaning": "Great River (hatun great + mayu river), the Moon's largest"
+  },
+  "river:47.5,49.7": {
+   "name": "Ninamuawa",
+   "tongue": "terlunan",
+   "meaning": "Blue River (ninamu blue + awa river), a sea's overflow crossing dry steppe"
+  },
+  "river:2.3,177.7": {
+   "name": "Paramayu",
+   "tongue": "runa",
+   "meaning": "Rain River (para rain + mayu river), the rain mountains' river"
+  },
+  "river:21.3,105.0": {
+   "name": "Hukagawa",
+   "tongue": "satoyama",
+   "meaning": "Deep River (huka deep + kawa river), broad and calm through its long lakes"
+  },
+  "river:15.0,287.7": {
+   "name": "Muto Kiyani",
+   "tongue": "pwani",
+   "meaning": "Green River (muto river + kiyani green), a sea's overflow through green country"
+  },
+  "river:-13.4,253.1": {
+   "name": "Ilog na Gavoah",
+   "tongue": "tagalhebrew",
+   "meaning": "High River (ilog river + na + gavoah high), from the highest country"
+  },
+  "river:-23.0,192.3": {
+   "name": "Pukutaimayu",
+   "tongue": "runa",
+   "meaning": "Mist River (pukutai mist + mayu river), down from the Moon's highest ground"
+  },
+  "river:25.8,103.0": {
+   "name": "Niigawa",
+   "tongue": "satoyama",
+   "meaning": "New River (nii new + kawa river), cut by the works"
+  },
+  "river:19.9,184.6": {
+   "name": "Rereawa",
+   "tongue": "terlunan",
+   "meaning": "Falls River (rere falls + awa river), for its one great fall"
+  },
+  "river:3.6,302.2": {
+   "name": "Yarikgol",
+   "tongue": "dala",
+   "meaning": "Light River (yarik light + gol river), a sea's spill over its neck, under a high Earth"
+  },
+  "river:-45.1,230.0": {
+   "name": "Muto Yiwe",
+   "tongue": "pwani",
+   "meaning": "Stone River (muto river + yiwe stone)"
+  },
+  "river:57.1,111.8": {
+   "name": "Asif Dahab",
+   "tongue": "sahran",
+   "meaning": "Gold River (asif river + dahab gold), water the works brought to the sand land"
+  },
+  "river:16.8,13.5": {
+   "name": "Tiareawa",
+   "tongue": "terlunan",
+   "meaning": "Flower River (tiare flower + awa river)"
+  },
+  "river:18.1,184.8": {
+   "name": "Wairamayu",
+   "tongue": "runa",
+   "meaning": "Wind River (waira wind + mayu river)"
+  },
+  "river:3.3,156.4": {
+   "name": "Puyumayu",
+   "tongue": "runa",
+   "meaning": "Cloud River (puyu cloud + mayu river), the cloud lakes' river"
+  },
+  "river:8.8,146.9": {
+   "name": "Koilurmayu",
+   "tongue": "runa",
+   "meaning": "Star River (koilur star + mayu river), under the far side's dark nights"
+  },
+  "river:1.4,302.5": {
+   "name": "Muto Yani",
+   "tongue": "pwani",
+   "meaning": "Leaf River (muto river + yani leaf)"
+  },
+  "river:-14.1,311.5": {
+   "name": "Muto Pasa",
+   "tongue": "pwani",
+   "meaning": "Twin River (muto river + pasa twin), beside the Leaf River"
+  },
+  "river:-50.2,131.6": {
+   "name": "H'Naharo Longa",
+   "tongue": "olivolingvo",
+   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
+  },
+  "river:12.3,346.0": {
+   "name": "Pooiriawa",
+   "tongue": "terlunan",
+   "meaning": "Black River (pooiri black + awa river), across the black basalt plain"
+  },
+  "river:47.4,186.0": {
+   "name": "H'Naharo Atika",
+   "tongue": "olivolingvo",
+   "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"
+  }
+ }
+}

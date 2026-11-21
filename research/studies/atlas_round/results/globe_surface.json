@@ -1,0 +1,163 @@
+{
+ "schema": "terluna.research.atlas-round-globe-surface/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/globe_surface.py": "0ee46cbc0f77523755209241c20405317919f43184473fa6872919a7feef9bfa",
+   "research/studies/atlas_round/design_routing.py": "554fde6092910090a411cd3807ec323bc8ed76b6bfb5224847d33b70b9462685",
+   "research/studies/atlas_round/design_cuts.py": "5f63e54e93f29cf2b2ceccacaf187e9c114be2473979ef2a5243752801dc5dbe",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
+  "research/studies/atlas_round/results/design_cuts.json": "2ba3f6eb2c041d281f469ed5f3584069bb7f64048f9f68821caebdfada0453fe",
+  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
+  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "b7f1b96bec9e0c68537bf5d986a8b101cba25bd3697b5577d44507ad11d60e17"
+ },
+ "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
+ "reading_rule": "Levels and heights in m above the redrawn common level; areas in km2, volumes in km3, flows in m3/s; shares of the Moon's surface. seas are the seven bodies at their own levels; lakes are the routing's lakes off the seas; neck_river is the main part's spill run down the routing from the ground past the crest. product names the grid the globe reads, on the research drive.",
+ "summary": {
+  "common_level_above_the_dry_geoid_m": -1615.03,
+  "water_share": 0.41658,
+  "sea_share": 0.24368,
+  "lake_share": 0.1729,
+  "lakes": 31575,
+  "closed_lake_share": 0.01416,
+  "lake_volume_km3": 5951749,
+  "rivers_into_the_seas_m3s": 242171,
+  "seas": {
+   "near-side sea": {
+    "level_m": -65.21,
+    "area_km2": 3839222,
+    "share": 0.10121,
+    "mean_depth_m": 725,
+    "greatest_depth_m": 3922,
+    "volume_km3": 2783880
+   },
+   "southern near-side seas": {
+    "level_m": -66.61,
+    "area_km2": 973034,
+    "share": 0.02565,
+    "mean_depth_m": 379,
+    "greatest_depth_m": 3146,
+    "volume_km3": 369158
+   },
+   "South Pole\u2013Aitken Sea": {
+    "level_m": 0.0,
+    "area_km2": 2410253,
+    "share": 0.06354,
+    "mean_depth_m": 2405,
+    "greatest_depth_m": 7335,
+    "volume_km3": 5795591
+   },
+   "Mare Humboldtianum": {
+    "level_m": 0.0,
+    "area_km2": 279470,
+    "share": 0.00737,
+    "mean_depth_m": 1193,
+    "greatest_depth_m": 4479,
+    "volume_km3": 333401
+   },
+   "Mare Moscoviense": {
+    "level_m": 3448.77,
+    "area_km2": 844220,
+    "share": 0.02226,
+    "mean_depth_m": 1706,
+    "greatest_depth_m": 7464,
+    "volume_km3": 1440481
+   },
+   "Mare Orientale": {
+    "level_m": 2341.33,
+    "area_km2": 297889,
+    "share": 0.00785,
+    "mean_depth_m": 1574,
+    "greatest_depth_m": 5425,
+    "volume_km3": 468965
+   },
+   "Smythii\u2013Marginis Sea": {
+    "level_m": 719.95,
+    "area_km2": 599348,
+    "share": 0.0158,
+    "mean_depth_m": 1411,
+    "greatest_depth_m": 5188,
+    "volume_km3": 845786
+   }
+  },
+  "neck_spill_m3s": 9364,
+  "neck_river": null,
+  "cuts": {
+   "trench_cells": 17,
+   "deepest_m": 437.9,
+   "ground_taken_km3": 7.6,
+   "lakes_drained": 0,
+   "lake_drained_km2": 0,
+   "pieces": [
+    {
+     "level_m": 3448.8,
+     "deepest_m": 437.9,
+     "cells": 13,
+     "km": 22,
+     "flow_m3s": 22389,
+     "at": {
+      "today": [
+       34.97,
+       139.72
+      ],
+      "turned": [
+       36.55,
+       133.16
+      ]
+     }
+    },
+    {
+     "level_m": 3027.9,
+     "deepest_m": 89.2,
+     "cells": 3,
+     "km": 5,
+     "flow_m3s": 14653,
+     "at": {
+      "today": [
+       34.22,
+       132.97
+      ],
+      "turned": [
+       35.02,
+       126.51
+      ]
+     }
+    },
+    {
+     "level_m": 2626.8,
+     "deepest_m": 56.1,
+     "cells": 1,
+     "km": 2,
+     "flow_m3s": 14653,
+     "at": {
+      "today": [
+       31.22,
+       131.53
+      ],
+      "turned": [
+       31.88,
+       125.57
+      ]
+     }
+    }
+   ],
+   "flow_m3s": 22389
+  },
+  "deepest_water_m": 7464,
+  "highest_ground_m": 11649,
+  "lowest_ground_m": -7335
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
+  "sha256": "0028db20a7b57d38b0bf5f279f0e998b368022b38541a047cd48e35a6575fd93"
+ },
+ "seconds": 15
+}

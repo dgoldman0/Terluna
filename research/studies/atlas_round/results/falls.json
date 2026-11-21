@@ -1,0 +1,1144 @@
+{
+ "schema": "terluna.research.atlas-round-falls/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/falls.py": "0671ceefec85f25c2a3d6f0c2cc83131f376c26dee74a3797a2431b7c9ff0122",
+   "research/studies/atlas_round/globe_surface.py": "0ee46cbc0f77523755209241c20405317919f43184473fa6872919a7feef9bfa",
+   "research/studies/atlas_round/design_routing.py": "554fde6092910090a411cd3807ec323bc8ed76b6bfb5224847d33b70b9462685"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
+  "research/studies/atlas_round/results/globe_surface.json": "038e28557ae5d90ac26721b38b215b1058399383fc25326c7e2eea20800e1009"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "0028db20a7b57d38b0bf5f279f0e998b368022b38541a047cd48e35a6575fd93"
+ },
+ "evidence": "Steps of the design routing over the design surface between 1.9 km cells: where the large rivers drop steeply, not whether they fall sheer, which is finer than the heights.",
+ "reading_rule": "Drops in m, lengths in km, flows in m3/s, power in GW of falling water at lunar gravity; steepest is the steepest 1.9 km step as a grade. at.today and at.turned are latitude and longitude in today's frame and the globe's. product holds every steep step for the white water, steep_reach the index into reaches of the listed reach each belongs to (-1 for none).",
+ "settings": {
+  "min_q_m3s": 100.0,
+  "steep": 0.03,
+  "named_km": 20.0
+ },
+ "summary": {
+  "steep_reaches": 850,
+  "steep_steps": 1505,
+  "over_1_gw": 139,
+  "over_500_m": 128,
+  "moscoviense_river": {
+   "source": {
+    "today": [
+     -10.72,
+     175.09
+    ],
+    "turned": [
+     -5.45,
+     173.84
+    ]
+   },
+   "mouth": {
+    "today": [
+     -22.84,
+     173.41
+    ],
+    "turned": [
+     -17.66,
+     173.14
+    ]
+   },
+   "flow_m3s": 26816,
+   "length_km": 675,
+   "falls_m": 3449,
+   "into": "South Pole\u2013Aitken Sea"
+  }
+ },
+ "reaches": [
+  {
+   "drop_m": 901,
+   "length_km": 4.5,
+   "flow_m3s": 27453,
+   "steepest": 0.351,
+   "steepest_deg": 19.4,
+   "power_gw": 40.07,
+   "start": 9610449,
+   "end": 9621970,
+   "at": {
+    "today": [
+     -14.28,
+     173.09
+    ],
+    "turned": [
+     -9.15,
+     172.15
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Aitken Z",
+    "beside": true,
+    "km": 19
+   },
+   "on_moscoviense_river": true
+  },
+  {
+   "drop_m": 846,
+   "length_km": 10.2,
+   "flow_m3s": 27739,
+   "steepest": 0.115,
+   "steepest_deg": 6.6,
+   "power_gw": 38.02,
+   "start": 10007872,
+   "end": 10036671,
+   "at": {
+    "today": [
+     -18.59,
+     172.03
+    ],
+    "turned": [
+     -13.53,
+     171.46
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Aitken",
+    "beside": true,
+    "km": 70
+   },
+   "on_moscoviense_river": true
+  },
+  {
+   "drop_m": 482,
+   "length_km": 7.3,
+   "flow_m3s": 29320,
+   "steepest": 0.074,
+   "steepest_deg": 4.2,
+   "power_gw": 22.89,
+   "start": 8072605,
+   "end": 8072602,
+   "at": {
+    "today": [
+     2.41,
+     177.84
+    ],
+    "turned": [
+     7.84,
+     175.64
+    ]
+   },
+   "into": "Mare Moscoviense",
+   "beside": {
+    "name": "Stein M",
+    "beside": false,
+    "km": 53
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 1470,
+   "length_km": 8.9,
+   "flow_m3s": 8837,
+   "steepest": 0.267,
+   "steepest_deg": 14.9,
+   "power_gw": 21.05,
+   "start": 6459918,
+   "end": 6459913,
+   "at": {
+    "today": [
+     19.91,
+     -175.09
+    ],
+    "turned": [
+     25.75,
+     -178.34
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Morse N",
+    "beside": false,
+    "km": 30
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 807,
+   "length_km": 6.4,
+   "flow_m3s": 16042,
+   "steepest": 0.247,
+   "steepest_deg": 13.9,
+   "power_gw": 20.97,
+   "start": 9495430,
+   "end": 9478149,
+   "at": {
+    "today": [
+     -13.03,
+     -175.59
+    ],
+    "turned": [
+     -7.16,
+     -176.86
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Amici Q",
+    "beside": true,
+    "km": 23
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 1116,
+   "length_km": 9.7,
+   "flow_m3s": 10767,
+   "steepest": 0.135,
+   "steepest_deg": 7.7,
+   "power_gw": 19.47,
+   "start": 10256166,
+   "end": 10261921,
+   "at": {
+    "today": [
+     -21.28,
+     -149.59
+    ],
+    "turned": [
+     -14.57,
+     -151.32
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Lodygin R",
+    "beside": false,
+    "km": 87
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 358,
+   "length_km": 8.6,
+   "flow_m3s": 29956,
+   "steepest": 0.046,
+   "steepest_deg": 2.6,
+   "power_gw": 17.37,
+   "start": 10399568,
+   "end": 10411092,
+   "at": {
+    "today": [
+     -22.84,
+     173.03
+    ],
+    "turned": [
+     -17.69,
+     172.78
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Vertregt",
+    "beside": true,
+    "km": 120
+   },
+   "on_moscoviense_river": true
+  },
+  {
+   "drop_m": 734,
+   "length_km": 9.9,
+   "flow_m3s": 14422,
+   "steepest": 0.111,
+   "steepest_deg": 6.3,
+   "power_gw": 17.15,
+   "start": 9224919,
+   "end": 9247956,
+   "at": {
+    "today": [
+     -10.09,
+     -162.53
+    ],
+    "turned": [
+     -3.64,
+     -164.15
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Crookes D",
+    "beside": true,
+    "km": 27
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 380,
+   "length_km": 6.4,
+   "flow_m3s": 26821,
+   "steepest": 0.061,
+   "steepest_deg": 3.5,
+   "power_gw": 16.49,
+   "start": 9328237,
+   "end": 9345518,
+   "at": {
+    "today": [
+     -11.22,
+     174.84
+    ],
+    "turned": [
+     -5.97,
+     173.63
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Aitken Y",
+    "beside": false,
+    "km": 61
+   },
+   "on_moscoviense_river": true
+  },
+  {
+   "drop_m": 327,
+   "length_km": 3.8,
+   "flow_m3s": 26816,
+   "steepest": 0.118,
+   "steepest_deg": 6.7,
+   "power_gw": 14.22,
+   "start": 9282161,
+   "end": 9293681,
+   "at": {
+    "today": [
+     -10.72,
+     175.09
+    ],
+    "turned": [
+     -5.45,
+     173.84
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Aitken Y",
+    "beside": false,
+    "km": 74
+   },
+   "on_moscoviense_river": true
+  },
+  {
+   "drop_m": 555,
+   "length_km": 5.7,
+   "flow_m3s": 14657,
+   "steepest": 0.21,
+   "steepest_deg": 11.9,
+   "power_gw": 13.17,
+   "start": 9363136,
+   "end": 9380416,
+   "at": {
+    "today": [
+     -11.59,
+     -163.97
+    ],
+    "turned": [
+     -5.19,
+     -165.52
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Korolev",
+    "beside": true,
+    "km": 297
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 445,
+   "length_km": 5.3,
+   "flow_m3s": 15662,
+   "steepest": 0.085,
+   "steepest_deg": 4.9,
+   "power_gw": 11.29,
+   "start": 9438890,
+   "end": 9450412,
+   "at": {
+    "today": [
+     -12.41,
+     -109.34
+    ],
+    "turned": [
+     -7.0,
+     -111.88
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Montes Rook",
+    "beside": true,
+    "km": 477
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 616,
+   "length_km": 8.3,
+   "flow_m3s": 10770,
+   "steepest": 0.096,
+   "steepest_deg": 5.5,
+   "power_gw": 10.75,
+   "start": 10290721,
+   "end": 10313760,
+   "at": {
+    "today": [
+     -21.66,
+     -149.91
+    ],
+    "turned": [
+     -14.95,
+     -151.61
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Barringer Z",
+    "beside": false,
+    "km": 94
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 866,
+   "length_km": 12.5,
+   "flow_m3s": 7621,
+   "steepest": 0.09,
+   "steepest_deg": 5.2,
+   "power_gw": 10.69,
+   "start": 4633233,
+   "end": 4610187,
+   "at": {
+    "today": [
+     39.72,
+     137.09
+    ],
+    "turned": [
+     40.94,
+     129.63
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Catena Kurchatov",
+    "beside": true,
+    "km": 76
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 780,
+   "length_km": 4.5,
+   "flow_m3s": 8320,
+   "steepest": 0.185,
+   "steepest_deg": 10.5,
+   "power_gw": 10.52,
+   "start": 9380728,
+   "end": 9392247,
+   "at": {
+    "today": [
+     -11.78,
+     -144.47
+    ],
+    "turned": [
+     -5.06,
+     -146.35
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Mechnikov F",
+    "beside": false,
+    "km": 35
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 432,
+   "length_km": 4.4,
+   "flow_m3s": 13469,
+   "steepest": 0.186,
+   "steepest_deg": 10.6,
+   "power_gw": 9.43,
+   "start": 9904566,
+   "end": 9898804,
+   "at": {
+    "today": [
+     -17.47,
+     -164.59
+    ],
+    "turned": [
+     -11.08,
+     -165.91
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Mohorovicic",
+    "beside": false,
+    "km": 39
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 178,
+   "length_km": 4.3,
+   "flow_m3s": 30768,
+   "steepest": 0.049,
+   "steepest_deg": 2.8,
+   "power_gw": 8.86,
+   "start": 4430492,
+   "end": 4418971,
+   "at": {
+    "today": [
+     41.91,
+     65.78
+    ],
+    "turned": [
+     36.12,
+     61.16
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Lacus Spei",
+    "beside": true,
+    "km": 49
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 554,
+   "length_km": 5.3,
+   "flow_m3s": 9231,
+   "steepest": 0.154,
+   "steepest_deg": 8.7,
+   "power_gw": 8.28,
+   "start": 7353425,
+   "end": 7364943,
+   "at": {
+    "today": [
+     10.22,
+     -130.91
+    ],
+    "turned": [
+     16.7,
+     -132.33
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Grigg P",
+    "beside": true,
+    "km": 22
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 306,
+   "length_km": 1.9,
+   "flow_m3s": 16706,
+   "steepest": 0.161,
+   "steepest_deg": 9.2,
+   "power_gw": 8.28,
+   "start": 7434885,
+   "end": 7429125,
+   "at": {
+    "today": [
+     9.34,
+     -79.66
+    ],
+    "turned": [
+     11.96,
+     -80.34
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Olbers N",
+    "beside": true,
+    "km": 11
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 308,
+   "length_km": 7.9,
+   "flow_m3s": 15673,
+   "steepest": 0.046,
+   "steepest_deg": 2.6,
+   "power_gw": 7.83,
+   "start": 9502263,
+   "end": 9519546,
+   "at": {
+    "today": [
+     -13.09,
+     -108.53
+    ],
+    "turned": [
+     -7.74,
+     -111.13
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Montes Rook",
+    "beside": true,
+    "km": 446
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 296,
+   "length_km": 1.9,
+   "flow_m3s": 15487,
+   "steepest": 0.159,
+   "steepest_deg": 9.0,
+   "power_gw": 7.42,
+   "start": 9266008,
+   "end": 9266009,
+   "at": {
+    "today": [
+     -10.53,
+     -114.47
+    ],
+    "turned": [
+     -4.8,
+     -116.79
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Catena Michelson  GIRD",
+    "beside": true,
+    "km": 307
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 274,
+   "length_km": 2.7,
+   "flow_m3s": 16546,
+   "steepest": 0.103,
+   "steepest_deg": 5.9,
+   "power_gw": 7.36,
+   "start": 7861053,
+   "end": 7855294,
+   "at": {
+    "today": [
+     4.72,
+     -84.16
+    ],
+    "turned": [
+     7.84,
+     -85.35
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Hedin B",
+    "beside": true,
+    "km": 15
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 314,
+   "length_km": 1.9,
+   "flow_m3s": 13688,
+   "steepest": 0.166,
+   "steepest_deg": 9.4,
+   "power_gw": 6.97,
+   "start": 10042759,
+   "end": 10048519,
+   "at": {
+    "today": [
+     -18.97,
+     -167.53
+    ],
+    "turned": [
+     -12.69,
+     -168.7
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Mohorovicic R",
+    "beside": true,
+    "km": 22
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 271,
+   "length_km": 3.4,
+   "flow_m3s": 14981,
+   "steepest": 0.081,
+   "steepest_deg": 4.6,
+   "power_gw": 6.58,
+   "start": 5882876,
+   "end": 5882874,
+   "at": {
+    "today": [
+     26.16,
+     119.78
+    ],
+    "turned": [
+     25.49,
+     114.69
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Innes",
+    "beside": false,
+    "km": 53
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 263,
+   "length_km": 4.5,
+   "flow_m3s": 15452,
+   "steepest": 0.06,
+   "steepest_deg": 3.4,
+   "power_gw": 6.57,
+   "start": 9260244,
+   "end": 9266006,
+   "at": {
+    "today": [
+     -10.47,
+     -114.72
+    ],
+    "turned": [
+     -4.72,
+     -117.03
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Catena Michelson  GIRD",
+    "beside": true,
+    "km": 306
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 772,
+   "length_km": 4.7,
+   "flow_m3s": 5022,
+   "steepest": 0.229,
+   "steepest_deg": 12.9,
+   "power_gw": 6.28,
+   "start": 12082527,
+   "end": 12094049,
+   "at": {
+    "today": [
+     -41.09,
+     -122.03
+    ],
+    "turned": [
+     -34.91,
+     -125.95
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Stetson P",
+    "beside": false,
+    "km": 49
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 241,
+   "length_km": 4.5,
+   "flow_m3s": 15673,
+   "steepest": 0.061,
+   "steepest_deg": 3.5,
+   "power_gw": 6.13,
+   "start": 9519548,
+   "end": 9513790,
+   "at": {
+    "today": [
+     -13.28,
+     -108.22
+    ],
+    "turned": [
+     -7.95,
+     -110.84
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Montes Rook",
+    "beside": true,
+    "km": 435
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 468,
+   "length_km": 3.8,
+   "flow_m3s": 7942,
+   "steepest": 0.16,
+   "steepest_deg": 9.1,
+   "power_gw": 6.02,
+   "start": 8107291,
+   "end": 8107289,
+   "at": {
+    "today": [
+     2.03,
+     -174.28
+    ],
+    "turned": [
+     7.95,
+     -176.41
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Krasovskiy J",
+    "beside": false,
+    "km": 33
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 230,
+   "length_km": 1.8,
+   "flow_m3s": 16032,
+   "steepest": 0.124,
+   "steepest_deg": 7.1,
+   "power_gw": 5.96,
+   "start": 9512744,
+   "end": 9512743,
+   "at": {
+    "today": [
+     -13.22,
+     -173.47
+    ],
+    "turned": [
+     -7.23,
+     -174.77
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Amici M",
+    "beside": true,
+    "km": 61
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 115,
+   "length_km": 2.4,
+   "flow_m3s": 30769,
+   "steepest": 0.049,
+   "steepest_deg": 2.8,
+   "power_gw": 5.72,
+   "start": 4413210,
+   "end": 4407449,
+   "at": {
+    "today": [
+     42.09,
+     65.66
+    ],
+    "turned": [
+     36.3,
+     61.03
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Lacus Spei",
+    "beside": true,
+    "km": 43
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 178,
+   "length_km": 3.8,
+   "flow_m3s": 19246,
+   "steepest": 0.061,
+   "steepest_deg": 3.5,
+   "power_gw": 5.54,
+   "start": 8447098,
+   "end": 8447096,
+   "at": {
+    "today": [
+     -1.66,
+     -176.34
+    ],
+    "turned": [
+     4.15,
+     -178.27
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Icarus X",
+    "beside": true,
+    "km": 27
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 204,
+   "length_km": 3.8,
+   "flow_m3s": 16042,
+   "steepest": 0.076,
+   "steepest_deg": 4.3,
+   "power_gw": 5.3,
+   "start": 9518470,
+   "end": 9506950,
+   "at": {
+    "today": [
+     -13.28,
+     -175.59
+    ],
+    "turned": [
+     -7.41,
+     -176.85
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "McKellar U",
+    "beside": true,
+    "km": 29
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 233,
+   "length_km": 1.9,
+   "flow_m3s": 13634,
+   "steepest": 0.123,
+   "steepest_deg": 7.0,
+   "power_gw": 5.16,
+   "start": 9904519,
+   "end": 9910279,
+   "at": {
+    "today": [
+     -17.47,
+     -167.53
+    ],
+    "turned": [
+     -11.19,
+     -168.76
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Mohorovicic R",
+    "beside": false,
+    "km": 67
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 141,
+   "length_km": 2.4,
+   "flow_m3s": 22388,
+   "steepest": 0.058,
+   "steepest_deg": 3.3,
+   "power_gw": 5.12,
+   "start": 4973080,
+   "end": 4967319,
+   "at": {
+    "today": [
+     36.03,
+     137.53
+    ],
+    "turned": [
+     37.35,
+     130.76
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Catena Kurchatov",
+    "beside": true,
+    "km": 43
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 211,
+   "length_km": 3.8,
+   "flow_m3s": 14628,
+   "steepest": 0.07,
+   "steepest_deg": 4.0,
+   "power_gw": 5.01,
+   "start": 5422264,
+   "end": 5433784,
+   "at": {
+    "today": [
+     31.16,
+     131.53
+    ],
+    "turned": [
+     31.82,
+     125.58
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Van Maanen K",
+    "beside": false,
+    "km": 81
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 258,
+   "length_km": 4.5,
+   "flow_m3s": 11947,
+   "steepest": 0.071,
+   "steepest_deg": 4.0,
+   "power_gw": 4.99,
+   "start": 10186889,
+   "end": 10175368,
+   "at": {
+    "today": [
+     -20.53,
+     -159.41
+    ],
+    "turned": [
+     -13.98,
+     -160.79
+    ]
+   },
+   "into": "land",
+   "beside": {
+    "name": "Wilsing V",
+    "beside": true,
+    "km": 39
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 329,
+   "length_km": 3.7,
+   "flow_m3s": 9214,
+   "steepest": 0.095,
+   "steepest_deg": 5.4,
+   "power_gw": 4.91,
+   "start": 7013502,
+   "end": 7013504,
+   "at": {
+    "today": [
+     13.91,
+     -136.09
+    ],
+    "turned": [
+     20.52,
+     -137.57
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Kekule",
+    "beside": false,
+    "km": 101
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 596,
+   "length_km": 6.7,
+   "flow_m3s": 5020,
+   "steepest": 0.176,
+   "steepest_deg": 10.0,
+   "power_gw": 4.84,
+   "start": 12007638,
+   "end": 12024918,
+   "at": {
+    "today": [
+     -40.28,
+     -122.59
+    ],
+    "turned": [
+     -34.08,
+     -126.41
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Stetson P",
+    "beside": false,
+    "km": 75
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 592,
+   "length_km": 5.7,
+   "flow_m3s": 5022,
+   "steepest": 0.195,
+   "steepest_deg": 11.0,
+   "power_gw": 4.82,
+   "start": 12042199,
+   "end": 12059479,
+   "at": {
+    "today": [
+     -40.66,
+     -122.53
+    ],
+    "turned": [
+     -34.45,
+     -126.37
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Stetson P",
+    "beside": false,
+    "km": 66
+   },
+   "on_moscoviense_river": false
+  },
+  {
+   "drop_m": 176,
+   "length_km": 2.7,
+   "flow_m3s": 16553,
+   "steepest": 0.066,
+   "steepest_deg": 3.8,
+   "power_gw": 4.72,
+   "start": 7734341,
+   "end": 7728580,
+   "at": {
+    "today": [
+     6.09,
+     -83.66
+    ],
+    "turned": [
+     9.15,
+     -84.7
+    ]
+   },
+   "into": "a lake",
+   "beside": {
+    "name": "Olbers Y",
+    "beside": true,
+    "km": 11
+   },
+   "on_moscoviense_river": false
+  }
+ ],
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/falls/falls_16ppd.npz",
+  "sha256": "f4e9d19a9555632c4ac9eb6b5135e7e3cb67edd153d7436a27ba1b151378b6cf"
+ },
+ "seconds": 9
+}

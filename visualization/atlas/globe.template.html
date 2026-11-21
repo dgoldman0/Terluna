@@ -13,46 +13,103 @@
     --space: #000000;
     --accent: #eb6834;
     --focus: #2a78d6;
+    --glass: rgba(255, 255, 255, 0.94);
     --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
     --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+      --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36;
+      --glass: rgba(21, 26, 33, 0.94); color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+    --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36;
+    --glass: rgba(21, 26, 33, 0.94); color-scheme: dark;
   }
-  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
-         padding-inline: 16px; padding-block: 20px 36px; }
-  .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
-  header h1 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 38px); letter-spacing: .01em;
-              margin: 0; text-wrap: balance; }
-  header p { margin: 4px 0 0; color: var(--muted); max-width: 72ch; }
-  .stage { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
-  @media (max-width: 860px) { .stage { grid-template-columns: minmax(0, 1fr); } }
-  .viewport { position: relative; background: var(--space); border-radius: 10px; overflow: hidden; width: 100%;
-              max-width: 100%; aspect-ratio: 1 / 1; max-height: 84vh; margin-inline: auto; touch-action: none; cursor: grab; }
+  /* The globe fills the window; the controls, the search, the card and the notes float over it. */
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--space); color: var(--ink); font-family: var(--body); font-size: 15px;
+         line-height: 1.5; overflow: hidden; }
+  .viewport { position: fixed; inset: 0; background: var(--space); overflow: hidden; touch-action: none; cursor: grab; }
   .viewport.dragging { cursor: grabbing; }
+  .viewport.pinning { cursor: crosshair; }
   .viewport canvas { display: block; width: 100%; height: 100%; }
+  .float { position: fixed; z-index: 5; background: var(--glass); color: var(--ink); border: 1px solid var(--rule);
+           border-radius: 10px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px); }
+  .top { top: max(16px, env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px));
+         width: min(360px, calc(100vw - 32px)); padding: 10px 12px; display: grid; gap: 6px; }
+  .top h1 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: .01em; margin: 0;
+            line-height: 1.2; text-wrap: balance; }
+  .top .readout:empty { display: none; }
+  .tools { top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px));
+           padding: 6px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .drawer { left: max(16px, env(safe-area-inset-left, 0px)); top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px));
+            bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 30px); width: 300px; overflow-y: auto;
+            padding: 2px 14px 10px; overscroll-behavior: contain; }
+  .cardpanel { right: max(16px, env(safe-area-inset-right, 0px)); top: calc(max(16px, env(safe-area-inset-top, 0px)) + 58px);
+               width: min(370px, calc(100vw - 32px)); max-height: calc(100dvh - 58px - 96px); overflow-y: auto;
+               padding: 14px 16px; overscroll-behavior: contain; }
+  .views { right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+           padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: calc(100vw - 32px); }
+  .views .zoom { min-width: 34px; font-weight: 600; }
+  .about { left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(780px, calc(100vw - 32px));
+           max-height: calc(100dvh - 64px); overflow-y: auto; padding: 18px 22px; z-index: 8; overscroll-behavior: contain; }
+  .about h2.title { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 0 32px 6px 0; }
+  .about .lede { margin: 0 0 12px; }
+  .close { position: absolute; top: 6px; right: 6px; border: 0; font-size: 22px; line-height: 1; padding: 4px 9px;
+           color: var(--muted); background: transparent; }
+  .close:hover { color: var(--ink); }
+  .banner { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); pointer-events: none;
+            top: calc(max(16px, env(safe-area-inset-top, 0px)) + 64px); background: var(--accent); color: #fff;
+            padding: 6px 14px; border-radius: 18px; font-size: 13.5px; white-space: nowrap; }
+  .tip { position: absolute; z-index: 4; pointer-events: none; max-width: 300px; background: var(--glass); color: var(--ink);
+         border: 1px solid var(--rule); border-radius: 8px; padding: 7px 10px; font-size: 13px; line-height: 1.4;
+         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
+  .tip b { display: block; font-family: var(--display); font-size: 15.5px; font-weight: 600; }
+  .tip .m { display: block; color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+  .tip .m:empty, .tip .t:empty { display: none; }
+  .sec { border-top: 1px solid var(--rule); padding: 9px 0; }
+  .sec:first-child { border-top: 0; }
+  .sec > summary { font-family: var(--display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+                   color: var(--muted); font-weight: 600; cursor: pointer; list-style: none; display: flex;
+                   justify-content: space-between; align-items: center; }
+  .sec > summary::-webkit-details-marker { display: none; }
+  .sec > summary::after { content: '+'; font-size: 16px; letter-spacing: 0; }
+  .sec[open] > summary::after { content: '−'; }
+  .sec[open] > summary { margin-bottom: 8px; }
+  @media (max-width: 700px) {
+    .top { right: max(16px, env(safe-area-inset-right, 0px)); width: auto; }
+    .tools { top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px)); }
+    .drawer, .cardpanel { left: 0; right: 0; bottom: 0; top: auto; width: auto; max-height: 58dvh; border-radius: 14px 14px 0 0;
+                          padding-left: max(16px, env(safe-area-inset-left, 0px));
+                          padding-right: max(16px, env(safe-area-inset-right, 0px));
+                          padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; }
+    .views { left: max(16px, env(safe-area-inset-left, 0px)); justify-content: center; }
+    .hint { display: none; }
+    .banner { top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px) + 46px); }
+  }
   .labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .lab { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-family: var(--display);
          font-size: 12.5px; line-height: 1.1; text-align: center; }
   .lab.sea { color: #eef5ff; font-style: italic; letter-spacing: .02em; text-shadow: 0 0 3px #0d2c55, 0 0 6px #0d2c55; }
+  .lab.region { color: #fff1d6; font-size: 13.5px; font-weight: 600; letter-spacing: .06em;
+                text-shadow: 0 0 3px #1c1408, 0 0 7px #1c1408, 0 0 11px #1c1408; }
+  .lab.region.seaRegion { color: #e2efff; font-style: italic; text-shadow: 0 0 3px #0d2c55, 0 0 8px #0d2c55; }
+  .lab.district { color: #fbf7ee; font-size: 11.5px; text-shadow: 0 0 3px #000, 0 0 6px #000; }
+  .lab.river { color: #cfe6ff; font-size: 11.5px; font-style: italic; font-weight: 600; letter-spacing: .04em;
+               text-shadow: 0 0 3px #06223f, 0 0 6px #06223f, 0 0 9px #06223f; }
+  .lab.coast { color: #d9ecff; font-size: 11px; font-style: italic; text-shadow: 0 0 3px #08213f, 0 0 6px #08213f; }
   .lab.island { color: #1f1d1a; font-size: 11.5px; text-shadow: 0 0 3px #fbfaf7, 0 0 5px #fbfaf7; }
   .appearance .lab.island { color: #f4f1ea; text-shadow: 0 0 3px #000, 0 0 5px #000; }
   .lab.site { transform: translate(9px, -50%); text-align: left; font-size: 11.5px; color: #fff3ec;
               text-shadow: 0 0 3px #000, 0 0 5px #000; }
   .lab.target { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-style: italic; color: #e7ebf2;
                 text-shadow: 0 0 3px #000, 0 0 5px #000; }
-  .hint { position: absolute; left: 12px; bottom: 10px; right: 12px; font-size: 12px; color: #aeb6c4; font-family: var(--body); }
-  .panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 14px;
-           display: grid; gap: 16px; }
-  .group h2 { font-family: var(--display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-              color: var(--muted); margin: 0 0 6px; font-weight: 600; }
-  .views { display: flex; flex-wrap: wrap; gap: 6px; }
+  .hint { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px));
+          max-width: 46vw; font-size: 12px; color: #aeb6c4; font-family: var(--body); text-shadow: 0 0 3px #000; }
   button { font: inherit; font-size: 13.5px; border: 1px solid var(--rule); background: transparent; color: var(--ink);
            border-radius: 6px; padding: 5px 10px; cursor: pointer; }
   button:hover { border-color: var(--muted); }
@@ -71,13 +128,29 @@
   .sw.tri { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent;
             border-bottom: 10px solid var(--accent); border-radius: 0; margin-inline: 2px; }
   .sw.sq { background: #2b2f36; width: 9px; height: 9px; margin-inline: 3px; border: 1px solid #fff; }
+  .sw.fall { background: #bfe9ff; width: 9px; height: 9px; margin-inline: 3px; transform: rotate(45deg); border: 1px solid #36505e; }
+  .lab.fall { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-weight: 600; color: #e6f6ff;
+    text-shadow: 0 0 3px #000, 0 0 5px #000; white-space: nowrap; }
+  .lab.work { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-weight: 600; color: #ffe0b8;
+    text-shadow: 0 0 3px #000, 0 0 5px #000; white-space: nowrap; }
+  .sw.work { background: #ffb347; width: 11px; height: 5px; margin-inline: 2px; border: 1px solid #5a3a10; }
   .figs { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; font-size: 13.5px; margin: 0; }
   .figs dt { color: var(--muted); }
   .figs dd { margin: 0; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
-  .card { border-top: 1px solid var(--rule); padding-top: 12px; font-size: 14px; display: grid; gap: 4px; }
-  .card h3 { font-family: var(--display); font-size: 19px; margin: 0; font-weight: 600; line-height: 1.15; }
-  .card .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .card { font-size: 14px; display: grid; gap: 7px; }
+  .card h3 { font-family: var(--display); font-size: 22px; margin: 0 30px 0 0; font-weight: 600; line-height: 1.15;
+             text-wrap: balance; }
+  .card .meta { font-size: 13px; color: var(--muted); }
   .card p { margin: 0; }
+  .card .lead { font-size: 15px; line-height: 1.5; }
+  .card dl.facts { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; margin: 2px 0 0;
+                   font-size: 13.5px; border-top: 1px solid var(--rule); padding-top: 8px; }
+  .card dl.facts dt { color: var(--muted); }
+  .card dl.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .card .links { display: flex; flex-wrap: wrap; gap: 5px; align-items: baseline; }
+  .card .links span { color: var(--muted); font-size: 12.5px; width: 100%; }
+  .card .links button { font-size: 12.5px; padding: 2px 8px; }
+  .card .note { font-size: 12px; color: var(--muted); }
   .readout { font-family: var(--mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
   input[type=range] { width: 100%; accent-color: var(--accent); }
   select, input[type=text] { font: inherit; font-size: 13.5px; border: 1px solid var(--rule); background: var(--panel);
@@ -95,7 +168,7 @@
   .ticks span:last-child { transform: translateX(-100%); }
   .lab.pin { transform: translate(13px, -50%); text-align: left; font-size: 12px; color: #ffffff;
              text-shadow: 0 0 3px #000, 0 0 5px #000; }
-  .notes { color: var(--muted); font-size: 14px; max-width: 92ch; display: grid; gap: 8px; }
+  .notes { color: var(--muted); font-size: 14px; display: grid; gap: 8px; }
   .notes h2 { font-family: var(--display); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; margin: 6px 0 0;
               color: var(--ink); font-weight: 600; }
   .notes p { margin: 0; }
@@ -103,57 +176,65 @@
   .notes code { font-family: var(--mono); font-size: 12px; word-break: break-all; }
 </style>
 
-<div class="wrap">
-  <header>
-    <h1 id="headline">The Open Moon at 28% water</h1>
-    <p id="lede">Land and sea from the Terluna geography atlas. Drag to turn the Moon; scroll or pinch to zoom.</p>
-  </header>
+<div class="viewport" id="viewport">
+  <canvas id="globe" aria-label="Interactive 3D globe of the Open Moon"></canvas>
+  <div class="labels" id="labels"></div>
+  <div class="tip" id="tip" hidden><b></b><span class="m"></span><span class="t"></span></div>
+  <div class="banner" id="pin-banner" hidden>Click the globe to place a pin · Esc to stop</div>
+  <div class="hint" id="hint">Loading the globe…</div>
+</div>
 
-  <div class="stage">
-    <div class="viewport" id="viewport">
-      <canvas id="globe" aria-label="Interactive 3D globe of the Open Moon"></canvas>
-      <div class="labels" id="labels"></div>
-      <div class="hint" id="hint">Loading the globe…</div>
-    </div>
+<header class="float top" id="top">
+  <h1 id="headline">The Open Moon at 28% water</h1>
+  <form class="goto" id="goto" autocomplete="off" role="search">
+    <input type="text" id="goto-input" list="places" placeholder="A place, or 45 N, 30 W"
+           aria-label="A place, or a latitude and longitude" aria-describedby="goto-value">
+    <button type="submit">Go</button>
+  </form>
+  <datalist id="places"></datalist>
+  <div class="readout" id="goto-value"></div>
+</header>
 
-    <aside class="panel" aria-label="Globe controls">
-      <div class="group">
-        <h2>Mode</h2>
+<div class="float tools" role="toolbar" aria-label="Tools">
+  <button type="button" id="layers-toggle" aria-pressed="true" aria-expanded="true" aria-controls="drawer">Layers</button>
+  <button type="button" id="pin-mode" aria-pressed="false"
+          title="Place a pin to read the height and the water there; Esc stops">Pin</button>
+  <button type="button" id="clear-pin" hidden>Clear pin</button>
+  <button type="button" id="about-open" aria-expanded="false" aria-controls="about">About</button>
+</div>
+
+<nav class="float views" aria-label="Views">
+  <button type="button" data-view="near" aria-pressed="true">Near side</button>
+  <button type="button" data-view="far" aria-pressed="false">Far side</button>
+  <button type="button" data-view="south" aria-pressed="false">South pole</button>
+  <button type="button" data-view="north" aria-pressed="false">North pole</button>
+  <button type="button" data-view="earth" aria-pressed="false">From Earth</button>
+  <button type="button" id="turn" aria-pressed="false">Turn slowly</button>
+  <button type="button" class="zoom" id="zoom-in" aria-label="Zoom in">+</button>
+  <button type="button" class="zoom" id="zoom-out" aria-label="Zoom out">−</button>
+</nav>
+
+<section class="float cardpanel" id="cardpanel" aria-label="The place selected" hidden>
+  <button type="button" class="close" id="card-close" aria-label="Close the card">×</button>
+  <div class="card" id="card" aria-live="polite"></div>
+</section>
+
+    <aside class="float drawer" id="drawer" aria-label="Layers and display">
+      <details class="sec" data-key="mode" open>
+        <summary>Mode</summary>
         <div class="segmented" role="group" aria-label="Mode">
           <button type="button" data-mode="appearance" aria-pressed="true">Appearance</button>
           <button type="button" data-mode="topo" aria-pressed="false">Topography</button>
         </div>
-      </div>
-      <div class="group">
-        <h2>View</h2>
-        <div class="views">
-          <button type="button" data-view="near" aria-pressed="true">Near side</button>
-          <button type="button" data-view="far" aria-pressed="false">Far side</button>
-          <button type="button" data-view="south" aria-pressed="false">South pole</button>
-          <button type="button" data-view="north" aria-pressed="false">North pole</button>
-          <button type="button" data-view="earth" aria-pressed="false">From Earth</button>
-          <button type="button" id="turn" aria-pressed="false">Turn slowly</button>
-        </div>
-      </div>
-      <div class="group">
-        <h2>Go to</h2>
-        <form class="goto" id="goto" autocomplete="off">
-          <input type="text" id="goto-input" list="places" placeholder="45 N, 30 W or a place"
-                 aria-label="Latitude and longitude, or a place" aria-describedby="goto-value">
-          <button type="submit">Go</button>
-          <button type="button" id="clear-pin" hidden>Clear</button>
-        </form>
-        <datalist id="places"></datalist>
-        <div class="readout" id="goto-value">Or click the globe for the height or depth there.</div>
-      </div>
-      <div class="group" id="years-group" hidden>
-        <h2>Years</h2>
+      </details>
+      <details class="sec" data-key="years" id="years-group" hidden open>
+        <summary>Years</summary>
         <input type="range" id="years" min="0" max="7" step="1" value="0"
                aria-label="Years after the water stands as the atlas draws it" aria-describedby="years-value">
         <div class="readout" id="years-value"></div>
-      </div>
-      <div class="group" data-only="appearance">
-        <h2>Light</h2>
+      </details>
+      <details class="sec" data-key="light" data-only="appearance" open>
+        <summary>Light</summary>
         <div class="segmented" role="group" aria-label="Light">
           <button type="button" data-light="sun" aria-pressed="true">Sunlight</button>
           <button type="button" data-light="even" aria-pressed="false">Fully lit</button>
@@ -161,19 +242,27 @@
         <input type="range" id="phase" min="0" max="29.5" step="0.1" value="10" style="margin-top:10px"
                aria-label="Day since new moon" aria-describedby="phase-value">
         <div class="readout" id="phase-value"></div>
-      </div>
-      <div class="group" data-only="appearance">
-        <h2>Display</h2>
+      </details>
+      <details class="sec" data-key="display" data-only="appearance">
+        <summary>Display</summary>
         <input type="range" id="exposure" min="-3" max="14" step="0.5" value="1" aria-describedby="exposure-value">
         <div class="readout" id="exposure-value"></div>
+        <label><input type="checkbox" id="close-light" checked> Close up: the ground as a mosaic shows it (even light, held exposure, no haze)</label>
         <div class="toggles" style="margin-top:8px">
           <label><input type="checkbox" id="show-clouds" checked> Clouds</label>
           <label><input type="checkbox" id="show-air" checked> Atmosphere</label>
           <label><input type="checkbox" id="red-only"> Red light only</label>
         </div>
-      </div>
-      <div class="group">
-        <h2>Topography</h2>
+      </details>
+      <details class="sec" data-key="air" data-only="appearance">
+        <summary>Air in view</summary>
+        <div class="toggles"><label><input type="checkbox" id="peel-zoom" checked> With the zoom</label></div>
+        <input type="range" id="peel" min="0" max="12" step="1" value="12" style="margin-top:6px"
+               aria-label="Height below which the view looks through the air" aria-describedby="peel-value">
+        <div class="readout" id="peel-value"></div>
+      </details>
+      <details class="sec" data-key="topography">
+        <summary>Topography</summary>
         <div data-only="appearance">
           <div class="toggles"><label><input type="checkbox" id="topo-overlay"> Over the appearance</label></div>
           <input type="range" id="topo-opacity" min="10" max="100" step="5" value="70" style="margin-top:6px"
@@ -185,14 +274,18 @@
             <option value="0">none</option><option value="250">every 250 m</option><option value="500">every 500 m</option>
             <option value="1000" selected>every 1 km</option><option value="2000">every 2 km</option></select></label>
         </div>
-      </div>
-      <div class="group">
-        <h2>Show</h2>
+      </details>
+      <details class="sec" data-key="show" open>
+        <summary>Show</summary>
         <div class="toggles">
           <label><input type="checkbox" id="show-seas"> Sea names</label>
           <label><input type="checkbox" id="show-islands"> Islands</label>
           <label><input type="checkbox" id="show-sites"> Heritage sites</label>
           <label><input type="checkbox" id="show-targets"> Sampling targets</label>
+          <label><input type="checkbox" id="show-falls" checked> Falls and cascades</label>
+          <label><input type="checkbox" id="show-works" checked> Works</label>
+          <label><input type="checkbox" id="show-rivers" checked> Named rivers</label>
+          <label><input type="checkbox" id="show-districts" checked> Regions and districts</label>
           <label><input type="checkbox" id="show-grid"> Grid</label>
         </div>
         <div class="scale">
@@ -205,31 +298,33 @@
             <option value="5">5°</option><option value="2">2°</option><option value="1">1°</option>
             <option value="0.5">0.5°</option><option value="0.25">0.25°</option></select></label>
         </div>
-      </div>
-      <div class="group">
-        <h2>Relief</h2>
+      </details>
+      <details class="sec" data-key="relief">
+        <summary>Relief</summary>
         <input type="range" id="relief" min="0" max="10" step="1" value="1" aria-describedby="relief-value">
         <div class="readout" id="relief-value"></div>
-      </div>
-      <div class="group">
-        <h2 id="legend-title">Surface</h2>
+      </details>
+      <details class="sec" data-key="legend" open>
+        <summary id="legend-title">Surface</summary>
         <div class="legend" id="legend"></div>
         <p class="legend-note" id="legend-note"></p>
-      </div>
-      <div class="group">
-        <h2 id="figs-title">At 28%</h2>
+      </details>
+      <details class="sec" data-key="figures">
+        <summary id="figs-title">At 28%</summary>
         <dl class="figs" id="figs"></dl>
-      </div>
-      <div class="card" id="card" aria-live="polite"></div>
+      </details>
     </aside>
-  </div>
 
-  <section class="notes" aria-label="What the globe shows">
+<section class="float about" id="about" aria-label="About this globe" tabindex="-1" hidden>
+  <button type="button" class="close" id="about-close" aria-label="Close">×</button>
+  <h2 class="title">About this globe</h2>
+  <p class="lede" id="lede">Land and sea from the Terluna geography atlas.</p>
+  <div class="notes">
     <p id="frame-note" hidden></p>
     <h2>What the appearance shows</h2>
-    <p><b>Computed.</b> Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
+    <p><b>Computed.</b> <span id="water-source">Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
       degree (1.9 km), filled to the geography atlas's common sea level. Rivers and the rain-fed lakes above sea level
-      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain:
+      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain:</span>
       <span id="lake-figures"></span>.
       The air comes from the illumination domain's Open Moon atmosphere, <span id="air-figures"></span>. The page ray-marches that air through its whole height, so the
       halo around the limb and the sunlit air beyond the terminator come from the same calculation as the haze over
@@ -240,7 +335,7 @@
       pattern over land and sea. Light scattered more than once in the air is an isotropic source proportional
       to the sky atlas's diffuse light at each point's Sun height, scaled per channel so that the air seen straight
       down matches Eddington's multiple-scattering reflectance of the same column.</p>
-    <p><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, floodplains, height,
+    <p id="cover-text"><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, floodplains, height,
       hollows and slope: forest, woodland, grassland, bare highland or basaltic soil, and rock on steep ground. The
       climate run's rain and soil moisture are smoothed over 0.7 of its 5.5° grid before they set the cover, so that
       its grid does not show as straight edges. Water
@@ -252,33 +347,63 @@
       Exposure scales them like a camera: at 0 a white surface under the unfiltered overhead Sun sits at display
       white, and the page opens one stop brighter, where the brightest cloud reaches white. A soft shoulder above 80%
       keeps bright cloud from clipping, and about +10 stops shows the twilight and the night side. Red light only
-      shows the red channel in grey, as a red filter would: the air is thinnest there, so land and sea show best. The Sun slider sets the Moon's age from new moon:
-      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same Sun, 60° up
-      in the north-west of its own sky and overhead near the poles, so that the globe reads evenly from limb to
-      limb; it keeps the clouds of the slider's day, and with no one Sun there is no sunglint. From Earth puts the camera at the Moon's mean distance, 384,400 km, with a narrow field of
+      shows the red channel in grey, as a red filter would: the air is thinnest there, so land and sea show best. Air in
+      view peels the air away from the top down, as a descent through it would show the ground: the view looks through
+      the air below the chosen height only, so the haze, the halo and any cloud deck above that height leave it, while
+      every place keeps the light the whole air gives it, the decks' shade included. At the ground no haze is left, and
+      the ground shows in its own colours under its sky, much as satellite mosaics of Earth, corrected for the air
+      between, show its ground. With the zoom, the zoom stands in for the descent: from the opening view to the nearest
+      zoom the share of the air's column left in view falls from all of it to none, evenly with the logarithm of the
+      camera's height, while the camera itself stays above the air; moving the slider takes the peel off the zoom. A
+      camera that truly descended would keep most of the haze until the last few tens of kilometres, where the ground
+      this page holds is a blur. The Sun slider sets the Moon's age from new moon:
+      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same light, 45° up from the screen's upper left as the
+      globe turns, the light hill-shaded maps give their relief, so that the globe reads evenly from limb to limb and
+      the poles show their craters as they are, with no pinwheel that a direction fixed to each place would draw round
+      them; it keeps the clouds of the slider's day, and with no one Sun there is no sunglint. From Earth puts the camera at the Moon's mean distance, 384,400 km, with a narrow field of
       view.</p>
     <p><b>Next refinements.</b> Refraction: a ray grazing the surface bends about 0.28°, which carries sunlight
       further past the terminator. Multiple scattering along the limb and in twilight, where the calibration for the
       disk is weakest. Earthshine on the night side. Clouds with depth, and their shadows in the air. Finer terrain
       for close views: at 16 pixels per degree the surface softens below about 1,500 km altitude.</p>
     <h2>What the topography shows</h2>
-    <p>The ground's height above sea level and the sea floor's depth below it, from the atlas's LOLA heights above
+    <p id="topo-text">The ground's height above sea level and the sea floor's depth below it, from the atlas's LOLA heights above
       the GRAIL geoid at 4 pixels per degree (7.6 km), with the water taken away. Below sea level each of the atlas
       sheets' depth bands keeps its colour at the band's middle depth; above it the colours run from lowland green
       to the near-white of the highest ground. Shading comes from the full relief at 8 pixels per degree under
-      light that every place has alike, from high in its own north-west, so that level ground keeps the legend's
+      light that every place has alike, 45° up from the screen's upper left, so that level ground keeps the legend's
       colours anywhere on the globe, and contour lines mark the chosen interval, with sea level darker. In the topography mode the slider exaggerates the relief down into the sea floors as well as
       up into the highlands. Over the appearance the same colours and contours lie on the rendered globe at the
       chosen opacity, unlit by the Sun so that they read on the night side and through the air. Every depression
       below sea level takes the sea's colours, as the atlas fills it, and the rain-fed lakes above sea level are
       left out, so their beds show. Groundwater in the porous crust and crustal loading will move the shoreline.
-      Heritage sites and sampling targets come from the conservation study's register. In both modes, a click on the
-      globe reads the height of the 0.25° atlas cell under it.</p>
+      Heritage sites and sampling targets come from the conservation study's register. In both modes, a pin placed
+      with the Pin tool reads the height of the 0.25° atlas cell under it.</p>
     <h2 id="years-title" hidden>What the years show</h2>
     <p id="years-note" hidden></p>
+    <section id="districts-note" hidden>
+      <h2>Regions and districts: a first draft</h2>
+      <p><b>Computed, then judged.</b> A district is a region that reads as a whole and meaningful place and stands apart
+        from the others. The draft applies that as rules: each district gathers round one centre (a named crater's floor,
+        a large lake, or the ground between them); its edges follow the ground's own ridges and rim crests and the edges of
+        its moisture zone and rock; neighbours alike in zone, rock and the waters they drain to, with only a weak edge
+        between them, merge; and districts run from about 5,000 to 150,000 km². <span id="districts-figures"></span>
+        Regions gather districts round the great basins and are never crossed by a district. The coastal seas, the water
+        within 60 km of the shore, are districts of their own, each linked to the land that faces it and the land whose
+        rivers reach it, so that the coast and its land can be planned together; each one's card names the others. The
+        draft's significance is computed, from landform, water, climate and rock: written judgment of each place, and the
+        kept landforms, settlement and heritage treatments, come later.</p>
+      <p><b>Names.</b> Working names in the Moon's own tongues, each region in one of them, chosen loosely as Earth's
+        peoples sit in like landscapes: <span id="districts-tongues"></span>. Terlunan and Proto-Olivolingvo come from the
+        author's own languages; the others are lunar descendants of their Earth roots, built for the atlas from everyday
+        landscape words. A name joins a head chosen by the place's centre (a lake, a crater, a river, a plain, a coast) to
+        a word for what sets it apart (its zone, rock, height, lakes, falls or the Earthlight of the near side). Some
+        match places on Earth, as names from real roots will. They are labels for the people who come to live there to keep
+        or replace. <span id="districts-coined"></span></p>
+    </section>
     <p id="provenance"></p>
-  </section>
-</div>
+  </div>
+</section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script id="atlas-data" type="application/json">__ATLAS_DATA__</script>
@@ -297,6 +422,13 @@
   uniform float uAtmos;
   uniform float uH;
   uniform float uRt;
+  uniform float uPeel;          // the top of the air the view looks through, Moon radii; the air above it is peeled away
+  uniform sampler2D tSeaSlope;  // the water's mean square slope from the winds, over uSeaSlope.x of full scale
+  uniform vec2 uSeaSlope;       // the texture's full scale (0 without it), and the slope drawn without the winds
+  uniform sampler2D tSkyRefl;   // rough water's reflectance of an even sky (appearance.sky_reflectance_table)
+  uniform vec2 uSkyMu;          // its first view cosine and its count across
+  uniform vec3 uSkyRms;         // its first rms slope, the step and the count down
+  uniform float uWaterIndex;    // seawater's refractive index
   uniform vec3 uSunColour;
   uniform float uExposure;
   uniform float uRedOnly;
@@ -315,14 +447,25 @@
   uniform vec4 uHighNoise;      // frequency, octaves, warp, east-west stretch
   uniform vec2 uFractal;        // gain, lacunarity
   uniform float uQuant[66];     // quantiles of each deck's noise over the sphere, low then high
+  uniform sampler2D tFineColour;  // the close views' finer ground (fine_tiles.py) in a window of today's frame: colour,
+  uniform sampler2D tFineNormal;  // the relief's shading,
+  uniform sampler2D tFineAux;     // and the water (red), the sky seen (green) and where the window holds data (blue)
+  uniform vec4 uFineWin;          // the window: top latitude, left longitude (east), latitude span, longitude span (deg)
+  uniform float uFine;            // 1 while a window is loaded
+  uniform mat3 uToToday;          // unit vectors (x = cos lat cos lon, y = cos lat sin lon, z = sin lat), settled to today
+  uniform mat3 uFromToday;        // and back
   uniform sampler2D tAlbedo;
   uniform sampler2D tNormal;
   uniform sampler2D tWater;
+  uniform sampler2D tSky;       // the share of an even sky each place sees past the relief (appearance.sky_view); white without it
   uniform sampler2D tCloudSun;
   uniform sampler2D tCloudGeo;
   uniform sampler2D tLight;
   uniform float uOverlay;       // opacity of the topography over the appearance; 0 leaves it off
   uniform float uEven;          // 1 lights every place alike (fully lit), 0 by the one Sun
+  uniform float uClose;         // 0 far out, 1 close up: the close view's light, tone and relief come in
+  uniform float uCloseGain;     // the close view's gain on the ground's reflectance
+  uniform float uCloseRelief;   // how many times as steep the close view draws the relief (1: as the relief slider sets it)
   uniform vec3 uMidWater;       // the appearance's linear reflectances for water and bare floor (appearance.py)
   uniform vec3 uDeepWater;
   uniform vec3 uTurbidWater;
@@ -376,12 +519,70 @@
     return (tau + (2.0 / 3.0 - mu) * (1.0 - exp(-tau / mu))) / (4.0 / 3.0 + tau);
   }
 
+  // Unpolarized Fresnel reflectance of a facet from air into water of index uWaterIndex.
+  float fresnelWater(float c) {
+    c = clamp(c, 0.0, 1.0);
+    float n2 = uWaterIndex * uWaterIndex;
+    float root = sqrt(max(n2 - 1.0 + c * c, 0.0));
+    float rs = (c - root) / (c + root), rp = (n2 * c - root) / (n2 * c + root);
+    return 0.5 * (rs * rs + rp * rp);
+  }
+  // Smith's Lambda for Gaussian slopes of mean square mss, for a ray at cosine mu from the vertical (Walter and
+  // others' rational fit to the exact form illumination.water_surface.reflection.smith_lambda takes).
+  float smithLambda(float mu, float mss) {
+    float a = mu / (sqrt(max(1.0 - mu * mu, 1e-8)) * sqrt(mss));
+    return a < 1.6 ? (1.0 - 1.259 * a + 0.396 * a * a) / (3.535 * a + 2.181 * a * a) : 0.0;
+  }
+  // Rough water's reflectance of an even sky, bilinear in its table: view cosines crowded toward grazing across, rms
+  // slopes down. Without the table, level water's Fresnel reflectance.
+  float skyReflectance(float mu, float mss) {
+    if (uSkyMu.y < 2.0) return fresnelWater(mu);
+    float x = clamp(sqrt(max(mu - uSkyMu.x, 0.0) / (1.0 - uSkyMu.x)) * (uSkyMu.y - 1.0), 0.0, uSkyMu.y - 1.0);
+    float y = clamp((sqrt(mss) - uSkyRms.x) / uSkyRms.y, 0.0, uSkyRms.z - 1.0);
+    ivec2 p = ivec2(floor(vec2(x, y)));
+    ivec2 q = min(p + 1, ivec2(int(uSkyMu.y) - 1, int(uSkyRms.z) - 1));
+    vec2 f = vec2(x, y) - vec2(p);
+    float a = mix(texelFetch(tSkyRefl, p, 0).r, texelFetch(tSkyRefl, ivec2(q.x, p.y), 0).r, f.x);
+    float b = mix(texelFetch(tSkyRefl, ivec2(p.x, q.y), 0).r, texelFetch(tSkyRefl, q, 0).r, f.x);
+    return mix(a, b, f.y);
+  }
+
+  // The view looks through the air below uPeel only, as it would from that height: the air above leaves the line of
+  // sight, while every place keeps the light the whole air gives it. The column between a point and the eye is the
+  // column from the point to space less the column beyond where the ray crosses the peel on the camera's side,
+  // which main() sets for each ray.
+  float gBeyond = 0.0;
+  float eyeColumn(float r, float c) { return max(column(r, c) - gBeyond, 0.0); }
+  // The vertical column of the air in view above radius r, in units of the column above the surface.
+  float columnInView(float r) { return max(exp((1.0 - r) / uH) - exp((1.0 - min(uPeel, uRt)) / uH), 0.0); }
+
   vec2 sphereUV(vec3 n) {
     return vec2(fract(atan(n.z, -n.x) / (2.0 * PI) + 1.0), 0.5 + asin(clamp(n.y, -1.0, 1.0)) / PI);
   }
 
-  // The direction of the Sun from the point n: the one Sun, or when fully lit the place's own, high in its
-  // north-west.
+  // Where the place n (the page's frame) falls in the finer ground's window: its window coordinates, today's east and
+  // north turned into the page's frame (the window's shading is in today's), and a weight that fades to 0 over the
+  // window's last degree and is 0 outside it. The page's vectors are (cos lat cos lon, sin lat, -cos lat sin lon).
+  float fineAt(vec3 n, out vec2 fuv, out vec3 eastT, out vec3 northT) {
+    fuv = vec2(0.0);
+    eastT = vec3(0.0);
+    northT = vec3(0.0);
+    if (uFine < 0.5) return 0.0;
+    vec3 u = uToToday * vec3(n.x, -n.z, n.y);
+    float lat = degrees(asin(clamp(u.z, -1.0, 1.0)));
+    float lon = degrees(atan(u.y, u.x));
+    fuv = vec2(mod(lon - uFineWin.y + 720.0, 360.0) / uFineWin.w, (uFineWin.x - lat) / uFineWin.z);
+    if (fuv.x <= 0.0 || fuv.x >= 1.0 || fuv.y <= 0.0 || fuv.y >= 1.0) return 0.0;
+    float cl = cos(radians(lon)), sl = sin(radians(lon)), ca = cos(radians(lat)), sa = sin(radians(lat));
+    vec3 e = uFromToday * vec3(-sl, cl, 0.0), nn = uFromToday * vec3(-sa * cl, -sa * sl, ca);
+    eastT = vec3(e.x, e.z, -e.y);
+    northT = vec3(nn.x, nn.z, -nn.y);
+    vec2 edge = min(fuv, 1.0 - fuv) * vec2(uFineWin.w * ca, uFineWin.z);
+    return smoothstep(0.0, 1.0, min(edge.x, edge.y));
+  }
+
+  // The direction of the Sun from the point n: the one Sun, or when fully lit the light every place has alike, from the
+  // screen's upper left.
   vec3 sunAt(vec3 n) { return uEven > 0.5 ? localLight(n) : uSun; }
 
   // Value noise on an integer hash; appearance.py replicates it to measure its distribution.
@@ -475,11 +676,11 @@
       shade = 1.0 - 0.6 * clamp((ahead - d) * 2.5, 0.0, 1.0) * (1.0 - 0.6 * cs);
     }
     vec3 toSun = exp(-uTau0 * column(r, cs));
-    vec3 toEye = exp(-uTau0 * column(r, dot(n, -dir)));
+    vec3 toEye = exp(-uTau0 * eyeColumn(r, dot(n, -dir)));
     float elevation = degrees(asin(clamp(cs, -1.0, 1.0)));
     vec3 light = toSun * max(cs, 0.0) + uAtmos * lightTable(1, elevation) * exp((1.0 - r) / uH);
     float muv = max(dot(n, -dir), 0.02);
-    vec3 above = uTau0 * exp((1.0 - r) / uH);
+    vec3 above = uTau0 * columnInView(r);
     vec3 scatteredUp = muv > 0.02 ? max(1.0 - eddington(above, muv) - toEye, 0.0) : vec3(0.0);
     clouds += cloudT * (toEye + scatteredUp) * a * uCloudAlbedo * light * shade * uSunColour;
     cloudT *= 1.0 - a;
@@ -494,6 +695,7 @@
     bool hit = h2 < 1.0 && tca > 0.0;
     float tHit = tca - sqrt(max(1.0 - h2, 0.0));
     vec3 ns = hit ? normalize(o + tHit * dir) : normalize(pca);
+    float pix = max(length(dFdx(ns)), length(dFdy(ns)));       // the angle a pixel spans on the surface
 
     // Texture coordinates and their screen derivatives, taken across the date line without a seam.
     vec2 uv = sphereUV(ns);
@@ -506,23 +708,28 @@
     // crosses many columns but few rows, the rows stay sharp and nothing smears along the meridians.
     vec2 texels = vec2(textureSize(tAlbedo, 0));
     vec2 ground = vec2(sqrt(max(1.0 - ns.y * ns.y, 1e-6)), 1.0) * texels;
-    float lod = max(0.0, 0.5 * log2(max(dot(gx * ground, gx * ground), dot(gy * ground, gy * ground))));
+    float lodRaw = 0.5 * log2(max(dot(gx * ground, gx * ground), dot(gy * ground, gy * ground)));
+    float lod = max(0.0, lodRaw);
     float lodWater = max(0.0, lod + log2(float(textureSize(tWater, 0).x) / texels.x));
     float lodNormal = max(0.0, lod + log2(float(textureSize(tNormal, 0).x) / texels.x));
     // The overlay's height relative to sea level and its change per pixel, and the disk's edge in pixels.
     float hRel = relief(uv), hPerPixel = fwidth(hRel);
     float rim = clamp((1.0 - sqrt(h2)) / max(fwidth(sqrt(h2)), 1e-6), 0.0, 1.0);
 
-    float rt2 = uRt * uRt;
-    if (h2 >= rt2 || tca <= 0.0) { gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); return; }
-    float chord = sqrt(rt2 - h2);
+    // The air the view looks through ends at the peel, the top of the air unless the control lowers it.
+    float rp = min(uPeel, uRt), rp2 = rp * rp;
+    if (h2 >= rp2 || tca <= 0.0) { gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); return; }
+    float chord = sqrt(rp2 - h2);
     float tIn = max(tca - chord, 0.0);
     float tOut = hit ? tHit : tca + chord;
+    vec3 entry = o + tIn * dir;
+    gBeyond = column(length(entry), dot(normalize(entry), -dir));
 
-    // Crossings of the cloud decks, in the order the ray meets them: high in, low in, low out, high out.
+    // Crossings of the cloud decks below the peel, in the order the ray meets them: high in, low in, low out, high
+    // out. A deck above the peel leaves the view; its shade on the ground stays.
     vec4 tc = vec4(1e9);
     if (uClouds > 0.5) {
-      float hh = uHighR * uHighR - h2, ll = uLowR * uLowR - h2;
+      float hh = uHighR < rp ? uHighR * uHighR - h2 : -1.0, ll = uLowR < rp ? uLowR * uLowR - h2 : -1.0;
       if (hh > 0.0) { float s = sqrt(hh); tc.x = tca - s; if (!hit) tc.w = tca + s; }
       if (ll > 0.0) { float s = sqrt(ll); tc.y = tca - s; if (!hit) tc.z = tca + s; }
     }
@@ -550,7 +757,7 @@
         vec3 sun = sunAt(n);
         float cs = dot(n, sun), mu = dot(dir, sun);
         float phase = 0.1875 * (1.0 + mu * mu);
-        vec3 toEye = exp(-uTau0 * column(r, dot(n, -dir)));
+        vec3 toEye = exp(-uTau0 * eyeColumn(r, dot(n, -dir)));
         vec3 toSun = exp(-uTau0 * column(r, cs));
         float elevation = degrees(asin(clamp(cs, -1.0, 1.0)));
         vec3 source = phase * toSun + uAtmos * lightTable(1, elevation) * lightTable(2, elevation);
@@ -563,11 +770,14 @@
     haze *= uTau0 / uH * uSunColour;
 
     vec3 surface = vec3(0.0), topo = vec3(0.0);
+    vec3 closeTone = vec3(1.0);
+    float drawnWater = 0.0;                            // the share of water drawn there, for a selected place's tint
     if (hit) {
       vec3 n = ns, v = -dir;
       vec3 albedo = srgbToLinear(textureLod(tAlbedo, uv, lod).rgb);
       vec3 blurred = srgbToLinear(textureLod(tAlbedo, uv, uBlurLod).rgb);
       float water = textureLod(tWater, uv, lodWater).r;
+      float skySeen = mix(textureLod(tSky, uv, lodWater).r, 1.0, water);
       if (uYear > 0.5) {
         // The year shown: water the drainage network moves takes the appearance's colour for its depth, floor a
         // sea has left a bare floor's colour (a placeholder), and an overflow river its sediment-laden colour.
@@ -581,8 +791,28 @@
       vec3 east = vec3(n.z, 0.0, -n.x);
       east = dot(east, east) > 1e-10 ? normalize(east) : vec3(1.0, 0.0, 0.0);
       vec3 north = cross(n, east);
+      vec3 tilt = (nm.x * east + nm.y * north) / max(nm.z, 0.2);
+      // Close up, the finer ground where its window is loaded: its colour, water, sky and shading, faded in at the
+      // window's edge, and the 1.9 km ground wherever the window holds no data.
+      vec2 fuv;
+      vec3 fe, fn;
+      float fw = uYear > 0.5 ? 0.0 : fineAt(n, fuv, fe, fn);
+      if (fw > 0.0) {
+        // the finer texture's own level, from the unclamped footprint: close up a pixel spans less than a 1.9 km texel
+        float lf = max(0.0, lodRaw + log2(float(textureSize(tFineAux, 0).y) / uFineWin.z / 16.0));
+        vec4 aux = textureLod(tFineAux, fuv, lf);
+        fw *= clamp(aux.b * 1.02, 0.0, 1.0);
+        if (fw > 0.0) {
+          vec3 fnm = textureLod(tFineNormal, fuv, lf).xyz * 2.0 - 1.0;
+          albedo = mix(albedo, srgbToLinear(textureLod(tFineColour, fuv, lf).rgb), fw);
+          water = mix(water, aux.r, fw);
+          skySeen = mix(skySeen, mix(aux.g, 1.0, aux.r), fw);
+          tilt = mix(tilt, (fnm.x * fe + fnm.y * fn) / max(fnm.z, 0.2), fw);
+        }
+      }
+      drawnWater = water;
       // The normal map holds the full relief, sea floors and lake beds included; water lies flat over it.
-      vec3 nr = normalize(n + uRelief * (1.0 - water) * (nm.x * east + nm.y * north) / max(nm.z, 0.2));
+      vec3 nr = normalize(n + uRelief * (1.0 + (uCloseRelief - 1.0) * uClose) * (1.0 - water) * tilt);
       if (uOverlay > 0.0) {
         // The topography over the appearance: the legend's colours and contours, shaded by the full relief, sea
         // floors included, under light that every place has alike.
@@ -600,25 +830,59 @@
         shade *= 1.0 - uLowOpacity * cloud(normalize(n + tl * sun), 0);
         shade *= 1.0 - uHighOpacity * cloud(normalize(n + th * sun), 1);
       }
-      vec3 light = toSun * mus * shade + uAtmos * lightTable(1, elevation) * (1.0 - 0.3 * (1.0 - shade));
-      // Sunglint on open water: a GGX lobe for a wind-roughened sea. Fully lit, with no one Sun, has none.
+      shade = mix(shade, 1.0, uClose);                 // close up the ground shows as a cloud-free mosaic shows it
+      vec3 skyLight = uAtmos * lightTable(1, elevation) * (1.0 - 0.3 * (1.0 - shade)) * skySeen;
+      vec3 light = toSun * mus * shade + skyLight;
+      // Close up (uClose): where the Sun stands low or under the horizon the light every place has alike comes in
+      // (45 degrees up from the screen's upper left), so that a region in the Moon's night still shows its ground;
+      // and the picture holds the ground's light over what level white ground would send back in that light, colour by
+      // colour, times one gain (uCloseGain), whatever the Sun's height and the colour the air gives its light (orange
+      // at 45 degrees under this air). A display rule: satellite mosaics are corrected to the ground's reflectance.
+      float even = 0.0;
+      if (uClose > 0.0) {
+        vec3 sunE = localLight(n);
+        float muE = max(dot(n, sunE), 1e-3);
+        vec3 directE = exp(-uTau0 * column(1.0, muE));
+        vec3 skyE = uAtmos * lightTable(1, degrees(asin(clamp(muE, -1.0, 1.0))));
+        even = uClose * (1.0 - uEven) * (1.0 - smoothstep(6.0, 24.0, elevation));
+        light = mix(light, directE * max(dot(nr, sunE), 0.0) + skyE * skySeen, even);
+        skyLight = mix(skyLight, skyE * skySeen, even);
+        vec3 white = mix(toSun * max(mu0, 0.0) + uAtmos * lightTable(1, elevation), directE * muE + skyE, even) * uSunColour;
+        // 2.0: the page's opening exposure of one stop, which the gain replaces; the slider still scales the picture
+        closeTone = mix(vec3(1.0), uCloseGain / max(2.0 * white, vec3(1e-4)), uClose);
+      }
+      // The water's slopes: the mean square slope the design climate's daytime wind raises there
+      // (appearance.sea_slopes), or one fixed slope for every water without the winds.
+      float mss = uSeaSlope.x > 0.0 ? max(textureLod(tSeaSlope, uv, 0.0).r * uSeaSlope.x, 0.002) : uSeaSlope.y;
+      // Sunglint on open water: facets with Gaussian slopes, as Cox and Munk measured, mirror the Sun by Fresnel's
+      // law, less the share Smith's shadowing hides. Fully lit, with no one Sun, has none.
       vec3 hv = normalize(v + sun);
-      float nh = max(dot(n, hv), 0.0), nl = max(mu0, 0.0);
-      float a2 = 0.04, dd = nh * nh * (a2 - 1.0) + 1.0;
-      float spec = a2 / (PI * dd * dd) * (0.02 + 0.98 * pow(clamp(1.0 - dot(v, hv), 0.0, 1.0), 5.0))
-                 * nl / (nl * 0.9 + 0.1) * muv / (muv * 0.9 + 0.1) / (4.0 * muv);
-      vec3 glint = water * PI * spec * toSun * shade * (1.0 - uEven);
-      vec3 toEye = exp(-uTau0 * column(1.0, muv));
-      vec3 diffuseUp = max(1.0 - eddington(uTau0, muv) - toEye, 0.0);
-      surface = ((albedo * light + glint) * toEye + blurred * light * diffuseUp) * uSunColour;
+      float nh = max(dot(n, hv), 1e-3), nl = max(mu0, 0.0);
+      float tan2 = (1.0 - nh * nh) / (nh * nh);
+      float spec = nl > 0.0 ? fresnelWater(dot(v, hv)) * exp(-tan2 / mss) / (PI * mss)
+                   / (4.0 * muv * nh * nh * nh * nh) / (1.0 + smithLambda(muv, mss) + smithLambda(nl, mss)) : 0.0;
+      // close up the Sun's glint leaves the water with the sky's mirror image: a mosaic is put together from views
+      // that avoid it, and over a lake district it reads as a spotlight
+      vec3 glint = water * PI * spec * toSun * shade * (1.0 - uEven) * (1.0 - even) * (1.0 - uClose);
+      // The sky the water mirrors: rough water's reflectance of an even sky at the view's angle
+      // (appearance.sky_reflectance_table), of the diffuse skylight; the water's own colour is the light that leaves it.
+      glint += water * skyReflectance(muv, mss) * skyLight * (1.0 - uClose);   // close up the water shows its own colour
+      vec3 toEye = exp(-uTau0 * eyeColumn(1.0, muv));
+      vec3 diffuseUp = max(1.0 - eddington(uTau0 * columnInView(1.0), muv) - toEye, 0.0);
+      // close up the air between the ground and the eye leaves the picture, as a mosaic's correction takes it out
+      surface = ((albedo * light + glint) * mix(toEye, vec3(1.0), uClose) + blurred * light * diffuseUp * (1.0 - uClose)) * uSunColour;
     }
-    vec3 c = (haze + clouds + cloudT * surface) * uExposure;
+    // close up the haze and the cloud decks between the eye and the ground leave the picture, and the close view's
+    // tone is the ground's light's alone
+    vec3 c = ((haze + clouds) * (1.0 - uClose) + mix(cloudT, 1.0, uClose) * surface * closeTone) * uExposure;
     if (uRedOnly > 0.5) c = vec3(c.r);
     c = mix(c, 0.8 + 0.2 * (1.0 - exp(-(c - 0.8) / 0.2)), step(0.8, c));
     float dither = float(hashu(uint(gl_FragCoord.x) + hashu(uint(gl_FragCoord.y)))) * (1.0 / 4294967295.0) - 0.5;
     vec3 display = linearToSrgb(c);
     if (hit && uOverlay > 0.0) display = mix(display, linearToSrgb(topo), uOverlay * rim);
-    if (hit) display = gridOver(display, uv, gx, gy);
+    // the selected place's tint is worked out for every pixel, since it takes screen derivatives, and laid on the globe
+    vec3 tinted = districtsOver(display, uv, drawnWater, clamp(uOverlay * rim, 0.0, 1.0));
+    if (hit) display = gridOver(worksOver(tinted, ns, pix), uv, gx, gy);
     gl_FragColor = vec4(display + dither / 255.0, 1.0);
   }
 </script>
@@ -644,6 +908,62 @@
     vec3 dark = vec3(0.03, 0.04, 0.06);
     colour = mix(colour, mix(dark, vec3(1.0), bright), 0.3 * edge);
     return mix(colour, mix(vec3(1.0), dark, bright), max(0.8 * major, 0.4 * minor));
+  }
+</script>
+<script id="district-lines" type="x-shader/x-fragment">
+  // The atlas round's draft regions and districts. The borders are traced lines (border-vertex below); here the place
+  // a click selected is tinted, and that place alone: a district with its lakes, a coastal sea, or a region with its
+  // lakes and coastal waters. The page makes the tint's reach from the districts texture's cells when a place is
+  // selected (makeSelection): where the land's tint may show (red), where the water's tint may show (green) and the
+  // place's own cells (blue), each blurred over a few cells, so that its half level runs smoothly and close to the
+  // traced borders, which were smoothed from the same cells. Across a shore the two reaches overlap and the water the
+  // picture draws decides between the tints, so each ends at the shore as drawn: warm on land, and a pale blue on
+  // water, where the warm tint would read as grey.
+  uniform sampler2D tSel;
+  uniform vec4 uSelWin;          // the window the reach covers in the districts texture, as shares of the texture: its
+                                 // left edge, its top edge from the north, its width and its height (width 0: no place)
+  uniform float uSelStrength;    // the tint's share of the colour
+  uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
+  // water: the share of water the picture draws at the place; plain: the share of the picture that draws no water (the
+  // topography), where the place's own cells take the warm tint.
+  vec3 districtsOver(vec3 colour, vec2 uv, float water, float plain) {
+    if (uDistrictMode < 0.5 || uSelWin.z <= 0.0) return colour;
+    vec2 at = vec2(fract(uv.x - uSelWin.x) / uSelWin.z, (1.0 - uv.y - uSelWin.y) / uSelWin.w);
+    float inside = step(at.x, 1.0) * step(0.0, at.y) * step(at.y, 1.0);
+    vec3 m = texture2D(tSel, clamp(at, 0.0, 1.0)).rgb;
+    vec3 w = clamp(0.7 * fwidth(m), 0.008, 0.3);                     // each reach is cut at one half over about a pixel
+    vec3 a = smoothstep(0.5 - w, 0.5 + w, m) * inside * uSelStrength;
+    float land = mix(a.r * (1.0 - water), a.b, plain), wet = a.g * water * (1.0 - plain);
+    return colour * (1.0 - land - wet) + land * vec3(1.0, 0.80, 0.42) + wet * vec3(0.55, 0.78, 1.0);
+  }
+</script>
+<script id="works-lines" type="x-shader/x-fragment">
+  // The works' cuts drawn as atlases draw canals: a line a few pixels wide at any zoom along each cut's course, amber
+  // with a dark edge as the works' marks are, far wider than the trench at most zooms. Each segment joins two cells'
+  // centres along a course (render.work_lines), as unit vectors in the globe's frame.
+  uniform vec3 uWorkA[WORK_SEGMENTS];
+  uniform vec3 uWorkB[WORK_SEGMENTS];
+  uniform float uWorks;          // 1 draws them
+  // Distance from the direction p to the arc from a to b, in radians while it is small (chords stand in for arcs).
+  float arcDistance(vec3 p, vec3 a, vec3 b) {
+    vec3 c = cross(a, b);
+    float len = length(c);
+    float ends = min(length(p - a), length(p - b));
+    if (len < 1e-9) return ends;
+    c /= len;
+    float off = dot(p, c);
+    vec3 q = p - off * c;
+    return (dot(cross(a, q), c) >= 0.0 && dot(cross(q, b), c) >= 0.0) ? abs(off) : ends;
+  }
+  // p: the direction of the place drawn; perPixel: the angle a pixel spans there.
+  vec3 worksOver(vec3 colour, vec3 p, float perPixel) {
+    if (uWorks < 0.5) return colour;
+    float d = 1e9;
+    for (int i = 0; i < WORK_SEGMENTS; i++) d = min(d, arcDistance(p, uWorkA[i], uWorkB[i]));
+    float px = d / max(perPixel, 1e-9);
+    float edge = 1.0 - smoothstep(2.4, 3.4, px), core = 1.0 - smoothstep(1.1, 2.1, px);
+    colour = mix(colour, vec3(0.35, 0.23, 0.06), 0.9 * edge);
+    return mix(colour, vec3(1.0, 0.70, 0.28), core);
   }
 </script>
 <script id="topo-lines" type="x-shader/x-fragment">
@@ -692,24 +1012,36 @@
     float depth = (wet > 0.5 && id > 0.5) ? max(levelOf(id) - h, 0.0) : -1.0;
     return vec4(wet, depth, bitOf(s.r, 0.0), bitOf(r.r, uYear) * r.g / 255.0 * (1.0 - wet));
   }
+  // The design surface: each place's water depth in whole metres in two bytes (red, green) and the body over it in
+  // blue, 0 on dry ground, 1-7 the seas and 8 a lake. A sea takes the colour of its depth under its own surface; the
+  // lakes are left out, as the atlas's topography leaves them, so their beds show, and ground below the reference that
+  // no sea covers takes the lowland's.
+  uniform sampler2D tSurface;
+  uniform float uSurface;
   // The topography's colour in the year shown: water the network moves takes the sea's colour for its depth, and
   // floor a sea has left takes the coast's.
   vec3 rampAt(vec2 at, float h) {
+    if (uSurface > 0.5) {
+      vec3 s = floor(texture2D(tSurface, at).rgb * 255.0 + 0.5);
+      if (s.b > 0.5 && s.b < 7.5) return ramp(-max(s.r * 256.0 + s.g, 1.0));   // the seas; the lakes' beds show
+      return ramp(max(h, 0.0));
+    }
     if (uYear < 0.5) return ramp(h);
     vec4 w = yearWater(at, h);
     if (w.x > 0.5 && w.y >= 0.0) return ramp(-max(w.y, 1.0));
     if (w.x < 0.5 && w.z > 0.5) return ramp(0.0);
     return ramp(h);
   }
-  // Light from 60° up in the north-west of the place n's own sky, turning overhead near the poles, where north and
-  // east turn round, so that no part of the globe is lit more than another.
+  // The light every place has alike, in the fully lit appearance and the topography: 45° up, from the screen's upper
+  // left as the globe turns (uLightDir, that direction in the globe's frame), the light hill-shaded maps give their
+  // relief. It holds no fixed direction on the sphere, so no pole draws a pinwheel; it turns overhead only where the
+  // place itself faces the screen's upper left, on the limb.
+  uniform vec3 uLightDir;
   vec3 localLight(vec3 n) {
-    vec3 east = vec3(n.z, 0.0, -n.x);
-    float c = length(east);
+    vec3 t = uLightDir - dot(uLightDir, n) * n;
+    float c = length(t);
     if (c < 1e-4) return n;
-    east /= c;
-    vec3 north = cross(n, east);
-    return normalize(0.866 * n + 0.5 * smoothstep(0.0, 0.1, c) * normalize(north - east));
+    return normalize(0.7071 * n + 0.7071 * smoothstep(0.0, 0.1, c) * t / c);
   }
   // Relief shading under that light, from the relief's normal nr at the place n: 1 on level ground, which keeps
   // the legend's colours, brighter on slopes that face the light and darker on those turned away.
@@ -726,6 +1058,84 @@
     float line = (1.0 - smoothstep(0.3 + 0.5 * coast, 1.2 + 0.5 * coast, d))
                * mix(smoothstep(3.0, 8.0, uContour / fw), 1.0, coast);
     return 1.0 - (0.3 + 0.35 * coast) * line;
+  }
+</script>
+<script id="border-vertex" type="x-shader/x-vertex">
+  // The traced borders (render.border_lines) as thin lines of a fixed width in pixels: each segment a quad between its
+  // two ends on the globe, raised with the relief in the topography mode, its sides set out across the segment on the
+  // screen. A segment with either end beyond the limb is dropped whole; the depth test hides what the ground hides.
+  uniform sampler2D tRelief;
+  uniform float uLow;
+  uniform float uScale;
+  uniform float uTopo;
+  uniform vec2 uViewport;
+  uniform float uHalfWidth;
+  uniform float uDepthBias;
+  uniform float uRiver;         // 1 for the rivers' channels: the half width follows each point's flow
+  uniform float uKmPerPx;       // the kilometres a pixel spans on the ground nearest the camera
+  attribute vec3 aB;
+  attribute float aSide;
+  attribute float aEnd;
+  attribute float aAlong;
+  attribute float aFlow;        // m3/s at this end of the segment (the rivers' channels)
+  varying float vAlong;
+  varying float vAcross;
+  varying float vHalf;
+  float relief(vec2 at) { return dot(texture2D(tRelief, at).rg, vec2(65280.0, 255.0)) + uLow; }
+  vec3 raised(vec3 p) {
+    vec2 at = vec2(fract(atan(p.z, -p.x) / 6.283185307 + 1.0), asin(clamp(p.y, -1.0, 1.0)) / 3.141592654 + 0.5);
+    return p * (1.0 + uTopo * uScale * relief(at) + 0.0003);
+  }
+  void main() {
+    vec3 pa = raised(position), pb = raised(aB);
+    vec4 va = modelViewMatrix * vec4(pa, 1.0), vb = modelViewMatrix * vec4(pb, 1.0);
+    float facing = min(dot(normalize(normalMatrix * normalize(pa)), -normalize(va.xyz)),
+                       dot(normalize(normalMatrix * normalize(pb)), -normalize(vb.xyz)));
+    if (facing < 0.0) {
+      gl_Position = vec4(0.0, 0.0, 2.0, 1.0);          // every corner of the quad the same point beyond the far plane
+      return;
+    }
+    vec4 ca = projectionMatrix * modelViewMatrix * vec4(pa, 1.0);
+    vec4 cb = projectionMatrix * modelViewMatrix * vec4(pb, 1.0);
+    vec2 dir = (cb.xy / cb.w - ca.xy / ca.w) * uViewport;
+    float len = length(dir);
+    dir = len > 1e-6 ? dir / len : vec2(1.0, 0.0);
+    vec4 c = aEnd > 0.5 ? cb : ca;
+    // A river's channel: half its computed width (11.52 m per root of a m3/s) at the view's scale, and at least a
+    // floor that grows with the root of the flow from 0.3 pixels at 100 m3/s to 1.25 at 30,000. Wherever the floor is
+    // the larger the line is wider than the water: a display exaggeration (river_courses.display_half_width_px).
+    float halfWidth = uRiver > 0.5
+      ? max(0.00576 * sqrt(aFlow) / uKmPerPx, mix(0.3, 1.25, clamp((sqrt(aFlow) - 10.0) / 163.2, 0.0, 1.0)))
+      : uHalfWidth;
+    float w = halfWidth + 1.0;                        // a pixel beyond the line's half width, for its soft edge
+    c.xy += vec2(-dir.y, dir.x) * aSide * w * 2.0 / uViewport * c.w;
+    c.z -= uDepthBias * c.w;
+    gl_Position = c;
+    vAcross = aSide * w;
+    vAlong = aAlong;
+    vHalf = halfWidth;
+  }
+</script>
+<script id="border-fragment" type="x-shader/x-fragment">
+  // A soft-edged line about two half widths wide; dashed where it crosses water, the dashes measured along the line so
+  // that they stay even, uDashKm the length of a dash and its gap together.
+  precision highp float;
+  uniform vec3 uColour;
+  uniform float uOpacity;
+  uniform float uHalfWidth;
+  uniform float uDash;
+  uniform float uDashKm;
+  varying float vAlong;
+  varying float vAcross;
+  varying float vHalf;
+  void main() {
+    float cover = clamp(vHalf + 0.5 - abs(vAcross), 0.0, 1.0);
+    if (uDash > 0.5) {
+      float t = fract(vAlong / uDashKm);
+      cover *= smoothstep(0.0, 0.06, t) * (1.0 - smoothstep(0.5, 0.56, t));
+    }
+    if (cover <= 0.004) discard;
+    gl_FragColor = vec4(uColour, uOpacity * cover);
   }
 </script>
 <script id="relief-vertex" type="x-shader/x-vertex">
@@ -768,7 +1178,9 @@
     vec3 nm = texture2D(tNormal, vUv).xyz * 2.0 - 1.0;
     vec3 nr = normalize(n + uNormalScale * (nm.x * east + nm.y * north) / max(nm.z, 0.2));
     vec3 colour = srgbToLinear(rampAt(vUv, h)) * hillshade(nr, n) * contourShade(h, fwidth(h));
-    gl_FragColor = vec4(gridOver(linearToSrgb(colour), vUv, dFdx(vUv), dFdy(vUv)), 1.0);
+    float pix = max(length(dFdx(n)), length(dFdy(n)));
+    vec3 shown = districtsOver(linearToSrgb(colour), vUv, 0.0, 1.0);
+    gl_FragColor = vec4(gridOver(worksOver(shown, n, pix), vUv, dFdx(vUv), dFdy(vUv)), 1.0);
   }
 </script>
 <script>
@@ -787,14 +1199,14 @@
 
   // Header, figures and provenance from the products.
   const pct = Math.round(D.share * 100) + '%';
-  document.getElementById('headline').textContent = (D.frame ? 'The turned Open Moon at ' : 'The Open Moon at ') + pct +
-    ' water';
+  document.getElementById('headline').textContent = D.headline || ((D.frame ? 'The turned Open Moon at ' : 'The Open Moon at ') +
+    pct + ' water');
   document.getElementById('figs-title').textContent = 'At ' + pct;
-  document.getElementById('lede').textContent =
+  document.getElementById('lede').textContent = D.lede ||
     'An estimate of how the Open Moon looks from space: its air, clouds and a guessed cover of plants, over the ' +
     'geography atlas with sea level ' + D.levelText + ' above the lunar geoid.' + (D.frame ? D.frame.lede : '') +
-    ' Drag to turn it, scroll or pinch to zoom, click for the height or depth of a place, and move the Sun to see the ' +
-    'halo, the twilight and the view from Earth.';
+    ' Drag to turn it, scroll or pinch to zoom, click a place for its card, use the Pin tool for the height or depth of a ' +
+    'point, and move the Sun to see the halo, the twilight and the view from Earth.';
   if (D.frame) {
     const note = document.getElementById('frame-note');
     note.innerHTML = D.frame.note;
@@ -816,13 +1228,37 @@
     'reaching ' + fmt(P.topKm - P.radiusKm) + ' km';
   document.getElementById('clim-run').textContent = P.climatology.run + ' (model years ' + P.climatology.years.join('–') + ')';
   const figure = (label) => (D.figures.find(([k]) => k.startsWith(label)) || [null, ''])[1];
-  document.getElementById('lake-figures').textContent = 'the lakes cover a further ' +
-    figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes');
+  document.getElementById('lake-figures').textContent = D.lakeFigures || ('the lakes cover a further ' +
+    figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes'));
+  if (D.waterSource) document.getElementById('water-source').textContent = D.waterSource;
+  if (D.coverText) document.getElementById('cover-text').innerHTML = D.coverText;
+  if (D.topoText) document.getElementById('topo-text').textContent = D.topoText;
   document.getElementById('cloud-figures').textContent = Math.round(P.clouds.totalCover * 100) + '% cover, a low deck ' +
     'of ' + Math.round(P.clouds.lowCover * 100) + '% below about 34 km, drawn at its cover-weighted height of ' +
     Math.round(P.clouds.lowKm) + ' km, and a high deck of ' + Math.round(P.clouds.highCover * 100) + '% drawn at ' +
     Math.round(P.clouds.highKm) + ' km. The run has no sea ice or snow anywhere';
   document.getElementById('provenance').innerHTML = '<b>Provenance.</b> ' + D.provenance;
+  if (D.fine && D.fine.look) {
+    // The trial of the close-up look: its windows named where it covers only some (fine_look.py), or the whole of
+    // the tiles (look_tiles.py), and called the guess it is.
+    const trial = document.createElement('p'), head = document.createElement('b');
+    head.textContent = 'A trial of the close-up look.';
+    trial.append(head, (D.fine.look.windows.length ? ' Zoomed close over ' + D.fine.look.windows.join(', ') + ': '
+                                                    : ' Zoomed close, between 80° N and 80° S of today\'s Moon: ') + D.fine.look.note);
+    document.getElementById('provenance').after(trial);
+  }
+  if (D.districts) {
+    const S = D.districts.summary;
+    document.getElementById('districts-note').hidden = false;
+    document.getElementById('districts-figures').textContent = 'The draft holds ' + S.land_districts + ' districts on land in ' +
+      S.land_regions + ' regions, their median ' + S.land_district_km2.median.toLocaleString('en-US') + ' km², and ' +
+      S.coastal_sea_districts + ' coastal seas in the ' + S.sea_regions + ' seas.';
+    document.getElementById('districts-tongues').textContent = Object.values(D.districts.tongues).join('; ');
+    const coined = Object.entries(D.districts.coined || {});
+    document.getElementById('districts-coined').textContent = coined.length
+      ? 'Terlunan words coined here for the atlas, proposals beside the language\'s v0.6 dictionary: ' +
+        coined.map(([w, m]) => w + ', ' + m).join('; ') + '.' : '';
+  }
 
   const legend = document.getElementById('legend');
   const legendNote = document.getElementById('legend-note');
@@ -850,23 +1286,27 @@
     }
     legend.append(bar, ticks);
     const every = +document.getElementById('contours').value;
-    return 'Heights relative to sea level: the highest ground stands ' + fmt(D.relief.highest) + ' m above it and ' +
-      'the deepest sea floor lies ' + fmt(-D.relief.lowest) + ' m below' +
-      (every ? '; contours every ' + (every >= 1000 ? every / 1000 + ' km' : every + ' m') + ', sea level darker.' : '.');
+    const ref = D.reference || 'sea level';
+    return 'Heights relative to ' + ref + ': the highest ground stands ' + fmt(D.relief.highest) + ' m above it and ' +
+      'the deepest ' + (D.reference ? 'ground' : 'sea floor') + ' lies ' + fmt(-D.relief.lowest) + ' m below' +
+      (every ? '; contours every ' + (every >= 1000 ? every / 1000 + ' km' : every + ' m') + ', ' + ref + ' darker.' : '.');
   };
   const drawLegend = (mode) => {
     legend.replaceChildren();
     if (mode === 'appearance') {
       const overlay = document.getElementById('topo-overlay').checked;
-      legendTitle.textContent = overlay ? 'Surface (guesstimate) and topography' : 'Surface (guesstimate)';
+      const title = P.legendTitle || 'Surface (guesstimate)';
+      legendTitle.textContent = overlay ? title + ' and topography' : title;
       for (const [label, colour] of P.legend) legend.append(swatch(colour, label));
-      legendNote.textContent = 'Reflectance of each cover in daylight; from space the air veils them in blue.' +
+      legendNote.textContent = (P.legendNote || 'Reflectance of each cover in daylight; from space the air veils them in blue.') +
         (overlay ? ' ' + topoKey() : '');
     } else {
       legendTitle.textContent = 'Height and depth';
       const note = topoKey();
       legend.append(swatch(null, 'Heritage, submerged', 'sw ring'), swatch(null, 'Heritage, on land', 'sw tri'),
                     swatch(null, 'Sampling target', 'sw sq'));
+      if ((D.labels.falls || []).length) legend.append(swatch(null, 'Falls, cascades', 'sw fall'));
+      if ((D.labels.works || []).length) legend.append(swatch(null, (D.labels.workLines || []).length ? 'Works: a cut and its course' : 'Works: a cut', 'sw work'));
       legendNote.textContent = note;
     }
   };
@@ -901,7 +1341,18 @@
   const normalMap = load(D.textures.normal, repeatU);
   const segments = window.innerWidth < 700 ? [320, 160] : [512, 256];
   const rgb = (hex) => new THREE.Vector3(...[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255));
-  const shared = document.getElementById('topo-lines').textContent + document.getElementById('grid-lines').textContent;
+  const shared = document.getElementById('topo-lines').textContent + document.getElementById('grid-lines').textContent
+    + document.getElementById('works-lines').textContent + document.getElementById('district-lines').textContent;
+  // The works' courses as segments between unit vectors, for both shaders' canal lines.
+  const unitAt = (lat, lon) => {
+    const theta = (90 - lat) * Math.PI / 180, phi = (lon + 180) / 360 * 2 * Math.PI;
+    return new THREE.Vector3(-Math.cos(phi) * Math.sin(theta), Math.cos(theta), Math.sin(phi) * Math.sin(theta));
+  };
+  const workSegments = [];
+  for (const line of (D.labels.workLines || [])) {
+    for (let i = 0; i + 1 < line.length; i++) workSegments.push([unitAt(...line[i]), unitAt(...line[i + 1])]);
+  }
+  const WORK_SEGMENTS = Math.max(1, workSegments.length);
   // The years control's textures hold bits and ids, so they are read texel by texel, never blended.
   const Y = D.stops || null;
   const exact = (t) => {
@@ -910,18 +1361,27 @@
     t.generateMipmaps = false;
   };
   const blank = () => { const t = new THREE.DataTexture(new Uint8Array(4), 1, 1, THREE.RGBAFormat); t.needsUpdate = true; return t; };
+  const white = () => { const t = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat); t.needsUpdate = true; return t; };
   const BODIES = Y ? Math.max(2, Y.names.length) : 2;
   const topoUniforms = {
     tRelief: { value: load(D.textures.relief, linear) }, uLow: { value: D.relief.low + 0.5 }, uContour: { value: 1000 },
     uGrid: { value: new THREE.Vector2() },
     uStopHeight: { value: D.topo.map(([h]) => h) }, uStopColour: { value: D.topo.map(([, c]) => rgb(c)) },
     tYears: { value: Y ? load(Y.textures.stops, exact) : blank() },
+    tSurface: { value: D.textures.surface ? load(D.textures.surface, exact) : blank() },
+    uSurface: { value: D.textures.surface ? 1 : 0 },
     tYearRivers: { value: Y ? load(Y.textures.channels, exact) : blank() },
-    uYear: { value: 0 }, uLevels: { value: new Array(BODIES).fill(0) }
+    uYear: { value: 0 }, uLevels: { value: new Array(BODIES).fill(0) },
+    uWorkA: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][0] : new THREE.Vector3()) },
+    uWorkB: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][1] : new THREE.Vector3()) },
+    uWorks: { value: 0 },
+    uDistrictMode: { value: 0 },
+    tSel: { value: blank() }, uSelWin: { value: new THREE.Vector4() }, uSelStrength: { value: 0 },
+    uLightDir: { value: new THREE.Vector3(-0.7071, 0.7071, 0) }
   };
   const reliefUniforms = { ...topoUniforms, tNormal: { value: normalMap }, uScale: { value: 0 }, uNormalScale: { value: 1 } };
   const reliefMesh = new THREE.Mesh(new THREE.SphereGeometry(1, segments[0], segments[1]), new THREE.ShaderMaterial({
-    uniforms: reliefUniforms, defines: { STOPS: D.topo.length, BODIES }, extensions: { derivatives: true },
+    uniforms: reliefUniforms, defines: { STOPS: D.topo.length, BODIES, WORK_SEGMENTS }, extensions: { derivatives: true },
     vertexShader: document.getElementById('relief-vertex').textContent,
     fragmentShader: document.getElementById('relief-fragment').textContent.replace('// SHARED', shared)
   }));
@@ -940,13 +1400,48 @@
   const lightTex = new THREE.DataTexture(lightData, lightN, lightRows, THREE.RGBAFormat, THREE.FloatType);
   lightTex.minFilter = lightTex.magFilter = THREE.NearestFilter;
   lightTex.needsUpdate = true;
+  // The sea's slopes from the winds, and rough water's reflectance of the sky, when the build has them.
+  const SEA = P.sea || null;
+  const skyReflTex = (() => {
+    if (!SEA) return blank();
+    const across = SEA.skyTable[0].length, down = SEA.skyTable.length;
+    const data = new Float32Array(across * down * 4);
+    SEA.skyTable.forEach((row, j) => row.forEach((v, i) => data.set([v, 0, 0, 1], (j * across + i) * 4)));
+    const t = new THREE.DataTexture(data, across, down, THREE.RGBAFormat, THREE.FloatType);
+    t.minFilter = t.magFilter = THREE.NearestFilter;
+    t.needsUpdate = true;
+    return t;
+  })();
   const N = P.clouds.noise;
+  // The close views' finer ground (fine_tiles.py): a window of today's frame, FINE_PX pixels a side, drawn from packs
+  // of 474 m tiles into three canvases that the shader reads.
+  const F = D.fine || null;
+  const FINE_PX = window.matchMedia('(max-width: 700px)').matches ? 1024 : 2048;
+  const fineCanvas = {}, fineTex = {};
+  for (const name of ['colour', 'normal', 'aux']) {
+    const c = document.createElement('canvas');
+    c.width = c.height = F ? FINE_PX : 1;
+    fineCanvas[name] = c;
+    const t = new THREE.CanvasTexture(c);
+    t.flipY = false;
+    t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+    t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    fineTex[name] = t;
+  }
+  const rotationMatrix = (rows, transpose) => new THREE.Matrix3().set(...(transpose
+    ? [rows[0][0], rows[1][0], rows[2][0], rows[0][1], rows[1][1], rows[2][1], rows[0][2], rows[1][2], rows[2][2]]
+    : rows.flat()));
   const uniforms = {
     ...topoUniforms, uOverlay: { value: 0 }, uEven: { value: 0 },
+    uClose: { value: 0 }, uCloseGain: { value: 1.6 }, uCloseRelief: { value: 1.0 },
+    tFineColour: { value: fineTex.colour }, tFineNormal: { value: fineTex.normal }, tFineAux: { value: fineTex.aux },
+    uFineWin: { value: new THREE.Vector4(0, 0, 1, 1) }, uFine: { value: 0 },
+    uToToday: { value: F ? rotationMatrix(F.rotation, true) : new THREE.Matrix3() },
+    uFromToday: { value: F ? rotationMatrix(F.rotation, false) : new THREE.Matrix3() },
     uCamPos: { value: new THREE.Vector3() }, uCamBasis: { value: new THREE.Matrix3() }, uTanHalf: { value: new THREE.Vector2() },
     uSun: { value: new THREE.Vector3(1, 0, 0) }, uSubsolar: { value: 0 },
     uTau0: { value: new THREE.Vector3(...P.tau0) }, uAtmos: { value: 1 },
-    uH: { value: P.scaleHeightKm / P.radiusKm }, uRt: { value: P.topKm / P.radiusKm },
+    uH: { value: P.scaleHeightKm / P.radiusKm }, uRt: { value: P.topKm / P.radiusKm }, uPeel: { value: P.topKm / P.radiusKm },
     uSunColour: { value: new THREE.Vector3(...P.sunColour) }, uExposure: { value: 1 }, uRedOnly: { value: 0 },
     uClouds: { value: 1 }, uLowR: { value: 1 + P.clouds.lowKm / P.radiusKm }, uHighR: { value: 1 + P.clouds.highKm / P.radiusKm },
     uLowOpacity: { value: P.clouds.lowOpacity }, uHighOpacity: { value: P.clouds.highOpacity },
@@ -960,6 +1455,13 @@
     tAlbedo: { value: load(D.textures.albedo, repeatU) },
     tNormal: { value: normalMap },
     tWater: { value: load(D.textures.water, repeatU) },
+    tSky: { value: D.textures.sky ? load(D.textures.sky, repeatU) : white() },
+    tSeaSlope: { value: SEA && D.textures.seaSlope ? load(D.textures.seaSlope, repeatU) : blank() },
+    uSeaSlope: { value: new THREE.Vector2(SEA && D.textures.seaSlope ? SEA.slopeScale : 0, 0.04) },
+    tSkyRefl: { value: skyReflTex },
+    uSkyMu: { value: new THREE.Vector2(SEA ? SEA.skyMu[0] : 0, SEA ? SEA.skyMu[1] : 0) },
+    uSkyRms: { value: new THREE.Vector3(...(SEA ? SEA.skyRms : [0, 1, 1])) },
+    uWaterIndex: { value: SEA ? SEA.refractiveIndex : 1.34 },
     tCloudSun: { value: load(D.textures.cloudSun, linear) },
     tCloudGeo: { value: load(D.textures.cloudGeo, linear) },
     tLight: { value: lightTex },
@@ -968,7 +1470,7 @@
       { value: new THREE.Vector3(...(Y ? Y.colours[k] : [0, 0, 0])) }]))
   };
   const planet = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
-    uniforms, depthTest: false, depthWrite: false, defines: { STOPS: D.topo.length, BODIES },
+    uniforms, depthTest: false, depthWrite: false, defines: { STOPS: D.topo.length, BODIES, WORK_SEGMENTS },
     vertexShader: 'varying vec2 vNdc; void main() { vNdc = position.xy; gl_Position = vec4(position.xy, 0.0, 1.0); }',
     fragmentShader: document.getElementById('planet-fragment').textContent.replace('// SHARED', shared)
   }));
@@ -1006,6 +1508,31 @@
     invalidate();
   };
   reliefImage.src = D.textures.relief;
+  let surfacePixels = null, surfaceW = 0, surfaceH = 0;
+  if (D.textures.surface) {
+    const surfaceImage = new Image();
+    surfaceImage.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = surfaceW = surfaceImage.width;
+      c.height = surfaceH = surfaceImage.height;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(surfaceImage, 0, 0);
+      try { surfacePixels = ctx.getImageData(0, 0, surfaceW, surfaceH).data; } catch (err) { surfacePixels = null; }
+    };
+    surfaceImage.src = D.textures.surface;
+  }
+  // The water over a place on the design surface: its body, depth and the body's level relative to the reference (a
+  // lake's own level is not carried), or null on dry ground.
+  const surfaceAt = (lat, lon) => {
+    if (!surfacePixels) return null;
+    const i = Math.min(surfaceH - 1, Math.max(0, Math.floor((90 - lat) / 180 * surfaceH)));
+    const j = ((Math.floor((lon + 180) / 360 * surfaceW) % surfaceW) + surfaceW) % surfaceW;
+    const k = (i * surfaceW + j) * 4;
+    if (!surfacePixels[k + 2]) return null;
+    const b = surfacePixels[k + 2];
+    return { body: D.surface.names[b] || 'water', depth: surfacePixels[k] * 256 + surfacePixels[k + 1], level: D.surface.levels[b],
+             index: b };
+  };
   const heightAt = (lat, lon) => {
     if (!reliefPixels) return null;
     const i = Math.min(reliefH - 1, Math.max(0, Math.floor((90 - lat) / 180 * reliefH)));
@@ -1068,6 +1595,10 @@
   const landGeo = new THREE.ConeGeometry(0.009, 0.02, 3);
   const targetGeo = new THREE.BoxGeometry(0.009, 0.009, 0.009);
   const targetMat = new THREE.MeshBasicMaterial({ color: 0x2b2f36 });
+  const fallGeo = new THREE.OctahedronGeometry(0.0065);
+  const fallMat = new THREE.MeshBasicMaterial({ color: 0xbfe9ff });
+  const workGeo = new THREE.BoxGeometry(0.012, 0.004, 0.004);
+  const workMat = new THREE.MeshBasicMaterial({ color: 0xffb347 });
   const items = [];
   const UP = new THREE.Vector3(0, 1, 0);
   const addLabel = (kind, text, lat, lon, height, extra) => {
@@ -1080,10 +1611,254 @@
     items.push(item);
     return item;
   };
-  for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  // The atlas's older sea labels, under today's names; where the regions are drawn the seas carry their own names.
+  if (!D.districts) for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  else document.getElementById('show-seas').closest('label').hidden = true;
+  // The atlas round's draft regions and districts, with their names in the Moon's tongues.
+  const DIST = D.districts || null;
+  const UNIT_KINDS = new Set(['region', 'district', 'coast']);
+  if (DIST) {
+    DIST.regions.forEach((r, k) => { r.page = k + 1; });          // the region's number in the districts texture's blue
+    for (const r of [...DIST.regions].sort((a, b) => b.area - a.area)) {
+      const item = addLabel('region', r.name, r.lat, r.lon, 0, r);
+      if (r.sea) item.el.classList.add('seaRegion');
+    }
+    for (const d of [...DIST.districts].sort((a, b) => b.area - a.area)) addLabel(d.kind, d.name, d.lat, d.lon, 0, d);
+  }
+  const unitByIndex = new Map(DIST ? DIST.districts.map((d) => [d.index, d]) : []);
+  // What lies under a place, for a click and for the hover: the districts texture read on the CPU gives the district
+  // (its place in the page's list), the region drawn there (0 in international waters) and whether it is water; open
+  // water beyond the regions is its sea's.
+  const regionItems = new Map(), unitItems = new Map(), itemByAnchor = new Map();
+  for (const it of items) {
+    if (!UNIT_KINDS.has(it.kind)) continue;
+    if (it.kind === 'region') regionItems.set(it.extra.page, it); else unitItems.set(it.extra.index, it);
+    if (it.extra.anchor) itemByAnchor.set(it.extra.anchor, it);
+  }
+  let unitPixels = null, unitW = 0, unitH = 0;
+  if (DIST && D.textures.districts) {
+    const unitImage = new Image();
+    unitImage.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = unitW = unitImage.width;
+      c.height = unitH = unitImage.height;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(unitImage, 0, 0);
+      try { unitPixels = ctx.getImageData(0, 0, unitW, unitH).data; } catch (err) { unitPixels = null; }
+      makeSelection();                                 // a place selected before the cells arrived takes its tint now
+    };
+    unitImage.src = D.textures.districts;
+  }
+  const seaItemOfBody = (b) => {
+    const body = D.surface && D.surface.bodies ? D.surface.bodies[b] : null;
+    return body ? itemByAnchor.get('sea:' + body) || null : null;
+  };
+  const unitItemAt = (at) => {
+    if (!DIST || !show.district || !at || !unitPixels) return null;
+    const i = Math.min(unitH - 1, Math.max(0, Math.floor((90 - at.lat) / 180 * unitH)));
+    const j = ((Math.floor((at.lon + 180) / 360 * unitW) % unitW) + unitW) % unitW;
+    const k = (i * unitW + j) * 4;
+    const district = (unitPixels[k] & 127) * 256 + unitPixels[k + 1], region = unitPixels[k + 2];
+    if (distance < ZOOM_DISTRICTS && district) return unitItems.get(district) || null;
+    if (region) return regionItems.get(region) || null;
+    const w = surfaceAt(at.lat, at.lon);
+    return w ? seaItemOfBody(w.index) : null;
+  };
+  // The tint of the place a click selects, and of that place alone (district-lines): its reach, made here from the
+  // districts texture's cells in a window round the place. The cells step along a shore that the picture draws far
+  // finer, so both tints reach across it and the shader ends each at the water drawn. The warm tint may show on the
+  // place's own cells and, for a place with land, on the sea's cells within SEL_REACH cells of that land. The water's
+  // tint may show on the place's own cells, except its dry cells within SEL_RIM cells of a sea outside it, and for a
+  // place with coastal waters also on other dry land within SEL_REACH cells of them. So a district's lakes take the
+  // water's tint and the sea beside it takes none, a coastal sea is tinted from its shore to its limits, and a region
+  // holds its land, its lakes and its coastal waters. Where the place ends at a border, on land or across water, its
+  // reach ends with its cells. Each reach and the own cells are then blurred by SEL_PASSES passes of a three-cell
+  // mean, wider along a row towards the poles as the cells narrow, which puts the half level within a cell of the
+  // traced borders nearly everywhere. The far water the page draws lies within one cell of the texture's shore.
+  const SEL_REACH = 2, SEL_RIM = 1, SEL_PASSES = 3;
+  const MINE_DRY = 1, MINE_LAKE = 2, MINE_SEA = 3, OTHER_SEA = 4, OTHER_DRY = 5;   // a cell's kind; 0: another's lake
+  // How many of the page's districts are on land; the coastal seas follow them in its list.
+  const landUnits = DIST ? DIST.districts.filter((d) => d.kind === 'district').length : 0;
+  let selWanted = null, selTexture = null;
+  const makeSelection = () => {
+    topoUniforms.uSelWin.value.set(0, 0, 0, 0);
+    invalidate();
+    if (!selWanted || !unitPixels) return;
+    const W = unitW, H = unitH, px = unitPixels, kind = selWanted.kind, id = selWanted.id, hi = id >> 8, lo = id & 255;
+    const own = kind === 'region' ? (k) => px[k + 2] === id : (k) => (px[k] & 127) === hi && px[k + 1] === lo;
+    // The rows that hold the place, and its columns as an arc that may cross the date line: all but the longest run
+    // of columns without it.
+    const used = new Uint8Array(W);
+    let top = -1, bottom = -1;
+    for (let i = 0, k = 0; i < H; i++) {
+      for (let j = 0; j < W; j++, k += 4) if (own(k)) { used[j] = 1; if (top < 0) top = i; bottom = i; }
+    }
+    if (top < 0) return;
+    let gap = 0, gapEnd = 0;
+    for (let j = 0, run = 0; j < 2 * W; j++) {
+      if (used[j % W]) run = 0;
+      else if (++run > gap) { gap = run; gapEnd = j; }
+    }
+    // A row's cells are cos(latitude) as wide as they are tall, so along a row the reach and the blur take as many
+    // times more cells, to the whole number and no more than eight times.
+    const stretchAt = (i) => Math.min(8, Math.round(1 / Math.max(0.05, Math.cos(((i + 0.5) / H - 0.5) * Math.PI))));
+    const pad = SEL_REACH + SEL_PASSES + 1;
+    const i0 = Math.max(0, top - pad), rows = Math.min(H - 1, bottom + pad) - i0 + 1;
+    const padX = pad * Math.max(stretchAt(i0), stretchAt(i0 + rows - 1));
+    const wrap = W - gap + 2 * padX >= W;              // the window is the whole way round
+    const w = wrap ? W : W - gap + 2 * padX, j0 = wrap ? 0 : (gapEnd + 1 - padX + 2 * W) % W;
+    const n = rows * w, cls = new Uint8Array(n), stretch = new Uint8Array(rows);
+    for (let r = 0; r < rows; r++) {
+      stretch[r] = stretchAt(i0 + r);
+      for (let c = 0; c < w; c++) {
+        const k = ((i0 + r) * W + (j0 + c) % W) * 4, unit = (px[k] & 127) * 256 + px[k + 1];
+        const sea = unit === 0 || unit > landUnits, wet = px[k] > 127;
+        cls[r * w + c] = own(k) ? (sea ? MINE_SEA : wet ? MINE_LAKE : MINE_DRY) : sea ? OTHER_SEA : wet ? 0 : OTHER_DRY;
+      }
+    }
+    // A field's mean over `reach` cells each way, the row's stretch times as many along the row.
+    const sums = new Float64Array(w + 1), across = new Float32Array(n);
+    const mean = (src, reach) => {
+      const out = new Float32Array(n);
+      for (let r = 0; r < rows; r++) {
+        const base = r * w, hx = reach * stretch[r], share = 1 / ((2 * hx + 1) * (2 * reach + 1));
+        for (let c = 0; c < w; c++) sums[c + 1] = sums[c] + src[base + c];
+        for (let c = 0; c < w; c++) {
+          const a = c - hx, b = c + hx + 1;
+          let s = sums[b < w ? b : w] - sums[a > 0 ? a : 0];
+          if (wrap) s += (a < 0 ? sums[w] - sums[w + a] : 0) + (b > w ? sums[b - w] : 0);
+          across[base + c] = s * share;
+        }
+      }
+      for (let r = 0; r < rows; r++) {
+        const base = r * w, to = Math.min(rows - 1, r + reach);
+        for (let q = Math.max(0, r - reach); q <= to; q++) {
+          const other = q * w;
+          for (let c = 0; c < w; c++) out[base + c] += across[other + c];
+        }
+      }
+      return out;
+    };
+    // Above zero within `reach` cells of a cell of the kinds given.
+    const near = (kinds, reach) => {
+      const f = new Float32Array(n);
+      for (let q = 0; q < n; q++) if (kinds.includes(cls[q])) f[q] = 1;
+      return mean(f, reach);
+    };
+    const nearLand = kind === 'coast' ? null : near([MINE_DRY, MINE_LAKE], SEL_REACH);
+    const nearSea = near([OTHER_SEA], SEL_RIM);
+    const nearWaters = kind === 'district' ? null : near([MINE_SEA], SEL_REACH);
+    let land = new Float32Array(n), water = new Float32Array(n), self = new Float32Array(n);
+    for (let q = 0; q < n; q++) {
+      const v = cls[q], mine = v === MINE_DRY || v === MINE_LAKE || v === MINE_SEA;
+      if (mine) self[q] = 1;
+      if (nearLand && (mine || (v === OTHER_SEA && nearLand[q] > 0))) land[q] = 1;
+      if (mine ? !(v === MINE_DRY && nearSea[q] > 0) : v === OTHER_DRY && nearWaters && nearWaters[q] > 0) water[q] = 1;
+    }
+    for (let p = 0; p < SEL_PASSES; p++) { land = mean(land, 1); water = mean(water, 1); self = mean(self, 1); }
+    const data = new Uint8Array(n * 4);
+    for (let q = 0; q < n; q++) {
+      data[4 * q] = Math.min(255, Math.round(255 * land[q]));
+      data[4 * q + 1] = Math.min(255, Math.round(255 * water[q]));
+      data[4 * q + 2] = Math.min(255, Math.round(255 * self[q]));
+      data[4 * q + 3] = 255;
+    }
+    if (selTexture) selTexture.dispose();
+    selTexture = new THREE.DataTexture(data, w, rows, THREE.RGBAFormat);
+    selTexture.minFilter = selTexture.magFilter = THREE.LinearFilter;
+    if (wrap) selTexture.wrapS = THREE.RepeatWrapping;
+    selTexture.needsUpdate = true;
+    topoUniforms.tSel.value = selTexture;
+    topoUniforms.uSelWin.value.set(j0 / W, i0 / H, w / W, rows / H);
+    topoUniforms.uSelStrength.value = kind === 'region' ? 0.2 : 0.28;
+  };
+  // kind: 'district', 'coast' or 'region'; id: the unit's place in the page's list, or the region's number in the
+  // districts texture's blue.
+  const selectPlace = (kind, id) => { selWanted = { kind, id }; makeSelection(); };
+  const clearSelection = () => { selWanted = null; makeSelection(); };
+  // The borders, traced once in the build (render.border_lines): thin lines of a fixed width in pixels, solid on land
+  // and along shores, dashed where water lies on both sides. Regions' edges show at every zoom, districts' when
+  // zoomed in.
+  const borderUniforms = { uTopo: { value: 0 }, uViewport: { value: new THREE.Vector2(1, 1) },
+                           uDashKm: { value: 10 }, uDepthBias: { value: 0.0002 }, uKmPerPx: { value: 1 } };
+  const borderMeshes = { region: [], district: [] };
+  const decodeLines = (b64) => {
+    const bin = atob(b64), view = new DataView(new ArrayBuffer(bin.length)), lines = [];
+    for (let i = 0; i < bin.length; i++) view.setUint8(i, bin.charCodeAt(i));
+    let line = [];
+    for (let i = 0; i + 3 < bin.length; i += 4) {
+      const lat = view.getInt16(i, true), lon = view.getInt16(i + 2, true);
+      if (lat === -32768) { if (line.length > 1) lines.push(line); line = []; } else line.push([lat / 100, lon / 100]);
+    }
+    if (line.length > 1) lines.push(line);
+    return lines;
+  };
+  const borderMesh = (lines, halfWidth, colour, opacity, dashed, flows) => {
+    let n = 0;
+    for (const l of lines) n += l.length - 1;
+    const a = new Float32Array(n * 12), b = new Float32Array(n * 12), side = new Float32Array(n * 4);
+    const end = new Float32Array(n * 4), along = new Float32Array(n * 4), index = new Uint32Array(n * 6);
+    const flow = new Float32Array(n * 4);          // each point's flow (m3/s), where the lines are rivers' channels
+    let k = 0, li = -1;
+    for (const l of lines) {
+      li++;
+      let km = 0, prev = unitAt(...l[0]);
+      for (let i = 1; i < l.length; i++) {
+        const next = unitAt(...l[i]), step = prev.angleTo(next) * MOON_KM;
+        for (let v = 0; v < 4; v++) {
+          a.set([prev.x, prev.y, prev.z], (4 * k + v) * 3);
+          b.set([next.x, next.y, next.z], (4 * k + v) * 3);
+          side[4 * k + v] = v % 2 ? 1 : -1;
+          end[4 * k + v] = v < 2 ? 0 : 1;
+          along[4 * k + v] = v < 2 ? km : km + step;
+          flow[4 * k + v] = flows ? flows[li][v < 2 ? i - 1 : i] : 0;
+        }
+        index.set([4 * k, 4 * k + 1, 4 * k + 2, 4 * k + 1, 4 * k + 3, 4 * k + 2], 6 * k);
+        km += step;
+        prev = next;
+        k++;
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(a, 3));
+    g.setAttribute('aB', new THREE.BufferAttribute(b, 3));
+    g.setAttribute('aSide', new THREE.BufferAttribute(side, 1));
+    g.setAttribute('aEnd', new THREE.BufferAttribute(end, 1));
+    g.setAttribute('aAlong', new THREE.BufferAttribute(along, 1));
+    g.setAttribute('aFlow', new THREE.BufferAttribute(flow, 1));
+    g.setIndex(new THREE.BufferAttribute(index, 1));
+    const mesh = new THREE.Mesh(g, new THREE.ShaderMaterial({
+      uniforms: { tRelief: topoUniforms.tRelief, uLow: topoUniforms.uLow, uScale: reliefUniforms.uScale, ...borderUniforms,
+                  uHalfWidth: { value: halfWidth }, uColour: { value: new THREE.Vector3(...colour) },
+                  uOpacity: { value: opacity }, uDash: { value: dashed ? 1 : 0 }, uRiver: { value: flows ? 1 : 0 } },
+      vertexShader: document.getElementById('border-vertex').textContent,
+      fragmentShader: document.getElementById('border-fragment').textContent,
+      transparent: true, depthTest: true, depthWrite: false, side: THREE.DoubleSide }));
+    mesh.frustumCulled = false;
+    mesh.renderOrder = 3;
+    mesh.visible = false;
+    globe.add(mesh);
+    return mesh;
+  };
+  if (DIST && DIST.borders) {
+    const looks = { region: [0.7, [1.0, 0.91, 0.72], 0.75], district: [0.5, [0.96, 0.94, 0.88], 0.5] };
+    for (const kind of ['region', 'district']) {
+      for (const style of ['solid', 'dashed']) {
+        const [half, colour, opacity] = looks[kind];
+        borderMeshes[kind].push(borderMesh(decodeLines(DIST.borders[kind][style]), half, colour, opacity, style === 'dashed'));
+      }
+    }
+  }
+  const setDistrictMode = () => {
+    const m = !DIST || !show.district ? 0 : distance < ZOOM_DISTRICTS ? 2 : 1;
+    topoUniforms.uDistrictMode.value = m;
+    for (const mesh of borderMeshes.region) mesh.visible = m >= 1;
+    for (const mesh of borderMeshes.district) mesh.visible = m >= 2;
+  };
   for (const [name, lat, lon, h] of D.labels.islands) addLabel('island', name, lat, lon, h);
   for (const s of D.labels.sites) {
-    const item = addLabel('site', s.short || '', s.lat, s.lon, s.status === 'submerged' ? -s.depth : s.aboveSea, s);
+    const item = addLabel('site', s.short || '', s.lat, s.lon,
+      s.height !== undefined ? s.height : (s.status === 'submerged' ? -s.depth : s.aboveSea), s);
     item.mesh = new THREE.Mesh(s.status === 'submerged' ? siteGeo : landGeo, siteMat);
     item.mesh.renderOrder = 2;
     globe.add(item.mesh);
@@ -1094,6 +1869,40 @@
     item.mesh.renderOrder = 2;
     globe.add(item.mesh);
   }
+  for (const f of (D.labels.falls || [])) {
+    const item = addLabel('fall', f.short, f.lat, f.lon, f.height, f);
+    item.mesh = new THREE.Mesh(fallGeo, fallMat);
+    item.mesh.renderOrder = 2;
+    globe.add(item.mesh);
+  }
+  for (const w of (D.labels.works || [])) {
+    const item = addLabel('work', w.short, w.lat, w.lon, w.height, w);
+    item.mesh = new THREE.Mesh(workGeo, workMat);
+    item.mesh.renderOrder = 2;
+    globe.add(item.mesh);
+  }
+  // The named rivers (render.river_marks, from the waterways record), largest first: each one's name half way along
+  // its course, and the courses as thin lines that show from afar and fade as the view comes close enough for the
+  // water itself to be seen.
+  const RIVERS = D.rivers || [];
+  for (const r of RIVERS) addLabel('river', r.name, r.lat, r.lon, 0, r);
+  // Where the build gave the rivers their pieces (render.river_marks, from river_courses.py): the channel reaches as
+  // lines that taper with the flow, in a map's blue, and each lake crossing as a faint line through the lake's deep
+  // water, so that a named river can be followed from its head to its mouth. With "channels" in the link the channels
+  // alone are drawn, in a dark blue near the open water's own, and no lake carries a mark: a river then reads as lakes
+  // joined by short rivers, as it would from above. Without pieces, the old line.
+  const RIVER_WATER = [0.07, 0.13, 0.20], RIVER_MAP_BLUE = [0.36, 0.60, 0.88];
+  let riverLakeLinesShown = true;
+  const riverPiecesHeld = RIVERS.some((r) => r.pieces && r.pieces.length);
+  const riverPieces = (kind) => RIVERS.flatMap((r) => (r.pieces || []).filter((p) => p[0] === kind).map((p) => p[1]));
+  const riverLines = !RIVERS.length ? null : riverPiecesHeld
+    ? borderMesh(riverPieces('c').map((p) => p.map((q) => [q[0], q[1]])), 0.75, RIVER_MAP_BLUE, 0.95, false,
+                 riverPieces('c').map((p) => p.map((q) => q[2])))
+    : borderMesh(RIVERS.map((r) => r.course), 0.75, [0.66, 0.86, 1.0], 0.7, false);
+  const riverLakeLines = riverPiecesHeld
+    ? borderMesh(riverPieces('l').map((p) => p.map((q) => [q[0], q[1]])), 0.4, [0.62, 0.80, 0.96], 0.4, false) : null;
+  const RIVER_LINES_FADE = [1.45, 1.95];             // Moon radii from the centre: gone nearer, whole farther
+  if (!RIVERS.length) document.getElementById('show-rivers').closest('label').hidden = true;
   const placeMarkers = () => {
     for (const it of items) {
       if (!it.mesh) continue;
@@ -1106,11 +1915,19 @@
   // Per-mode settings: what is shown and how much relief.
   const reliefInput = document.getElementById('relief');
   const reliefValue = document.getElementById('relief-value');
-  const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', grid: 'show-grid' };
+  const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', fall: 'show-falls',
+                     work: 'show-works', river: 'show-rivers', grid: 'show-grid', region: 'show-districts',
+                     district: 'show-districts', coast: 'show-districts' };
   const settings = {
-    appearance: { show: { sea: false, island: false, site: false, target: false, grid: false }, relief: 1, max: 10 },
-    topo: { show: { sea: true, island: true, site: true, target: false, grid: false }, relief: 12, max: 40 }
+    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, river: true,
+                          grid: false, region: true, district: true, coast: true }, relief: 1, max: 10 },
+    topo: { show: { sea: false, island: true, site: true, target: false, fall: true, work: true, river: true,
+                    grid: false, region: true, district: true, coast: true }, relief: 12, max: 40 }
   };
+  // Regions show when zoomed out, districts and coastal seas when zoomed in past ZOOM_DISTRICTS Moon radii.
+  const ZOOM_DISTRICTS = 2.6;
+  const zoomShows = (kind) => kind === 'region' ? distance >= ZOOM_DISTRICTS
+    : (kind === 'district' || kind === 'coast') ? distance < ZOOM_DISTRICTS : true;
   let show = settings.appearance.show;
   const setRelief = (v) => {
     settings[mode].relief = v;
@@ -1136,6 +1953,8 @@
   const setGrid = () => {
     const spacing = show.grid ? [+gridMajor.value, +gridMinor.value] : [0, 0];
     topoUniforms.uGrid.value.set(...spacing);
+    topoUniforms.uWorks.value = show.work && workSegments.length ? 1 : 0;
+    setDistrictMode();
     invalidate();
   };
   for (const select of [gridMajor, gridMinor]) select.addEventListener('change', () => {
@@ -1172,8 +1991,8 @@
   const phaseValue = document.getElementById('phase-value');
   const phaseName = (e) => e < 7 || e >= 353 ? 'new moon' : e < 83 ? 'waxing crescent' : e < 97 ? 'first quarter'
     : e < 173 ? 'waxing gibbous' : e < 187 ? 'full moon' : e < 263 ? 'waning gibbous' : e < 277 ? 'last quarter' : 'waning crescent';
-  // Sunlight follows the slider's day; fully lit gives every place its own Sun, high in its north-west, and keeps
-  // the clouds of that day.
+  // Sunlight follows the slider's day; fully lit lights every place alike from the screen's upper left and keeps the
+  // clouds of that day.
   let light = 'sun', day = 10;
   const setPhase = (d) => {
     day = d;
@@ -1188,7 +2007,7 @@
     phaseValue.textContent = light === 'sun'
       ? 'Day ' + day.toFixed(1) + ' · ' + phaseName(elongation) + ' · ' + Math.round(lit * 100) +
         '% lit from Earth · Sun over ' + fmtLon(sub)
-      : 'Day ' + day.toFixed(1) + ' · the clouds of that day, with every place lit alike from high in its north-west';
+      : 'Day ' + day.toFixed(1) + ' · the clouds of that day, with every place lit alike from the screen\'s upper left';
     invalidate();
   };
   phaseInput.addEventListener('input', (e) => setPhase(+e.target.value));
@@ -1209,13 +2028,63 @@
     invalidate();
   };
   exposureInput.addEventListener('input', (e) => setExposure(+e.target.value));
+  // Close up, the ground's own light and tone (uClose in the shader), unless this box is cleared.
+  const closeLightBox = document.getElementById('close-light');
+  closeLightBox.addEventListener('change', () => invalidate());
+  const CLOSE_LIGHT = [3.0, 2.2];                    // Moon radii from the centre: none of it farther, all of it nearer
   document.getElementById('show-clouds').addEventListener('change', (e) => { uniforms.uClouds.value = e.target.checked ? 1 : 0; invalidate(); });
   document.getElementById('red-only').addEventListener('change', (e) => { uniforms.uRedOnly.value = e.target.checked ? 1 : 0; invalidate(); });
   document.getElementById('show-air').addEventListener('change', (e) => {
     uniforms.uAtmos.value = e.target.checked ? 1 : 0;
     uniforms.uTau0.value.set(...P.tau0.map((v) => v * uniforms.uAtmos.value));
-    invalidate();
+    peelInput.disabled = peelZoomBox.disabled = !e.target.checked;
+    if (peelZoomBox.checked) { peelKm = -1; followZoom(); } else setPeel(+peelInput.value);
   });
+  // Peeling the air from the top down, as a descent through it would show the ground: the slider's last stop is the
+  // whole air, as from space; each lower stop keeps in view only the air below that height. With the zoom, the zoom
+  // stands in for the descent: from the opening view to the nearest zoom the share of the air's column left in view
+  // falls from all of it to none, evenly with the logarithm of the camera's height; the camera itself stays above the
+  // air. Moving the slider takes the peel off the zoom.
+  const PEEL_KM = [0, 1, 2, 5, 10, 20, 30, 50, 75, 100, 150, 250];
+  const airTopKm = P.topKm - P.radiusKm;
+  const ZOOM_NEAREST = 1.35, ZOOM_HOME = 5.8;      // the nearest zoom and the appearance's opening view, Moon radii
+  const peelInput = document.getElementById('peel'), peelValue = document.getElementById('peel-value');
+  const peelZoomBox = document.getElementById('peel-zoom');
+  let peelKm = airTopKm;
+  const kmText = (km) => km >= 10 ? String(Math.round(km)) : km.toFixed(1).replace(/\.0$/, '');
+  const applyPeel = (km, auto) => {
+    peelKm = Math.min(Math.max(km, 0), airTopKm);
+    uniforms.uPeel.value = 1 + peelKm / P.radiusKm;
+    const share = Math.round((1 - Math.exp(-peelKm / P.scaleHeightKm)) * 100);
+    const decks = peelKm <= P.clouds.lowKm ? '; both cloud decks lie above, and their shade stays on the ground'
+      : peelKm <= P.clouds.highKm ? '; the high cloud deck lies above, and its shade stays on the ground' : '';
+    const lead = auto ? 'With the zoom, ' : '';
+    peelValue.textContent = !uniforms.uAtmos.value ? 'The air is off'
+      : peelKm >= airTopKm ? (auto ? 'With the zoom, all' : 'All') + ' the air, ' + Math.round(airTopKm) + ' km deep, as from space'
+      : peelKm <= 0 ? (auto ? 'With the zoom, none' : 'None') + ' of the air: the ground in the light the whole air gives it, with no haze between' + decks
+      : lead + (auto ? 'the' : 'The') + ' air below ' + kmText(peelKm) + ' km, ' + share + '% of its column, as from '
+        + kmText(peelKm) + ' km up' + decks;
+    invalidate();
+  };
+  const setPeel = (i) => applyPeel(i >= PEEL_KM.length ? airTopKm : PEEL_KM[i], false);
+  const zoomPeelKm = (d) => {
+    const s = Math.log(Math.max(d - 1, 1e-6) / (ZOOM_NEAREST - 1)) / Math.log((ZOOM_HOME - 1) / (ZOOM_NEAREST - 1));
+    return s >= 1 ? airTopKm : s <= 0 ? 0 : -P.scaleHeightKm * Math.log(1 - s);
+  };
+  const followZoom = () => {
+    if (!peelZoomBox.checked || mode !== 'appearance') return;
+    const km = Math.min(zoomPeelKm(distance), airTopKm);
+    if (Math.abs(km - peelKm) < 0.05) return;
+    let stop = PEEL_KM.length;
+    if (km < airTopKm) PEEL_KM.forEach((v, i) => { if (Math.abs(v - km) < Math.abs((PEEL_KM[stop] ?? Infinity) - km)) stop = i; });
+    peelInput.value = String(stop);
+    applyPeel(km, true);
+  };
+  peelInput.addEventListener('input', (e) => { peelZoomBox.checked = false; setPeel(+e.target.value); });
+  peelZoomBox.addEventListener('change', () => {
+    if (peelZoomBox.checked) { peelKm = -1; followZoom(); } else setPeel(+peelInput.value);
+  });
+  setPeel(+peelInput.value);
 
   // Orientation, distance and field of view for each view.
   const qFromEuler = (x, y, z) => new THREE.Quaternion().setFromEuler(new THREE.Euler(x, y, z, 'XYZ'));
@@ -1227,7 +2096,14 @@
     earth: near
   };
   const EARTH = { distance: EARTH_KM / MOON_KM, fov: 0.9 };
-  const homeCamera = () => mode === 'appearance' ? { distance: 5.8, fov: 28 } : { distance: 4.3, fov: 28 };
+  // The opening distance fills the same share of a wide view's height with the Moon, and of a tall view's width.
+  const fitHome = (base) => {
+    const aspect = viewport.clientWidth / Math.max(1, viewport.clientHeight);
+    if (aspect >= 1) return base;
+    const halfY = 14 * Math.PI / 180, halfX = Math.atan(Math.tan(halfY) * aspect);
+    return Math.min(12, 1 / Math.sin(Math.asin(1 / base) / halfY * halfX));
+  };
+  const homeCamera = () => ({ distance: fitHome(mode === 'appearance' ? 5.8 : 4.3), fov: 28 });
   let distance = 5.8, fov = 28, current = 'near';
   globe.quaternion.copy(VIEWS.near);
   let tween = null, turning = false;
@@ -1294,6 +2170,79 @@
     invalidate();
   });
 
+  // The hover: a mouse over a region, district, sea or marker shows its name, what the name means and the first
+  // sentence of its text beside the pointer.
+  const tip = document.getElementById('tip');
+  const hideTip = () => { tip.hidden = true; };
+
+  // Pin mode: the Pin tool turns it on, and Esc or the tool turns it off. While it is on, a click places the pin and
+  // reads the height and the water there; otherwise a click opens the card of what lies under it.
+  const pinModeBtn = document.getElementById('pin-mode'), pinBanner = document.getElementById('pin-banner');
+  let pinMode = false;
+  const setPinMode = (on) => {
+    pinMode = on;
+    pinModeBtn.setAttribute('aria-pressed', String(on));
+    pinBanner.hidden = !on;
+    viewport.classList.toggle('pinning', on);
+    hideTip();
+  };
+  pinModeBtn.addEventListener('click', () => setPinMode(!pinMode));
+
+  // The floating panels: the card on the right, the layers drawer on the left (sheets from the bottom on a phone, one
+  // at a time) and the notes. Each viewer's drawer and open sections are remembered in their own browser.
+  const small = () => window.matchMedia('(max-width: 700px)').matches;
+  const remember = (key, value) => { try { localStorage.setItem('openMoonGlobe.' + key, JSON.stringify(value)); } catch (err) { /* none kept */ } };
+  const recall = (key, fallback) => {
+    try { const v = localStorage.getItem('openMoonGlobe.' + key); return v === null ? fallback : JSON.parse(v); } catch (err) { return fallback; }
+  };
+  const cardPanel = document.getElementById('cardpanel');
+  const drawer = document.getElementById('drawer'), layersBtn = document.getElementById('layers-toggle');
+  const setDrawer = (open, keep) => {
+    drawer.hidden = !open;
+    layersBtn.setAttribute('aria-expanded', String(open));
+    layersBtn.setAttribute('aria-pressed', String(open));
+    if (keep) remember('drawer', open);
+    if (open && small()) cardPanel.hidden = true;
+  };
+  const openCard = () => {
+    cardPanel.hidden = false;
+    cardPanel.scrollTop = 0;
+    if (small()) setDrawer(false, false);
+  };
+  const closeCard = () => {
+    cardPanel.hidden = true;
+    clearSelection();
+    invalidate();
+  };
+  document.getElementById('card-close').addEventListener('click', closeCard);
+  layersBtn.addEventListener('click', () => setDrawer(drawer.hidden, true));
+  setDrawer(small() ? false : recall('drawer', true), false);
+  for (const sec of drawer.querySelectorAll('details[data-key]')) {
+    const open = recall('section.' + sec.dataset.key, null);
+    if (open !== null) sec.open = open;
+    sec.addEventListener('toggle', () => remember('section.' + sec.dataset.key, sec.open));
+  }
+  const about = document.getElementById('about'), aboutBtn = document.getElementById('about-open');
+  const setAbout = (open) => {
+    about.hidden = !open;
+    aboutBtn.setAttribute('aria-expanded', String(open));
+    if (open) about.focus();
+  };
+  aboutBtn.addEventListener('click', () => setAbout(about.hidden));
+  document.getElementById('about-close').addEventListener('click', () => setAbout(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!about.hidden) setAbout(false);
+    else if (pinMode) setPinMode(false);
+    else if (!cardPanel.hidden) closeCard();
+    else if (!drawer.hidden && small()) setDrawer(false, false);
+  });
+  // The drawer starts below the search box, whatever height the title gives it.
+  const topBox = document.getElementById('top');
+  const fitPanels = () => document.documentElement.style.setProperty('--top-h', topBox.offsetHeight + 12 + 'px');
+  new ResizeObserver(fitPanels).observe(topBox);
+  fitPanels();
+
   // Going to a place: degrees as 45 N, 30 W (or 45, -30 with east positive), or a name the globe labels.
   const facing = (lat, lon) => new THREE.Quaternion().setFromAxisAngle(X_AXIS, lat * Math.PI / 180)
     .multiply(new THREE.Quaternion().setFromAxisAngle(Y_AXIS, -Math.PI / 2 - lon * Math.PI / 180));
@@ -1324,7 +2273,7 @@
   };
   const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const places = [];
-  for (const [name, lat, lon] of [...D.labels.seas, ...D.labels.islands]) places.push({ name, lat, lon, key: plain(name) });
+  for (const [name, lat, lon] of [...(D.districts ? [] : D.labels.seas), ...D.labels.islands]) places.push({ name, lat, lon, key: plain(name) });
   for (const it of items) {
     if (!it.extra) continue;
     for (const name of new Set([it.extra.name, it.extra.short].filter(Boolean)))
@@ -1354,8 +2303,12 @@
     }
     const { lat, lon } = c || place;
     flyTo(lat, lon);
-    setPin(lat, lon, place ? place.name : fmtPoint(lat, lon));
-    if (place && place.item) showCard(place.item); else showPoint(lat, lon, place && place.name);
+    // A named place opens its card; a latitude and longitude takes a pin and reads the place there.
+    if (place && place.item) showCard(place.item);
+    else {
+      setPin(lat, lon, place ? place.name : fmtPoint(lat, lon));
+      showPoint(lat, lon, place && place.name);
+    }
     gotoValue.textContent = (place ? place.name + ' · ' : '') + fmtPoint(lat, lon);
   });
 
@@ -1393,6 +2346,8 @@
     viewport.classList.add('dragging');
     moved = 0;
     tween = null;
+    hoverAt = null;               // a press ends the hover until the pointer moves again
+    hideTip();
   });
   viewport.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -1427,40 +2382,183 @@
     else distance = Math.min(12, Math.max(1.35, distance * factor));
     invalidate();
   };
-  viewport.addEventListener('wheel', (e) => { e.preventDefault(); zoom(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+  viewport.addEventListener('wheel', (e) => { e.preventDefault(); hideTip(); zoom(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+  document.getElementById('zoom-in').addEventListener('click', () => { tween = null; zoom(1 / 1.35); });
+  document.getElementById('zoom-out').addEventListener('click', () => { tween = null; zoom(1.35); });
+
+  // The hover, worked out at most once a frame.
+  let hoverAt = null, hoverQueued = false;
+  const firstSentence = (t) => { const m = (t || '').match(/^.*?[.!?](?=\s|$)/); return m ? m[0] : (t || ''); };
+  const kindOf = (it) => {
+    const x = it.extra;
+    if (it.kind === 'region') return x.sea ? 'sea' : x.card && x.card.islandGroup ? 'island group' : 'region';
+    return it.kind === 'coast' ? 'coastal sea' : 'district';
+  };
+  const MARKER_KINDS = { site: 'heritage site', target: 'sampling target', fall: 'falls', work: 'the works' };
+  const updateHover = () => {
+    hoverQueued = false;
+    if (!hoverAt || pointers.size || pinMode) { hideTip(); return; }
+    const [px, py] = hoverAt;
+    const marker = markerAt(px, py) || riverAt(px, py);
+    let title = '', sub = '', text = '';
+    if (marker && marker.kind === 'river') {
+      const x = marker.extra;
+      title = x.name;
+      sub = ['river', x.tongue, x.meaning].filter(Boolean).join(' · ');
+      text = firstSentence(x.text);
+    } else if (marker) {
+      const x = marker.extra;
+      title = x.title || (x.name ? x.name + (x.year ? ' (' + x.year + ')' : '') : x.short || '');
+      sub = MARKER_KINDS[marker.kind] || '';
+    } else {
+      const it = unitItemAt(pointAt(px, py));
+      if (!it) { hideTip(); return; }
+      const x = it.extra, c = x.card || {};
+      title = x.name;
+      sub = [kindOf(it), x.tongue, c.gloss || x.meaning].filter(Boolean).join(' · ');
+      text = firstSentence(c.text || (it.kind === 'region' ? '' : x.description));
+    }
+    tip.querySelector('b').textContent = title;
+    tip.querySelector('.m').textContent = sub;
+    tip.querySelector('.t').textContent = text;
+    tip.hidden = false;
+    const w = viewport.clientWidth, h = viewport.clientHeight;
+    const left = px + 16 + tip.offsetWidth > w - 8 ? px - 12 - tip.offsetWidth : px + 16;
+    const top = py + 18 + tip.offsetHeight > h - 8 ? py - 12 - tip.offsetHeight : py + 18;
+    tip.style.left = Math.max(8, left) + 'px';
+    tip.style.top = Math.max(8, top) + 'px';
+  };
+  viewport.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || pointers.size) return;           // a mouse with no button down
+    const box = viewport.getBoundingClientRect();
+    hoverAt = [e.clientX - box.left, e.clientY - box.top];
+    if (!hoverQueued) { hoverQueued = true; requestAnimationFrame(updateHover); }
+  });
+  viewport.addEventListener('pointerleave', () => { hoverAt = null; hideTip(); });
 
   // The record card.
   const card = document.getElementById('card');
   const showCard = (it) => {
     const x = it.extra;
+    clearSelection();
+    openCard();
+    invalidate();
     if (it.kind === 'site') {
       const where = x.status === 'submerged'
-        ? fmt(x.depth) + ' m under the sea · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
+        ? fmt(x.depth) + ' m under ' + (x.waterName || 'the sea') + ' · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
         : fmt(x.aboveSea) + ' m above the sea · water ' + fmt(x.nearestWater) + ' km';
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p><p class="treat"></p>';
       card.querySelector('h3').textContent = x.name + ' (' + x.year + ')';
       card.querySelector('.meta').textContent = where;
       card.querySelector('.marks').textContent = x.marks;
-      card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.';
+      card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.' + (x.statusNote ? ' ' + x.statusNote : '');
+    } else if (it.kind === 'fall' || it.kind === 'work') {
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
+      card.querySelector('h3').textContent = x.title;
+      card.querySelector('.meta').textContent = x.meta;
+      card.querySelector('.marks').textContent = x.note;
+    } else if (it.kind === 'river') {
+      // A named river: what its name means, the lines written from the waterways record, its figures, and links that
+      // fly to the sea it ends in and the regions it crosses.
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="lead"></p><dl class="facts"></dl>' +
+        '<div class="links"></div><p class="note"></p>';
+      card.querySelector('h3').textContent = x.name;
+      card.querySelector('.meta').textContent = ['river', x.tongue, x.meaning].filter(Boolean).join(' · ');
+      card.querySelector('.lead').textContent = x.text;
+      const dl = card.querySelector('.facts');
+      for (const [k, v] of x.rows) {
+        const dt = document.createElement('dt'), dd = document.createElement('dd');
+        dt.textContent = k;
+        dd.textContent = v;
+        dl.append(dt, dd);
+      }
+      const links = card.querySelector('.links');
+      const linked = (x.links || []).map((a) => itemByAnchor.get(a)).filter(Boolean);
+      if (linked.length) {
+        const label = document.createElement('span');
+        label.textContent = 'Its sea and regions';
+        links.append(label);
+        for (const target of linked) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = target.extra.name;
+          b.addEventListener('click', () => { flyTo(target.lat, target.lon); showCard(target); });
+          links.append(b);
+        }
+      }
+      links.hidden = !linked.length;
+      card.querySelector('.note').textContent = x.note;
+    } else if (UNIT_KINDS.has(it.kind)) {
+      // A draft unit: its name, kind, tongue and what its name means; for a land region the text written from its fact
+      // sheet and its main figures, otherwise its short computed description; and links that fly to the places tied
+      // to it (a region's seas and neighbours, a coast's shore and catchment, a district's coastal seas).
+      const c = x.card || null;
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="lead"></p><dl class="facts"></dl>' +
+        '<div class="links"></div><p class="note"></p>';
+      card.querySelector('h3').textContent = x.name;
+      card.querySelector('.meta').textContent = [kindOf(it) + (x.region ? ' of ' + x.region : ''), x.tongue,
+                                                 (c && c.gloss) || x.meaning, x.code].filter(Boolean).join(' · ');
+      card.querySelector('.lead').textContent = (c && c.text) || x.description || '';
+      const dl = card.querySelector('.facts');
+      const rows = c ? c.rows : x.sea ? [] : [['Area', fmt(x.area) + ' km²']];
+      for (const [k, v] of rows) {
+        const dt = document.createElement('dt'), dd = document.createElement('dd');
+        dt.textContent = k;
+        dd.textContent = v;
+        dl.append(dt, dd);
+      }
+      dl.hidden = !rows.length;
+      const links = card.querySelector('.links');
+      const linked = c ? [...(c.seas || []), ...(c.neighbours || [])].map((a) => itemByAnchor.get(a)).filter(Boolean)
+        : (x.links || []).map((k) => unitItems.get(k)).filter(Boolean);
+      if (linked.length) {
+        const label = document.createElement('span');
+        label.textContent = c ? 'Its seas and neighbours' : it.kind === 'coast' ? 'Its shore and catchment' : 'Its coastal seas';
+        links.append(label);
+        for (const target of linked) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = target.extra.name;
+          b.addEventListener('click', () => { flyTo(target.lat, target.lon); showCard(target); });
+          links.append(b);
+        }
+      }
+      links.hidden = !linked.length;
+      const note = card.querySelector('.note');
+      note.textContent = c ? c.note : '';
+      note.hidden = !note.textContent;
+      // The place itself is tinted, and none of those its links name; a sea beyond the regions' waters takes no tint.
+      if (it.kind === 'region') { if (!x.sea && x.page) selectPlace('region', x.page); }
+      else if (x.index) selectPlace(it.kind, x.index);
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
       card.querySelector('.meta').textContent = (x.aboveSea >= 0 ? fmt(x.aboveSea) + ' m above' : fmt(-x.aboveSea) + ' m below') +
-        ' sea level · ' + x.zone;
+        ' ' + (D.reference || 'sea level') + (x.under !== undefined ? (x.under >= 0 ? ' · under ' + fmt(x.under) + ' m of water' : ' · dry ground') : '') +
+        ' · ' + x.zone;
       card.querySelector('.marks').textContent = x.record + ' Sample ' + x.sample + '.';
     }
   };
-  const first = items.find((it) => it.extra && it.extra.id === 'apollo-11');
-  if (first) showCard(first);
   let shownPoint = null;
   const showPoint = (lat, lon, name) => {
     shownPoint = [lat, lon, name];
+    clearSelection();
+    openCard();
+    invalidate();
     card.innerHTML = '<h3></h3><div class="meta"></div><p></p>';
     card.querySelector('h3').textContent = name || fmtPoint(lat, lon);
     card.querySelector('.meta').textContent = (name ? fmtPoint(lat, lon) + ' · ' : '') + '0.25° atlas cell';
     const h = heightAt(lat, lon);
     let text = h === null ? 'The relief is still loading.'
       : h < 0 ? 'Sea floor ' + fmt(-h) + ' m below sea level.' : 'Ground ' + fmt(h) + ' m above sea level.';
+    if (D.surface && h !== null) {
+      const w = surfaceAt(lat, lon);
+      const ground = (h < 0 ? fmt(-h) + ' m below' : fmt(h) + ' m above') + ' the common level';
+      text = w ? 'Under ' + w.body + ', ' + fmt(w.depth) + ' m deep on average over the cell' +
+        (w.level !== null && w.level !== undefined ? '; its surface stands ' + (w.level < 0 ? fmt(-w.level) + ' m below' :
+          fmt(w.level) + ' m above') + ' the common level' : '') + '; the cell\'s mean ground lies ' + ground + '.'
+        : 'Dry ground ' + ground + '.';
+    }
     const then = h === null ? null : yearAt(lat, lon, h);
     if (then) text += ' In year ' + fmt(Y.years[yearIndex]) + ', ' + then + '.';
     card.querySelector('p').textContent = text;
@@ -1473,7 +2571,8 @@
     if (Y) {
       topoUniforms.uLevels.value = Y.levels[yearIndex];
       yearsValue.textContent = yearText(yearIndex);
-      if (shownPoint && card.querySelector('.meta') && card.querySelector('.meta').textContent.endsWith('atlas cell')) {
+      if (shownPoint && !cardPanel.hidden && card.querySelector('.meta') &&
+          card.querySelector('.meta').textContent.endsWith('atlas cell')) {
         showPoint(...shownPoint);
       }
     }
@@ -1509,20 +2608,63 @@
     projected.copy(worldPos).project(camera);
     return { x: (projected.x + 1) / 2 * viewport.clientWidth, y: (1 - projected.y) / 2 * viewport.clientHeight, facing };
   };
-  const pick = (e) => {
-    const box = viewport.getBoundingClientRect();
-    const px = e.clientX - box.left, py = e.clientY - box.top;
+  // The marker nearest a pixel, within 16 pixels: a heritage site, a sampling target, a fall or a piece of the works.
+  const markerAt = (px, py) => {
     let best = null, bestD = 16;
     for (const it of items) {
-      if (!it.extra || (it.kind === 'site' && !show.site) || (it.kind === 'target' && !show.target)) continue;
+      if (!it.extra || !it.mesh || !show[it.kind]) continue;
       const s = screenOf(it);
       if (s.facing < 0.05) continue;
       const d = Math.hypot(s.x - px, s.y - py);
       if (d < bestD) { best = it; bestD = d; }
     }
-    if (best) { showCard(best); return; }
+    return best;
+  };
+  // The named river under a pixel: its name, or its drawn course within 7 pixels while the lines show.
+  const coursePoint = { lat: 0, lon: 0, height: 0 };
+  const riverAt = (px, py) => {
+    if (!show.river) return null;
+    let best = null, bestD = 7;
+    for (const it of items) {
+      if (it.kind !== 'river') continue;
+      if (!it.el.hidden) {
+        const s = screenOf(it);
+        if (Math.abs(px - s.x) < it.el.textContent.length * 3.3 + 6 && Math.abs(py - s.y) < 9) return it;
+      }
+      if (!riverLines || !riverLines.visible) continue;
+      let prev = null;
+      for (const [lat, lon] of it.extra.course) {
+        coursePoint.lat = lat;
+        coursePoint.lon = lon;
+        const s = screenOf(coursePoint);
+        const cur = s.facing > 0.05 ? s : null;
+        if (prev && cur) {
+          const dx = cur.x - prev.x, dy = cur.y - prev.y;
+          const t = Math.min(1, Math.max(0, ((px - prev.x) * dx + (py - prev.y) * dy) / (dx * dx + dy * dy || 1)));
+          const d = Math.hypot(px - prev.x - t * dx, py - prev.y - t * dy);
+          if (d < bestD) { best = it; bestD = d; }
+        }
+        prev = cur;
+      }
+    }
+    return best;
+  };
+  // A click: in pin mode the pin and the place's height and water; otherwise the card of the marker under the pointer,
+  // or of the named river there, or of the region (zoomed out), district or coastal sea (zoomed in) or sea there, or
+  // the place's own reading.
+  const pick = (e) => {
+    const box = viewport.getBoundingClientRect();
+    const px = e.clientX - box.left, py = e.clientY - box.top;
     const at = pointAt(px, py);
-    if (at) { setPin(at.lat, at.lon, fmtPoint(at.lat, at.lon)); showPoint(at.lat, at.lon); }
+    if (pinMode) {
+      if (at) { setPin(at.lat, at.lon, fmtPoint(at.lat, at.lon)); showPoint(at.lat, at.lon); }
+      return;
+    }
+    const marker = markerAt(px, py) || riverAt(px, py);
+    if (marker) { showCard(marker); return; }
+    const unit = unitItemAt(at);
+    if (unit) showCard(unit);
+    else if (at) showPoint(at.lat, at.lon);
   };
   // The place under a pixel: the ray meets the sphere, then, in the raised modes, the sphere at that place's
   // raised height, a few times over.
@@ -1544,6 +2686,88 @@
     return found;
   };
 
+  // The finer ground, loaded close up: once the camera comes within FINE_DISTANCE Moon radii of the centre in the
+  // appearance, a window of today's frame is centred on the view and drawn from the packs it overlaps; each pack's files
+  // are fetched once and kept compressed, and the window moves when the view has moved a quarter of the way across it.
+  // The textures change only when the new window is drawn whole, so the view never shows half a window.
+  const FINE_DISTANCE = 3.0;
+  const finePacks = new Map();
+  let fineWin = null, fineBusy = false, fineAgain = false;
+  const todayOf = (p) => {                       // a direction in the page's frame to today's latitude and longitude
+    const R = F.rotation, u = [p.x, -p.z, p.y];
+    const t = [0, 1, 2].map((i) => R[0][i] * u[0] + R[1][i] * u[1] + R[2][i] * u[2]);
+    return { lat: Math.asin(Math.max(-1, Math.min(1, t[2]))) * 180 / Math.PI,
+             lon: ((Math.atan2(t[1], t[0]) * 180 / Math.PI) + 360) % 360 };
+  };
+  const fineWindowFor = (lat, lon) => {
+    const latSpan = FINE_PX / F.ppd;
+    const top = Math.max(-F.lat_top + latSpan, Math.min(F.lat_top, Math.round((lat + latSpan / 2) / 4) * 4));
+    const mid = top - latSpan / 2;
+    const lonSpan = Math.min(4 * latSpan, latSpan / Math.max(Math.cos(mid * Math.PI / 180), 0.25));
+    const left = ((Math.round((lon - lonSpan / 2) / 4) * 4) % 360 + 360) % 360;
+    return { top, left, latSpan, lonSpan };
+  };
+  const fineParts = (win, p) => {                // where a pack meets the window, in degrees, across the date line too
+    const bottom = p.lat_top - F.pack_tiles[0] * F.tile_deg;
+    const lat1 = Math.min(win.top, p.lat_top), lat0 = Math.max(win.top - win.latSpan, bottom);
+    const out = [];
+    if (lat1 <= lat0) return out;
+    for (const shift of [-360, 0, 360]) {
+      const pl = p.lon_left + shift, pr = pl + F.pack_tiles[1] * F.tile_deg;
+      const l0 = Math.max(win.left, pl), l1 = Math.min(win.left + win.lonSpan, pr);
+      if (l1 > l0) out.push({ lat0, lat1, l0, l1, pl });
+    }
+    return out;
+  };
+  const packFiles = (p) => {
+    if (!finePacks.has(p)) {
+      finePacks.set(p, Promise.all(['colour', 'normal', 'aux'].map((name) => fetch('fine/' + p.files[name])
+        .then((r) => { if (!r.ok) throw new Error('fine/' + p.files[name] + ': ' + r.status); return r.blob(); }))));
+    }
+    return finePacks.get(p);
+  };
+  const drawFine = async (win) => {
+    const wanted = F.packs.filter((p) => fineParts(win, p).length);
+    const files = await Promise.all(wanted.map(packFiles));
+    const ctx = {};
+    for (const name of ['colour', 'normal', 'aux']) {
+      ctx[name] = fineCanvas[name].getContext('2d');
+      ctx[name].clearRect(0, 0, FINE_PX, FINE_PX);
+      ctx[name].imageSmoothingEnabled = true;
+      ctx[name].imageSmoothingQuality = 'high';
+    }
+    const s = F.ppd, wx = FINE_PX / win.lonSpan, wy = FINE_PX / win.latSpan;
+    for (let k = 0; k < wanted.length; k++) {
+      const p = wanted[k];
+      const images = await Promise.all(files[k].map((b) => createImageBitmap(b, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' })));
+      for (const o of fineParts(win, p)) {
+        const src = [(o.l0 - o.pl) * s, (p.lat_top - o.lat1) * s, (o.l1 - o.l0) * s, (o.lat1 - o.lat0) * s];
+        const dst = [(o.l0 - win.left) * wx, (win.top - o.lat1) * wy, (o.l1 - o.l0) * wx, (o.lat1 - o.lat0) * wy];
+        ['colour', 'normal', 'aux'].forEach((name, i) => ctx[name].drawImage(images[i], ...src, ...dst));
+      }
+      images.forEach((im) => im.close());
+    }
+    for (const name of ['colour', 'normal', 'aux']) fineTex[name].needsUpdate = true;
+    uniforms.uFineWin.value.set(win.top, win.left, win.latSpan, win.lonSpan);
+    uniforms.uFine.value = 1;
+  };
+  const fineTick = () => {
+    if (!F) return;
+    const on = mode === 'appearance' && distance < FINE_DISTANCE && current !== 'earth';
+    if (!on) { uniforms.uFine.value = 0; return; }
+    const c = todayOf(back);
+    if (fineWin) {
+      const dlon = ((c.lon - (fineWin.left + fineWin.lonSpan / 2)) % 360 + 540) % 360 - 180;
+      const near = Math.abs(c.lat - (fineWin.top - fineWin.latSpan / 2)) < fineWin.latSpan / 4 && Math.abs(dlon) < fineWin.lonSpan / 4;
+      if (near || Math.abs(c.lat) > F.lat_top + 4) { if (!fineBusy) uniforms.uFine.value = 1; return; }
+    }
+    if (fineBusy) { fineAgain = true; return; }
+    fineBusy = true;
+    fineWin = fineWindowFor(c.lat, c.lon);
+    drawFine(fineWin).catch((err) => { console.warn('The finer ground did not load:', err); fineWin = null; })
+      .finally(() => { fineBusy = false; if (fineAgain) { fineAgain = false; fineWin = null; } invalidate(); });
+  };
+
   // Rendering happens only when something changes.
   const resize = () => {
     const w = viewport.clientWidth, h = viewport.clientHeight;
@@ -1558,9 +2782,11 @@
     const centre = latLonOf(back), where = ' · centre ' + fmtPoint(centre.lat, centre.lon, 1);
     if (mode !== 'appearance') return 'Drag to turn · scroll or pinch to zoom' + where;
     if (distance > 50) return 'From Earth, ' + fmt(EARTH_KM) + ' km · field of view ' + fov.toFixed(2) + '°';
-    return 'Drag to turn · scroll or pinch to zoom · ' + fmt((distance - 1) * MOON_KM) + ' km above the surface' + where;
+    return 'Drag to turn · scroll or pinch to zoom · ' + fmt((distance - 1) * MOON_KM) + ' km above the surface' + where +
+      (fineBusy ? ' · loading the finer ground…' : '');
   };
   let last = performance.now(), loaded = false;
+  const drawSize = new THREE.Vector2();
   const frame = (now) => {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
@@ -1576,6 +2802,8 @@
     if (turning && !pointers.size) { globe.rotateY(dt * 0.12); dirty = true; }
     if (dirty) {
       dirty = false;
+      followZoom();
+      setDistrictMode();
       camera.position.set(0, 0, distance);
       camera.fov = fov;
       camera.near = Math.max(0.01, distance - 2);
@@ -1588,8 +2816,30 @@
       up.set(0, 1, 0).applyQuaternion(qInv);
       back.set(0, 0, 1).applyQuaternion(qInv);
       uniforms.uCamBasis.value.set(right.x, up.x, back.x, right.y, up.y, back.y, right.z, up.z, back.z);
+      topoUniforms.uLightDir.value.copy(up).sub(right).normalize();     // the screen's upper left, in the globe's frame
+      const closeT = closeLightBox.checked && mode === 'appearance'
+        ? Math.min(1, Math.max(0, (CLOSE_LIGHT[0] - distance) / (CLOSE_LIGHT[0] - CLOSE_LIGHT[1]))) : 0;
+      uniforms.uClose.value = closeT * closeT * (3 - 2 * closeT);
+      fineTick();
       const tanY = Math.tan(fov * Math.PI / 360);
       uniforms.uTanHalf.value.set(tanY * camera.aspect, tanY);
+      renderer.getDrawingBufferSize(drawSize);
+      borderUniforms.uViewport.value.copy(drawSize);
+      borderUniforms.uTopo.value = mode === 'topo' ? 1 : 0;
+      borderUniforms.uDepthBias.value = mode === 'topo' ? 0.002 : 0.0002;
+      // a dash and its gap four pixels each, at the ground nearest the camera
+      borderUniforms.uDashKm.value = 8 * 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
+      borderUniforms.uKmPerPx.value = 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
+      if (riverLines) {
+        const fade = show.river ? Math.min(1, Math.max(0, (distance - RIVER_LINES_FADE[0]) /
+                                                          (RIVER_LINES_FADE[1] - RIVER_LINES_FADE[0]))) : 0;
+        riverLines.visible = fade > 0.01;
+        riverLines.material.uniforms.uOpacity.value = (riverPiecesHeld ? (riverLakeLinesShown ? 0.95 : 1.0) : 0.7) * fade;
+        if (riverLakeLines) {
+          riverLakeLines.visible = riverLakeLinesShown && fade > 0.01;
+          riverLakeLines.material.uniforms.uOpacity.value = 0.4 * fade;
+        }
+      }
       // Markers keep the size they have at the topography's home distance, at any zoom.
       const markerScale = (distance - 1) * tanY / (3.3 * Math.tan(14 * Math.PI / 180));
       for (const it of items) if (it.mesh) it.mesh.scale.setScalar(markerScale);
@@ -1598,12 +2848,21 @@
         pinGroup.visible = screenOf(pin).facing > 0.02;
       }
       renderer.render(scene, camera);
+      const placed = [];
       for (const it of items) {
-        const visible = show[it.kind] && !(it.kind === 'site' && !it.extra.short);
-        if (it.mesh) it.mesh.visible = it.kind === 'site' ? show.site : show.target;
+        const visible = show[it.kind] && zoomShows(it.kind) && !(it.kind === 'site' && !it.extra.short);
+        if (it.mesh) it.mesh.visible = !!show[it.kind];
         if (!visible) { it.el.hidden = true; continue; }
         const s = screenOf(it);
-        const on = s.facing > 0.12;
+        let on = s.facing > 0.12;
+        if (on && (UNIT_KINDS.has(it.kind) || it.kind === 'river')) {
+          // Region and district names: the larger unit first (items are in that order); a name that would overlap one
+          // already placed waits until the zoom gives it room. The rivers' names follow, the largest river first.
+          const w = it.el.textContent.length * (it.kind === 'region' ? 8.2 : 6.6) + 8, h = 15;
+          const box = [s.x - w / 2, s.y - h / 2, s.x + w / 2, s.y + h / 2];
+          if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) on = false;
+          else placed.push(box);
+        }
         it.el.hidden = !on;
         if (on) {
           it.el.style.left = s.x.toFixed(1) + 'px';
@@ -1650,8 +2909,18 @@
     else if (/^lat\d+[ns]$/.test(t)) aimLat = +t.slice(3, -1) * (t.endsWith('s') ? -1 : 1);
     else if (/^lon\d+[ew]$/.test(t)) aimLon = +t.slice(3, -1) * (t.endsWith('w') ? -1 : 1);
     else if (/^y\d+$/.test(t)) startYear = +t.slice(1);
+    else if (t === 'channels') {
+      riverLakeLinesShown = false;
+      if (riverLines && riverPiecesHeld) riverLines.material.uniforms.uColour.value.set(...RIVER_WATER);
+    }
     else if (t === 'noclouds') document.getElementById('show-clouds').click();
     else if (t === 'noair') document.getElementById('show-air').click();
+    else if (/^peel\d+$/.test(t)) {
+      const km = +t.slice(4);
+      peelZoomBox.checked = false;
+      peelInput.value = String(km >= airTopKm ? PEEL_KM.length : PEEL_KM.filter((v) => v <= km).length - 1);
+      setPeel(+peelInput.value);
+    }
     else if (t === 'red') document.getElementById('red-only').click();
   }
   if (aimLat !== null || aimLon !== null) {

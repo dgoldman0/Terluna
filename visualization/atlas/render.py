@@ -197,6 +197,22 @@ def jpeg_data_uri(array, quality=88):
     return 'data:image/jpeg;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
+TEXTURES = 'textures'           # the page's textures as files beside it (the design surface's page), under OUT
+
+
+def texture_file(name, array, kind='png', quality=88):
+    """A texture written as a file beside the page (OUT/textures/<name>.<kind>); returns the path the page reads."""
+    from PIL import Image
+    (OUT / TEXTURES).mkdir(parents=True, exist_ok=True)
+    path = OUT / TEXTURES / f'{name}.{"jpg" if kind == "jpeg" else "png"}'
+    image = Image.fromarray(array)
+    if kind == 'jpeg':
+        image.save(path, format='JPEG', quality=quality, subsampling=0, optimize=True)
+    else:
+        image.save(path, format='PNG', optimize=True)
+    return f'{TEXTURES}/{path.name}'
+
+
 STOPS_SCHEMA = 'terluna.research.drainage-network-globe-stops/1'
 SEA_NAMES = dict(near_side='the Near-side Sea', south_pole_aitken='the South Pole–Aitken Sea',
                  smythii_marginis='Smythii–Marginis', humboldtianum='Humboldtianum', orientale='Orientale',
@@ -287,7 +303,33 @@ TURNED_CLIMATES = {
         "the design climate on the turned Moon, {label}, with PlaSim's night-side twilight counted once and the equinox "
         'regressing with the node: the ground at 301.0 K, rain of 1.95 mm/day over the globe and 2.15 over land, and '
         '60.7% of the land dry (an aridity below 0.65), 63.2% in the north and 58.4% in the south',
+    'A28S_301k_design_l15_snow_s930_settled':
+        'the design climate on the final surface, {label}, at sunlight 0.930: the ground at 300.3 K, rain of 1.93 '
+        'mm/day over the globe and 2.13 over land, and 57.1% of the land dry (an aridity below 0.65)',
+    # an estimate (climate.gcm.pattern_scaling, then climate.gcm.surface_change): its figures are read from the
+    # climatology and moisture map drawn
+    'A28D_301k_design_l15_snow_s936_settled':
+        'the design climate on the design surface, an estimate: {label}, at sunlight 0.936, carried by pattern scaling '
+        'from its 301.0 K to the 300.3 K at which the run at 0.930 on the final surface settled, and from the surface '
+        'the run stood on to the one its own rain fills, where a cell that turns to lake rains less and the land '
+        'rains more. That leaves the ground at {ground:.1f} K, rain of {rain:.2f} mm/day over the globe and '
+        '{rain_land:.2f} over land, and {dry:.1%} of the land dry (an aridity below 0.65)',
 }
+
+
+def climate_figures(climatology, moisture=None):
+    """The figures a climate sentence reads when they are not written into it: the ground's mean temperature and the
+    rain over the globe and over the land (cos-latitude weighted) from the climatology, and the dry share of the run's
+    land cells (the four classes below an aridity of 0.65) from its moisture map."""
+    with np.load(climatology) as z:
+        w = np.cos(np.radians(z['lat']))[:, None] * np.ones((1, z['lon'].size))
+        land = z['lsm'] > 0.5
+        out = dict(ground=float((z['ts_k'] * w).sum() / w.sum()), rain=float((z['pr_mm_day'] * w).sum() / w.sum()),
+                   rain_land=float((z['pr_mm_day'] * w * land).sum() / (w * land).sum()), dry=float('nan'))
+    if moisture:
+        m = json.loads(Path(moisture).read_text())
+        out['dry'] = sum(m['shares']['by_class'][c['key']]['share'] for c in m['classes'][:4])
+    return out
 
 
 def turned_note(turn, drained, run, years):
@@ -427,6 +469,942 @@ def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None, stops=Non
                 years=stop_checks, passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 
+# ---------------------------------------------------------------- the globe on the atlas round's design surface
+
+SURFACE_PRESSURE_ATM = 1.2               # the air at the surface, as the conservation register reckons a site's water
+WATER_KG_M3, LUNAR_G = 1000.0, 1.62
+NEAREST_WINDOW_DEG = 8.0
+
+
+def surface_grid(path):
+    """The design surface (the atlas round's globe_surface product): heights, each cell's water level (NaN on dry
+    ground) and body, on today's grid from 90 N and 0 E."""
+    z = np.load(path)
+    meta = json.loads(str(z['metadata']))
+    rows, cols = meta['grid']['rows'], meta['grid']['cols']
+    level = np.full(rows * cols, np.nan, np.float32)
+    level[z['water_cell']] = z['water_level_m']
+    body = np.zeros(rows * cols, np.int8)
+    body[z['water_cell']] = np.where(z['water_body'] > 0, z['water_body'], len(meta['bodies']))
+    return dict(meta=meta, height=z['height_m'].astype(np.float32).reshape(rows, cols), level=level.reshape(rows, cols),
+                body=body.reshape(rows, cols), rows=rows, cols=cols, ppd=meta['grid']['pixels_per_degree'])
+
+
+def block(a, k, how):
+    r, c = a.shape[0] // k, a.shape[1] // k
+    b = a[:r * k, :c * k].reshape(r, k, c, k)
+    return getattr(np, how)(b, axis=(1, 3))
+
+
+def surface_map(grid, k):
+    """The map grid's heights and water from the 16 px/deg surface, k cells to a side: each cell's mean ground, and its
+    water where most of it lies under water, as the mean depth of that water and the body most of it is."""
+    h = block(grid['height'].astype(np.float64), k, 'mean')
+    wet16 = np.isfinite(grid['level'])
+    share = block(wet16.astype(np.float64), k, 'mean')
+    lev = block(np.where(wet16, grid['level'] - grid['height'], 0.0).astype(np.float64), k, 'sum') / np.maximum(block(wet16.astype(np.float64), k, 'sum'), 1)
+    bodies = grid['body']
+    counts = np.stack([block((bodies == b).astype(np.float64), k, 'sum') for b in range(int(bodies.max()) + 1)])
+    counts[0] = -1
+    body = np.argmax(counts, axis=0).astype(np.uint8)
+    wet = share >= 0.5
+    return h, np.where(wet, lev, np.nan), np.where(wet, body, 0).astype(np.uint8)
+
+
+def surface_texture(depth, body):
+    """The water for the page, 180 W at the left edge: its depth in whole metres in two bytes (red and green) and the
+    body over the place in blue (0 on dry ground)."""
+    lv = np.roll(depth, depth.shape[1] // 2, axis=1)
+    bd = np.roll(body, body.shape[1] // 2, axis=1)
+    v = np.where(np.isfinite(lv), np.clip(np.round(np.nan_to_num(lv, nan=0.0)), 0, 0xFFFF), 0).astype(np.int64)
+    rgb = np.zeros(lv.shape + (3,), np.uint8)
+    rgb[..., 0], rgb[..., 1], rgb[..., 2] = v >> 8, v & 0xFF, np.where(np.isfinite(lv), bd, 0)
+    return rgb
+
+
+def nearest_km(mask, i, j, want, ppd, window=NEAREST_WINDOW_DEG):
+    """The distance (km) from cell (i, j) to the nearest cell where mask equals `want`, within a window, on the sphere."""
+    from scipy import ndimage
+    rows, cols = mask.shape
+    k = int(window * ppd)
+    r_ = np.arange(max(i - k, 0), min(i + k + 1, rows))
+    c_ = np.arange(j - k, j + k + 1) % cols
+    win = mask[np.ix_(r_, c_)] == want
+    if not win.any():
+        return round(MOON_RADIUS / 1000.0 * np.radians(window))
+    d, (ii, jj) = ndimage.distance_transform_edt(~win, return_indices=True)
+    a, b = i - r_[0], k if c_.size > 2 * k else int(np.flatnonzero(c_ == j)[0])
+    la1, lo1 = 90.0 - (i + 0.5) / ppd, (j + 0.5) / ppd
+    la2, lo2 = 90.0 - (r_[ii[a, b]] + 0.5) / ppd, (c_[jj[a, b]] + 0.5) / ppd
+    dlon = (lo2 - lo1 + 180.0) % 360.0 - 180.0
+    return round(MOON_RADIUS / 1000.0 * np.radians(np.hypot(la2 - la1, dlon * np.cos(np.radians(0.5 * (la1 + la2))))))
+
+
+def surface_places(sites, targets, grid, level0, names):
+    """The heritage sites and sampling targets on the design surface: each one's ground against the common level, the
+    water over it and its depth, the pressure there as the register reckons it, and its nearest land or water."""
+    ppd, wet = grid['ppd'], np.isfinite(grid['level'])
+    cell = lambda la, lo: (min(int((90.0 - la) * ppd), grid['rows'] - 1), int((lo % 360.0) * ppd) % grid['cols'])
+    changed = []
+    out_sites = []
+    for st in sites:
+        i, j = cell(st['lat'], st['lon'])
+        ground = float(grid['height'][i, j] - level0)
+        under = bool(wet[i, j])
+        x = dict(st)
+        x['height'] = round(ground)
+        x['water_name'] = names[int(grid['body'][i, j])] if under else ''
+
+        if under:
+            depth = float(grid['level'][i, j] - grid['height'][i, j])
+            x.update(status='submerged', depth_m=round(depth),
+                     pressure_atm=round(SURFACE_PRESSURE_ATM + WATER_KG_M3 * LUNAR_G * depth / 101325.0, 1),
+                     nearest_land_km=nearest_km(wet, i, j, False, ppd), above_sea_m=0)
+        else:
+            x.update(status='land', depth_m=0, pressure_atm=0.0, above_sea_m=round(ground),
+                     nearest_water_km=nearest_km(wet, i, j, True, ppd))
+        if (st['status'] == 'submerged') != under:
+            x['status_note'] = ('The register\'s treatment was written for the atlas\'s water, which '
+                                + ('left it on land.' if under else 'covered it.'))
+            changed.append(st['id'])
+        out_sites.append(x)
+    out_targets = []
+    for t in targets:
+        i, j = cell(float(t['lat']), float(t['lon']))
+        x = dict(t)
+        x['height_relative_to_sea_m'] = str(round(float(grid['height'][i, j] - level0)))
+        x['under_m'] = round(float(grid['level'][i, j] - grid['height'][i, j])) if wet[i, j] else -1
+        out_targets.append(x)
+    return out_sites, out_targets, changed
+
+
+def surface_note(turn, summary, climate):
+    """The page's paragraph on the design surface: the turn, the seas at their levels, the parting and the lakes."""
+    seas = summary['seas']
+    m = lambda v: f'{abs(v):,.0f} m ' + ('above' if v >= 0 else 'below')
+    return ('<b>The design surface.</b> The globe shows the Moon as the atlas round\'s design gives it. The floor is '
+            "LOLA's as the water's weight redraws it at the settled state, and the Moon is turned "
+            f"{turn['pole_moved_deg']:.2f}° into the orientation that water settles it in, so the globe's poles, "
+            'equator, grid and the point beneath Earth are the turned Moon\'s and every place keeps its ground. Heights '
+            'are measured from the common level, the level 28% of the surface lies below, '
+            f"{abs(summary['common_level_above_the_dry_geoid_m']):,.0f} m below the dry Moon's geoid. Each sea stands "
+            f"at its own level: Moscoviense, Orientale and Smythii–Marginis full at their rims, "
+            f"{seas['Mare Moscoviense']['level_m']:,.0f}, {seas['Mare Orientale']['level_m']:,.0f} and "
+            f"{seas['Smythii–Marginis Sea']['level_m']:,.0f} m above the common level; the South Pole–Aitken Sea and "
+            "Mare Humboldtianum at the common level, which fixed weirs on Moscoviense's overflow hold; and the "
+            + ("near-side sea parted at its neck in western Procellarum, its main body "
+               f"{m(seas['near-side sea']['level_m'])} the common level and Cognitum, Humorum, Nubium and southern "
+               f"Procellarum {m(seas['southern near-side seas']['level_m'])} it, joined by a river of about "
+               f"{round(summary['neck_spill_m3s'], -3):,.0f} m³/s over the neck. " if summary.get('neck_river') else
+               "near-side sea one water across its neck in western Procellarum, "
+               f"{m(seas['near-side sea']['level_m'])} the common level, its main body sending Cognitum, Humorum, "
+               f"Nubium and southern Procellarum about {round(summary['neck_spill_m3s'], -3):,.0f} m³/s through the neck. ")
+            + f"The clouds and the ground cover follow {climate}. The "
+            "rivers and lakes are routed on that run's rain and evaporation carried back to the ground, its open "
+            f"water's evaporation raised to close the water budget: {summary['lake_share']:.1%} of the Moon in "
+            f"{summary['lakes']:,} lakes holding {summary['lake_volume_km3'] / 1e6:.1f} million km³, with "
+            f"{summary['rivers_into_the_seas_m3s']:,} m³/s reaching the seas.")
+
+
+def routing_product(record):
+    """The routing product the design surface was drawn from: named by the routing record among the surface record's
+    inputs, and read only while its bytes match that record."""
+    name = next(k for k in record['inputs'] if k.endswith('design_routing.json'))
+    product = json.loads((ROOT / name).read_text())['product']
+    if digest(product['path']) != product['sha256']:
+        raise SystemExit(f"{product['path']} no longer matches its record {name}")
+    return Path(product['path'])
+
+
+def cuts_product(record):
+    """The works' trenches the design surface was cut with: named by the cuts record among the surface record's inputs,
+    and read only while its bytes match that record; None for a surface without cuts."""
+    name = next((k for k in record['inputs'] if k.endswith('design_cuts.json')), None)
+    if name is None:
+        return None
+    product = json.loads((ROOT / name).read_text())['product']
+    if digest(product['path']) != product['sha256']:
+        raise SystemExit(f"{product['path']} no longer matches its record {name}")
+    return Path(product['path'])
+
+
+def work_lines(path, rotation):
+    """Each stretch of the works' cuts as the page's canal line: its cells' centres in the order the water takes them,
+    as latitude and longitude in the globe's frame. Empty for a cuts product without courses."""
+    if path is None:
+        return []
+    with np.load(path, allow_pickle=False) as z:
+        if 'course_cell' not in z.files:
+            return []
+        cells, stretch = z['course_cell'].astype(np.int64), z['course_stretch']
+        cols = json.loads(str(z['metadata']))['grid']['cols']
+    ppd = cols / 360.0
+    lat = 90.0 - (cells // cols + 0.5) / ppd
+    lon = ((cells % cols + 0.5) / ppd + 180.0) % 360.0 - 180.0
+    return [[[round(float(v), 4) for v in to_turned(la, lo, rotation)] for la, lo in zip(lat[stretch == s], lon[stretch == s])]
+            for s in range(int(stretch.max()) + 1)] if cells.size else []
+
+
+def water_cells(surface_path, shape):
+    """Each cell of a coarser grid that is mostly water, a sea's or a lake's, on the design surface's 16 px/deg grid."""
+    with np.load(surface_path, allow_pickle=False) as z:
+        meta = json.loads(str(z['metadata']))
+        rows, cols = meta['grid']['rows'], meta['grid']['cols']
+        fine = np.zeros(rows * cols, bool)
+        fine[z['water_cell']] = True
+    k = rows // shape[0]
+    return fine.reshape(shape[0], k, shape[1], k).mean(axis=(1, 3)) >= 0.5
+
+
+BORDER_SIMPLIFY = 0.08           # grid cells: the traced borders' simplification, about 300 m at 8 px/deg
+BORDER_END = -32768              # the encoded borders' marker between lines
+
+
+def segment_keys(seg, rows, cols):
+    return np.minimum(seg[:, 0], seg[:, 1]) * (rows + 1) * cols + np.maximum(seg[:, 0], seg[:, 1])
+
+
+def chains_of(segments):
+    """Chains of grid corners from undirected segments: each runs between corners where the segments do not meet in
+    twos (its ends, and where three or more borders meet), or round a closed loop; returns (corners, closed) pairs."""
+    from collections import defaultdict
+    adj = defaultdict(list)
+    for k, (a, b) in enumerate(segments):
+        adj[a].append(k)
+        adj[b].append(k)
+    used = np.zeros(len(segments), bool)
+
+    def walk(start, k):
+        chain, node = [start], start
+        while True:
+            used[k] = True
+            a, b = segments[k]
+            node = b if a == node else a
+            chain.append(node)
+            if len(adj[node]) != 2:
+                return chain
+            nxt = [j for j in adj[node] if not used[j]]
+            if not nxt:
+                return chain
+            k = nxt[0]
+
+    out = []
+    for node, ks in adj.items():
+        if len(ks) != 2:
+            for k in ks:
+                if not used[k]:
+                    out.append((walk(node, k), False))
+    for k in range(len(segments)):
+        if not used[k]:
+            ch = walk(segments[k][0], k)
+            out.append((ch, ch[0] == ch[-1]))
+    return out
+
+
+BORDER_SAMPLE, BORDER_WINDOW, BORDER_PASSES = 0.5, 9, 3   # grid cells between samples; the moving average's span
+
+
+def smooth_chain(xy, closed):
+    """A chain's staircase of cell edges made a smooth line: through the midpoints of its steps, resampled every
+    BORDER_SAMPLE cells, then a moving average over BORDER_WINDOW samples, BORDER_PASSES times, about a dozen km at 8
+    px/deg. An open chain keeps its ends, where other borders or a shore meet it; a closed one is smoothed round."""
+    if closed:
+        pts = 0.5 * (xy[:-1] + np.roll(xy[:-1], -1, axis=0))
+        pts = np.vstack([pts, pts[:1]])
+    elif len(xy) > 2:
+        pts = np.vstack([xy[:1], 0.5 * (xy[:-1] + xy[1:]), xy[-1:]])
+    else:
+        return xy
+    step = np.hypot(*np.diff(pts, axis=0).T)
+    along = np.concatenate([[0.0], np.cumsum(step)])
+    if along[-1] <= BORDER_SAMPLE:
+        return pts[[0, -1]]
+    t = np.linspace(0.0, along[-1], int(np.ceil(along[-1] / BORDER_SAMPLE)) + 1)
+    out = np.stack([np.interp(t, along, pts[:, 0]), np.interp(t, along, pts[:, 1])], axis=1)
+    half = BORDER_WINDOW // 2
+    kernel = np.ones(BORDER_WINDOW) / BORDER_WINDOW
+    for _ in range(BORDER_PASSES):
+        if closed:
+            body = out[:-1]
+            padded = np.vstack([body[-half:], body, body[:half]])
+        else:
+            padded = np.vstack([np.repeat(out[:1], half, axis=0), out, np.repeat(out[-1:], half, axis=0)])
+        smooth = np.stack([np.convolve(padded[:, k], kernel, mode='valid') for k in (0, 1)], axis=1)
+        if closed:
+            out = np.vstack([smooth, smooth[:1]])
+        else:
+            smooth[0], smooth[-1] = out[0], out[-1]
+            out = smooth
+    return out
+
+
+def simplify(xy, tol):
+    """Douglas and Peucker's simplification of a line to within tol, its ends kept."""
+    if len(xy) <= 2:
+        return xy
+    keep = np.zeros(len(xy), bool)
+    keep[[0, -1]] = True
+    stack = [(0, len(xy) - 1)]
+    while stack:
+        i, j = stack.pop()
+        if j <= i + 1:
+            continue
+        a, b = xy[i], xy[j]
+        ab = b - a
+        n = np.hypot(*ab)
+        seg = xy[i + 1:j] - a
+        d = np.abs(ab[0] * seg[:, 1] - ab[1] * seg[:, 0]) / n if n > 0 else np.hypot(seg[:, 0], seg[:, 1])
+        k = int(np.argmax(d))
+        if d[k] > tol:
+            m = i + 1 + k
+            keep[m] = True
+            stack += [(i, m), (m, j)]
+    return xy[keep]
+
+
+def border_lines(units, wet, rotation, land_units, ppd):
+    """The page's borders as lines: each region's and district's edge traced once along the grid's cell edges, made
+    smooth and simplified, in the globe's frame, each piece solid or dashed. A region holds its land and its waters,
+    the coastal seas, so its outline closes at sea along their outer limit, where international waters begin. A piece
+    is dashed where it has water on both sides (at sea, or across a lake) and solid where it has land on either side.
+    District edges are kept between two land districts or two coastal seas, and not where a region's edge already
+    runs; the shore draws itself. Returns {kind: {style: base64 of int16 latitude and longitude in hundredths of a degree, each line
+    ended by BORDER_END}} with the count of lines and points."""
+    district, region = units
+    rows, cols = district.shape
+
+    def wet_pairs(kind):
+        return (wet & np.roll(wet, -1, axis=1)) if kind == 'h' else (wet[:-1] & wet[1:])
+
+    def segs(a, ok, skip=None):
+        right = np.roll(a, -1, axis=1)
+        mh = (a != right) & ok(a, right)
+        rr, cc = np.nonzero(mh)
+        h = np.stack([rr * cols + (cc + 1) % cols, (rr + 1) * cols + (cc + 1) % cols, wet_pairs('h')[rr, cc]], axis=1)
+        mv = (a[:-1] != a[1:]) & ok(a[:-1], a[1:])
+        rr, cc = np.nonzero(mv)
+        v = np.stack([(rr + 1) * cols + cc, (rr + 1) * cols + (cc + 1) % cols, wet_pairs('v')[rr, cc]], axis=1)
+        seg = np.concatenate([h, v]).astype(np.int64)
+        if skip is not None and seg.size:
+            seg = seg[~np.isin(segment_keys(seg, rows, cols), skip)]
+        return seg
+
+    both = lambda a, b: (a > 0) & (b > 0)                                              # noqa: E731
+    either = lambda a, b: (a > 0) | (b > 0)                                            # noqa: E731
+    same_kind = lambda a, b: both(a, b) & ((a <= land_units) == (b <= land_units))     # noqa: E731
+    region_seg = segs(region, either)
+    district_seg = segs(district, same_kind, skip=segment_keys(region_seg, rows, cols) if region_seg.size else None)
+    out, counts = {}, {}
+    for kind, seg in (('region', region_seg), ('district', district_seg)):
+        out[kind] = {}
+        for style, flag in (('solid', 0), ('dashed', 1)):
+            pick = seg[seg[:, 2] == flag][:, :2]
+            values, n_lines, n_points = [], 0, 0
+            for chain, closed in chains_of([tuple(x) for x in pick.tolist()]):
+                i, j = np.divmod(np.asarray(chain, np.int64), cols)
+                x = j.astype(float)
+                x = x[0] + np.concatenate([[0.0], np.cumsum((np.diff(x) + cols / 2) % cols - cols / 2)])
+                xy = simplify(smooth_chain(np.stack([x, i.astype(float)], axis=1), closed), BORDER_SIMPLIFY)
+                lat, lon = to_turned(90.0 - xy[:, 1] / ppd, xy[:, 0] / ppd, rotation)
+                lon = (np.asarray(lon) + 180.0) % 360.0 - 180.0
+                values.append(np.stack([np.round(np.asarray(lat) * 100), np.round(lon * 100)], axis=1).ravel())
+                values.append(np.array([BORDER_END, BORDER_END]))
+                n_lines += 1
+                n_points += len(xy)
+            data = np.concatenate(values).astype('<i2') if values else np.zeros(0, '<i2')
+            out[kind][style] = base64.b64encode(data.tobytes()).decode('ascii')
+            counts[f'{kind}_{style}'] = dict(lines=n_lines, points=n_points)
+    return out, counts
+
+
+def districts_layer(record_path, rotation, surface_path=None, profiles=None):
+    """The atlas round's draft regions and districts for the page: a texture in the globe's frame (180 W at the left)
+    holding at each 8 px/deg cell the district's place in the page's list (red's low seven bits and green, 0 on open
+    water), whether the cell is water (red's top bit, a lake or a sea), and the region
+    the page draws there (blue): a land cell's and a coastal sea's own region, 0 in international waters; and the lists with each unit's name, code, tongue, label point, area and short
+    description; for a coastal sea, the land districts it faces and that feed it, and for a land district its coastal
+    seas."""
+    record = json.loads(Path(record_path).read_text())
+    product = Path(record['product']['path'])
+    if digest(product) != record['product']['sha256']:
+        raise SystemExit(f'{product} no longer matches its record {record_path}')
+    with np.load(product, allow_pickle=False) as z:
+        district, region = z['district'].astype(np.int64), z['region'].astype(np.int64)
+    regions = record['regions']
+    page_region = np.zeros(int(region.max()) + 1, np.int64)
+    for k, r in enumerate(regions):
+        page_region[int(r['code'][1:]) if r['kind'] == 'land' else 100 + int(r['code'][1:])] = k + 1
+    units = record['districts'] + record['coastal_seas']
+    if district.max() > 65535 or len(regions) > 255:
+        raise SystemExit('too many districts or regions for the page\'s texture')
+    if district.max() > 32767:
+        raise SystemExit('too many districts for the page\'s texture with its water flag')
+    sea = region >= 100                                       # international waters: no region
+    shown = np.where(sea, 0, page_region[np.where(sea, 0, region)])
+    wet = (district > len(record['districts'])) | sea | (water_cells(surface_path, district.shape) if surface_path
+                                                        else np.zeros(sea.shape, bool))
+    tex = np.zeros(district.shape + (3,), np.uint8)
+    tex[..., 0], tex[..., 1], tex[..., 2] = (district >> 8) | (wet.astype(np.int64) << 7), district & 0xFF, shown
+    land_units = len(record['districts'])
+    borders, counts = border_lines((district, shown), wet, rotation, land_units, district.shape[1] / 360.0)
+    tex = np.roll(tex, tex.shape[1] // 2, axis=1)
+    turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
+    cards = region_cards(profiles, record) if profiles else None
+    return turned, dict(districts_data(record, cards), borders=borders, border_counts=counts), Path(record_path), product
+
+
+NIGHTS = {'Earthlit': 'lit by Earth', 'dim': 'dim, below 1 lux at their darkest', 'dark': 'dark, with no Earth in the sky',
+          'twilit': 'twilit, the Sun just below the horizon'}
+# The page's sentence on what a click and a pin do, and its older wording, which a re-wrapped page replaces.
+LEDE_ACTIONS = ('Drag to turn it, scroll or pinch to zoom, click a place for its card, use the Pin tool for the height '
+                'of a point and the water over it, and move the Sun to see the halo, the twilight and the view from '
+                'Earth.')
+LEDE_ACTIONS_BEFORE = ('Drag to turn it, scroll or pinch to zoom, click for the height of a place and the water over it, '
+                       'and move the Sun to see the halo, the twilight and the view from Earth.')
+TOPO_CLICK = ('In both modes, a click opens the card of the region, district or sea under it, and a pin, placed with '
+              'the Pin tool, reads the 0.25° cell under it.')
+TOPO_CLICK_BEFORE = 'In both modes, a click on the globe reads the 0.25° cell under it.'
+# The topography's light, and its older wording: a light fixed to each place's own north-west turned round the poles
+# and drew a pinwheel there, so the light now comes from the screen's upper left as the globe turns.
+LIGHT_PHRASE = "45° up from the screen's upper left as the globe turns"
+LIGHT_PHRASE_BEFORE = '45° up in its own north-west'
+
+
+def sea_names(record):
+    """The seas' names by the design surface's body names, from the sea regions' anchors (sea:<body>)."""
+    return {r['anchor'].split(':', 1)[1]: r['name'] for r in record['regions']
+            if r['kind'] == 'sea' and str(r.get('anchor', '')).startswith('sea:')}
+
+
+def surface_body_names(bodies, record=None):
+    """The page's names for the design surface's bodies of water, indexed as its surface texture holds them: dry
+    ground, each sea under its atlas name when a districts record gives one, and the lakes."""
+    named = sea_names(record) if record else {}
+    return (['dry ground'] + [named.get(b) or ('the ' + b if b.startswith(('near-side', 'southern')) else b)
+                              for b in bodies[1:]] + ['a lake'])
+
+
+def region_cards(profiles_path, record):
+    """Each land region's card from its fact sheet (research/studies/atlas_round/region_profiles.py), by anchor: what
+    its name means, its written text when there is one, its main figures as label and value with the places under
+    their current names, a note on how its climate is read, and the anchors of its seas and neighbours."""
+    product = json.loads(Path(profiles_path).read_text())
+    if product.get('districts_product') != record['product']['sha256']:
+        raise SystemExit(f'{profiles_path} was computed for another districts draw; run region_profiles again')
+    names = {x['anchor']: x['name'] for x in record['regions'] + record['districts'] + record['coastal_seas']
+             if x.get('anchor')}
+    cards = {}
+    for p in product['regions']:
+        f, x, d = p['figures'], p['facts'], p['detail']
+        plural = lambda n, word: f"{n} {word}{'' if n == '1' else 's'}"
+        land = f"{f['area']} in {plural(f['districts'], 'district')}"
+        if p['island_group']:
+            land = f"{f['area']} on {plural(f['land_pieces'], 'island')}"
+        rows = [['Land', land]]
+        if x['waters']:
+            seas = [names.get(a, a) for a in d['seas']]
+            rows.append(['Coastal waters', f"{f['waters']}" + (' on ' + ' and '.join(seas) if seas else '')
+                         + (', salt' if x['salt'] else '')])
+        if x['lakes']:
+            rows.append(['Lakes', f"{f['lakes']}, {f['lake_share']} of the land"])
+        if x['river'] >= 1:
+            rows.append(['Largest river', f['river']])
+        if x['falls']:
+            rows.append(['Steep reaches', f"{f['falls']}, the strongest {f['falls_gw']}"])
+        above = d['heights_above']
+        if d.get('heights_above_anchor'):
+            above = 'the level of ' + names.get(d['heights_above_anchor'], d['heights_above_anchor'])
+        elif product.get('common_level_seas'):
+            above = 'the level ' + ' and '.join(names.get(a, a) for a in product['common_level_seas']) + ' share'
+        rows.append(['Highest point', f"{f['highest']} above {above}"])
+        rows.append(['Rain', f"{f['rain']} a year"])
+        rows.append(['Air', f"{f['air']} on average; {f['air_cool']} on the coolest days, {f['air_warm']} on the warmest"])
+        rows.append(['Earth in the sky', {'near': f"{f['earth']} up on average", 'far': 'never rises',
+                                          'limb': f"low over {f['earth_share']} of the land, at most {f['earth_high']} up"}
+                     [x['side']]])
+        rows.append(['Nights', NIGHTS.get(x['night'], x['night'])])
+        if x.get('tide') is not None:
+            rows.append(['Tides', f"{f['tide']} on its coasts"])
+        sites = [s['name'] + (f" (under {s['water']})" if s['where'] == 'water' else '') for s in d['heritage']]
+        if sites:
+            rows.append(['Heritage', '; '.join(sites)])
+        weak = x['climate_in_water_share'] >= 0.5 or x['climate_reach_km'] >= 150
+        note = ('Figures from the atlas round\'s fact sheet. Climate: the estimated design climate, read on the climate '
+                'model\'s cells of about 170 km' + (', which hold most of this land as water, so its climate is the '
+                                                     'nearest shore\'s.' if weak else '.'))
+        cards[p['anchor']] = dict(gloss=p['gloss'], text=p.get('text'), stale=bool(p.get('text_stale')), rows=rows,
+                                  note=note, islandGroup=p['island_group'],
+                                  seas=list(d['seas']), neighbours=[n['anchor'] for n in d['neighbours']])
+    return cards
+
+
+def districts_data(record, cards=None):
+    """The page's lists of regions, districts and coastal seas from a districts record: each unit's name, its meaning,
+    code, anchor, tongue, label point, area, short description and links, indexed as the districts texture holds them,
+    and for a land region its card from its fact sheet when cards are given (region_cards). A unit's links are all the
+    units its card names, each once: a coastal sea's shore districts and then the others whose rivers feed it, a land
+    district's coastal seas."""
+    regions = record['regions']
+    units = record['districts'] + record['coastal_seas']
+    index = {u['code']: k + 1 for k, u in enumerate(units)}
+    tongue = {k: t['label'] for k, t in record['tongues'].items()}
+    tongue_where = {t['label']: t.get('where', '') for t in record['tongues'].values()}
+    region_name = {r['code']: r['name'] for r in regions}
+    unit = lambda u, kind: dict(
+        index=index.get(u['code'], 0), code=u['code'], anchor=u.get('anchor', ''), name=u['name'], kind=kind,
+        tongue=tongue[u['tongue']], lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'],
+        description=u['description'], region=region_name.get(u.get('region'), ''), meaning=u.get('name_meaning', ''),
+        links=list(dict.fromkeys(index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', []))
+                                 if c in index)))
+    card = lambda r: dict(card=cards[r['anchor']]) if cards and r.get('anchor') in cards else {}
+    data = dict(regions=[unit(r, 'region') | dict(index=0, sea=r['kind'] == 'sea', meaning=r.get('name_meaning', ''))
+                         | card(r) for r in regions],
+                districts=[unit(d, 'district') for d in record['districts']]
+                + [unit(c, 'coast') for c in record['coastal_seas']],
+                summary=record['summary'], tongues={l: f'{l} for {w}' if w else l for l, w in tongue_where.items()},
+                coined=record.get('terlunan_coined', {}))
+    return data
+
+
+DATA_OPEN, DATA_CLOSE = '<script id="atlas-data" type="application/json">', '</script>'
+
+
+def fine_data(fine_dir, copy=True):
+    """The page's description of the close views' finer ground (fine_tiles.py): its grid, the settled frame's rotation
+    and each pack's place and files, which the page fetches from fine/ beside it; the files are copied there when the
+    tiles were built elsewhere, unless the page described is a copy that stands elsewhere with its own fine/."""
+    fine_dir = Path(fine_dir)
+    m = json.loads((fine_dir / 'manifest.json').read_text())
+    dest = OUT / 'fine'
+    if copy and fine_dir.resolve() != dest.resolve():
+        import shutil
+        dest.mkdir(parents=True, exist_ok=True)
+        for p in m['packs']:
+            for name in p['files'].values():
+                shutil.copy2(fine_dir / name, dest / name)
+    out = dict(ppd=m['ppd'], tile_deg=m['tile_deg'], lat_top=m['lat_top'], pack_tiles=m['pack_tiles'],
+               rotation=m['rotation_today_to_turned'], credit=m['credit'], bytes=m['bytes'],
+               packs=[dict(lat_top=p['lat_top'], lon_left=p['lon_left'], files=p['files']) for p in m['packs']])
+    if m.get('look'):                                    # fine_look.py's trial windows, named on the page as a guess
+        out['look'] = dict(note=m['look']['note'], windows=[w['name'] for w in m['look']['windows']])
+    return out
+
+
+def river_marks(waterways_path, surface_path=None):
+    """The page's named rivers (waterways.py: the whole watercourses of 1,000 m3/s or more where they end): each with
+    its name, the place its name stands (half way along its course), its course in the settled frame from the mouth
+    upstream, and its card's lines, figures and links. After a rename waterways.py is run again (seconds) and the page
+    re-wrapped."""
+    record = json.loads(Path(waterways_path).read_text())
+    nb = '\u00a0'
+    out = []
+    for x in record['waterways']:
+        if not x.get('name'):
+            continue
+        course = np.asarray(x['course'], float)
+        la, lo = np.radians(course[:, 0]), np.radians(course[:, 1])
+        unit = np.stack([np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)], axis=1)
+        step = np.arccos(np.clip((unit[1:] * unit[:-1]).sum(axis=1), -1.0, 1.0))
+        along = np.r_[0.0, np.cumsum(step)]
+        k = int(np.clip(np.searchsorted(along, along[-1] / 2.0), 1, len(along) - 1))
+        t = (along[-1] / 2.0 - along[k - 1]) / max(along[k] - along[k - 1], 1e-12)
+        arc = max(step[k - 1], 1e-12)                       # along the great circle between the two points
+        mid = (np.sin((1.0 - t) * arc) * unit[k - 1] + np.sin(t * arc) * unit[k]) / np.sin(arc)
+        mid /= np.linalg.norm(mid)
+        lat, lon = float(np.degrees(np.arcsin(mid[2]))), float(np.degrees(np.arctan2(mid[1], mid[0])))
+        lakes = (f", {x['lake_km']:,}{nb}km of it through {x['lakes_crossed']} lake{'s' if x['lakes_crossed'] != 1 else ''}"
+                 if x['lakes_crossed'] else '')
+        fed = x['fed_by']
+        source = ('It gathers from the rain on its own basin.' if fed == 'headwaters'
+                  else f'Its water is {fed}.')
+        width = appearance.RIVER_WIDTH * x['flow_mouth_m3s'] ** 0.5
+        wide = f'{width / 1000.0:.1f}{nb}km' if width >= 1000.0 else f'{round(width, -1):,.0f}{nb}m'
+        low = x.get('lowest_year_m3s')                   # None until the year-by-year rivers stand on this routing
+        text = (f"{x['name']} runs {x['length_km']:,}{nb}km to {x['ends_in']}{lakes}. {source} Where it ends it carries "
+                f"{x['flow_mouth_m3s']:,}{nb}m³/s on the design climate's mean"
+                + (f", and {low:,}{nb}m³/s in the lowest of the fifteen years routed one by one." if low is not None else '.'))
+        rows = [['Flow where it ends', f"{x['flow_mouth_m3s']:,}{nb}m³/s"],
+                *([['Lowest year', f"{low:,}{nb}m³/s"]] if low is not None else []),
+                ['Length', f"{x['length_km']:,}{nb}km"],
+                ['Through lakes', f"{x['lake_km']:,}{nb}km, {x['lakes_crossed']} lake{'s' if x['lakes_crossed'] != 1 else ''}"],
+                ['Width where it ends', 'about ' + wide],
+                ['Water from', 'its own basin' if fed == 'headwaters' else fed],
+                ['Course', 'cut by the works' if x['works'] else 'natural']]
+        out.append(dict(name=x['name'], anchor=x['anchor'], tongue=x.get('tongue'), meaning=x.get('meaning'),
+                        lat=round(lat, 3), lon=round(lon, 3), flow=x['flow_mouth_m3s'], text=text, rows=rows,
+                        links=[x['ends_in_anchor']] + [r['anchor'] for r in x['regions']],
+                        note=('A calculation on the design routing, on the design climate (an estimate). The line follows the '
+                              'routing\'s 1.9 km cells, straight across each lake; the width is the page\'s rule for a '
+                              'river\'s flow.'),
+                        course=[[round(float(a), 3), round(float(b), 3)] for a, b in course]))
+    if surface_path is not None:                         # the smooth lines that taper with the flow (river_courses.py)
+        import river_courses
+        from research.studies.atlas_round import design_routing
+        routing = river_courses.routing_arrays(json.loads(design_routing.OUT.read_text())['product']['path'])
+        with np.load(surface_path, allow_pickle=False) as z:
+            height = z['height_m']
+        lines = {r['name']: r['pieces'] for r in river_courses.river_lines(
+            record['waterways'], routing, height, routing['meta']['frame']['rotation_today_to_turned'])}
+        for r in out:
+            r['pieces'] = [[p['kind'][0], p['points']] for p in lines.get(r['name'], [])]
+            r['note'] = ('A calculation on the design routing, on the design climate (an estimate). The line follows the '
+                         'routed course, smoothed, from shore to shore between the lakes, at the width the page\'s rule '
+                         'gives the flow and no narrower than 0.6 to 2.5 pixels, which far out is wider than the water.')
+    return sorted(out, key=lambda r: -r['flow'])
+
+
+FINE_NOTE = ' Close views (within about 3 Moon radii of the centre): the finer ground at 474 m, loaded for the ground in view. '
+
+
+def rename_page(page_path, record_path, profiles=None, fine=None, waterways=None, surface_path=None):
+    """The built page's regions, districts, coastal seas and seas renamed from a districts record, the regions' cards
+    taken from their fact sheets when given, and its data wrapped in the current template, its textures kept: the
+    record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
+    The named rivers come from the waterways record when given, and with the design surface their smooth lines are
+    made again (river_marks); without it the lines the page was built with are kept. A rename, a new text or a
+    change to the viewer then needs no rebuild, only the page republished."""
+    page = Path(page_path).read_text()
+    start = page.index(DATA_OPEN) + len(DATA_OPEN)
+    end = page.index(DATA_CLOSE, start)
+    data = json.loads(page[start:end])
+    if 'districts' not in data:
+        raise SystemExit(f'{page_path} draws no districts to rename')
+    record = json.loads(Path(record_path).read_text())
+    new = districts_data(record, region_cards(profiles, record) if profiles else None)
+    for key in ('regions', 'districts'):
+        if [u['code'] for u in new[key]] != [u['code'] for u in data['districts'][key]]:
+            raise SystemExit(f'{record_path} holds other {key} than the page drew; build the page again')
+    if record['product']['sha256'] != (data['districts'].get('product_sha256') or record['product']['sha256']):
+        raise SystemExit(f'{record_path} names another grid than the page drew; build the page again')
+    data['districts'] = dict(data['districts'], **new, product_sha256=record['product']['sha256'])   # the borders kept
+    surface = data.get('surface')
+    if surface:
+        if 'bodies' not in surface:
+            # a page built before the bodies were carried: its names are the surface's own, 'the ' before two of them
+            bodies = [''] + [n[4:] if n.startswith('the ') else n for n in surface['names'][1:-1]] + ['lake']
+            if not all(f'sea:{b}' in {r.get('anchor') for r in record['regions']} for b in bodies[1:-1]):
+                raise SystemExit(f'{page_path} names its waters otherwise than {record_path}; build the page again')
+            surface['bodies'] = bodies
+        before = surface['names']
+        surface['names'] = surface_body_names(['lake'] + surface['bodies'][1:-1], record)
+        renamed = dict(zip(before, surface['names']))
+        for s in data.get('labels', {}).get('sites', []):
+            if s.get('waterName') in renamed:
+                s['waterName'] = renamed[s['waterName']]
+        for key in ('lede',):
+            if isinstance(data.get(key), str):
+                data[key] = data[key].replace(LEDE_ACTIONS_BEFORE, LEDE_ACTIONS)
+        if isinstance(data.get('topoText'), str):
+            data['topoText'] = data['topoText'].replace(TOPO_CLICK_BEFORE, TOPO_CLICK).replace(LIGHT_PHRASE_BEFORE,
+                                                                                               LIGHT_PHRASE)
+    if fine:
+        data['fine'] = fine_data(fine, copy=Path(page_path).resolve().parent == OUT.resolve())
+        if FINE_NOTE.strip() not in data['provenance']:
+            data['provenance'] += FINE_NOTE + data['fine']['credit']
+    if waterways:
+        held = {r['name']: r for r in data.get('rivers', []) if r.get('pieces')}   # the lines the page was built with
+        data['rivers'] = river_marks(waterways, surface_path)
+        for r in data['rivers']:
+            if surface_path is None and r['name'] in held:
+                r['pieces'], r['note'] = held[r['name']]['pieces'], held[r['name']]['note']
+    marker = "Regions and districts: the atlas round's first draft (districts.json "
+    at = data['provenance'].find(marker)
+    if at >= 0:
+        at += len(marker)
+        data['provenance'] = data['provenance'][:at] + digest(record_path)[:12] + data['provenance'][at + 12:]
+    page = (HERE / 'globe.template.html').read_text().replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
+    Path(page_path).write_text(page)
+    cards = sum(1 for r in new['regions'] if r.get('card'))
+    texts = sum(1 for r in new['regions'] if r.get('card', {}).get('text'))
+    return dict(renamed=len(new['regions']) + len(new['districts']), region_cards=cards, region_texts=texts,
+                rivers=len(data.get('rivers', [])), page_bytes=len(page.encode()))
+
+
+def work_marks(summary, grid, level0, rotation):
+    """The page's marks for the works' cuts: each piece of trench at its deepest point, with its card's lines."""
+    pieces = summary.get('cuts', {}).get('pieces', [])
+    out = []
+    for i, x in enumerate(pieces):
+        lat, lon = x['at']['turned']
+        first = i == 0
+        out.append(dict(lat=lat, lon=lon, height=round(x['level_m']), short=f"cut {x['deepest_m']:,.0f} m",
+                        title=("Moscoviense's northern cut" if first else 'A cut on the northern branch'),
+                        meta=(f"{x['deepest_m']:,.0f} m deep at its deepest · about {x['km']} km of trench · water "
+                              f"{x['level_m']:,.0f} m above the common level · {x['flow_m3s']:,} m³/s"),
+                        note=('The works of 16 November: ' + ('the cut through Moscoviense\'s northern ridge carries its '
+                              'surplus north, Humboldtianum\'s share and Smythii–Marginis\'s. ' if first else
+                              'a further cut on the way north. ') + 'Drawn one 1.9 km cell wide, about as wide as a '
+                              'channel for its flow needs; the works have not designed its width. The amber line follows '
+                              'the course of each cut, from the water it leaves to the water it falls into, a few pixels '
+                              'wide at any zoom, as atlases draw canals: far wider than the trench at most zooms.')))
+    return out
+
+
+FALL_MARKS = 12                 # the largest falls the page marks
+
+
+def fall_marks(record, grid, level0):
+    """The page's marks for the largest falls of the falls study: place in the globe's frame, the ground's height there
+    above the common level, a short label and the card's lines."""
+    heights = grid['height'].ravel()
+    great = record['summary'].get('moscoviense_river')
+    out = []
+    for x in record['reaches'][:FALL_MARKS]:
+        lat, lon = x['at']['turned']
+        near = ('beside ' if x['beside']['beside'] else 'near ') + x['beside']['name']
+        river = (f"On the river that carries Mare Moscoviense's overflow over its natural pass to the "
+                 f"{great['into']}: {great['length_km']:,} km, falling {great['falls_m']:,} m in all. "
+                 if great and x['on_moscoviense_river'] else '')
+        out.append(dict(lat=lat, lon=lon, height=round(float(heights[x['start']] - level0)), short=f"{x['drop_m']:,} m",
+                        title=f"{x['drop_m']:,} m drop {near}",
+                        meta=(f"{x['flow_m3s']:,} m³/s · {x['drop_m']:,} m in {x['length_km']} km · steepest "
+                              f"{x['steepest_deg']}° over a 1.9 km step · {x['power_gw']:.0f} GW of falling water"),
+                        note=(river + f"It ends in {x['into']}. LOLA's 59 m heights show the six largest drops as long "
+                              'cascades down crater walls, their steepest 60 m 16–28° and no step steeper than 45°: white '
+                              'water rather than a free fall, though cliffs of a few tens of metres would not show.')))
+    return out
+
+
+def sea_text(sea, sources):
+    """The page's sentences on the water's slopes, from appearance.build's sea parameters."""
+    tilt = lambda mss: f"{np.degrees(np.arctan(np.sqrt(mss))):.0f}°"
+    return ('The water mirrors the Sun and the sky through the slopes of its waves, which follow the design climate\'s '
+            f"daytime wind: the surface wind of the same run and years ({digest(sources['wind'])[:12]}) gives each "
+            'climate cell\'s friction velocity over water, on the open seas the median of its stress\'s, '
+            f"{sea['openWaterMedianUstar']:.3f} m/s, and over the run's land cells, which hold the lakes and the seas' "
+            'edges, the wind 100 m up, where land and water share it, brought down over the water; the illumination '
+            "domain's model of a wind-roughened sea at lunar "
+            'gravity turns it into slopes: the short waves of Elfouhaily et al. (1997) above 1 m and a fully developed '
+            f"sea's longer waves below, a mean square slope of {sea['openWaterMedianMss']:.3f} over the open seas "
+            f"({sea['openWaterMss'][0]:.3f}–{sea['openWaterMss'][1]:.3f} across them), an rms tilt of "
+            f"{tilt(sea['openWaterMedianMss'])}. Facets with Gaussian slopes, as Cox and Munk measured Earth's, with "
+            'Fresnel\'s law and Smith\'s shadowing, give the Sun\'s glitter and the sky the water reflects, which toward '
+            'the limb falls to about half what level water would mirror. The longer waves of a fully developed sea are an '
+            'upper estimate in winds this light, and the run\'s 3-day means leave out gusts and calm hours, which would '
+            'break the glitter into patches. ')
+
+
+def cover_text(cover, sources, sea=None):
+    """The page's paragraph on the ground in true colour, from appearance.build's cover parameters (and its sea
+    parameters, when the winds set the water's slopes)."""
+    m = cover['moisture']
+    at = lambda a: f"{appearance.plant_cover(a):.0%}"
+    return ('<b>The ground: informed and guesstimate.</b> The ground\'s colour follows the design climate\'s dryness: the '
+            f"aridity of the moisture map (rain over the water the air could draw off; run {m['run']}, model years "
+            f"{m['years'][0]}–{m['years'][-1]}; {digest(sources['moisture'])[:12]}) in each of the run's 170 km land cells, "
+            'carried between the cells\' centres and smoothed as the clouds\' fields are, the run\'s water cells taking '
+            'their nearest land cell\'s. Earth\'s land under the same dryness gives the colours, a guesstimate: plants '
+            f"cover {at(0.02)} of the ground at an aridity of 0.02, {at(0.1)} at 0.1, {at(0.2)} at 0.2, {at(0.5)} at 0.5 "
+            f"and {at(1.0)} at 1, as Earth's drylands lose their cover fast below 0.2 (Berdugo et al. 2020); trees take a "
+            'growing share of it above 0.3, and the grass is straw where it is dry and green where it is wet. Bare '
+            'ground is weathered soil. Under the air space weathering ends and oxygen and water rust the rock\'s iron, '
+            'so the soils take the dry colours of Earth\'s soils on like rock under like dryness, at the moderate '
+            'weathering the terrain\'s upkeep keeps: the rock dust it carries back uphill renews the top metre every '
+            '2,400 to 100,000 years. On the feldspathic highland rock, whose 4–6% iron matches Earth\'s continental '
+            'crust, they run from light brown in the deserts (Munsell 7.5YR 6/4, with lime) through brown (7.5YR 5/4) to '
+            'yellowish red where it is humid (5YR 5/6); on basalt from reddish brown (5YR 4/4) through dark reddish brown '
+            '(5YR 3/4) to the dark red of terra roxa (2.5YR 3/6), darker with more titanium. The rock\'s iron and titanium '
+            f"come from Lunar Prospector's gamma rays (Prettyman et al. 2006; {digest(sources['composition'])[:12]}), the "
+            f"maria's outlines from the LROC team's map (Nelson et al. 2014; {digest(sources['mare'])[:12]}): basalt "
+            f"holds {cover['basaltLandShare']:.1%} of the land. Rock shows on steep slopes. The drylands' soils and their "
+            'living crusts are chosen with the biome design, so these are the soils the rock and climate give unaided. '
+            'Within a cell, ground along larger rivers and in hollows is wetter and steep slopes are drier, and noise '
+            'draws patches. The colours read the climate model\'s rain: where it rains at night, about a quarter of the '
+            'land, the cloud-resolving boxes\' dry end would leave the ground drier, and lake districts err dry, the '
+            'moisture map\'s own limits. The waters take the colours the sea appearance study calculates for the '
+            f"designed waters ({digest(sources['water_colours'])[:12]}), the light leaving them under sunlight: deep blue "
+            'offshore, the productive coast\'s green over water shallower than about 150 m and in shallow lakes, and the '
+            'river mouth\'s ochre in rivers and where they carry sediment into a lake or sea, a plume about 0.3 km wide '
+            'per (m³/s)^½ of the runoff gathered since the last lake or sea, since lakes and seas trap their rivers\' '
+            'sediment and send clear water on' + ('. ' + sea_text(sea, sources) if sea else '; the water also mirrors the sky. ')
+            + ('Rivers turn to white water where they drop steeply, wholly where a 1.9 km step falls 200 m a km, and '
+               'spray whitens the ground and water up to about 5 km round the falls of 2 GW or more, display '
+               'guesstimates over the falls study\'s steep reaches; the largest twelve falls are marked. '
+               if cover.get('falls') else '')
+            + 'The relief shades the ground from '
+            'its heights at 16 pixels per degree, and the sky\'s diffuse light reaches each place in the share of the '
+            'sky its surroundings leave open, found from the heights out to 50 km in 16 directions with the Moon\'s '
+            'curvature: under this air the sky gives 43% of the green light on level ground with the Sun 60° up, so '
+            'hollows and crater walls darken where they see less of it. River width follows '
+            'discharge, by Earth\'s relation widened for the slower flow of lunar gravity; most channels are narrower '
+            'than a pixel. Cloud shapes are noise the page draws in 3D, thresholded to the run\'s cover, and the decks\' '
+            'opacity is a guess (the low deck holds the run\'s cloud water, the high deck little).')
+
+
+def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
+                        wind=None, districts=None, profiles=None, fine=None, waterways=None):
+    """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
+    the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
+    on it, and the figures from the surface's record."""
+    grid = surface_grid(surface_path)
+    record = json.loads(Path(record_path).read_text())
+    summary = record['summary']
+    meta = grid['meta']
+    level0 = float(meta['common_level_m'])
+    rotation = np.asarray(meta['frame']['rotation_today_to_turned'], float)
+    pole = float(np.degrees(np.arccos(np.clip(rotation[2, 2], -1, 1))))
+    turn = dict(rotation=rotation, pole_moved_deg=pole)
+    ppd_map = SURFACE_PPD // 4
+    h_map, lev_map, body_map = surface_map(grid, grid['ppd'] // ppd_map)
+    turned = lambda a: appearance.turn_texture(a.astype(np.float32), rotation, left_lon=0.0, nearest=True)
+    h_map_t = turned(h_map).astype(float)
+    lev_map_t = turned(lev_map).astype(float)
+    body_map_t = turned(body_map.astype(np.float32)).astype(np.uint8)
+    relief, low, decoded = relief_texture(h_map_t, level0)
+    exact = np.roll(h_map_t, h_map_t.shape[1] // 2, axis=1) - level0
+    relief_error = float(np.abs(decoded - exact).max())
+    highest, lowest = round(float(exact.max())), round(float(exact.min()))
+    del exact
+    surface_tex = surface_texture(lev_map_t, body_map_t)
+    heights16 = turned(grid['height'])                  # its own name: `fine` is the close views' folder
+    routing = routing_product(record) if moisture else None
+    falls_record = json.loads(Path(falls).read_text()) if falls else None
+    if falls_record and digest(falls_record['product']['path']) != falls_record['product']['sha256']:
+        raise SystemExit(f"{falls_record['product']['path']} no longer matches its record {falls}")
+    looks, params, sources, masks = appearance.build(
+        heights16, level0, SURFACE_PPD, climatology=climatology, rotation=rotation, surface_path=surface_path,
+        moisture_path=moisture, routing_path=routing,
+        falls_paths=(Path(falls), Path(falls_record['product']['path'])) if falls_record and moisture else None,
+        wind_path=wind)
+    del heights16
+    truly = 'cover' in params
+    share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
+                                     / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
+    texture_water = share(surface_tex[..., 2] > 0, ppd_map)
+    surface_water = share(masks['sea'], SURFACE_PPD)
+    mask_water = share(looks['water'] / 255.0, SURFACE_PPD)
+    body_names = surface_body_names(meta['bodies'], json.loads(Path(districts).read_text()) if districts else None)
+    places_sites, places_targets, changed = surface_places(sites, targets, grid, level0, body_names)
+    place = lambda la, lo: tuple(round(float(v), 3) for v in to_turned(la, lo, rotation))
+    seas = summary['seas']
+    minus = lambda v: f'{v:,.0f}'.replace('-', '−')
+    sea_fig = lambda name, key: [name, f"{seas[key]['share']:.1%} · mean {seas[key]['mean_depth_m']:,} m · "
+                                       f"{minus(seas[key]['level_m'])} m"]
+    climate = TURNED_CLIMATES[params['climatology']['run']].format(
+        label=f"{params['climatology']['run']}, model years {params['climatology']['years'][0]}–{params['climatology']['years'][-1]}",
+        **climate_figures(climatology, moisture))
+    data = dict(
+        share=summary['water_share'], levelText=minus(level0) + ' m', normalStrength=appearance.NORMAL_STRENGTH,
+        relief=dict(low=low, highest=highest, lowest=lowest),
+        topo=[[h, col] for h, col in TOPO],
+        reference='the common level',
+        headline='The Open Moon on its design surface',
+        lede=('An estimate of how the Open Moon looks from space as the atlas round designs it: its air, clouds and '
+              + ('its ground in true colour, plants and soils as the design climate\'s dryness leaves them, '
+                 if truly else 'a guessed cover of plants ')
+              + 'over the floor its water redraws, with every sea and lake at its own level and the near-side sea parted '
+              'at its neck. ' + LEDE_ACTIONS),
+        coverText=cover_text(params['cover'], sources, params.get('sea')) if truly else None,
+        figures=[['Water', f"{summary['water_share']:.0%} of the surface"],
+                 ['Common level (geoid)', minus(level0) + ' m'],
+                 sea_fig('Near-side sea', 'near-side sea'), sea_fig('Southern near-side seas', 'southern near-side seas'),
+                 sea_fig('South Pole–Aitken Sea', 'South Pole–Aitken Sea'), sea_fig('Mare Humboldtianum', 'Mare Humboldtianum'),
+                 ['Upper seas full', f"{sum(seas[k]['share'] for k in ('Mare Moscoviense', 'Mare Orientale', 'Smythii–Marginis Sea')):.1%}"
+                                     ' · Moscoviense, Orientale, Smythii–Marginis'],
+                 ['Lakes', f"{summary['lake_share']:.1%} · {summary['lakes']:,} lakes"],
+                 ['Water in those lakes', f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"],
+                 ['Rivers into the seas', f"{summary['rivers_into_the_seas_m3s']:,} m³/s"],
+                 ['Over the neck' if summary.get('neck_river') else 'Through the neck', f"{summary['neck_spill_m3s']:,} m³/s"],
+                 ['Deepest water', f"{summary['deepest_water_m']:,} m"],
+                 ['Turn of the pole', f"{pole:.2f}°"]],
+        lakeFigures=(f"the lakes cover a further {summary['lake_share']:.1%} of the Moon and hold "
+                     f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"),
+        waterSource=('Land, water and water depth come from LOLA topography at 16 pixels per degree (1.9 km) as the '
+                     "water's weight redraws it at the settled state, with every sea and lake at its own level as the atlas "
+                     "round's design surface sets it"
+                     + (f". The works' cuts from Moscoviense towards Humboldtianum and Smythii–Marginis are cut into the "
+                        f"ground down to the water they carry, {summary['cuts']['deepest_m']:,.0f} m at the deepest, and "
+                        f"its {summary['cuts']['flow_m3s']:,} m³/s runs through them as a river"
+                        if summary.get('cuts', {}).get('trench_cells') else '')
+                     + ". Rivers and lakes come from the round's routing of the design climate's runoff over that floor:"),
+        topoText=('The ground\'s height above or below the common level, from the design surface\'s heights at 4 pixels '
+                  'per degree (7.6 km), with the water taken away. A sea takes the colour of the depth band for its '
+                  'depth under its own surface, averaged over each 7.6 km cell most of which it covers, so a sea above '
+                  'the common level and the parted near-side sea\'s lower body read as seas like any other. The lakes '
+                  'off the seas are left out of these colours, so their beds show; the appearance draws them as water, '
+                  'and a click reads them. Ground below the common level that no sea covers, such as the floor the '
+                  'parted sea leaves and the hollows that dry on the design rain, takes the lowland\'s colour, and above '
+                  'it the colours run from lowland green to the near-white of the highest ground. Shading comes from '
+                  f'the full relief at {SURFACE_PPD if truly else SURFACE_PPD // 2} pixels per degree under light that every place has alike, '
+                  + LIGHT_PHRASE + ', and contour lines mark the chosen interval, with the common level darker. In the '
+                  'topography mode the slider exaggerates the relief down into the sea floors as well as up into the '
+                  'highlands. Over the appearance the same colours and contours lie on the rendered globe at the chosen '
+                  'opacity, unlit by the Sun. Heritage sites and sampling targets come from the conservation study\'s '
+                  'register, each placed on the design surface with the water over it there. ' + TOPO_CLICK),
+        surface=dict(names=body_names, bodies=[''] + list(meta['bodies'][1:]) + ['lake'],
+                     levels=[None] + [round(seas[b]['level_m'], 1) for b in meta['bodies'][1:]] + [None]),
+        textures=(dict(relief=texture_file('relief', relief), surface=texture_file('surface', surface_tex),
+                       normal=texture_file('normal', looks['normal'], 'jpeg'),
+                       albedo=texture_file('albedo', looks['albedo'], 'jpeg'), water=texture_file('water', looks['water']),
+                       sky=texture_file('sky', looks['sky'], 'jpeg', 92), cloudSun=texture_file('cloud_sun', looks['cloud_sun']),
+                       cloudGeo=texture_file('cloud_geo', looks['cloud_geo']),
+                       **({'seaSlope': texture_file('sea_slope', looks['sea_slope'])} if 'sea_slope' in looks else {}))
+                  if truly else
+                  dict(relief=png_data_uri(relief), surface=png_data_uri(surface_tex), normal=jpeg_data_uri(looks['normal']),
+                       albedo=jpeg_data_uri(looks['albedo']), water=png_data_uri(looks['water']),
+                       cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo']))),
+        appearance=params,
+        labels=dict(
+            seas=[[name.replace('\n', ' '), *place(la, lo)] for name, la, lo in SEA_LABELS],
+            islands=[],
+            falls=fall_marks(falls_record, grid, level0) if falls_record else [],
+            works=work_marks(summary, grid, level0, rotation),
+            workLines=work_lines(cuts_product(record), rotation),
+            sites=[dict(id=s['id'], name=s['name'], year=s['year'], **dict(zip(('lat', 'lon'), place(s['lat'], s['lon']))),
+                        status=s['status'], short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
+                        height=s['height'], pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
+                        nearestWater=s.get('nearest_water_km', 0), aboveSea=max(s.get('above_sea_m', 0), 0),
+                        marks=s['marks'], treatment=s['treatment_type'].capitalize(), evaluation=s['evaluation_status'],
+                        statusNote=s.get('status_note', ''), waterName=s.get('water_name', '')) for s in places_sites],
+            targets=[dict(id=t['name'], name=next((t['name'].replace(k, v) for k, v in DISPLAY.items() if k in t['name']), t['name']),
+                          **dict(zip(('lat', 'lon'), place(float(t['lat']), float(t['lon'])))),
+                          aboveSea=int(t['height_relative_to_sea_m']), under=t['under_m'],
+                          zone=t['zone'], record=t['record'][0].upper() + t['record'][1:] + '.', sample=t['sample'])
+                     for t in places_targets]),
+        provenance=("The atlas round's design surface <code>" + meta['schema'] + '</code> (globe_surface_16ppd.npz '
+                    f"{digest(surface_path)[:12]}; its record {digest(record_path)[:12]}, the settled frame "
+                    f"{meta['frame']['sha256'][:12]}); the conservation register ({hashes['register'][:12]}); the "
+                    f"illumination domain's engine atmosphere ({digest(sources['engine'])[:12]}) and Open Moon sky atlas "
+                    f"({digest(sources['sky_atlas'])[:12]}); the climate domain's <code>{params['climatology']['schema']}"
+                    f"</code> for run {params['climatology']['run']} ({digest(sources['climatology'])[:12]})"
+                    + (f"; the moisture map <code>{params['cover']['moisture']['schema']}</code> of the same run and years "
+                       f"({digest(sources['moisture'])[:12]}), the LROC mare boundaries ({digest(sources['mare'])[:12]}) and "
+                       f"the sea appearance study's water colours ({digest(sources['water_colours'])[:12]})" if truly else '')
+                    + (f"; the climate domain's <code>{params['sea']['schema']}</code> of the same run and years "
+                       f"({digest(sources['wind'])[:12]}), which sets the sea's slopes" if 'wind' in sources else '')
+                    + f". Surface {looks['albedo'].shape[1]}×{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per "
+                    f"degree), relief at {SURFACE_PPD if truly else SURFACE_PPD // 2}, the map at {ppd_map}."),
+        frame=dict(note=surface_note(turn, summary, climate),
+                   lede=''))
+    if districts and truly:
+        texture, layer, rec_path, product = districts_layer(districts, rotation, surface_path, profiles)
+        if profiles:
+            sources.update(region_profiles=Path(profiles))
+        data['textures']['districts'] = texture_file('districts', texture)
+        data['districts'] = dict(layer, product_sha256=digest(product))
+        data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "
+                               f"{digest(rec_path)[:12]}, its grid {digest(product)[:12]}).")
+        sources.update(districts=rec_path, districts_grid=product)
+    if fine and truly:
+        data['fine'] = fine_data(fine)
+        data['provenance'] += FINE_NOTE + data['fine']['credit']
+        sources.update(fine_manifest=Path(fine) / 'manifest.json')
+    if waterways and truly:
+        data['rivers'] = river_marks(waterways, surface_path)
+        sources.update(waterways=Path(waterways))
+    template = (HERE / 'globe.template.html').read_text()
+    page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
+    (OUT / 'globe.html').write_text(page)
+    products = {str(Path(v)): digest(v) for v in sources.values()}
+    passed = (abs(surface_water - summary['water_share']) <= 0.002 and abs(texture_water - summary['water_share']) <= 0.005
+              and mask_water >= surface_water - 1e-4 and relief_error <= 0.5)
+    return dict(relief_max_error_m=round(relief_error, 3), map_texture_water_share=round(texture_water, 4),
+                surface_water_share=round(surface_water, 4), product_water_share=summary['water_share'],
+                water_mask_share_with_rivers=round(mask_water, 4), tolerances=dict(surface=0.002, map=0.005),
+                sites_whose_water_changed=changed, passed=passed, page_bytes=len(page.encode()),
+                appearance_products=products)
+
+
 def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -437,7 +1415,67 @@ def main(argv=None):
     parser.add_argument('--drainage', type=Path, default=ROOT / 'geography',
                         help="the folder holding the drainage product's results/ and products/")
     parser.add_argument('--stops', type=Path, help="the drainage network study's globe_stops.json: the years control")
+    parser.add_argument('--surface', type=Path, help="the atlas round's design surface (globe_surface_16ppd.npz): "
+                                                     'the globe alone, every water body at its own level')
+    parser.add_argument('--surface-record', type=Path, help="the design surface's record (results/globe_surface.json)")
+    parser.add_argument('--falls', type=Path, help="with --moisture, the falls study's record (results/falls.json): "
+                                                    'the largest falls marked, white water on steep reaches')
+    parser.add_argument('--moisture', type=Path, help="with --surface, the moisture map of the climatology's run and years "
+                                                      '(results/moisture_map_final.json): the ground in true colour')
+    parser.add_argument('--districts', type=Path, help="with --moisture, the atlas round's draft regions and districts "
+                                                       '(research/studies/atlas_round/results/districts.json): regions when '
+                                                       'zoomed out, districts and their names when zoomed in')
+    parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
+                                                  'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
+                                                  'slopes, and so its glint and its reflected sky, from the winds')
+    parser.add_argument('--fine', type=Path, help="the close views' finer ground: the folder fine_tiles.py wrote "
+                                                  '(visualization/atlas/out/fine), whose packs the page loads close up')
+    parser.add_argument('--profiles', type=Path, help="with --districts, the regions' fact sheets and texts "
+                                                      '(research/studies/atlas_round/results/region_profiles.json): '
+                                                      "each region's card")
+    parser.add_argument('--waterways', type=Path, help="the named rivers (research/studies/atlas_round/results/"
+                                                       'waterways.json): each one\'s name, line and card')
+    parser.add_argument('--names-only', action='store_true',
+                        help="with --districts: rename the built page's regions, districts, coastal seas and seas from "
+                             "the record, take the regions' cards from --profiles, and wrap the page's data in the "
+                             'current template, its textures kept (out/globe.html)')
+    parser.add_argument('--page', type=Path, help='with --names-only: the built page to wrap again, in place of '
+                                                  'out/globe.html (a trial copy, for instance)')
     args = parser.parse_args(argv)
+    if args.names_only:
+        if not args.districts:
+            raise SystemExit('--names-only needs --districts')
+        print(json.dumps(rename_page(args.page.absolute() if args.page else OUT / 'globe.html', args.districts.absolute(),
+                                     args.profiles.absolute() if args.profiles else None,
+                                     args.fine.absolute() if args.fine else None,
+                                     args.waterways.absolute() if args.waterways else None,
+                                     args.surface.absolute() if args.surface else None)))
+        return 0
+    if args.surface:
+        if not args.surface_record:
+            raise SystemExit('--surface needs --surface-record')
+        reg_path, tgt_path = STUDY / 'heritage_register.json', STUDY / 'science_targets.csv'
+        sites = json.loads(reg_path.read_text())['sites']
+        with open(tgt_path) as handle:
+            targets = list(csv.DictReader(handle))
+        OUT.mkdir(parents=True, exist_ok=True)
+        globe = write_globe_surface(args.surface.absolute(), args.surface_record.absolute(), args.climatology.absolute(),
+                                    sites, targets, dict(register=digest(reg_path)),
+                                    moisture=args.moisture.absolute() if args.moisture else None,
+                                    falls=args.falls.absolute() if args.falls else None,
+                                    wind=args.wind.absolute() if args.wind else None,
+                                    districts=args.districts.absolute() if args.districts else None,
+                                    profiles=args.profiles.absolute() if args.profiles else None,
+                                    fine=args.fine.absolute() if args.fine else None,
+                                    waterways=args.waterways.absolute() if args.waterways else None)
+        products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
+        products[str(args.surface)] = digest(args.surface)
+        products[str(args.surface_record)] = digest(args.surface_record)
+        manifest = dict(products=products, renderer=digest(Path(__file__)), template=digest(HERE / 'globe.template.html'),
+                        mode='design surface', globe=globe)
+        (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
+        print(json.dumps(dict(globe={k: v for k, v in globe.items() if k != 'appearance_products'})))
+        return 0 if globe['passed'] else 1
     atlas_path = ROOT / 'geography' / 'results' / 'atlas.json'
     atlas = json.loads(atlas_path.read_text())
     if atlas.get('schema') != ga.SCHEMA:

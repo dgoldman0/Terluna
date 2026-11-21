@@ -1,0 +1,600 @@
+"""The Moon's shared sounds: every name passes through them and keeps what it can of its parent language's.
+
+The framework is the sound section of the Terlunan reference (v0.6, section 2), taken as the sounds all the Moon's
+tongues share: the vowels a e i o u, a long vowel written double; the consonants p b t d k g m n ng s h l r w y and the
+glottal stop, with f and v admitted in established words; no sh, z, emphatic or affricate series; syllables (C)V(C)
+with ai, au, oi, ou as one nucleus, so a consonant may close a syllable and meet the next one's opening consonant but
+no syllable opens or closes on two; no vowel added at the end of a borrowed word; identical consonants meeting where
+two parts are fused become one; stress on the syllable before the last unless a long vowel takes it.
+
+Each parent language has a rule sheet below (a reader): a sound the framework has is kept, a sound it lacks goes to its
+nearest neighbour inside it, and where there is a choice the reader takes the one that keeps most of the parent. Every
+rule is a choice that can be turned; lunar_sounds.md gives each with its reason. The rules are a first set and the
+parent words are written from general knowledge of the languages: no dictionary or speaker has checked them.
+
+This module is the framework and the rule sheets, and it imports nothing of the names. district_names.py holds every
+tongue's words as their parent languages spell them and passes them through here when it loads, so that every name
+is made from the passed words; the record built here lists each word with its parent form, checks every word and
+every joined name against the framework, and checks that the names table and the draft record stand as passed.
+
+    python -m research.studies.atlas_round.lunar_sounds      -> results/lunar_sounds.json and a printed summary
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import sys
+import time
+import unicodedata
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[2]
+OUT = HERE / 'results' / 'lunar_sounds.json'
+SCHEMA = 'terluna.research.atlas-round-lunar-sounds/1'
+
+VOWELS = 'aeiou'
+CONSONANTS = ('ng', 'p', 'b', 't', 'd', 'k', 'g', 'm', 'n', 's', 'h', 'l', 'r', 'w', 'y', "'", 'f', 'v')
+DIPHTHONGS = ('ai', 'au', 'oi', 'ou')
+
+
+# ------------------------------------------------------------------------------------------------ the framework
+
+def segments(w):
+    """A word's sounds in order: ng is one consonant."""
+    out, i = [], 0
+    while i < len(w):
+        if w[i:i + 2] == 'ng':
+            out.append('ng'); i += 2
+        else:
+            out.append(w[i]); i += 1
+    return out
+
+
+def _v(s):
+    return s in VOWELS
+
+
+def repair(w, vowel=None):
+    """The framework's repairs on one word: a doubled consonant becomes one; a cluster that opens the word gets a
+    vowel inside it (i before y and u before w, as the reference's liyong and kuwo, else a copy of the next vowel); a
+    cluster that closes it is opened with a copy of the vowel before it; a run of three consonants is opened after
+    its second, before a glide with the glide's own vowel. A parent language with a vowel of its own for opening a
+    cluster gives it as vowel (Hebrew's e), and it takes the place of the copies."""
+    s = segments(w)
+    s = [x for i, x in enumerate(s) if not (i and x == s[i - 1] and not _v(x))]
+    if len(s) > 1 and not _v(s[0]) and not _v(s[1]):
+        nxt = next((x for x in s[2:] if _v(x)), 'a')
+        s.insert(1, {'y': 'i', 'w': 'u'}.get(s[1], vowel or nxt))
+    if len(s) > 2 and not _v(s[-1]) and not _v(s[-2]):
+        prev = next((x for x in reversed(s[:-2]) if _v(x)), 'a')
+        s.insert(len(s) - 1, vowel or prev)
+    i = 0
+    while i + 2 < len(s):
+        if not _v(s[i]) and not _v(s[i + 1]) and not _v(s[i + 2]):
+            nxt = next((x for x in s[i + 3:] if _v(x)), 'a')
+            s.insert(i + 2, {'y': 'i', 'w': 'u'}.get(s[i + 2], vowel or nxt))
+        i += 1
+    return ''.join(s)
+
+
+def fuse(parts):
+    """Parts fused into one word as the reference fuses compounds: identical consonants meeting at the join become
+    one; a part that ends on two consonants is opened before a part that begins with a third (bult + kol, bulutkol);
+    equal vowels stay as a doubled vowel of at most two letters."""
+    out = ''
+    for p in parts:
+        if not p:
+            continue
+        if out:
+            a, b = segments(out), segments(p)
+            if a[-1] == b[0] and not _v(a[-1]):
+                b = b[1:]
+            if len(a) > 1 and b and not _v(a[-1]) and not _v(a[-2]) and not _v(b[0]):
+                prev = next((x for x in reversed(a[:-2]) if _v(x)), 'a')
+                a.insert(len(a) - 1, prev)
+            out, p = ''.join(a), ''.join(b)
+        out += p
+    return re.sub(r'([aeiou])\1\1+', r'\1\1', out)
+
+
+def syllables(w):
+    """Syllables (C)V(C), a doubled vowel or ai, au, oi, ou being one nucleus; with the faults against the framework:
+    a sound outside it, no vowel, two consonants opening or closing a syllable."""
+    s = segments(w)
+    faults = [f'outside the inventory: {x}' for x in s if not _v(x) and x not in CONSONANTS]
+    nuclei, i = [], 0
+    while i < len(s):
+        if _v(s[i]):
+            if i + 1 < len(s) and _v(s[i + 1]) and (s[i] == s[i + 1] or s[i] + s[i + 1] in DIPHTHONGS):
+                nuclei.append((i, i + 2)); i += 2
+            else:
+                nuclei.append((i, i + 1)); i += 1
+        else:
+            i += 1
+    if not nuclei:
+        return [w], faults + ['no vowel']
+    syl, start = [], 0
+    for k, (a, b) in enumerate(nuclei):
+        last = k == len(nuclei) - 1
+        between = (len(s) if last else nuclei[k + 1][0]) - b
+        take = between if last else max(0, between - 1)
+        if a - start > 1:
+            faults.append('two consonants open a syllable')
+        if take > 1:
+            faults.append('two consonants close a syllable')
+        syl.append(''.join(s[start:b + take]))
+        start = b + take
+    return syl, faults
+
+
+ARTICLE = "h'"                       # Proto-Olivolingvo's article, written as the author writes it; how it is said
+#                                      depends on the local language that carries the name, so no saying is given here
+PARTICLES = ('na',)                  # the Tagalog linker between a head that ends on a consonant and its modifier
+
+
+def _bare(word):
+    """A word without the article h': no word of the framework opens on h and a glottal stop, so that opening is
+    always the article before its noun."""
+    w = word.lower()
+    return w[len(ARTICLE):] if w.startswith(ARTICLE) and len(w) > len(ARTICLE) else w
+
+
+def said(w):
+    """A word's syllables with the stressed one in capitals: the one before the last, or the rightmost long vowel's.
+    The article h' and the linker na are shown as written; neither takes a stress."""
+    out = []
+    for word in w.split():
+        if word.lower() in PARTICLES:
+            out.append(word.lower())
+            continue
+        bare = _bare(word)
+        lead = ARTICLE if bare != word.lower() else ''
+        syl, _ = syllables(bare)
+        k = max(0, len(syl) - 2)
+        longs = [i for i, x in enumerate(syl) if re.search(r'([aeiou])\1', x)]
+        if longs:
+            k = longs[-1]
+        out.append(lead + '.'.join(x.upper() if i == k else x for i, x in enumerate(syl)))
+    return ' '.join(out)
+
+
+def faults(w):
+    """A name's faults against the framework, word by word, the article h' apart."""
+    return [f for word in w.split() for f in syllables(_bare(word))[1]]
+
+
+# ------------------------------------------------------------------------------------------------ the rule sheets
+
+_KAZAKH = {'а': 'a', 'ә': 'e', 'б': 'b', 'в': 'w', 'г': 'g', 'ғ': 'g', 'д': 'd', 'е': 'e', 'ж': 'y', 'з': 's', 'и': 'i', 'й': 'Y',
+           'к': 'k', 'қ': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'ң': 'ng', 'о': 'o', 'ө': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+           'у': 'U', 'ұ': 'u', 'ү': 'u', 'ф': 'p', 'х': 'h', 'һ': 'h', 'ц': 's', 'ч': 's', 'ш': 's', 'щ': 's', 'ы': 'I', 'і': 'I',
+           'э': 'e', 'ю': 'yu', 'я': 'ya', 'ь': '', 'ъ': ''}
+_MONGOLIAN = {'а': 'a', 'б': 'b', 'в': 'b', 'г': 'g', 'д': 'd', 'е': 'ye', 'ё': 'yo', 'ж': 'y', 'з': 's', 'и': 'i', 'й': 'Y',
+              'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'ө': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ү': 'u',
+              'ф': 'p', 'х': 'h', 'ц': 's', 'ч': 's', 'ш': 's', 'ы': 'i', 'э': 'e', 'ю': 'yu', 'я': 'ya', 'ь': 'i', 'ъ': ''}
+
+
+def _glides(tokens):
+    """Kazakh's short high vowels and glides settled: a short high vowel is u after o or u and i otherwise, the
+    rounding harmony of speech (құдық, kuduk); й after a or o closes a diphthong and is y elsewhere; у is a vowel
+    after a consonant, closes a diphthong after a or o, and is w before a vowel at the start of a word."""
+    out, last = [], ''
+    for k, ch in enumerate(tokens):
+        nxt = tokens[k + 1] if k + 1 < len(tokens) else ''
+        if ch == 'I':
+            ch = 'u' if last and last in 'ou' else 'i'
+            last = ch
+        elif ch == 'Y':
+            ch = 'i' if out and out[-1] in ('a', 'o') else 'y'
+        elif ch == 'U':
+            if out and out[-1] in ('a', 'o'):
+                ch = 'u'
+            elif out and _v(out[-1]):
+                ch = 'w'
+            elif not out and nxt and nxt[0] in 'aeiouI':
+                ch = 'w'
+            else:
+                ch = 'u'; last = 'u'
+        elif ch and ch[-1] in VOWELS:
+            last = ch[-1]
+        out.append(ch)
+    return ''.join(out)
+
+
+def kazakh(word):
+    """Kazakh and Kyrgyz in their own letters. Kept: ng, final consonants, the rounding harmony. Changed: the uvular
+    stop and fricative to k and g; sh and z to s; the j of жылан to y, the sound it answers to across the Turkic
+    languages; front rounded ö and ü to o and u."""
+    return _glides([_KAZAKH.get(ch, ch) for ch in word.lower()])
+
+
+def mongolian(word):
+    """Mongolian in its own letters. Kept: long vowels, written double. Changed: its sibilants and affricates to s; a
+    final soft sign is the old -i (говь, gobi)."""
+    w = ''.join(_MONGOLIAN.get(ch, ch) for ch in word.lower())
+    w = re.sub(r'([ao])Y', r'\1i', w)
+    return w.replace('Y', 'y')
+
+
+def quechua(word):
+    """Quechua in its standard spelling. Kept: the lowering of i and u to e and o beside the uvular q, which Quechua
+    speaks and does not write, so that qucha is kosa when q becomes k. Changed: q to k; ch and sh to s; ll and ñ to l
+    and n; the aspirated and ejective stops to the plain ones."""
+    w = word.lower().replace('ñ', 'N').replace('chh', 'C').replace("ch'", 'C').replace('ch', 'C').replace('sh', 's').replace('ll', 'L')
+    w = re.sub(r"([ptkq])[h']", r'\1', w)
+    low = {'i': 'e', 'u': 'o'}
+    w = re.sub(r'[iu](?=[^aeiou]?q)', lambda m: low[m.group(0)], w)
+    w = re.sub(r'(?<=q)[iu]', lambda m: low[m.group(0)], w)
+    w = w.replace('q', 'k').replace('C', 's').replace('L', 'l').replace('N', 'n')
+    w = re.sub(r'([aeo])y(?![aeiou])', r'\1i', w)
+    return re.sub(r'aw(?![aeiou])', 'au', w)
+
+
+def arabic(word):
+    """Arabic and Tamazight in Latin letters, with ʿ and ʾ where the parent has them. Kept: the two throat stops as
+    the framework's glottal stop; f. Changed: the emphatics to their plain partners and q to k, as the reference does
+    with its Akkadian words; kh and the deep h to h; gh to g; sh, z and th to s, s and t; j to g, as Cairo says it;
+    long vowels to short."""
+    w = word.lower()
+    for a, b in (('ʿ', "'"), ('ʾ', "'"), ('ā', 'a'), ('ī', 'i'), ('ū', 'u'), ('ḥ', 'h'), ('ṣ', 's'), ('ḍ', 'd'), ('ṭ', 't'), ('ẓ', 's'),
+                 ('kh', 'h'), ('gh', 'g'), ('sh', 's'), ('th', 't'), ('dh', 'd'), ('j', 'g'), ('z', 's'), ('q', 'k')):
+        w = w.replace(a, b)
+    w = re.sub(r'([^aeiou])\1', r'\1', w)
+    w = re.sub(r'aw(?![aeiou])', 'au', w)
+    return re.sub(r'ay(?![aeiou])', 'ai', w)
+
+
+def swahili(word):
+    """Swahili in its standard spelling; m° marks the syllabic m of the tree-and-river class. Kept: its five vowels,
+    which are the framework's; f and v; ng as the framework's ng. Changed: sh, ch and z to s; j to y; a syllabic nasal
+    gets back the vowel it lost, mu- in the tree-and-river class (mto, muto) and i- before the nasal elsewhere, as
+    its sister languages have it (mvua, imvua); a consonant and a glide that open a word get a vowel between."""
+    w = word.lower().replace("ng'", 'ng')
+    for a, b in (('sh', 's'), ('ch', 's'), ('th', 't'), ('dh', 'd'), ('gh', 'g'), ('kh', 'h'), ('z', 's'), ('j', 'y')):
+        w = w.replace(a, b)
+    if w.startswith('m°'):
+        return 'mu' + w[2:]
+    w = w.replace('°', '')
+    s = segments(w)
+    if len(s) > 1 and s[0] in ('m', 'n', 'ng') and not _v(s[1]) and s[1] != 'w':
+        w = 'i' + w
+    return w
+
+
+def tagalog(word):
+    """Tagalog in its standard spelling, with its glottal stop written where it stands between vowels. Tagalog's
+    sounds are the framework's own."""
+    return word.lower()
+
+
+def hebrew(word):
+    """Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k. A cluster
+    opens with e, the vowel Hebrew itself puts there (zman, seman)."""
+    w = word.lower()
+    for a, b in (('ʿ', "'"), ('ʾ', "'"), ('tz', 's'), ('ts', 's'), ('sh', 's'), ('kh', 'h'), ('ch', 'h'), ('ḥ', 'h'), ('z', 's'), ('q', 'k')):
+        w = w.replace(a, b)
+    return w
+
+
+def japanese(word):
+    """Japanese in the Hepburn spelling. Kept: its five vowels and long vowels. Changed to the spelling that follows
+    its own sound system: shi, chi, tsu, fu are si, ti, tu, hu; z and j are s; a consonant and y before a vowel get
+    an i between (kyo, kiyo)."""
+    w = word.lower()
+    for a, b in (('ō', 'oo'), ('ū', 'uu'), ('shi', 'si'), ('chi', 'ti'), ('tsu', 'tu'), ('fu', 'hu'), ('ji', 'si'),
+                 ('sh', 'siy'), ('ch', 'tiy'), ('j', 'siy'), ('ts', 't'), ('z', 's'), ('f', 'h')):
+        w = w.replace(a, b)
+    return re.sub(r'([^aeiouy])y(?=[aeiou])', r'\1iy', w)
+
+
+def esperanto(word):
+    """Proto-Olivolingvo, the author's Esperanto-based tongue, in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;
+    the hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. How its clusters open depends on the local language
+    that takes the word up; here they take the framework's own repair (kratero, karatero)."""
+    w = word.lower()
+    for a, b in (('ŭ', 'u'), ('ĥ', 'h'), ('ŝ', 's'), ('ĝ', 'g'), ('ĉ', 's'), ('ĵ', 's'), ('sh', 's'), ('x', 'h'), ('c', 's'), ('z', 's'), ('j', 'y')):
+        w = w.replace(a, b)
+    return re.sub(r'([ao])y(?![aeiou])', r'\1i', w)
+
+
+_FRENCH = {'ʃ': 's', 'ʒ': 's', 'z': 's', 'ɲ': 'nY', 'ŋ': 'ng', 'ʁ': 'r', 'ʀ': 'r', 'ɾ': 'r', 'ɥ': 'w', 'j': 'Y', 'ɡ': 'g',
+           'ɑ': 'a', 'ɛ': 'e', 'ə': 'e', 'ø': 'e', 'œ': 'e', 'ɔ': 'o', 'y': 'i'}
+
+
+def french(word):
+    """Louisiana French and the Creoles of Louisiana and Haiti beside it, each word as it is said, in the phonetic
+    alphabet's letters, since French spelling carries letters that are not sounded. Kept: f and v, and the h that
+    Louisiana still sounds. Changed: the hushing sounds and z to s; gn to n followed by y; the rounded front vowels
+    unrounded, as the Creoles unround them (lune, lin; bleu, ble); a nasal vowel to its vowel with n; a final stop or
+    fricative loses the l or r after it, as it does in Louisiana speech (sable, sab)."""
+    w = unicodedata.normalize('NFD', word.lower())
+    w = re.sub('[aɑ]\u0303', 'an', w)
+    w = re.sub('[oɔ]\u0303', 'on', w)
+    w = re.sub('[eɛœ]\u0303', 'en', w)
+    w = ''.join(ch for ch in w if not unicodedata.combining(ch))
+    w = w.replace('dʒ', 'dY').replace('tʃ', 's')
+    w = ''.join(_FRENCH.get(ch, ch) for ch in w).replace('Y', 'y')
+    return re.sub(r'([pbtdkgfvs])[lr]$', r'\1', w)
+
+
+def somali(word):
+    """Somali in its own spelling. Kept: long vowels, written double; the glottal stop. Changed: c, the deep throat
+    sound, to the glottal stop; x and kh to h; q to k; sh to s; dh to d; j to y. Somali has no p or v, so a borrowed
+    name comes with b and f."""
+    w = word.lower()
+    for a, b in (('kh', 'h'), ('sh', 's'), ('dh', 'd'), ('c', "'"), ('x', 'h'), ('q', 'k'), ('j', 'y')):
+        w = w.replace(a, b)
+    return w
+
+
+def uyghur(word):
+    """Uyghur in Latin letters. Kept: ng, final consonants. Changed: q and gh to k and g; x to h; ch, sh, zh and z to
+    s; j to y; ö, ü and é to o, u and e; v to w."""
+    w = word.lower()
+    for a, b in (('ö', 'o'), ('ü', 'u'), ('é', 'e'), ('gh', 'g'), ('ch', 's'), ('sh', 's'), ('zh', 's'), ('q', 'k'), ('x', 'h'),
+                 ('j', 'y'), ('z', 's'), ('v', 'w')):
+        w = w.replace(a, b)
+    return w
+
+
+def setswana(word):
+    """Setswana in its own spelling. Kept: ng, and its open syllables. Changed: kg to k and g, its throat sound, to h
+    (Kgalagadi comes out as kalahadi, near the form English made of it); the breathed stops ph, th, kh to p, t, k;
+    tl and tlh to t; ts, tsh and š to s; j to y."""
+    w = word.lower()
+    for a, b in (('tlh', 't'), ('tl', 't'), ('tsh', 's'), ('ts', 's'), ('tš', 's'), ('š', 's'), ('kg', 'k'), ('kh', 'k'), ('ph', 'p'),
+                 ('th', 't'), ('ng', 'ŋ'), ('g', 'h'), ('ŋ', 'ng'), ('j', 'y')):
+        w = w.replace(a, b)
+    return w
+
+
+_ENGLISH = {'θ': 't', 'ð': 'd', 'ʃ': 's', 'ʒ': 's', 'z': 's', 'ŋ': 'ng', 'ɹ': 'r', 'j': 'y', 'ɡ': 'g', 'ɪ': 'i', 'ɛ': 'e', 'æ': 'a',
+            'ɑ': 'a', 'ɒ': 'a', 'ɔ': 'o', 'ʊ': 'u', 'ʌ': 'a', 'ə': 'e', 'ɜ': 'e'}
+
+
+def english(word):
+    """English of the American West, each word as it is said, in the phonetic alphabet's letters. Kept: f, v, h, the
+    r that the West sounds, and the glides ai, au, oi and ou. Changed: th to t or d; the hushing sounds, z, ch and j
+    to s; the vowel of 'say' to e; the short vowels to the nearest of the five."""
+    w = word.lower().replace('ː', '').replace('ˈ', '').replace('ˌ', '')
+    for a, b in (('tʃ', 's'), ('dʒ', 's'), ('eɪ', 'e'), ('oʊ', 'ou'), ('aɪ', 'ai'), ('aʊ', 'au'), ('ɔɪ', 'oi'), ('ɝ', 'er'), ('ɚ', 'er')):
+        w = w.replace(a, b)
+    return ''.join(_ENGLISH.get(ch, ch) for ch in w)
+
+
+def spanish(word):
+    """Spanish of New Mexico in its own spelling. Kept: its five vowels, the framework's own. Changed: ll to y; j and
+    the soft g to h; z and the soft c to s, ch to s; v to b, as Spanish says it; ñ to n followed by y; the silent h
+    dropped; rr to r."""
+    w = word.lower().replace('ñ', 'ny')
+    w = ''.join(ch for ch in unicodedata.normalize('NFD', w) if not unicodedata.combining(ch))
+    w = re.sub(r'(?<!c)h', '', w)
+    w = re.sub(r'c(?=[ei])', 's', w)
+    w = re.sub(r'g(?=[ei])', 'h', w)
+    for a, b in (('ch', 's'), ('ll', 'y'), ('rr', 'r'), ('qu', 'k'), ('j', 'h'), ('z', 's'), ('c', 'k'), ('v', 'b'), ('x', 'h')):
+        w = w.replace(a, b)
+    return w
+
+
+def terlunan(word):
+    """Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the
+    reference's fanga does."""
+    return word.lower().replace('wh', 'f')
+
+
+def plain(word):
+    """A name from elsewhere in Latin letters with its sounds marked (zh, sh, ch, ts, z, j, q, long vowels)."""
+    w = word.lower()
+    for a, b in (('ā', 'a'), ('ī', 'i'), ('ū', 'u'), ('zh', 's'), ('sh', 's'), ('ch', 's'), ('ts', 's'), ('kh', 'h'), ('q', 'k'),
+                 ('z', 's'), ('j', 'y'), ('x', 'h')):
+        w = w.replace(a, b)
+    return w
+
+
+READERS = dict(kk=kazakh, mn=mongolian, qu=quechua, ar=arabic, sw=swahili, tl=tagalog, he=hebrew, ja=japanese, eo=esperanto,
+               fr=french, so=somali, ug=uyghur, tn=setswana, en=english, es=spanish, te=terlunan, la=plain)
+PARENT_OF = dict(kk='Kazakh or Kyrgyz', mn='Mongolian', qu='Quechua', ar='Arabic or Tamazight', sw='Swahili', tl='Tagalog', he='Hebrew',
+                 ja='Japanese', eo='Esperanto with Hebrew loans', fr='Louisiana French and the Creoles beside it', so='Somali', ug='Uyghur', tn='Setswana',
+                 en='English of the American West', es='Spanish of New Mexico', te='Terlunan', la='another language')
+
+
+def read(spec):
+    """'kk:көл' or 'kk:қара+mn:говь': each part read by its parent's rule sheet, unrepaired, for fusing."""
+    out = []
+    for part in spec.split('+'):
+        code, word = part.split(':', 1)
+        out.append(READERS[code](word))
+    return out
+
+
+# A parent language's own vowel for opening a cluster, where it has one: Hebrew opens a cluster with e.
+# Proto-Olivolingvo is Earth's proposed common language and has no second parent of its own: on the Moon a word of it
+# is shaped by the local language that takes it up, so how its clusters open and how its article is said depend on
+# that language's other parent (the author, 20 November 2026). Until the local languages are set out its words take
+# the framework's own repair.
+REPAIR_VOWEL = dict(he='e')
+
+
+def repair_vowel(spec):
+    return REPAIR_VOWEL.get(spec.split(':', 1)[0])
+
+
+def passed(spec):
+    """A parent spec passed through whole: read, fused and repaired in its parent's way."""
+    return repair(fuse(read(spec)), repair_vowel(spec))
+
+
+RENDAKU = (('k', 'g'), ('t', 'd'), ('h', 'b'))      # the sequential voicing the framework can show; s has no voiced partner in it
+
+
+def voiced(head):
+    """A Japanese-rooted head with its first consonant voiced, where the framework has the voiced partner."""
+    for a, b in RENDAKU:
+        if head.startswith(a):
+            return b + head[len(a):]
+    return head
+
+
+# ------------------------------------------------------------------------------------------------ the record
+#
+# What follows reads the names (district_names.py and place_names.json) to report on them; it is loaded only when
+# asked, since the names load this module.
+
+def _dn():
+    from research.studies.atlas_round import district_names as DN
+    return DN
+
+
+def lexicon(tongue):
+    """A tongue's words as they stand: {(role, key): dict(parent, read, passed, said, faults)}, with a note where the
+    parent form puts right more than sounds. parent is the word as its parent language spells it, with the code of
+    the parent's rule sheet; read is the form names are fused from; passed is the word standing alone."""
+    DN = _dn()
+    t = DN.TONGUES[tongue]
+    out = {}
+    for role, table in (('head', t['heads']), ('modifier', t['mods']), ('meaning', DN.CALQUE_WORDS.get(tongue, {}))):
+        for key, word in table.items():
+            spec = t['parents'][(role, key)]
+            alone = word.lower()
+            entry = dict(role=role, parent=spec, read=t['fuse'][(role, key)], passed=alone, said=said(alone), faults=faults(alone))
+            if passed(spec) != alone:
+                entry['faults'] = entry['faults'] + ['not its parent form passed through']
+            note = DN.PARENT_NOTES.get((tongue, key))
+            if note:
+                entry['note'] = note
+            out[(role, key)] = entry
+    return out
+
+
+def collisions(tongue):
+    """Pairs of a tongue's words with different parent words and one passed form, among its heads and among its
+    modifiers and the words for old names' meanings."""
+    lex = lexicon(tongue)
+    out = []
+    for roles in (('head',), ('modifier', 'meaning')):
+        seen = {}
+        for (role, key), e in lex.items():
+            if role not in roles:
+                continue
+            other = seen.setdefault(e['passed'], (key, e['parent']))
+            if other[0] != key and other[1].lower() != e['parent'].lower():
+                out.append((other[0], key, e['passed']))
+    return out
+
+
+# The names table's pins as a head and a modifier (or a meaning's word) of their tongue: district_names.compose makes
+# each pin from these keys, which a test holds, so that a pin and the lexicons cannot part.
+PINS = {
+    'sea:near-side sea': ('terlunan', 'sea', 'rain'), 'sea:southern near-side seas': ('dala', 'sea', 'cloud'),
+    'sea:South Pole–Aitken Sea': ('olivolingvo', 'sea', 'salt'), 'sea:Mare Humboldtianum': ('dala', 'sea', 'star'),
+    'sea:Mare Moscoviense': ('runa', 'lake', 'high'), 'sea:Mare Orientale': ('pwani', 'sea', 'east'),
+    'sea:Smythii–Marginis Sea': ('tagalhebrew', 'sea', 'edge'),
+    'river:-22.9,173.3': ('runa', 'river', 'great'), 'river:47.5,49.7': ('terlunan', 'river', 'blue'),
+    'river:2.3,177.7': ('runa', 'river', 'rain'), 'river:21.3,105.0': ('satoyama', 'river', 'deep'),
+    'river:15.0,287.7': ('pwani', 'river', 'green'), 'river:-13.4,253.1': ('tagalhebrew', 'river', 'high'),
+    'river:-23.0,192.3': ('runa', 'river', 'mist'), 'river:25.8,103.0': ('satoyama', 'river', 'new'),
+    'river:3.6,302.2': ('dala', 'river', 'light'), 'river:-45.1,230.0': ('pwani', 'river', 'stone'),
+    'river:57.1,111.8': ('sahran', 'river', 'gold'), 'river:16.8,13.5': ('terlunan', 'river', 'flower'),
+    'river:18.1,184.8': ('runa', 'river', 'wind'), 'river:3.3,156.4': ('runa', 'river', 'cloud'),
+    'river:8.8,146.9': ('runa', 'river', 'star'), 'river:1.4,302.5': ('pwani', 'river', 'leaf'),
+    'river:-14.1,311.5': ('pwani', 'river', 'twin'), 'river:-50.2,131.6': ('olivolingvo', 'river', 'long'),
+    'river:12.3,346.0': ('terlunan', 'river', 'black'), 'river:47.4,186.0': ('olivolingvo', 'river', 'old'),
+}
+# Pins that are not a head and a modifier: fused from named parts, or the author's own, which stand as written.
+PINS_BY_PARTS = {'river:19.9,184.6': 'te:rere+te:awa'}
+PINS_STAND = ('feature:Sinus Iridum', 'feature:Montes Jura', 'feature:Mare Ingenii')
+
+
+def pins(table=None):
+    """Every pinned name against the lexicons: [dict(anchor, name, tongue, from_the_words, said, stands, how, faults)].
+    stands is whether the pin is the name its tongue's words make today."""
+    DN = _dn()
+    table = DN.load_table() if table is None else table
+    out = []
+    for anchor, pin in table.items():
+        name = pin['name']
+        if anchor in PINS_STAND:
+            made, how = name, "the author's own name, which stands as written"
+        elif anchor in PINS_BY_PARTS:
+            made, how = DN._cap(passed(PINS_BY_PARTS[anchor])), PINS_BY_PARTS[anchor]
+        elif anchor in PINS:
+            tongue, head, mod = PINS[anchor]
+            made, how = DN.compose(tongue, head, mod), f'{tongue}: {mod} + {head}'
+        else:
+            made, how = None, 'named by hand, with no head and modifier to check it against'
+        out.append(dict(anchor=anchor, name=name, tongue=pin.get('tongue'), from_the_words=made, said=said(name),
+                        stands=made is None or made == name, how=how,
+                        faults=faults(name) if anchor not in PINS_STAND else []))
+    return out
+
+
+def record_names(record):
+    """A districts record's generated names against the lexicons: (names with a head and a modifier, those the
+    words make today)."""
+    DN = _dn()
+    found = made = 0
+    for u in record.get('regions', []) + record.get('districts', []) + record.get('coastal_seas', []):
+        if u.get('name_source') != 'generated' or not u.get('name_head') or not u.get('name_mod'):
+            continue
+        found += 1
+        made += DN.compose(u['tongue'], u['name_head'], u['name_mod']) == u['name'].split(' ')[0] \
+            or DN.compose(u['tongue'], u['name_head'], u['name_mod']) in u['name']
+    return found, made
+
+
+def _sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def build(log=print):
+    DN = _dn()
+    t0 = time.time()
+    tongues = {}
+    for tongue, t in DN.TONGUES.items():
+        lex = lexicon(tongue)
+        words = [dict(key=key, **e) for (role, key), e in lex.items()]
+        tongues[tongue] = dict(label=t['label'], words=words, faults=sum(bool(e['faults']) for e in lex.values()),
+                               fallen_together=collisions(tongue),
+                               joined_names_at_fault=sum(bool(faults(DN.compose(tongue, h, m))) for h in DN.HEADS for m in DN.MODIFIERS))
+        log(f"{t['label']:36s} {len(words):3d} words, {tongues[tongue]['faults']} against the framework, "
+            f"{len(tongues[tongue]['fallen_together'])} fallen together, {tongues[tongue]['joined_names_at_fault']} joined names at fault")
+    pinned = pins()
+    record = json.loads(DN.RECORD.read_text()) if DN.RECORD.exists() else {}
+    found, made = record_names(record)
+    log(f"pins: {len(pinned)}, {sum(not p['stands'] for p in pinned)} apart from their words; the draft record's generated names: "
+        f"{made} of {found} are the names the words make")
+    return dict(
+        schema=SCHEMA, producer='research.studies.atlas_round.lunar_sounds',
+        inputs={str(p.relative_to(ROOT)): _sha(p) for p in (HERE / 'district_names.py', DN.PLACE_NAMES, DN.RECORD) if p.exists()},
+        evidence=("A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan "
+                  "reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; "
+                  "the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, "
+                  "Tagalog, Hebrew, Japanese, Esperanto, Louisiana French, Somali, Uyghur, Setswana, English and Spanish, and no speaker has checked "
+                  "them; a dictionary check of one batch of names is described in the paper."),
+        reading_rule=("tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old "
+                      "name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language "
+                      "spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed "
+                      "one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words "
+                      "with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. "
+                      "pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and "
+                      "whether the two agree (stands). record counts the draft record's generated names and those the words make today."),
+        framework=dict(vowels=list(VOWELS), consonants=list(CONSONANTS), diphthongs=list(DIPHTHONGS), admitted_in_established_words=['f', 'v'],
+                       syllable='(C)V(C)', stress='the syllable before the last, or the rightmost long vowel',
+                       article="h', written as the author writes it; its saying depends on the local language"),
+        rule_sheets={code: (fn.__doc__ or '').strip().replace('\n    ', ' ') for code, fn in READERS.items()},
+        tongues=tongues, pins=pinned,
+        record=dict(generated_names=found, made_by_the_words=made),
+        seconds=round(time.time() - t0, 2))
+
+
+def main(argv=None) -> int:
+    record = build()
+    OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + '\n')
+    print(f'wrote {OUT.relative_to(ROOT)}')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main(sys.argv[1:]))

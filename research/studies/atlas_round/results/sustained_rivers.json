@@ -1,0 +1,6456 @@
+{
+ "schema": "terluna.research.atlas-round-sustained-rivers/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/sustained_rivers.py": "0c0249809626662f5c7ea68920dce2b1a7bf4b7960570fbd89eb17289d2159e1",
+   "research/studies/atlas_round/design_routing.py": "554fde6092910090a411cd3807ec323bc8ed76b6bfb5224847d33b70b9462685",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
+   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
+   "research/studies/atlas_round/design_works.py": "dc28a4d235bb00bcdb35b4309b2c8f8b090e9e4b60548302416af6835366c550",
+   "research/studies/atlas_round/near_side_neck.py": "69664c1047b7c54f2e997f683c60da98daa872bed200c18fdaaecddbd95a4f04",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
+   "research/studies/atlas_round/lake_rule_balance.py": "0755ab26642dc9734849ab1efe2c78256be7085dff1b05eacaecc815eb28bfff",
+   "research/studies/atlas_round/hollow_courses.py": "dc21d4190da6a7017dd2cba8af7f7ae635450bac6513a488be04456bc37759c3",
+   "research/studies/atlas_round/moisture_final.py": "abbb2fc8b67037af1da80b1ac57a2f3398b886249b1feda1d80bb89458550e51",
+   "research/studies/atlas_round/river_losses.py": "3847ce4fe1ce6c24307bd458594501d98cec6a7bace4657d4a33541eca8afe1c",
+   "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
+   "climate/gcm/turned_climatology.py": "454374ea179ba6bd0c91b91e485572fc81e75fc4c0d1a64254814b8cdb4095f6",
+   "climate/gcm/pattern_scaling.py": "e5e51450c1fa3ff42dfdb2abe847e09d26172b609789de1d0a348672d96674ed",
+   "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
+  "research/studies/atlas_round/results/final_drainage.json": "27ec3ba3b464d08682d7bf31ae65f6134f4bb1ce40e4581c4669f62fca3f043f",
+  "research/studies/atlas_round/results/near_side_neck.json": "7bbaa72ca2935c4feaaf14169d410b7fb8356eca4a2f67f0ac113cc095c2e160",
+  "research/studies/atlas_round/results/design_works.json": "35fe34c7f0ad4bde9aef21c7ab1a6a6c1d5df21c48afb41edb6f527112428ce1",
+  "research/studies/atlas_round/results/river_losses.json": "c07955908bb332ee477a1690bdd8621bbfa052f12dcb1280f13bad37a47de2a9",
+  "climate/results/gcm/pattern_scaling_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.json": "0d150b24d2d9943fa8225bcb358cfc542d6e92ebf7ac8ffa7c85301a36e56381",
+  "climate/results/gcm/surface_change_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.json": "df7a938f993c7723f77dbdc0f596c458b47b924f6837952f61eba0edccb3f2a4",
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e",
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz": "30aab71a469bd9a977ef1517c77bd1939dff8f1e863b7a0a6f714e12127210d5",
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114",
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "e1e3a37218c44859fa2d1608a275538dc66b0514377ec912cefec934f004e854",
+  "climate/gcm/products/moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc": "a24e12a3a91c203d6d79ece6168515cbf7dd253acee042f9f871fac69cf8ddb2",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s930_settled.00004.1.npz": "833aeeb1ff27ff410bf6f611547bbd2d1033592acc45276dc9eee90e024eef66",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s930_settled.00005.1.npz": "654fca717edf1e239519b395b8636a0e49289369fec8d9529a961e6139244221",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s930_settled.00006.1.npz": "7a2e35ce9ed76af0562ab8a13cf045240041d4ac2aaf4ebc10986a4e2985dcfe",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s930_settled.00007.1.npz": "660b62f27f16536ff6e4a312f920d37b976a7b9efe89030ade1a908f2a246f71",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s930_settled.00008.1.npz": "c03df97c3be7067b9e459a3db384c4f9bc6e1b22d286dc2569a424291e37e77a",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00045.1.npz": "d9f1d6750d64f4515db719c1694ee2247941448774f1718a8040affe19c1d3d9",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00046.1.npz": "c76424a6d36112b60e8edb343828847c4a9ea6c512f59d8c41895e095d52c266",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00047.1.npz": "de6fc39a30030b76c479f40ad32857a69c920427948310efdaaf7be8c385a910",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00048.1.npz": "c0d0a33c4a9dd19ce046999d9489193e7950f9ff2babd6f4874a1bf2eab1346b",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00049.1.npz": "a19b35cc69b1d95a6b32c2efc3de7132b8426df10827f6a6efbf29e30ebca41b",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00050.1.npz": "b3ea025efd48b7b50298850a8e6c5c1d33b2b011ef2432cf2b1a91f9b07d98bd",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00051.1.npz": "8cb02529f3fc54cc9090af2b5aed9af8654bd581092c69613332792e71f452e4",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00052.1.npz": "9b27f10e6343c91f9e03859fca251d88fae629c8646d21c8cc8e96eb0828713b",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00053.1.npz": "719fa29675c934092d95bfefe0892b7e26358a297dd6a5320868422cd5a3f429",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00054.1.npz": "1fc8955d0504c034b13133c6d28509718d6fb4298fa08dae05827f59e08673da",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00055.1.npz": "ea4188c7e5970bed48f8d4767879dbd504aa93db6dc79dc60f52fe6723bdba45",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00056.1.npz": "84325ccda40a2b0bc16dc033373eb11c1917e7eced0b4c47eeabbdb876c33e30",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00057.1.npz": "e2c2d52f4789fe06b21401a1aaef3dcb5fa4aa07560dc0ac38fb06f5ae4784ec",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00058.1.npz": "83027fe78e148e1f0c158f2e612b467798839d17609e911ee50a58a64022e7d7",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28D_301k_design_l15_snow_s936_settled.00059.1.npz": "590b49ab7cb8813cc338be644457e9aff4a0361fb3798d03761af90ac24c4a2b",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00035.1.npz": "1224258ece2254ce0bf7464374018bd2b5e1f98c8e1941e7f9116d75b333d796",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00036.1.npz": "4ea0caf0f408fa15e4ed0501bef0591377c060326e3e1528939e7ad7b3a44fba",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00037.1.npz": "9f4973ed735abf786862874141126ee5ba2e891f2486ee09a5cc8f22762db53f",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00038.1.npz": "8f5570785e4e8a600eea8d0994442f3483b3952f3a09bd7d8970bfdd9ff69672",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00039.1.npz": "1cf2515b04df6babaf7d2c2a3efb74660eb733a9940754fce3636c63a8877c7e",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00040.1.npz": "14cf09364568f6f2c5f895583b4124bf66f2ce319666cdfb42915ab709743c1a",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00041.1.npz": "aecdb6ad664673a16d7378257db09f455bd77b54116e160d63775abbe9fb6be0",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00042.1.npz": "405e3ef5e60ccfbdc33eb35282258441768dcf245b7f894fec8bd6ab45a74256",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00043.1.npz": "5504c359973a376c2a9ad3645875c7d191bf9263f68b11747304180b4229bb7c",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00044.1.npz": "08c08ddf3da17e8c29bc187946102a44c0aaabbc3c83ebe38fe7fadd2b2cd502",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00045.1.npz": "be2a81193851926c5b813610c31764b9c343b5a0a69d346355281666a6e42578",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00046.1.npz": "a6f2fcecb71ca0ff814a7a128b1912774a8c0770779e7591bfcb3211b893e0c1",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00047.1.npz": "880ac2c97900b64a11c8fef41835ea6d8c9facb93b4b2212a1c569fcf2cf3bb0",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00048.1.npz": "e898ed8592164d88167dd00a2d98c9d404940a6c3245b630c243a80eb75db012",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s930_settled.00049.1.npz": "af79d45aa48bafea4afb7224b457e5f6b7a277d85c7899a9a4bb88e637e4c54d",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00003.1.npz": "b7734e5a800415f2ac634cf0f0fbda4a0686d2e7a6c36e4cb994ae6d368bc421",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00004.1.npz": "4fcdc97eff0316f3c71111ce2927eaddce5ce4634d6eed542be193f438b13d49",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00005.1.npz": "28d2bc7c0c9e658deaf85132490882edf675183a7a36b21431a4e03e727efb7c",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00006.1.npz": "aad4719670e391e2774447d75acd4575fd1c691c4f1eb9bada2862bd47a4625c",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00007.1.npz": "cbbaaade617219252c97c7030aca1e7089218133875542903b4bb49f8d2521ed",
+  "/media/projectspace/terluna-research/atlas-round/drylands/cache/A28S_301k_design_l15_snow_s938_settled.00008.1.npz": "0b2aa45656b90269981b5866dd363fa1df67c09808529fe16f7cf67a92a0f616"
+ },
+ "evidence": "A calculation on products: the design climate's fifteen settled years (an estimate carried by pattern scaling to 300.31 K and then onto the design's own surface), each routed on the design routing's structure held fixed, the lakes as the corrected rule fills them, without storage and with the lakes and the upper seas carrying their volume from year to year over outlets sized by Earth's channel widths; the rivers' losses in the drylands by river_losses.py's estimate. Fifteen years is a short record, and no figure is validated against an observation.",
+ "reading_rule": "Flows in m3/s, lengths in km, areas in km2; a year is a settled year of the design climate (model years 45-59). Each year is routed three ways: none, with no water carried between years and the lakes the design leaves below their passes passing nothing, the lower bound on a dry year's flow for the waters the design holds full; narrow and wide, with the lakes' and the upper seas' storage carried from year to year over outlets of width 3 and 15 m per (m3/s)^0.5 widened for lunar gravity, wide holding the least, a lake below its pass rising in wet years and passing water on once it reaches it. A reach is part of a major river (threshold_m3s or more on the design routing) between confluences, lakes of lake_break_km2 or more and changes of class, its flows read at its downstream end; it is sustained when it carries the threshold in every year with the wide outlets' storage and intermittent otherwise. A river is a stem from its head to where it ends or joins a larger river, classed by its end. after_losses gives the design climate's flow after the drylands' losses at the low and high ends, and lowest_year_high the wide storage's lowest year less the high end's loss of the mean year. product holds the cells, reaches the full table.",
+ "limits": [
+  "The climate is an estimate in two steps: the run at sunlight 0.936 carried by pattern scaling from 301.00 K to 300.31 K, each year keeping its own departures from the run's mean, and then each cell's rain and evaporation moved by the ratio the step onto the design's own surface gives the mean (climate.gcm.surface_change, from existing runs); a run on that surface at the design temperature would differ by more than the noise of fifteen years' means where the lakes grew.",
+  "Fifteen years is a short record: the lowest year is about the driest year in fifteen and the second lowest the driest in seven or eight; longer records hold drier years, so a river sustained here can fall under the threshold in a rarer drought. The years follow one another in the model's order.",
+  "Without storage each year passes on only its own surplus: the lower bound on a dry year's flow for the waters the design holds full. With storage a lake that fell below its pass in a dry year refills before it spills again, so in the years after a drought its river can carry less than without storage (by_storage.*.km_whose_lowest_year_falls_below_none).",
+  "The storage's outlets are not designed or measured: each passes critical flow over a section as wide as Earth's alluvial channels at its design flow, at both ends of their range, so the head a lake holds over its pass, and with it the water it carries into a dry year, is an assumption; a pass the water has not cut would be wider and hold less. A lake's area over its pass is held at its area at the pass.",
+  "Each year is a year's mean rain and evaporation in 24 steps: the seasons and the storms within a year are left out, and a year's rain is resolved over the climate model's land cells of about 17,391 km2, the routing's 1.9 km cells taking it bilinearly.",
+  "The losses are river_losses.py's estimate at the ends of its ranges, taken from the mean year's flow; the lowest year after losses deducts the mean year's loss.",
+  "The structure is held fixed: the lakes keep the design's shores in the years without storage, a lake that reaches its pass with storage sends its water on by the course the design gives it and not into the larger hollow it would fill with its neighbour, and each cut carries the design's part of its branch's share whether or not its lake can spare it that year. Where the near-side sea is one sea across its neck, both parts are held at their design levels.",
+  "The routing is the design routing's on 1.9 km cells, each hollow filled as one water (lake_rule.py). Nothing is validated against an observation."
+ ],
+ "settings": {
+  "threshold_m3s": 100.0,
+  "large_m3s": 1000.0,
+  "track_m3s": 1.0,
+  "dry_m3s": 1.0,
+  "lake_break_km2": 100.0,
+  "steps_a_year": 24,
+  "outlet_width_coefficients": [
+   3.0,
+   15.0
+  ],
+  "lunar_widening": 1.434,
+  "outlet_sized_at_least_m3s": 1.0,
+  "lake_table_depths_m": [
+   0.0,
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   4.0,
+   8.0,
+   16.0,
+   32.0,
+   64.0,
+   128.0,
+   256.0,
+   512.0,
+   1024.0,
+   2048.0,
+   4096.0,
+   8192.0,
+   16384.0
+  ]
+ },
+ "climate": {
+  "run": "A28D_301k_design_l15_snow_s936_settled",
+  "years": [
+   45,
+   59
+  ],
+  "estimate": "scaled300.31K_resurfaced",
+  "delta_K": -0.6928,
+  "responses_per_K": {
+   "pr": {
+    "land": 0.018683,
+    "water": 0.048777
+   },
+   "evap": {
+    "land": 0.028576,
+    "water": 0.03212
+   }
+  },
+  "open_water_evaporation_factor": 1.043,
+  "frame": {
+   "record": "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json",
+   "sha256": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
+  }
+ },
+ "design_check": {
+  "routing_made_again_largest_difference_m3s": 0.0,
+  "replay_largest_difference_m3s": 0.0,
+  "years_procedure_largest_difference_m3s": 0.433,
+  "years_procedure_outflows_m3s": {
+   "moscoviense": [
+    49204.6,
+    49204.6
+   ],
+   "orientale": [
+    16367.0,
+    16367.4
+   ],
+   "smythii_marginis": [
+    30094.0,
+    30093.9
+   ]
+  },
+  "rivers_into_the_seas_m3s": 242171,
+  "lakes": {
+   "count": 160807,
+   "below_their_passes": 135379,
+   "lowest_points_inside_larger_lakes": 46271
+  },
+  "near_side": {
+   "joined_across_the_neck": true,
+   "neck_flow_m3s": 9364.2,
+   "main": {
+    "rivers_m3s": 77578.7,
+    "loses_m3s": 68214.4,
+    "left_m3s": 0.2
+   },
+   "south": {
+    "rivers_m3s": 6020.1,
+    "loses_m3s": 15369.8,
+    "left_m3s": 14.4
+   },
+   "note": "left: what a part receives, with the neck's flow taken from the main part and given to the southern one, beyond what it loses; the design routing settles each part within 0.2% of what it receives"
+  }
+ },
+ "against_the_design": {
+  "major_cells": 4779,
+  "years_mean_over_design": {
+   "median": 1.0002,
+   "p5": 0.9992,
+   "p95": 1.1532,
+   "cells": 4779
+  },
+  "mean_climate_routed_over_design": {
+   "median": 0.9994,
+   "p5": 0.9977,
+   "p95": 1.0003,
+   "cells": 4779
+  },
+  "years_mean_over_mean_climate_routed": {
+   "median": 1.0004,
+   "p5": 1.0,
+   "p95": 1.1552,
+   "cells": 4779
+  },
+  "storage_years_mean_over_design": {
+   "narrow": {
+    "median": 1.0016,
+    "p5": 0.9644,
+    "p95": 1.1199,
+    "cells": 4779
+   },
+   "wide": {
+    "median": 1.001,
+    "p5": 0.9872,
+    "p95": 1.0726,
+    "cells": 4779
+   }
+  },
+  "rivers_into_the_seas_m3s": {
+   "design": 242171,
+   "mean_climate_routed": 242128,
+   "years_mean_none": 245449,
+   "years_mean_narrow": 244184,
+   "years_mean_wide": 244552
+  },
+  "outflows_m3s": {
+   "moscoviense": {
+    "design": 49205,
+    "mean_climate_routed": 49213,
+    "years_mean_none": 49498,
+    "years_mean_narrow": 49627,
+    "years_mean_wide": 49779
+   },
+   "orientale": {
+    "design": 16367,
+    "mean_climate_routed": 16364,
+    "years_mean_none": 16501,
+    "years_mean_narrow": 16329,
+    "years_mean_wide": 16400
+   },
+   "smythii_marginis": {
+    "design": 30094,
+    "mean_climate_routed": 30095,
+    "years_mean_none": 30492,
+    "years_mean_narrow": 30045,
+    "years_mean_wide": 30202
+   }
+  },
+  "land_runoff_m3s": {
+   "note": "the routing's runoff from the design's dry ground: each 1.9 km cell's rain less evaporation where positive, so a year wetter where that straddles nothing adds runoff and a drier one cannot take any away",
+   "design": 98323,
+   "mean_climate": 98247,
+   "years_mean": 105063,
+   "lowest_year": 102660,
+   "highest_year": 109240,
+   "by_year": [
+    104486,
+    105074,
+    103183,
+    104568,
+    104346,
+    103508,
+    105847,
+    104915,
+    105461,
+    105406,
+    102660,
+    106892,
+    109240,
+    104628,
+    105726
+   ]
+  }
+ },
+ "storage": {
+  "narrow": {
+   "buffering": {
+    "moscoviense": {
+     "head_m": 17.68,
+     "years": 6.41
+    },
+    "orientale": {
+     "head_m": 12.25,
+     "years": 4.71
+    },
+    "smythii_marginis": {
+     "head_m": 15.01,
+     "years": 6.31
+    },
+    "lakes_passing_on_the_threshold": {
+     "count": 1710,
+     "over_a_year": 149,
+     "over_a_tenth_of_a_year": 565,
+     "median_years": 0.0188,
+     "longest": [
+      {
+       "at": {
+        "today": [
+         -50.22,
+         131.59
+        ],
+        "turned": [
+         -48.86,
+         137.48
+        ]
+       },
+       "area_km2": 93188,
+       "outflow_m3s": 621,
+       "head_m": 4.12,
+       "years": 13.05
+      },
+      {
+       "at": {
+        "today": [
+         33.66,
+         -169.97
+        ],
+        "turned": [
+         39.76,
+         -173.92
+        ]
+       },
+       "area_km2": 21997,
+       "outflow_m3s": 129,
+       "head_m": 2.44,
+       "years": 8.79
+      },
+      {
+       "at": {
+        "today": [
+         -15.16,
+         80.59
+        ],
+        "turned": [
+         -19.69,
+         80.3
+        ]
+       },
+       "area_km2": 45971,
+       "outflow_m3s": 403,
+       "head_m": 3.56,
+       "years": 8.59
+      },
+      {
+       "at": {
+        "today": [
+         47.41,
+         -174.09
+        ],
+        "turned": [
+         53.24,
+         -179.99
+        ]
+       },
+       "area_km2": 39678,
+       "outflow_m3s": 393,
+       "head_m": 3.53,
+       "years": 7.54
+      },
+      {
+       "at": {
+        "today": [
+         -20.09,
+         106.47
+        ],
+        "turned": [
+         -21.96,
+         107.1
+        ]
+       },
+       "area_km2": 18469,
+       "outflow_m3s": 135,
+       "head_m": 2.48,
+       "years": 7.16
+      },
+      {
+       "at": {
+        "today": [
+         -16.34,
+         -149.28
+        ],
+        "turned": [
+         -9.63,
+         -151.05
+        ]
+       },
+       "area_km2": 29387,
+       "outflow_m3s": 291,
+       "head_m": 3.2,
+       "years": 6.82
+      },
+      {
+       "at": {
+        "today": [
+         7.03,
+         102.16
+        ],
+        "turned": [
+         4.52,
+         99.68
+        ]
+       },
+       "area_km2": 23744,
+       "outflow_m3s": 216,
+       "head_m": 2.9,
+       "years": 6.72
+      },
+      {
+       "at": {
+        "today": [
+         -12.16,
+         66.09
+        ],
+        "turned": [
+         -17.81,
+         65.22
+        ]
+       },
+       "area_km2": 47411,
+       "outflow_m3s": 652,
+       "head_m": 4.18,
+       "years": 6.43
+      },
+      {
+       "at": {
+        "today": [
+         -13.28,
+         116.78
+        ],
+        "turned": [
+         -14.01,
+         116.56
+        ]
+       },
+       "area_km2": 19372,
+       "outflow_m3s": 172,
+       "head_m": 2.69,
+       "years": 6.38
+      },
+      {
+       "at": {
+        "today": [
+         5.66,
+         -109.59
+        ],
+        "turned": [
+         11.03,
+         -110.85
+        ]
+       },
+       "area_km2": 19473,
+       "outflow_m3s": 191,
+       "head_m": 2.78,
+       "years": 5.99
+      }
+     ]
+    }
+   },
+   "seconds_a_year": 7.5,
+   "largest_change_of_a_lake_outflow_m3s": 0.0,
+   "outflows_m3s": {
+    "moscoviense": [
+     49204.6,
+     49204.6
+    ],
+    "orientale": [
+     16367.4,
+     16367.4
+    ],
+    "smythii_marginis": [
+     30093.9,
+     30093.9
+    ]
+   }
+  },
+  "wide": {
+   "buffering": {
+    "moscoviense": {
+     "head_m": 6.05,
+     "years": 2.19
+    },
+    "orientale": {
+     "head_m": 4.19,
+     "years": 1.61
+    },
+    "smythii_marginis": {
+     "head_m": 5.13,
+     "years": 2.16
+    },
+    "lakes_passing_on_the_threshold": {
+     "count": 1710,
+     "over_a_year": 45,
+     "over_a_tenth_of_a_year": 363,
+     "median_years": 0.0064,
+     "longest": [
+      {
+       "at": {
+        "today": [
+         -50.22,
+         131.59
+        ],
+        "turned": [
+         -48.86,
+         137.48
+        ]
+       },
+       "area_km2": 93188,
+       "outflow_m3s": 621,
+       "head_m": 1.41,
+       "years": 4.46
+      },
+      {
+       "at": {
+        "today": [
+         33.66,
+         -169.97
+        ],
+        "turned": [
+         39.76,
+         -173.92
+        ]
+       },
+       "area_km2": 21997,
+       "outflow_m3s": 129,
+       "head_m": 0.83,
+       "years": 3.01
+      },
+      {
+       "at": {
+        "today": [
+         -15.16,
+         80.59
+        ],
+        "turned": [
+         -19.69,
+         80.3
+        ]
+       },
+       "area_km2": 45971,
+       "outflow_m3s": 403,
+       "head_m": 1.22,
+       "years": 2.94
+      },
+      {
+       "at": {
+        "today": [
+         47.41,
+         -174.09
+        ],
+        "turned": [
+         53.24,
+         -179.99
+        ]
+       },
+       "area_km2": 39678,
+       "outflow_m3s": 393,
+       "head_m": 1.21,
+       "years": 2.58
+      },
+      {
+       "at": {
+        "today": [
+         -20.09,
+         106.47
+        ],
+        "turned": [
+         -21.96,
+         107.1
+        ]
+       },
+       "area_km2": 18469,
+       "outflow_m3s": 135,
+       "head_m": 0.85,
+       "years": 2.45
+      },
+      {
+       "at": {
+        "today": [
+         -16.34,
+         -149.28
+        ],
+        "turned": [
+         -9.63,
+         -151.05
+        ]
+       },
+       "area_km2": 29387,
+       "outflow_m3s": 291,
+       "head_m": 1.09,
+       "years": 2.33
+      },
+      {
+       "at": {
+        "today": [
+         7.03,
+         102.16
+        ],
+        "turned": [
+         4.52,
+         99.68
+        ]
+       },
+       "area_km2": 23744,
+       "outflow_m3s": 216,
+       "head_m": 0.99,
+       "years": 2.3
+      },
+      {
+       "at": {
+        "today": [
+         -12.16,
+         66.09
+        ],
+        "turned": [
+         -17.81,
+         65.22
+        ]
+       },
+       "area_km2": 47411,
+       "outflow_m3s": 652,
+       "head_m": 1.43,
+       "years": 2.2
+      },
+      {
+       "at": {
+        "today": [
+         -13.28,
+         116.78
+        ],
+        "turned": [
+         -14.01,
+         116.56
+        ]
+       },
+       "area_km2": 19372,
+       "outflow_m3s": 172,
+       "head_m": 0.92,
+       "years": 2.18
+      },
+      {
+       "at": {
+        "today": [
+         5.66,
+         -109.59
+        ],
+        "turned": [
+         11.03,
+         -110.85
+        ]
+       },
+       "area_km2": 19473,
+       "outflow_m3s": 191,
+       "head_m": 0.95,
+       "years": 2.05
+      }
+     ]
+    }
+   },
+   "seconds_a_year": 8.7,
+   "largest_change_of_a_lake_outflow_m3s": 0.001,
+   "outflows_m3s": {
+    "moscoviense": [
+     49204.6,
+     49204.6
+    ],
+    "orientale": [
+     16367.4,
+     16367.4
+    ],
+    "smythii_marginis": [
+     30093.9,
+     30093.9
+    ]
+   }
+  }
+ },
+ "years": {
+  "none": [
+   {
+    "year": 45,
+    "supply_m3s": {
+     "moscoviense": 52268.4,
+     "orientale": 18182.7,
+     "smythii_marginis": 30748.0,
+     "south_pole_aitken": 52369.0,
+     "humboldtianum": 6307.2,
+     "near_side_main": 76133.8,
+     "near_side_south": 5801.2
+    },
+    "loss_m3s": {
+     "moscoviense": 4069.3,
+     "orientale": 1919.8,
+     "smythii_marginis": 808.8,
+     "south_pole_aitken": 49940.3,
+     "humboldtianum": 6176.4,
+     "near_side_main": 69139.7,
+     "near_side_south": 16755.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 48199.1,
+     "orientale": 16262.9,
+     "smythii_marginis": 29939.2
+    },
+    "rivers_into_the_seas_m3s": 240477.6
+   },
+   {
+    "year": 46,
+    "supply_m3s": {
+     "moscoviense": 54088.3,
+     "orientale": 19557.1,
+     "smythii_marginis": 30199.5,
+     "south_pole_aitken": 53594.8,
+     "humboldtianum": 5884.3,
+     "near_side_main": 74977.7,
+     "near_side_south": 6687.9
+    },
+    "loss_m3s": {
+     "moscoviense": 6425.5,
+     "orientale": 1814.1,
+     "smythii_marginis": 983.6,
+     "south_pole_aitken": 50228.0,
+     "humboldtianum": 6195.9,
+     "near_side_main": 70485.6,
+     "near_side_south": 15541.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 47662.8,
+     "orientale": 17743.0,
+     "smythii_marginis": 29215.9
+    },
+    "rivers_into_the_seas_m3s": 243591.6
+   },
+   {
+    "year": 47,
+    "supply_m3s": {
+     "moscoviense": 55005.4,
+     "orientale": 17282.6,
+     "smythii_marginis": 29196.4,
+     "south_pole_aitken": 58414.5,
+     "humboldtianum": 6715.7,
+     "near_side_main": 74196.8,
+     "near_side_south": 5861.7
+    },
+    "loss_m3s": {
+     "moscoviense": 2727.3,
+     "orientale": 1973.9,
+     "smythii_marginis": 371.7,
+     "south_pole_aitken": 50540.9,
+     "humboldtianum": 6348.3,
+     "near_side_main": 68723.2,
+     "near_side_south": 13819.1
+    },
+    "outflow_m3s": {
+     "moscoviense": 52278.1,
+     "orientale": 15308.7,
+     "smythii_marginis": 28824.7
+    },
+    "rivers_into_the_seas_m3s": 245251.7
+   },
+   {
+    "year": 48,
+    "supply_m3s": {
+     "moscoviense": 57574.2,
+     "orientale": 18490.2,
+     "smythii_marginis": 33072.4,
+     "south_pole_aitken": 54332.0,
+     "humboldtianum": 7114.9,
+     "near_side_main": 80969.4,
+     "near_side_south": 8332.6
+    },
+    "loss_m3s": {
+     "moscoviense": 2558.2,
+     "orientale": 2024.1,
+     "smythii_marginis": 1744.5,
+     "south_pole_aitken": 51131.0,
+     "humboldtianum": 6088.8,
+     "near_side_main": 66948.0,
+     "near_side_south": 16249.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 55016.0,
+     "orientale": 16466.0,
+     "smythii_marginis": 31327.8
+    },
+    "rivers_into_the_seas_m3s": 258531.0
+   },
+   {
+    "year": 49,
+    "supply_m3s": {
+     "moscoviense": 53466.5,
+     "orientale": 17613.6,
+     "smythii_marginis": 31678.4,
+     "south_pole_aitken": 54015.6,
+     "humboldtianum": 6283.3,
+     "near_side_main": 79614.4,
+     "near_side_south": 5650.5
+    },
+    "loss_m3s": {
+     "moscoviense": 2965.2,
+     "orientale": 2100.4,
+     "smythii_marginis": -674.5,
+     "south_pole_aitken": 50951.6,
+     "humboldtianum": 6279.8,
+     "near_side_main": 68256.9,
+     "near_side_south": 16165.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 50501.3,
+     "orientale": 15513.2,
+     "smythii_marginis": 32352.9
+    },
+    "rivers_into_the_seas_m3s": 246704.1
+   },
+   {
+    "year": 50,
+    "supply_m3s": {
+     "moscoviense": 55077.1,
+     "orientale": 17501.1,
+     "smythii_marginis": 31671.0,
+     "south_pole_aitken": 53670.3,
+     "humboldtianum": 6527.3,
+     "near_side_main": 77557.2,
+     "near_side_south": 6546.6
+    },
+    "loss_m3s": {
+     "moscoviense": 3110.6,
+     "orientale": 3163.3,
+     "smythii_marginis": 1584.5,
+     "south_pole_aitken": 50528.3,
+     "humboldtianum": 6235.9,
+     "near_side_main": 66605.1,
+     "near_side_south": 15988.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 51966.4,
+     "orientale": 14337.8,
+     "smythii_marginis": 30086.5
+    },
+    "rivers_into_the_seas_m3s": 247164.6
+   },
+   {
+    "year": 51,
+    "supply_m3s": {
+     "moscoviense": 54987.5,
+     "orientale": 17459.6,
+     "smythii_marginis": 31330.5,
+     "south_pole_aitken": 53163.7,
+     "humboldtianum": 6708.9,
+     "near_side_main": 78562.3,
+     "near_side_south": 5629.6
+    },
+    "loss_m3s": {
+     "moscoviense": 3317.8,
+     "orientale": 2511.0,
+     "smythii_marginis": 884.0,
+     "south_pole_aitken": 50318.2,
+     "humboldtianum": 6520.2,
+     "near_side_main": 68880.5,
+     "near_side_south": 17258.0
+    },
+    "outflow_m3s": {
+     "moscoviense": 51669.8,
+     "orientale": 14948.6,
+     "smythii_marginis": 30446.4
+    },
+    "rivers_into_the_seas_m3s": 246557.1
+   },
+   {
+    "year": 52,
+    "supply_m3s": {
+     "moscoviense": 52499.7,
+     "orientale": 19607.2,
+     "smythii_marginis": 30375.2,
+     "south_pole_aitken": 50894.2,
+     "humboldtianum": 6534.0,
+     "near_side_main": 81403.5,
+     "near_side_south": 6393.9
+    },
+    "loss_m3s": {
+     "moscoviense": 3184.2,
+     "orientale": 2118.1,
+     "smythii_marginis": 644.7,
+     "south_pole_aitken": 52462.9,
+     "humboldtianum": 6387.0,
+     "near_side_main": 70016.5,
+     "near_side_south": 15006.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 49315.5,
+     "orientale": 17489.1,
+     "smythii_marginis": 29730.4
+    },
+    "rivers_into_the_seas_m3s": 246226.5
+   },
+   {
+    "year": 53,
+    "supply_m3s": {
+     "moscoviense": 50646.4,
+     "orientale": 19105.0,
+     "smythii_marginis": 29233.4,
+     "south_pole_aitken": 49308.1,
+     "humboldtianum": 5879.5,
+     "near_side_main": 78993.5,
+     "near_side_south": 4440.0
+    },
+    "loss_m3s": {
+     "moscoviense": 4801.8,
+     "orientale": 2288.9,
+     "smythii_marginis": 1375.1,
+     "south_pole_aitken": 53142.6,
+     "humboldtianum": 6240.6,
+     "near_side_main": 68948.0,
+     "near_side_south": 15655.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 45844.6,
+     "orientale": 16816.2,
+     "smythii_marginis": 27858.3
+    },
+    "rivers_into_the_seas_m3s": 236120.2
+   },
+   {
+    "year": 54,
+    "supply_m3s": {
+     "moscoviense": 52074.2,
+     "orientale": 19460.7,
+     "smythii_marginis": 31398.0,
+     "south_pole_aitken": 51547.6,
+     "humboldtianum": 6324.5,
+     "near_side_main": 82053.9,
+     "near_side_south": 5566.1
+    },
+    "loss_m3s": {
+     "moscoviense": 4305.3,
+     "orientale": 1564.4,
+     "smythii_marginis": 1536.4,
+     "south_pole_aitken": 52782.4,
+     "humboldtianum": 6084.3,
+     "near_side_main": 70349.1,
+     "near_side_south": 15103.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 47768.9,
+     "orientale": 17896.3,
+     "smythii_marginis": 29861.6
+    },
+    "rivers_into_the_seas_m3s": 246987.2
+   },
+   {
+    "year": 55,
+    "supply_m3s": {
+     "moscoviense": 51398.8,
+     "orientale": 21849.5,
+     "smythii_marginis": 31188.6,
+     "south_pole_aitken": 48961.3,
+     "humboldtianum": 5816.4,
+     "near_side_main": 82865.5,
+     "near_side_south": 6521.9
+    },
+    "loss_m3s": {
+     "moscoviense": 4073.0,
+     "orientale": 1843.2,
+     "smythii_marginis": 676.2,
+     "south_pole_aitken": 52652.9,
+     "humboldtianum": 6476.0,
+     "near_side_main": 65099.1,
+     "near_side_south": 13937.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 47325.9,
+     "orientale": 20006.3,
+     "smythii_marginis": 30512.4
+    },
+    "rivers_into_the_seas_m3s": 247210.5
+   },
+   {
+    "year": 56,
+    "supply_m3s": {
+     "moscoviense": 54381.7,
+     "orientale": 18470.3,
+     "smythii_marginis": 32750.0,
+     "south_pole_aitken": 51018.7,
+     "humboldtianum": 6658.4,
+     "near_side_main": 81377.7,
+     "near_side_south": 6993.2
+    },
+    "loss_m3s": {
+     "moscoviense": 2216.6,
+     "orientale": 2015.3,
+     "smythii_marginis": 1057.0,
+     "south_pole_aitken": 51231.4,
+     "humboldtianum": 6074.9,
+     "near_side_main": 69836.8,
+     "near_side_south": 14481.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 52165.2,
+     "orientale": 16455.0,
+     "smythii_marginis": 31693.0
+    },
+    "rivers_into_the_seas_m3s": 249880.8
+   },
+   {
+    "year": 57,
+    "supply_m3s": {
+     "moscoviense": 54215.5,
+     "orientale": 16734.2,
+     "smythii_marginis": 33412.3,
+     "south_pole_aitken": 50376.0,
+     "humboldtianum": 6475.7,
+     "near_side_main": 81621.1,
+     "near_side_south": 7136.1
+    },
+    "loss_m3s": {
+     "moscoviense": 2374.0,
+     "orientale": 2929.7,
+     "smythii_marginis": 786.9,
+     "south_pole_aitken": 52291.3,
+     "humboldtianum": 6156.1,
+     "near_side_main": 67313.7,
+     "near_side_south": 15176.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 51841.5,
+     "orientale": 13804.5,
+     "smythii_marginis": 32625.4
+    },
+    "rivers_into_the_seas_m3s": 248291.6
+   },
+   {
+    "year": 58,
+    "supply_m3s": {
+     "moscoviense": 50347.9,
+     "orientale": 19354.7,
+     "smythii_marginis": 32650.4,
+     "south_pole_aitken": 48899.6,
+     "humboldtianum": 6048.2,
+     "near_side_main": 81144.3,
+     "near_side_south": 5218.2
+    },
+    "loss_m3s": {
+     "moscoviense": 2821.7,
+     "orientale": 2347.8,
+     "smythii_marginis": 292.7,
+     "south_pole_aitken": 53829.4,
+     "humboldtianum": 6282.5,
+     "near_side_main": 68752.3,
+     "near_side_south": 15384.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 47526.2,
+     "orientale": 17006.9,
+     "smythii_marginis": 32357.7
+    },
+    "rivers_into_the_seas_m3s": 242184.0
+   },
+   {
+    "year": 59,
+    "supply_m3s": {
+     "moscoviense": 47699.8,
+     "orientale": 19700.9,
+     "smythii_marginis": 30488.8,
+     "south_pole_aitken": 48137.6,
+     "humboldtianum": 5419.1,
+     "near_side_main": 81119.7,
+     "near_side_south": 5495.1
+    },
+    "loss_m3s": {
+     "moscoviense": 4310.4,
+     "orientale": 2246.8,
+     "smythii_marginis": -58.3,
+     "south_pole_aitken": 51429.8,
+     "humboldtianum": 6018.1,
+     "near_side_main": 63771.0,
+     "near_side_south": 13997.7
+    },
+    "outflow_m3s": {
+     "moscoviense": 43389.4,
+     "orientale": 17454.1,
+     "smythii_marginis": 30547.1
+    },
+    "rivers_into_the_seas_m3s": 236563.2
+   }
+  ],
+  "narrow": [
+   {
+    "year": 45,
+    "supply_m3s": {
+     "moscoviense": 51985.1,
+     "orientale": 18611.7,
+     "smythii_marginis": 30891.8,
+     "south_pole_aitken": 51508.9,
+     "humboldtianum": 6257.8,
+     "near_side_main": 76709.1,
+     "near_side_south": 5595.0
+    },
+    "loss_m3s": {
+     "moscoviense": 4069.3,
+     "orientale": 1919.8,
+     "smythii_marginis": 808.8,
+     "south_pole_aitken": 49940.3,
+     "humboldtianum": 6176.4,
+     "near_side_main": 69139.7,
+     "near_side_south": 16755.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 49119.2,
+     "orientale": 16401.6,
+     "smythii_marginis": 30094.5
+    },
+    "rivers_into_the_seas_m3s": 240212.2
+   },
+   {
+    "year": 46,
+    "supply_m3s": {
+     "moscoviense": 51517.1,
+     "orientale": 18563.7,
+     "smythii_marginis": 30589.9,
+     "south_pole_aitken": 51866.3,
+     "humboldtianum": 6297.8,
+     "near_side_main": 75596.2,
+     "near_side_south": 6072.9
+    },
+    "loss_m3s": {
+     "moscoviense": 6425.5,
+     "orientale": 1814.1,
+     "smythii_marginis": 983.6,
+     "south_pole_aitken": 50228.0,
+     "humboldtianum": 6195.9,
+     "near_side_main": 70485.6,
+     "near_side_south": 15541.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 48704.3,
+     "orientale": 16462.7,
+     "smythii_marginis": 30061.4
+    },
+    "rivers_into_the_seas_m3s": 239127.3
+   },
+   {
+    "year": 47,
+    "supply_m3s": {
+     "moscoviense": 53986.5,
+     "orientale": 17942.1,
+     "smythii_marginis": 30230.4,
+     "south_pole_aitken": 53499.2,
+     "humboldtianum": 6269.3,
+     "near_side_main": 74625.9,
+     "near_side_south": 6359.5
+    },
+    "loss_m3s": {
+     "moscoviense": 2727.3,
+     "orientale": 1973.9,
+     "smythii_marginis": 371.7,
+     "south_pole_aitken": 50540.9,
+     "humboldtianum": 6348.3,
+     "near_side_main": 68723.2,
+     "near_side_south": 13819.1
+    },
+    "outflow_m3s": {
+     "moscoviense": 48644.6,
+     "orientale": 16441.7,
+     "smythii_marginis": 30012.9
+    },
+    "rivers_into_the_seas_m3s": 241574.6
+   },
+   {
+    "year": 48,
+    "supply_m3s": {
+     "moscoviense": 55415.2,
+     "orientale": 18215.4,
+     "smythii_marginis": 29410.1,
+     "south_pole_aitken": 53758.9,
+     "humboldtianum": 6167.3,
+     "near_side_main": 76708.7,
+     "near_side_south": 7052.5
+    },
+    "loss_m3s": {
+     "moscoviense": 2558.2,
+     "orientale": 2024.1,
+     "smythii_marginis": 1744.5,
+     "south_pole_aitken": 51131.0,
+     "humboldtianum": 6088.8,
+     "near_side_main": 66948.0,
+     "near_side_south": 16249.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 49156.7,
+     "orientale": 16367.4,
+     "smythii_marginis": 29816.9
+    },
+    "rivers_into_the_seas_m3s": 245358.7
+   },
+   {
+    "year": 49,
+    "supply_m3s": {
+     "moscoviense": 55079.8,
+     "orientale": 18249.5,
+     "smythii_marginis": 30371.8,
+     "south_pole_aitken": 53452.7,
+     "humboldtianum": 6102.3,
+     "near_side_main": 77320.6,
+     "near_side_south": 6520.9
+    },
+    "loss_m3s": {
+     "moscoviense": 2965.2,
+     "orientale": 2100.4,
+     "smythii_marginis": -674.5,
+     "south_pole_aitken": 50951.6,
+     "humboldtianum": 6279.8,
+     "near_side_main": 68256.9,
+     "near_side_south": 16165.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 49659.8,
+     "orientale": 16332.2,
+     "smythii_marginis": 29752.4
+    },
+    "rivers_into_the_seas_m3s": 245601.9
+   },
+   {
+    "year": 50,
+    "supply_m3s": {
+     "moscoviense": 55003.3,
+     "orientale": 17766.4,
+     "smythii_marginis": 30886.8,
+     "south_pole_aitken": 53489.2,
+     "humboldtianum": 6126.6,
+     "near_side_main": 77108.0,
+     "near_side_south": 6374.6
+    },
+    "loss_m3s": {
+     "moscoviense": 3110.6,
+     "orientale": 3163.3,
+     "smythii_marginis": 1584.5,
+     "south_pole_aitken": 50528.3,
+     "humboldtianum": 6235.9,
+     "near_side_main": 66605.1,
+     "near_side_south": 15988.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 49974.5,
+     "orientale": 16137.0,
+     "smythii_marginis": 29807.7
+    },
+    "rivers_into_the_seas_m3s": 245296.6
+   },
+   {
+    "year": 51,
+    "supply_m3s": {
+     "moscoviense": 54477.0,
+     "orientale": 17907.7,
+     "smythii_marginis": 31058.8,
+     "south_pole_aitken": 53325.0,
+     "humboldtianum": 6143.9,
+     "near_side_main": 76909.9,
+     "near_side_south": 6011.0
+    },
+    "loss_m3s": {
+     "moscoviense": 3317.8,
+     "orientale": 2511.0,
+     "smythii_marginis": 884.0,
+     "south_pole_aitken": 50318.2,
+     "humboldtianum": 6520.2,
+     "near_side_main": 68880.5,
+     "near_side_south": 17258.0
+    },
+    "outflow_m3s": {
+     "moscoviense": 50220.9,
+     "orientale": 15935.7,
+     "smythii_marginis": 29810.7
+    },
+    "rivers_into_the_seas_m3s": 244450.3
+   },
+   {
+    "year": 52,
+    "supply_m3s": {
+     "moscoviense": 54038.4,
+     "orientale": 17863.6,
+     "smythii_marginis": 31325.7,
+     "south_pole_aitken": 53028.0,
+     "humboldtianum": 6223.2,
+     "near_side_main": 78670.8,
+     "near_side_south": 6397.7
+    },
+    "loss_m3s": {
+     "moscoviense": 3184.2,
+     "orientale": 2118.1,
+     "smythii_marginis": 644.7,
+     "south_pole_aitken": 52462.9,
+     "humboldtianum": 6387.0,
+     "near_side_main": 70016.5,
+     "near_side_south": 15006.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 50315.5,
+     "orientale": 15856.1,
+     "smythii_marginis": 29898.4
+    },
+    "rivers_into_the_seas_m3s": 246141.4
+   },
+   {
+    "year": 53,
+    "supply_m3s": {
+     "moscoviense": 53259.2,
+     "orientale": 19165.3,
+     "smythii_marginis": 31561.9,
+     "south_pole_aitken": 53132.6,
+     "humboldtianum": 6455.0,
+     "near_side_main": 79473.5,
+     "near_side_south": 5807.5
+    },
+    "loss_m3s": {
+     "moscoviense": 4801.8,
+     "orientale": 2288.9,
+     "smythii_marginis": 1375.1,
+     "south_pole_aitken": 53142.6,
+     "humboldtianum": 6240.6,
+     "near_side_main": 68948.0,
+     "near_side_south": 15655.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 50220.1,
+     "orientale": 15939.0,
+     "smythii_marginis": 29976.6
+    },
+    "rivers_into_the_seas_m3s": 247299.3
+   },
+   {
+    "year": 54,
+    "supply_m3s": {
+     "moscoviense": 52870.7,
+     "orientale": 19258.4,
+     "smythii_marginis": 31857.2,
+     "south_pole_aitken": 52497.8,
+     "humboldtianum": 6658.9,
+     "near_side_main": 78343.9,
+     "near_side_south": 5399.3
+    },
+    "loss_m3s": {
+     "moscoviense": 4305.3,
+     "orientale": 1564.4,
+     "smythii_marginis": 1536.4,
+     "south_pole_aitken": 52782.4,
+     "humboldtianum": 6084.3,
+     "near_side_main": 70349.1,
+     "near_side_south": 15103.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 49963.4,
+     "orientale": 16225.7,
+     "smythii_marginis": 30019.0
+    },
+    "rivers_into_the_seas_m3s": 245447.0
+   },
+   {
+    "year": 55,
+    "supply_m3s": {
+     "moscoviense": 52098.6,
+     "orientale": 19741.4,
+     "smythii_marginis": 31787.7,
+     "south_pole_aitken": 51186.9,
+     "humboldtianum": 6683.2,
+     "near_side_main": 78685.8,
+     "near_side_south": 5896.3
+    },
+    "loss_m3s": {
+     "moscoviense": 4073.0,
+     "orientale": 1843.2,
+     "smythii_marginis": 676.2,
+     "south_pole_aitken": 52652.9,
+     "humboldtianum": 6476.0,
+     "near_side_main": 65099.1,
+     "near_side_south": 13937.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 49724.7,
+     "orientale": 16504.2,
+     "smythii_marginis": 30132.5
+    },
+    "rivers_into_the_seas_m3s": 244648.6
+   },
+   {
+    "year": 56,
+    "supply_m3s": {
+     "moscoviense": 52008.5,
+     "orientale": 19052.3,
+     "smythii_marginis": 31271.9,
+     "south_pole_aitken": 50766.4,
+     "humboldtianum": 6520.2,
+     "near_side_main": 81076.9,
+     "near_side_south": 6208.4
+    },
+    "loss_m3s": {
+     "moscoviense": 2216.6,
+     "orientale": 2015.3,
+     "smythii_marginis": 1057.0,
+     "south_pole_aitken": 51231.4,
+     "humboldtianum": 6074.9,
+     "near_side_main": 69836.8,
+     "near_side_south": 14481.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 49609.4,
+     "orientale": 16712.3,
+     "smythii_marginis": 30201.6
+    },
+    "rivers_into_the_seas_m3s": 245326.3
+   },
+   {
+    "year": 57,
+    "supply_m3s": {
+     "moscoviense": 52680.5,
+     "orientale": 18176.4,
+     "smythii_marginis": 31238.5,
+     "south_pole_aitken": 50565.1,
+     "humboldtianum": 6343.4,
+     "near_side_main": 81027.5,
+     "near_side_south": 6619.3
+    },
+    "loss_m3s": {
+     "moscoviense": 2374.0,
+     "orientale": 2929.7,
+     "smythii_marginis": 786.9,
+     "south_pole_aitken": 52291.3,
+     "humboldtianum": 6156.1,
+     "near_side_main": 67313.7,
+     "near_side_south": 15176.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 49665.0,
+     "orientale": 16577.5,
+     "smythii_marginis": 30212.9
+    },
+    "rivers_into_the_seas_m3s": 245023.0
+   },
+   {
+    "year": 58,
+    "supply_m3s": {
+     "moscoviense": 53152.6,
+     "orientale": 19204.2,
+     "smythii_marginis": 31685.2,
+     "south_pole_aitken": 49903.9,
+     "humboldtianum": 6280.1,
+     "near_side_main": 79189.1,
+     "near_side_south": 6253.9
+    },
+    "loss_m3s": {
+     "moscoviense": 2821.7,
+     "orientale": 2347.8,
+     "smythii_marginis": 292.7,
+     "south_pole_aitken": 53829.4,
+     "humboldtianum": 6282.5,
+     "near_side_main": 68752.3,
+     "near_side_south": 15384.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 49762.3,
+     "orientale": 16471.1,
+     "smythii_marginis": 30329.1
+    },
+    "rivers_into_the_seas_m3s": 244126.7
+   },
+   {
+    "year": 59,
+    "supply_m3s": {
+     "moscoviense": 51820.9,
+     "orientale": 19148.6,
+     "smythii_marginis": 32379.2,
+     "south_pole_aitken": 49202.0,
+     "humboldtianum": 6334.2,
+     "near_side_main": 80016.8,
+     "near_side_south": 5735.6
+    },
+    "loss_m3s": {
+     "moscoviense": 4310.4,
+     "orientale": 2246.8,
+     "smythii_marginis": -58.3,
+     "south_pole_aitken": 51429.8,
+     "humboldtianum": 6018.1,
+     "near_side_main": 63771.0,
+     "near_side_south": 13997.7
+    },
+    "outflow_m3s": {
+     "moscoviense": 49666.4,
+     "orientale": 16569.0,
+     "smythii_marginis": 30552.4
+    },
+    "rivers_into_the_seas_m3s": 243123.1
+   }
+  ],
+  "wide": [
+   {
+    "year": 45,
+    "supply_m3s": {
+     "moscoviense": 51643.9,
+     "orientale": 18591.1,
+     "smythii_marginis": 30774.8,
+     "south_pole_aitken": 51963.3,
+     "humboldtianum": 6316.4,
+     "near_side_main": 76546.1,
+     "near_side_south": 5621.1
+    },
+    "loss_m3s": {
+     "moscoviense": 4069.3,
+     "orientale": 1919.8,
+     "smythii_marginis": 808.8,
+     "south_pole_aitken": 49940.3,
+     "humboldtianum": 6176.4,
+     "near_side_main": 69139.7,
+     "near_side_south": 16755.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 48897.0,
+     "orientale": 16449.2,
+     "smythii_marginis": 30076.0
+    },
+    "rivers_into_the_seas_m3s": 240131.9
+   },
+   {
+    "year": 46,
+    "supply_m3s": {
+     "moscoviense": 52548.0,
+     "orientale": 18453.9,
+     "smythii_marginis": 30279.0,
+     "south_pole_aitken": 52584.6,
+     "humboldtianum": 6245.3,
+     "near_side_main": 74767.9,
+     "near_side_south": 6357.5
+    },
+    "loss_m3s": {
+     "moscoviense": 6425.5,
+     "orientale": 1814.1,
+     "smythii_marginis": 983.6,
+     "south_pole_aitken": 50228.0,
+     "humboldtianum": 6195.9,
+     "near_side_main": 70485.6,
+     "near_side_south": 15541.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 48026.1,
+     "orientale": 16544.0,
+     "smythii_marginis": 29908.9
+    },
+    "rivers_into_the_seas_m3s": 239858.1
+   },
+   {
+    "year": 47,
+    "supply_m3s": {
+     "moscoviense": 55283.0,
+     "orientale": 18016.1,
+     "smythii_marginis": 29681.8,
+     "south_pole_aitken": 54641.3,
+     "humboldtianum": 6013.8,
+     "near_side_main": 74043.0,
+     "near_side_south": 6376.1
+    },
+    "loss_m3s": {
+     "moscoviense": 2727.3,
+     "orientale": 1973.9,
+     "smythii_marginis": 371.7,
+     "south_pole_aitken": 50540.9,
+     "humboldtianum": 6348.3,
+     "near_side_main": 68723.2,
+     "near_side_south": 13819.1
+    },
+    "outflow_m3s": {
+     "moscoviense": 48698.4,
+     "orientale": 16426.8,
+     "smythii_marginis": 29695.3
+    },
+    "rivers_into_the_seas_m3s": 242674.5
+   },
+   {
+    "year": 48,
+    "supply_m3s": {
+     "moscoviense": 56510.8,
+     "orientale": 18223.2,
+     "smythii_marginis": 29576.5,
+     "south_pole_aitken": 54339.1,
+     "humboldtianum": 6169.4,
+     "near_side_main": 77300.6,
+     "near_side_south": 7379.3
+    },
+    "loss_m3s": {
+     "moscoviense": 2558.2,
+     "orientale": 2024.1,
+     "smythii_marginis": 1744.5,
+     "south_pole_aitken": 51131.0,
+     "humboldtianum": 6088.8,
+     "near_side_main": 66948.0,
+     "near_side_south": 16249.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 50354.9,
+     "orientale": 16299.9,
+     "smythii_marginis": 29174.0
+    },
+    "rivers_into_the_seas_m3s": 248087.9
+   },
+   {
+    "year": 49,
+    "supply_m3s": {
+     "moscoviense": 55060.3,
+     "orientale": 18177.5,
+     "smythii_marginis": 31942.6,
+     "south_pole_aitken": 54419.5,
+     "humboldtianum": 6387.4,
+     "near_side_main": 77402.2,
+     "near_side_south": 6358.8
+    },
+    "loss_m3s": {
+     "moscoviense": 2965.2,
+     "orientale": 2100.4,
+     "smythii_marginis": -674.5,
+     "south_pole_aitken": 50951.6,
+     "humboldtianum": 6279.8,
+     "near_side_main": 68256.9,
+     "near_side_south": 16165.5
+    },
+    "outflow_m3s": {
+     "moscoviense": 51422.5,
+     "orientale": 16222.6,
+     "smythii_marginis": 29673.6
+    },
+    "rivers_into_the_seas_m3s": 248196.5
+   },
+   {
+    "year": 50,
+    "supply_m3s": {
+     "moscoviense": 54881.0,
+     "orientale": 17711.3,
+     "smythii_marginis": 31725.1,
+     "south_pole_aitken": 54081.6,
+     "humboldtianum": 6442.5,
+     "near_side_main": 77644.5,
+     "near_side_south": 6405.7
+    },
+    "loss_m3s": {
+     "moscoviense": 3110.6,
+     "orientale": 3163.3,
+     "smythii_marginis": 1584.5,
+     "south_pole_aitken": 50528.3,
+     "humboldtianum": 6235.9,
+     "near_side_main": 66605.1,
+     "near_side_south": 15988.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 51501.9,
+     "orientale": 15744.1,
+     "smythii_marginis": 30303.9
+    },
+    "rivers_into_the_seas_m3s": 247485.6
+   },
+   {
+    "year": 51,
+    "supply_m3s": {
+     "moscoviense": 53914.6,
+     "orientale": 17596.6,
+     "smythii_marginis": 31370.1,
+     "south_pole_aitken": 53503.1,
+     "humboldtianum": 6475.2,
+     "near_side_main": 78714.6,
+     "near_side_south": 5837.0
+    },
+    "loss_m3s": {
+     "moscoviense": 3317.8,
+     "orientale": 2511.0,
+     "smythii_marginis": 884.0,
+     "south_pole_aitken": 50318.2,
+     "humboldtianum": 6520.2,
+     "near_side_main": 68880.5,
+     "near_side_south": 17258.0
+    },
+    "outflow_m3s": {
+     "moscoviense": 51392.0,
+     "orientale": 15364.9,
+     "smythii_marginis": 30290.6
+    },
+    "rivers_into_the_seas_m3s": 246091.7
+   },
+   {
+    "year": 52,
+    "supply_m3s": {
+     "moscoviense": 53983.2,
+     "orientale": 17930.9,
+     "smythii_marginis": 31732.9,
+     "south_pole_aitken": 53009.8,
+     "humboldtianum": 6704.1,
+     "near_side_main": 80150.2,
+     "near_side_south": 6453.6
+    },
+    "loss_m3s": {
+     "moscoviense": 3184.2,
+     "orientale": 2118.1,
+     "smythii_marginis": 644.7,
+     "south_pole_aitken": 52462.9,
+     "humboldtianum": 6387.0,
+     "near_side_main": 70016.5,
+     "near_side_south": 15006.8
+    },
+    "outflow_m3s": {
+     "moscoviense": 51159.2,
+     "orientale": 15379.6,
+     "smythii_marginis": 30482.6
+    },
+    "rivers_into_the_seas_m3s": 248519.0
+   },
+   {
+    "year": 53,
+    "supply_m3s": {
+     "moscoviense": 52063.7,
+     "orientale": 19689.0,
+     "smythii_marginis": 31279.9,
+     "south_pole_aitken": 51871.7,
+     "humboldtianum": 6806.7,
+     "near_side_main": 79594.8,
+     "near_side_south": 5217.0
+    },
+    "loss_m3s": {
+     "moscoviense": 4801.8,
+     "orientale": 2288.9,
+     "smythii_marginis": 1375.1,
+     "south_pole_aitken": 53142.6,
+     "humboldtianum": 6240.6,
+     "near_side_main": 68948.0,
+     "near_side_south": 15655.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 50328.8,
+     "orientale": 15995.5,
+     "smythii_marginis": 30494.3
+    },
+    "rivers_into_the_seas_m3s": 244972.6
+   },
+   {
+    "year": 54,
+    "supply_m3s": {
+     "moscoviense": 51793.8,
+     "orientale": 19077.5,
+     "smythii_marginis": 31315.7,
+     "south_pole_aitken": 50985.7,
+     "humboldtianum": 6648.1,
+     "near_side_main": 78379.7,
+     "near_side_south": 5066.1
+    },
+    "loss_m3s": {
+     "moscoviense": 4305.3,
+     "orientale": 1564.4,
+     "smythii_marginis": 1536.4,
+     "south_pole_aitken": 52782.4,
+     "humboldtianum": 6084.3,
+     "near_side_main": 70349.1,
+     "near_side_south": 15103.3
+    },
+    "outflow_m3s": {
+     "moscoviense": 49182.4,
+     "orientale": 16709.2,
+     "smythii_marginis": 30214.9
+    },
+    "rivers_into_the_seas_m3s": 241863.9
+   },
+   {
+    "year": 55,
+    "supply_m3s": {
+     "moscoviense": 51340.7,
+     "orientale": 20340.1,
+     "smythii_marginis": 31177.5,
+     "south_pole_aitken": 50195.8,
+     "humboldtianum": 6342.2,
+     "near_side_main": 79696.3,
+     "near_side_south": 6061.1
+    },
+    "loss_m3s": {
+     "moscoviense": 4073.0,
+     "orientale": 1843.2,
+     "smythii_marginis": 676.2,
+     "south_pole_aitken": 52652.9,
+     "humboldtianum": 6476.0,
+     "near_side_main": 65099.1,
+     "near_side_south": 13937.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 48551.4,
+     "orientale": 17261.5,
+     "smythii_marginis": 30232.4
+    },
+    "rivers_into_the_seas_m3s": 243745.9
+   },
+   {
+    "year": 56,
+    "supply_m3s": {
+     "moscoviense": 52238.5,
+     "orientale": 19303.5,
+     "smythii_marginis": 30877.1,
+     "south_pole_aitken": 49905.8,
+     "humboldtianum": 6070.7,
+     "near_side_main": 83243.5,
+     "near_side_south": 6567.5
+    },
+    "loss_m3s": {
+     "moscoviense": 2216.6,
+     "orientale": 2015.3,
+     "smythii_marginis": 1057.0,
+     "south_pole_aitken": 51231.4,
+     "humboldtianum": 6074.9,
+     "near_side_main": 69836.8,
+     "near_side_south": 14481.4
+    },
+    "outflow_m3s": {
+     "moscoviense": 48581.0,
+     "orientale": 17620.6,
+     "smythii_marginis": 30172.3
+    },
+    "rivers_into_the_seas_m3s": 246565.1
+   },
+   {
+    "year": 57,
+    "supply_m3s": {
+     "moscoviense": 53769.0,
+     "orientale": 18153.0,
+     "smythii_marginis": 31715.2,
+     "south_pole_aitken": 49739.8,
+     "humboldtianum": 6046.1,
+     "near_side_main": 81798.1,
+     "near_side_south": 7006.5
+    },
+    "loss_m3s": {
+     "moscoviense": 2374.0,
+     "orientale": 2929.7,
+     "smythii_marginis": 786.9,
+     "south_pole_aitken": 52291.3,
+     "humboldtianum": 6156.1,
+     "near_side_main": 67313.7,
+     "near_side_south": 15176.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 49413.4,
+     "orientale": 16905.1,
+     "smythii_marginis": 30236.1
+    },
+    "rivers_into_the_seas_m3s": 246571.5
+   },
+   {
+    "year": 58,
+    "supply_m3s": {
+     "moscoviense": 53203.2,
+     "orientale": 19136.6,
+     "smythii_marginis": 32013.5,
+     "south_pole_aitken": 48758.9,
+     "humboldtianum": 6277.8,
+     "near_side_main": 78947.4,
+     "near_side_south": 5963.1
+    },
+    "loss_m3s": {
+     "moscoviense": 2821.7,
+     "orientale": 2347.8,
+     "smythii_marginis": 292.7,
+     "south_pole_aitken": 53829.4,
+     "humboldtianum": 6282.5,
+     "near_side_main": 68752.3,
+     "near_side_south": 15384.9
+    },
+    "outflow_m3s": {
+     "moscoviense": 50010.5,
+     "orientale": 16488.6,
+     "smythii_marginis": 30689.5
+    },
+    "rivers_into_the_seas_m3s": 242752.6
+   },
+   {
+    "year": 59,
+    "supply_m3s": {
+     "moscoviense": 49694.2,
+     "orientale": 18757.0,
+     "smythii_marginis": 33239.4,
+     "south_pole_aitken": 49363.8,
+     "humboldtianum": 6415.8,
+     "near_side_main": 79397.8,
+     "near_side_south": 5390.4
+    },
+    "loss_m3s": {
+     "moscoviense": 4310.4,
+     "orientale": 2246.8,
+     "smythii_marginis": -58.3,
+     "south_pole_aitken": 51429.8,
+     "humboldtianum": 6018.1,
+     "near_side_main": 63771.0,
+     "near_side_south": 13997.7
+    },
+    "outflow_m3s": {
+     "moscoviense": 49161.5,
+     "orientale": 16585.9,
+     "smythii_marginis": 31392.8
+    },
+    "rivers_into_the_seas_m3s": 240758.1
+   }
+  ]
+ },
+ "losses": {
+  "budgets": {
+   "routing_budget": {
+    "rivers": {
+     "100": {
+      "length_km": 2627.0,
+      "largest_flow_m3s": 30680.0
+     },
+     "1000": {
+      "length_km": 976.0,
+      "largest_flow_m3s": 30680.0
+     },
+     "10000": {
+      "length_km": 378.0,
+      "largest_flow_m3s": 30680.0
+     }
+    },
+    "floodplains": {
+     "2": {
+      "area_km2": 6489.0,
+      "evaporation_if_all_wet_m3s": 63.4
+     },
+     "5": {
+      "area_km2": 10147.0,
+      "evaporation_if_all_wet_m3s": 100.9
+     },
+     "10": {
+      "area_km2": 14954.0,
+      "evaporation_if_all_wet_m3s": 150.8
+     }
+    },
+    "channel": {
+     "3": {
+      "area_km2": 479.0,
+      "evaporation_m3s": 4.9
+     },
+     "15": {
+      "area_km2": 2395.0,
+      "evaporation_m3s": 24.4
+     }
+    },
+    "riparian_belt": {
+     "0.5": {
+      "area_km2": 1314.0,
+      "evaporation_m3s": 12.4
+     },
+     "2": {
+      "area_km2": 5255.0,
+      "evaporation_m3s": 49.4
+     }
+    },
+    "dry_land_share_of_land": 0.7801
+   },
+   "closed_budget": {
+    "rivers": {
+     "100": {
+      "length_km": 2772.0,
+      "largest_flow_m3s": 30680.0
+     },
+     "1000": {
+      "length_km": 1039.0,
+      "largest_flow_m3s": 30680.0
+     },
+     "10000": {
+      "length_km": 400.0,
+      "largest_flow_m3s": 30680.0
+     }
+    },
+    "floodplains": {
+     "2": {
+      "area_km2": 6839.0,
+      "evaporation_if_all_wet_m3s": 72.7
+     },
+     "5": {
+      "area_km2": 10633.0,
+      "evaporation_if_all_wet_m3s": 115.4
+     },
+     "10": {
+      "area_km2": 15682.0,
+      "evaporation_if_all_wet_m3s": 172.1
+     }
+    },
+    "channel": {
+     "3": {
+      "area_km2": 507.0,
+      "evaporation_m3s": 5.6
+     },
+     "15": {
+      "area_km2": 2535.0,
+      "evaporation_m3s": 27.8
+     }
+    },
+    "riparian_belt": {
+     "0.5": {
+      "area_km2": 1386.0,
+      "evaporation_m3s": 14.2
+     },
+     "2": {
+      "area_km2": 5544.0,
+      "evaporation_m3s": 56.9
+     }
+    },
+    "dry_land_share_of_land": 0.7935
+   }
+  },
+  "floodplains_at": {
+   "hand_m": 5.0,
+   "budget": "closed_budget",
+   "count": 756,
+   "area_km2": 10633.0,
+   "kept_wet_km2": 10633.0,
+   "evaporation_m3s": 115.4,
+   "largest": [
+    {
+     "area_km2": 790.0,
+     "today": [
+      0.78,
+      -34.25
+     ],
+     "turned": [
+      -1.73,
+      -36.15
+     ],
+     "river_flow_m3s": 250.0,
+     "net_evaporation_mm_year": 483.0,
+     "kept_wet_km2": 790.0,
+     "evaporation_m3s": 12.1
+    },
+    {
+     "area_km2": 649.0,
+     "today": [
+      3.17,
+      -35.22
+     ],
+     "turned": [
+      0.75,
+      -36.86
+     ],
+     "river_flow_m3s": 169.0,
+     "net_evaporation_mm_year": 311.0,
+     "kept_wet_km2": 649.0,
+     "evaporation_m3s": 6.4
+    },
+    {
+     "area_km2": 484.0,
+     "today": [
+      -4.11,
+      -22.95
+     ],
+     "turned": [
+      -7.77,
+      -25.39
+     ],
+     "river_flow_m3s": 119.0,
+     "net_evaporation_mm_year": 232.0,
+     "kept_wet_km2": 484.0,
+     "evaporation_m3s": 3.5
+    },
+    {
+     "area_km2": 274.0,
+     "today": [
+      17.37,
+      -42.55
+     ],
+     "turned": [
+      15.67,
+      -42.47
+     ],
+     "river_flow_m3s": 1100.0,
+     "net_evaporation_mm_year": 866.0,
+     "kept_wet_km2": 274.0,
+     "evaporation_m3s": 7.5
+    },
+    {
+     "area_km2": 202.0,
+     "today": [
+      17.47,
+      -77.41
+     ],
+     "turned": [
+      19.78,
+      -77.13
+     ],
+     "river_flow_m3s": 1245.0,
+     "net_evaporation_mm_year": 520.0,
+     "kept_wet_km2": 202.0,
+     "evaporation_m3s": 3.3
+    },
+    {
+     "area_km2": 201.0,
+     "today": [
+      -0.11,
+      -63.49
+     ],
+     "turned": [
+      0.74,
+      -65.31
+     ],
+     "river_flow_m3s": 811.0,
+     "net_evaporation_mm_year": 148.0,
+     "kept_wet_km2": 201.0,
+     "evaporation_m3s": 0.9
+    },
+    {
+     "area_km2": 197.0,
+     "today": [
+      15.83,
+      -36.9
+     ],
+     "turned": [
+      13.52,
+      -37.1
+     ],
+     "river_flow_m3s": 1022.0,
+     "net_evaporation_mm_year": 56.0,
+     "kept_wet_km2": 197.0,
+     "evaporation_m3s": 0.3
+    },
+    {
+     "area_km2": 162.0,
+     "today": [
+      11.26,
+      32.42
+     ],
+     "turned": [
+      4.54,
+      30.59
+     ],
+     "river_flow_m3s": 113.0,
+     "net_evaporation_mm_year": 132.0,
+     "kept_wet_km2": 162.0,
+     "evaporation_m3s": 0.7
+    },
+    {
+     "area_km2": 159.0,
+     "today": [
+      16.21,
+      -37.59
+     ],
+     "turned": [
+      13.97,
+      -37.72
+     ],
+     "river_flow_m3s": 1127.0,
+     "net_evaporation_mm_year": 213.0,
+     "kept_wet_km2": 159.0,
+     "evaporation_m3s": 1.1
+    },
+    {
+     "area_km2": 158.0,
+     "today": [
+      -17.18,
+      54.64
+     ],
+     "turned": [
+      -23.44,
+      53.69
+     ],
+     "river_flow_m3s": 126.0,
+     "net_evaporation_mm_year": 263.0,
+     "kept_wet_km2": 158.0,
+     "evaporation_m3s": 1.3
+    },
+    {
+     "area_km2": 147.0,
+     "today": [
+      -2.79,
+      -22.22
+     ],
+     "turned": [
+      -6.52,
+      -24.52
+     ],
+     "river_flow_m3s": 113.0,
+     "net_evaporation_mm_year": 53.0,
+     "kept_wet_km2": 147.0,
+     "evaporation_m3s": 0.2
+    },
+    {
+     "area_km2": 133.0,
+     "today": [
+      3.64,
+      -25.54
+     ],
+     "turned": [
+      0.2,
+      -27.2
+     ],
+     "river_flow_m3s": 376.0,
+     "net_evaporation_mm_year": 85.0,
+     "kept_wet_km2": 133.0,
+     "evaporation_m3s": 0.4
+    }
+   ]
+  },
+  "gcm": {
+   "surface": "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc",
+   "water_cells": 627,
+   "mask_land_fraction_at_most": 0.5463,
+   "largest_added_water_fraction": 0.025,
+   "cells_with_added_water_over_1_percent": 9,
+   "land_cells_that_would_turn_to_water": 0
+  },
+  "routed": {
+   "rule": "each loss taken from the river cell it falls on (a floodplain's from the nearest river cell), never more than the cell carries, and the year routed again: a lake or sea below receives less and Moscoviense passes on less by its fixed shares",
+   "ends": {
+    "low": "the narrow channel and belt (width coefficient 3, belt 0.5 km)",
+    "high": "the wide channel and belt (15, 2 km) and the floodplains kept wet at 5 m"
+   },
+   "taken_m3s": {
+    "low": 19.8,
+    "high": 200.1
+   },
+   "rivers_into_the_seas_m3s": {
+    "none": 242171.8,
+    "low": 242152.2,
+    "high": 241975.2
+   },
+   "waters_receive_m3s": {
+    "moscoviense": {
+     "none": 52759.0,
+     "low": 52758.6,
+     "high": 52755.4
+    },
+    "orientale": {
+     "none": 18558.9,
+     "low": 18557.1,
+     "high": 18545.6
+    },
+    "smythii_marginis": {
+     "none": 30898.6,
+     "low": 30898.0,
+     "high": 30893.5
+    },
+    "south_pole_aitken": {
+     "none": 51564.9,
+     "low": 51561.4,
+     "high": 51540.6
+    },
+    "humboldtianum": {
+     "none": 6237.6,
+     "low": 6236.2,
+     "high": 6228.1
+    },
+    "near_side_main": {
+     "none": 77578.7,
+     "low": 77569.5,
+     "high": 77484.7
+    },
+    "near_side_south": {
+     "none": 6020.1,
+     "low": 6016.7,
+     "high": 5966.1
+    }
+   },
+   "outflows_m3s": {
+    "moscoviense": {
+     "none": 49204.6,
+     "low": 49204.2,
+     "high": 49201.0
+    },
+    "orientale": {
+     "none": 16367.4,
+     "low": 16365.6,
+     "high": 16354.1
+    },
+    "smythii_marginis": {
+     "none": 30093.9,
+     "low": 30093.2,
+     "high": 30088.8
+    }
+   }
+  },
+  "against_the_earlier_climate": {
+   "note": "[river_losses.json on the present design climate at 8 degrees with the governed routing, this estimate on the design climate with the design routing]; the connected floodplains are the earlier record's on the routing's own budget and these on the closed budget, whose routing the design routing is",
+   "routing_budget": {
+    "dryland_rivers_100_km": [
+     2570.0,
+     2627.0
+    ],
+    "channel_m3s": [
+     [
+      6.7,
+      4.9
+     ],
+     [
+      33.3,
+      24.4
+     ]
+    ],
+    "riparian_belt_m3s": [
+     [
+      17.0,
+      12.4
+     ],
+     [
+      67.9,
+      49.4
+     ]
+    ],
+    "dry_land_share_of_land": [
+     0.8007,
+     0.7801
+    ]
+   },
+   "closed_budget": {
+    "dryland_rivers_100_km": [
+     2993.0,
+     2772.0
+    ],
+    "channel_m3s": [
+     [
+      9.0,
+      5.6
+     ],
+     [
+      45.1,
+      27.8
+     ]
+    ],
+    "riparian_belt_m3s": [
+     [
+      23.5,
+      14.2
+     ],
+     [
+      94.2,
+      56.9
+     ]
+    ],
+    "dry_land_share_of_land": [
+     0.8289,
+     0.7935
+    ]
+   },
+   "floodplains_kept_wet_km2": [
+    9052.0,
+    10633.0
+   ],
+   "floodplains_m3s": [
+    129.1,
+    115.4
+   ]
+  }
+ },
+ "classes": {
+  "threshold_m3s": 100.0,
+  "threshold_scale": {
+   "land_km2": 22130561,
+   "land_runoff_m3s": 98323,
+   "runoff_mm_a_year": 140.2,
+   "catchment_yielding_the_threshold_km2": 22508,
+   "climate_land_cell_km2_median": 17391
+  },
+  "rivers": 895,
+  "reaches": 928,
+  "major_km": 10381,
+  "large_km": 2338,
+  "by_storage": {
+   "none": {
+    "rivers_sustained_to_their_end": 594,
+    "rivers_intermittent_at_their_end": 301,
+    "rivers_stopping_at_their_end_in_a_year": 89,
+    "km_sustained": 6301,
+    "km_intermittent": 4080,
+    "km_stopping": 1119,
+    "large_km_sustained_at_their_threshold": 1806,
+    "large_km_under_it_in_a_year": 531
+   },
+   "narrow": {
+    "rivers_sustained_to_their_end": 772,
+    "rivers_intermittent_at_their_end": 123,
+    "rivers_stopping_at_their_end_in_a_year": 3,
+    "km_sustained": 8271,
+    "km_intermittent": 2110,
+    "km_stopping": 161,
+    "large_km_sustained_at_their_threshold": 2076,
+    "large_km_under_it_in_a_year": 262,
+    "km_whose_lowest_year_falls_below_none": 31,
+    "largest_shortfall_against_none_m3s": 6.1
+   },
+   "wide": {
+    "rivers_sustained_to_their_end": 704,
+    "rivers_intermittent_at_their_end": 191,
+    "rivers_stopping_at_their_end_in_a_year": 8,
+    "km_sustained": 7434,
+    "km_intermittent": 2947,
+    "km_stopping": 301,
+    "large_km_sustained_at_their_threshold": 1894,
+    "large_km_under_it_in_a_year": 444,
+    "km_whose_lowest_year_falls_below_none": 50,
+    "largest_shortfall_against_none_m3s": 81.5
+   }
+  },
+  "rivers_leaving_a_lake": 876,
+  "rivers_leaving_a_lake_sustained": {
+   "none": 583,
+   "wide": 693
+  },
+  "intermittent_by_turned_latitude": {
+   "0-15": {
+    "none": 168,
+    "wide": 124,
+    "narrow": 86,
+    "rivers": 555
+   },
+   "15-30": {
+    "none": 85,
+    "wide": 49,
+    "narrow": 33,
+    "rivers": 242
+   },
+   "30-45": {
+    "none": 32,
+    "wide": 13,
+    "narrow": 4,
+    "rivers": 74
+   },
+   "45-60": {
+    "none": 16,
+    "wide": 5,
+    "narrow": 0,
+    "rivers": 24
+   },
+   "60-90": {
+    "none": 0,
+    "wide": 0,
+    "narrow": 0,
+    "rivers": 0
+   }
+  },
+  "largest_into_the_seas": [
+   {
+    "end": {
+     "today": [
+      47.47,
+      49.72
+     ],
+     "turned": [
+      40.98,
+      46.17
+     ]
+    },
+    "beside": {
+     "name": "Lacus Temporis",
+     "beside": true,
+     "km": 135
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 3.8,
+    "design_m3s": 30359.4,
+    "none": {
+     "mean_m3s": 30872.7,
+     "lowest_m3s": 27987.0,
+     "second_lowest_m3s": 29031.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30339.9,
+     "lowest_m3s": 30037.3,
+     "second_lowest_m3s": 30142.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30486.9,
+     "lowest_m3s": 29823.4,
+     "second_lowest_m3s": 29868.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30358.2,
+     "high": 30349.9,
+     "lowest_year_high": 29814.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -22.91,
+      173.34
+     ],
+     "turned": [
+      -17.73,
+      173.08
+     ]
+    },
+    "beside": {
+     "name": "Vertregt",
+     "beside": true,
+     "km": 126
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "south_pole_aitken"
+    },
+    "length_km": 19.9,
+    "design_m3s": 29956.2,
+    "none": {
+     "mean_m3s": 30146.6,
+     "lowest_m3s": 28143.3,
+     "second_lowest_m3s": 28149.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30095.4,
+     "lowest_m3s": 29489.1,
+     "second_lowest_m3s": 29593.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30200.4,
+     "lowest_m3s": 29074.3,
+     "second_lowest_m3s": 29244.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29954.9,
+     "high": 29947.4,
+     "lowest_year_high": 29065.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      2.34,
+      177.72
+     ],
+     "turned": [
+      7.76,
+      175.52
+     ]
+    },
+    "beside": {
+     "name": "Stein M",
+     "beside": false,
+     "km": 57
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "moscoviense"
+    },
+    "length_km": 11.8,
+    "design_m3s": 29319.8,
+    "none": {
+     "mean_m3s": 29353.7,
+     "lowest_m3s": 26910.8,
+     "second_lowest_m3s": 27387.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 29586.9,
+     "lowest_m3s": 27995.0,
+     "second_lowest_m3s": 28542.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 29455.9,
+     "lowest_m3s": 27647.7,
+     "second_lowest_m3s": 27721.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29319.7,
+     "high": 29319.5,
+     "lowest_year_high": 27647.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      14.97,
+      -72.34
+     ],
+     "turned": [
+      16.74,
+      -72.35
+     ]
+    },
+    "beside": {
+     "name": "Catena Krafft",
+     "beside": true,
+     "km": 3
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 2.6,
+    "design_m3s": 17619.8,
+    "none": {
+     "mean_m3s": 17887.1,
+     "lowest_m3s": 15897.5,
+     "second_lowest_m3s": 16193.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 17753.6,
+     "lowest_m3s": 16880.8,
+     "second_lowest_m3s": 16997.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 17731.1,
+     "lowest_m3s": 16493.2,
+     "second_lowest_m3s": 16948.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 17615.5,
+     "high": 17582.6,
+     "lowest_year_high": 16455.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -13.41,
+      -106.91
+     ],
+     "turned": [
+      -8.17,
+      -109.56
+     ]
+    },
+    "beside": {
+     "name": "Montes Rook",
+     "beside": true,
+     "km": 398
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "orientale"
+    },
+    "length_km": 10.1,
+    "design_m3s": 15688.1,
+    "none": {
+     "mean_m3s": 15778.0,
+     "lowest_m3s": 14217.3,
+     "second_lowest_m3s": 14661.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 15712.5,
+     "lowest_m3s": 15298.7,
+     "second_lowest_m3s": 15386.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 15708.3,
+     "lowest_m3s": 15148.5,
+     "second_lowest_m3s": 15304.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 15686.6,
+     "high": 15677.9,
+     "lowest_year_high": 15138.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      25.84,
+      102.97
+     ],
+     "turned": [
+      23.29,
+      98.27
+     ]
+    },
+    "beside": {
+     "name": "Artamonov",
+     "beside": true,
+     "km": 25
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "smythii_marginis"
+    },
+    "length_km": 34.1,
+    "design_m3s": 14319.9,
+    "none": {
+     "mean_m3s": 14494.4,
+     "lowest_m3s": 12766.1,
+     "second_lowest_m3s": 13381.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 14448.1,
+     "lowest_m3s": 13574.0,
+     "second_lowest_m3s": 13597.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 14542.4,
+     "lowest_m3s": 13167.7,
+     "second_lowest_m3s": 13356.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 14319.6,
+     "high": 14317.6,
+     "lowest_year_high": 13165.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      21.28,
+      105.03
+     ],
+     "turned": [
+      18.99,
+      100.86
+     ]
+    },
+    "beside": {
+     "name": "Malyy",
+     "beside": true,
+     "km": 27
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "smythii_marginis"
+    },
+    "length_km": 10.5,
+    "design_m3s": 14213.2,
+    "none": {
+     "mean_m3s": 14363.7,
+     "lowest_m3s": 11730.7,
+     "second_lowest_m3s": 13210.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 14233.0,
+     "lowest_m3s": 13777.6,
+     "second_lowest_m3s": 13809.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 14276.9,
+     "lowest_m3s": 13686.6,
+     "second_lowest_m3s": 13850.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 14212.8,
+     "high": 14210.5,
+     "lowest_year_high": 13683.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -23.03,
+      -167.72
+     ],
+     "turned": [
+      -16.76,
+      -168.69
+     ]
+    },
+    "beside": {
+     "name": "Sniadecki",
+     "beside": false,
+     "km": 39
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "south_pole_aitken"
+    },
+    "length_km": 6.4,
+    "design_m3s": 13812.3,
+    "none": {
+     "mean_m3s": 13816.7,
+     "lowest_m3s": 11248.7,
+     "second_lowest_m3s": 12125.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 13942.7,
+     "lowest_m3s": 12084.5,
+     "second_lowest_m3s": 12801.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 13834.6,
+     "lowest_m3s": 11686.5,
+     "second_lowest_m3s": 12018.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 13812.2,
+     "high": 13811.8,
+     "lowest_year_high": 11686.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      12.34,
+      -14.03
+     ],
+     "turned": [
+      7.79,
+      -15.0
+     ]
+    },
+    "beside": {
+     "name": "Sinus Aestuum",
+     "beside": true,
+     "km": 169
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 56.0,
+    "design_m3s": 9670.1,
+    "none": {
+     "mean_m3s": 9686.3,
+     "lowest_m3s": 7547.2,
+     "second_lowest_m3s": 8222.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 9658.3,
+     "lowest_m3s": 8739.9,
+     "second_lowest_m3s": 9043.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 9681.3,
+     "lowest_m3s": 7911.0,
+     "second_lowest_m3s": 8803.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 9670.1,
+     "high": 9670.1,
+     "lowest_year_high": 7911.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      19.91,
+      -175.41
+     ],
+     "turned": [
+      25.73,
+      -178.67
+     ]
+    },
+    "beside": {
+     "name": "Morse N",
+     "beside": false,
+     "km": 21
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "moscoviense"
+    },
+    "length_km": 10.7,
+    "design_m3s": 8837.3,
+    "none": {
+     "mean_m3s": 8850.9,
+     "lowest_m3s": 7056.8,
+     "second_lowest_m3s": 7311.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 8942.8,
+     "lowest_m3s": 8535.8,
+     "second_lowest_m3s": 8581.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 8939.6,
+     "lowest_m3s": 8008.0,
+     "second_lowest_m3s": 8112.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 8837.1,
+     "high": 8835.9,
+     "lowest_year_high": 8006.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      57.09,
+      111.78
+     ],
+     "turned": [
+      55.14,
+      100.33
+     ]
+    },
+    "beside": {
+     "name": "Compton",
+     "beside": false,
+     "km": 133
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "humboldtianum"
+    },
+    "length_km": 2.2,
+    "design_m3s": 6237.5,
+    "none": {
+     "mean_m3s": 6312.7,
+     "lowest_m3s": 5419.0,
+     "second_lowest_m3s": 5816.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 6323.7,
+     "lowest_m3s": 6102.3,
+     "second_lowest_m3s": 6126.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 6356.9,
+     "lowest_m3s": 6013.8,
+     "second_lowest_m3s": 6045.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 6236.1,
+     "high": 6228.3,
+     "lowest_year_high": 6004.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -45.09,
+      -129.97
+     ],
+     "turned": [
+      -38.61,
+      -133.42
+     ]
+    },
+    "beside": {
+     "name": "Buffon K",
+     "beside": false,
+     "km": 54
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "south_pole_aitken"
+    },
+    "length_km": 2.3,
+    "design_m3s": 4905.4,
+    "none": {
+     "mean_m3s": 4994.8,
+     "lowest_m3s": 3714.1,
+     "second_lowest_m3s": 3953.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 5051.3,
+     "lowest_m3s": 4345.1,
+     "second_lowest_m3s": 4651.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 4952.5,
+     "lowest_m3s": 4090.4,
+     "second_lowest_m3s": 4170.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 4904.7,
+     "high": 4900.3,
+     "lowest_year_high": 4085.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      16.78,
+      13.47
+     ],
+     "turned": [
+      10.47,
+      12.18
+     ]
+    },
+    "beside": {
+     "name": "Dorsa Sorby",
+     "beside": true,
+     "km": 57
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 38.4,
+    "design_m3s": 4289.3,
+    "none": {
+     "mean_m3s": 4306.6,
+     "lowest_m3s": 3337.7,
+     "second_lowest_m3s": 3446.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 4267.5,
+     "lowest_m3s": 3858.1,
+     "second_lowest_m3s": 3904.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 4313.3,
+     "lowest_m3s": 3499.1,
+     "second_lowest_m3s": 3648.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 4289.0,
+     "high": 4287.0,
+     "lowest_year_high": 3496.7
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      18.09,
+      -175.22
+     ],
+     "turned": [
+      23.94,
+      -178.35
+     ]
+    },
+    "beside": {
+     "name": "Morse N",
+     "beside": false,
+     "km": 67
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "moscoviense"
+    },
+    "length_km": 22.2,
+    "design_m3s": 3894.5,
+    "none": {
+     "mean_m3s": 3894.1,
+     "lowest_m3s": 3242.3,
+     "second_lowest_m3s": 3464.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 3911.6,
+     "lowest_m3s": 3614.9,
+     "second_lowest_m3s": 3669.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 3906.0,
+     "lowest_m3s": 3497.0,
+     "second_lowest_m3s": 3572.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 3894.5,
+     "high": 3894.5,
+     "lowest_year_high": 3497.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      3.28,
+      156.41
+     ],
+     "turned": [
+      6.88,
+      154.05
+     ]
+    },
+    "beside": {
+     "name": "Henderson G",
+     "beside": true,
+     "km": 25
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "moscoviense"
+    },
+    "length_km": 2.7,
+    "design_m3s": 3149.1,
+    "none": {
+     "mean_m3s": 3157.5,
+     "lowest_m3s": 2621.4,
+     "second_lowest_m3s": 2629.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 3146.8,
+     "lowest_m3s": 3055.0,
+     "second_lowest_m3s": 3086.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 3164.3,
+     "lowest_m3s": 2855.8,
+     "second_lowest_m3s": 2930.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 3149.1,
+     "high": 3149.1,
+     "lowest_year_high": 2855.8
+    },
+    "leaves_a_lake": true
+   }
+  ],
+  "largest_sustained": [
+   {
+    "end": {
+     "today": [
+      42.09,
+      65.66
+     ],
+     "turned": [
+      36.3,
+      61.03
+     ]
+    },
+    "beside": {
+     "name": "Lacus Spei",
+     "beside": true,
+     "km": 43
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 10324
+    },
+    "length_km": 10.4,
+    "design_m3s": 30768.6,
+    "none": {
+     "mean_m3s": 31279.2,
+     "lowest_m3s": 28381.1,
+     "second_lowest_m3s": 29556.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30752.2,
+     "lowest_m3s": 30406.6,
+     "second_lowest_m3s": 30489.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30901.9,
+     "lowest_m3s": 30128.2,
+     "second_lowest_m3s": 30349.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30767.8,
+     "high": 30763.0,
+     "lowest_year_high": 30122.7
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      43.72,
+      58.91
+     ],
+     "turned": [
+      37.57,
+      54.71
+     ]
+    },
+    "beside": {
+     "name": "Lacus Temporis",
+     "beside": true,
+     "km": 110
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 13445
+    },
+    "length_km": 8.4,
+    "design_m3s": 30680.4,
+    "none": {
+     "mean_m3s": 31193.6,
+     "lowest_m3s": 28299.0,
+     "second_lowest_m3s": 29391.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30664.0,
+     "lowest_m3s": 30339.2,
+     "second_lowest_m3s": 30385.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30812.7,
+     "lowest_m3s": 30015.3,
+     "second_lowest_m3s": 30204.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30679.5,
+     "high": 30674.0,
+     "lowest_year_high": 30008.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      47.47,
+      50.53
+     ],
+     "turned": [
+      41.0,
+      46.89
+     ]
+    },
+    "beside": {
+     "name": "Lacus Temporis",
+     "beside": true,
+     "km": 118
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 102
+    },
+    "length_km": 4.6,
+    "design_m3s": 30362.1,
+    "none": {
+     "mean_m3s": 30875.3,
+     "lowest_m3s": 27989.7,
+     "second_lowest_m3s": 29034.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30342.6,
+     "lowest_m3s": 30039.9,
+     "second_lowest_m3s": 30145.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30489.6,
+     "lowest_m3s": 29825.4,
+     "second_lowest_m3s": 29870.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30361.0,
+     "high": 30353.9,
+     "lowest_year_high": 29817.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      47.47,
+      49.72
+     ],
+     "turned": [
+      40.98,
+      46.17
+     ]
+    },
+    "beside": {
+     "name": "Lacus Temporis",
+     "beside": true,
+     "km": 135
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 3.8,
+    "design_m3s": 30359.4,
+    "none": {
+     "mean_m3s": 30872.7,
+     "lowest_m3s": 27987.0,
+     "second_lowest_m3s": 29031.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30339.9,
+     "lowest_m3s": 30037.3,
+     "second_lowest_m3s": 30142.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30486.9,
+     "lowest_m3s": 29823.4,
+     "second_lowest_m3s": 29868.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30358.2,
+     "high": 30349.9,
+     "lowest_year_high": 29814.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      32.84,
+      75.34
+     ],
+     "turned": [
+      27.71,
+      70.96
+     ]
+    },
+    "beside": {
+     "name": "Hahn F",
+     "beside": false,
+     "km": 66
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 33562
+    },
+    "length_km": 9.3,
+    "design_m3s": 30097.7,
+    "none": {
+     "mean_m3s": 30513.0,
+     "lowest_m3s": 27812.0,
+     "second_lowest_m3s": 28656.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30045.0,
+     "lowest_m3s": 29826.4,
+     "second_lowest_m3s": 29829.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30202.7,
+     "lowest_m3s": 29498.9,
+     "second_lowest_m3s": 29507.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30096.9,
+     "high": 30092.2,
+     "lowest_year_high": 29493.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      25.22,
+      82.78
+     ],
+     "turned": [
+      20.71,
+      78.82
+     ]
+    },
+    "beside": {
+     "name": "Seneca",
+     "beside": false,
+     "km": 93
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 47822
+    },
+    "length_km": 6.3,
+    "design_m3s": 30096.6,
+    "none": {
+     "mean_m3s": 30494.6,
+     "lowest_m3s": 27860.1,
+     "second_lowest_m3s": 28827.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30047.8,
+     "lowest_m3s": 29755.6,
+     "second_lowest_m3s": 29810.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30205.1,
+     "lowest_m3s": 29178.6,
+     "second_lowest_m3s": 29676.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 30095.8,
+     "high": 30091.4,
+     "lowest_year_high": 29173.5
+    },
+    "leaves_a_lake": false
+   },
+   {
+    "end": {
+     "today": [
+      -22.53,
+      172.16
+     ],
+     "turned": [
+      -17.44,
+      171.91
+     ]
+    },
+    "beside": {
+     "name": "Vertregt",
+     "beside": true,
+     "km": 102
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 245
+    },
+    "length_km": 1.8,
+    "design_m3s": 29962.4,
+    "none": {
+     "mean_m3s": 30152.8,
+     "lowest_m3s": 28149.6,
+     "second_lowest_m3s": 28155.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30101.7,
+     "lowest_m3s": 29494.9,
+     "second_lowest_m3s": 29600.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30206.7,
+     "lowest_m3s": 29080.5,
+     "second_lowest_m3s": 29250.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29961.7,
+     "high": 29957.2,
+     "lowest_year_high": 29075.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -22.91,
+      173.34
+     ],
+     "turned": [
+      -17.73,
+      173.08
+     ]
+    },
+    "beside": {
+     "name": "Vertregt",
+     "beside": true,
+     "km": 126
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "south_pole_aitken"
+    },
+    "length_km": 19.9,
+    "design_m3s": 29956.2,
+    "none": {
+     "mean_m3s": 30146.6,
+     "lowest_m3s": 28143.3,
+     "second_lowest_m3s": 28149.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 30095.4,
+     "lowest_m3s": 29489.1,
+     "second_lowest_m3s": 29593.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 30200.4,
+     "lowest_m3s": 29074.3,
+     "second_lowest_m3s": 29244.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29954.9,
+     "high": 29947.4,
+     "lowest_year_high": 29065.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      2.34,
+      177.72
+     ],
+     "turned": [
+      7.76,
+      175.52
+     ]
+    },
+    "beside": {
+     "name": "Stein M",
+     "beside": false,
+     "km": 57
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "moscoviense"
+    },
+    "length_km": 11.8,
+    "design_m3s": 29319.8,
+    "none": {
+     "mean_m3s": 29353.7,
+     "lowest_m3s": 26910.8,
+     "second_lowest_m3s": 27387.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 29586.9,
+     "lowest_m3s": 27995.0,
+     "second_lowest_m3s": 28542.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 29455.9,
+     "lowest_m3s": 27647.7,
+     "second_lowest_m3s": 27721.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29319.7,
+     "high": 29319.5,
+     "lowest_year_high": 27647.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      2.53,
+      179.41
+     ],
+     "turned": [
+      8.07,
+      177.2
+     ]
+    },
+    "beside": {
+     "name": "Stein M",
+     "beside": false,
+     "km": 43
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 650
+    },
+    "length_km": 1.9,
+    "design_m3s": 29217.3,
+    "none": {
+     "mean_m3s": 29247.2,
+     "lowest_m3s": 26832.5,
+     "second_lowest_m3s": 27253.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 29480.7,
+     "lowest_m3s": 27949.5,
+     "second_lowest_m3s": 28471.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 29351.1,
+     "lowest_m3s": 27605.8,
+     "second_lowest_m3s": 27619.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 29217.3,
+     "high": 29217.3,
+     "lowest_year_high": 27605.7
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -18.91,
+      171.97
+     ],
+     "turned": [
+      -13.85,
+      171.42
+     ]
+    },
+    "beside": {
+     "name": "Aitken",
+     "beside": true,
+     "km": 80
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 12843
+    },
+    "length_km": 19.2,
+    "design_m3s": 27739.0,
+    "none": {
+     "mean_m3s": 27898.4,
+     "lowest_m3s": 24541.6,
+     "second_lowest_m3s": 26027.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 27967.3,
+     "lowest_m3s": 27387.7,
+     "second_lowest_m3s": 27573.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 28053.4,
+     "lowest_m3s": 26971.3,
+     "second_lowest_m3s": 27096.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 27738.5,
+     "high": 27734.9,
+     "lowest_year_high": 26967.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -14.34,
+      173.16
+     ],
+     "turned": [
+      -9.21,
+      172.21
+     ]
+    },
+    "beside": {
+     "name": "Aitken Z",
+     "beside": true,
+     "km": 17
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 10616
+    },
+    "length_km": 8.3,
+    "design_m3s": 27453.5,
+    "none": {
+     "mean_m3s": 27613.1,
+     "lowest_m3s": 24242.8,
+     "second_lowest_m3s": 25700.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 27683.3,
+     "lowest_m3s": 27107.0,
+     "second_lowest_m3s": 27225.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 27766.8,
+     "lowest_m3s": 26723.3,
+     "second_lowest_m3s": 26948.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 27453.3,
+     "high": 27451.6,
+     "lowest_year_high": 26721.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -11.66,
+      174.84
+     ],
+     "turned": [
+      -6.4,
+      173.66
+     ]
+    },
+    "beside": {
+     "name": "Aitken Y",
+     "beside": false,
+     "km": 58
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 4603
+    },
+    "length_km": 14.8,
+    "design_m3s": 26897.6,
+    "none": {
+     "mean_m3s": 27057.4,
+     "lowest_m3s": 23716.5,
+     "second_lowest_m3s": 25065.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 27128.0,
+     "lowest_m3s": 26597.7,
+     "second_lowest_m3s": 26615.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 27210.5,
+     "lowest_m3s": 26245.7,
+     "second_lowest_m3s": 26519.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 26897.3,
+     "high": 26895.6,
+     "lowest_year_high": 26243.7
+    },
+    "leaves_a_lake": false
+   },
+   {
+    "end": {
+     "today": [
+      36.03,
+      137.53
+     ],
+     "turned": [
+      37.35,
+      130.76
+     ]
+    },
+    "beside": {
+     "name": "Catena Kurchatov",
+     "beside": true,
+     "km": 43
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 8440
+    },
+    "length_km": 17.2,
+    "design_m3s": 22387.6,
+    "none": {
+     "mean_m3s": 22522.1,
+     "lowest_m3s": 19741.1,
+     "second_lowest_m3s": 20861.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 22580.8,
+     "lowest_m3s": 22132.3,
+     "second_lowest_m3s": 22160.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 22649.8,
+     "lowest_m3s": 21851.2,
+     "second_lowest_m3s": 22089.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 22387.1,
+     "high": 22384.4,
+     "lowest_year_high": 21848.0
+    },
+    "leaves_a_lake": false
+   },
+   {
+    "end": {
+     "today": [
+      -1.03,
+      -177.66
+     ],
+     "turned": [
+      4.7,
+      -179.62
+     ]
+    },
+    "beside": {
+     "name": "Lipskiy",
+     "beside": true,
+     "km": 62
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 9631
+    },
+    "length_km": 6.5,
+    "design_m3s": 19432.0,
+    "none": {
+     "mean_m3s": 19456.0,
+     "lowest_m3s": 17559.3,
+     "second_lowest_m3s": 17718.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "narrow": {
+     "mean_m3s": 19681.1,
+     "lowest_m3s": 18378.4,
+     "second_lowest_m3s": 18977.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 19556.9,
+     "lowest_m3s": 17663.4,
+     "second_lowest_m3s": 18351.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 19432.0,
+     "high": 19432.0,
+     "lowest_year_high": 17663.4
+    },
+    "leaves_a_lake": true
+   }
+  ],
+  "intermittent_largest": [
+   {
+    "end": {
+     "today": [
+      -4.84,
+      -21.09
+     ],
+     "turned": [
+      -8.68,
+      -23.6
+     ]
+    },
+    "beside": {
+     "name": "Mare Cognitum",
+     "beside": true,
+     "km": 176
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 183
+    },
+    "length_km": 24.7,
+    "design_m3s": 742.2,
+    "none": {
+     "mean_m3s": 746.5,
+     "lowest_m3s": 62.1,
+     "second_lowest_m3s": 83.1,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 743.3,
+     "lowest_m3s": 185.6,
+     "second_lowest_m3s": 210.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 744.4,
+     "lowest_m3s": 84.0,
+     "second_lowest_m3s": 237.4,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 742.1,
+     "high": 741.7,
+     "lowest_year_high": 83.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -4.59,
+      -20.28
+     ],
+     "turned": [
+      -8.51,
+      -22.76
+     ]
+    },
+    "beside": {
+     "name": "Rimae Parry",
+     "beside": true,
+     "km": 155
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 240
+    },
+    "length_km": 27.1,
+    "design_m3s": 741.9,
+    "none": {
+     "mean_m3s": 744.5,
+     "lowest_m3s": 67.5,
+     "second_lowest_m3s": 87.6,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 741.5,
+     "lowest_m3s": 185.1,
+     "second_lowest_m3s": 217.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 742.6,
+     "lowest_m3s": 88.3,
+     "second_lowest_m3s": 234.0,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 741.9,
+     "high": 741.9,
+     "lowest_year_high": 88.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -5.97,
+      -21.84
+     ],
+     "turned": [
+      -9.73,
+      -24.46
+     ]
+    },
+    "beside": {
+     "name": "Mare Cognitum",
+     "beside": true,
+     "km": 139
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_south"
+    },
+    "length_km": 29.0,
+    "design_m3s": 741.5,
+    "none": {
+     "mean_m3s": 746.5,
+     "lowest_m3s": 57.6,
+     "second_lowest_m3s": 79.2,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 743.5,
+     "lowest_m3s": 185.6,
+     "second_lowest_m3s": 204.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 744.5,
+     "lowest_m3s": 80.2,
+     "second_lowest_m3s": 239.5,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 741.3,
+     "high": 739.6,
+     "lowest_year_high": 78.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -2.34,
+      -19.47
+     ],
+     "turned": [
+      -6.35,
+      -21.73
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 1326
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 359
+    },
+    "length_km": 52.9,
+    "design_m3s": 595.6,
+    "none": {
+     "mean_m3s": 595.5,
+     "lowest_m3s": 71.8,
+     "second_lowest_m3s": 74.9,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 593.4,
+     "lowest_m3s": 164.6,
+     "second_lowest_m3s": 177.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 594.7,
+     "lowest_m3s": 81.9,
+     "second_lowest_m3s": 201.8,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 595.6,
+     "high": 595.6,
+     "lowest_year_high": 81.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      0.28,
+      -19.34
+     ],
+     "turned": [
+      -3.74,
+      -21.36
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 1290
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 122
+    },
+    "length_km": 30.6,
+    "design_m3s": 517.5,
+    "none": {
+     "mean_m3s": 517.4,
+     "lowest_m3s": 62.5,
+     "second_lowest_m3s": 71.7,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 515.4,
+     "lowest_m3s": 147.0,
+     "second_lowest_m3s": 150.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 516.6,
+     "lowest_m3s": 72.5,
+     "second_lowest_m3s": 168.4,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 517.5,
+     "high": 517.5,
+     "lowest_year_high": 72.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -6.91,
+      -14.59
+     ],
+     "turned": [
+      -11.34,
+      -17.26
+     ]
+    },
+    "beside": {
+     "name": "Rimae Parry",
+     "beside": true,
+     "km": 68
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 175
+    },
+    "length_km": 15.9,
+    "design_m3s": 335.2,
+    "none": {
+     "mean_m3s": 338.7,
+     "lowest_m3s": 0.1,
+     "second_lowest_m3s": 74.2,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 331.3,
+     "lowest_m3s": 171.1,
+     "second_lowest_m3s": 196.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 333.4,
+     "lowest_m3s": 79.5,
+     "second_lowest_m3s": 121.8,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 335.1,
+     "high": 334.5,
+     "lowest_year_high": 78.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -7.72,
+      -14.59
+     ],
+     "turned": [
+      -12.14,
+      -17.33
+     ]
+    },
+    "beside": {
+     "name": "Rimae Parry",
+     "beside": true,
+     "km": 59
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 757
+    },
+    "length_km": 8.3,
+    "design_m3s": 333.6,
+    "none": {
+     "mean_m3s": 337.5,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 72.5,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 329.9,
+     "lowest_m3s": 170.1,
+     "second_lowest_m3s": 197.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 332.0,
+     "lowest_m3s": 78.4,
+     "second_lowest_m3s": 119.3,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 333.5,
+     "high": 332.3,
+     "lowest_year_high": 77.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -9.41,
+      -14.41
+     ],
+     "turned": [
+      -13.84,
+      -17.3
+     ]
+    },
+    "beside": {
+     "name": "Parry M",
+     "beside": true,
+     "km": 16
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_south"
+    },
+    "length_km": 3.8,
+    "design_m3s": 332.1,
+    "none": {
+     "mean_m3s": 336.8,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 79.8,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 328.3,
+     "lowest_m3s": 177.0,
+     "second_lowest_m3s": 197.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 330.5,
+     "lowest_m3s": 87.0,
+     "second_lowest_m3s": 115.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 331.9,
+     "high": 330.3,
+     "lowest_year_high": 85.2
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      4.97,
+      -24.41
+     ],
+     "turned": [
+      1.41,
+      -25.94
+     ]
+    },
+    "beside": {
+     "name": "Mare Insularum",
+     "beside": true,
+     "km": 207
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 129
+    },
+    "length_km": 17.5,
+    "design_m3s": 305.5,
+    "none": {
+     "mean_m3s": 306.2,
+     "lowest_m3s": 47.2,
+     "second_lowest_m3s": 122.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 304.0,
+     "lowest_m3s": 99.4,
+     "second_lowest_m3s": 116.3,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 305.1,
+     "lowest_m3s": 75.4,
+     "second_lowest_m3s": 114.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 305.5,
+     "high": 305.5,
+     "lowest_year_high": 75.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -4.22,
+      147.59
+     ],
+     "turned": [
+      -1.49,
+      146.05
+     ]
+    },
+    "beside": {
+     "name": "Tamm",
+     "beside": false,
+     "km": 37
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 17991
+    },
+    "length_km": 1.9,
+    "design_m3s": 290.7,
+    "none": {
+     "mean_m3s": 296.9,
+     "lowest_m3s": 0.1,
+     "second_lowest_m3s": 36.6,
+     "years_at_the_threshold": 11,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 285.2,
+     "lowest_m3s": 186.8,
+     "second_lowest_m3s": 192.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 299.4,
+     "lowest_m3s": 93.8,
+     "second_lowest_m3s": 135.1,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 290.7,
+     "high": 290.7,
+     "lowest_year_high": 93.8
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      1.97,
+      -32.66
+     ],
+     "turned": [
+      -0.72,
+      -34.44
+     ]
+    },
+    "beside": {
+     "name": "Mare Insularum",
+     "beside": true,
+     "km": 187
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 1249
+    },
+    "length_km": 22.9,
+    "design_m3s": 270.6,
+    "none": {
+     "mean_m3s": 274.8,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 136.1,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 260.3,
+     "lowest_m3s": 160.9,
+     "second_lowest_m3s": 165.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 274.4,
+     "lowest_m3s": 93.8,
+     "second_lowest_m3s": 129.1,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 270.3,
+     "high": 266.8,
+     "lowest_year_high": 90.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -2.78,
+      19.41
+     ],
+     "turned": [
+      -9.29,
+      17.38
+     ]
+    },
+    "beside": {
+     "name": "Rimae Hypatia",
+     "beside": true,
+     "km": 126
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 104
+    },
+    "length_km": 9.9,
+    "design_m3s": 268.5,
+    "none": {
+     "mean_m3s": 268.4,
+     "lowest_m3s": 87.5,
+     "second_lowest_m3s": 111.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 268.2,
+     "lowest_m3s": 96.7,
+     "second_lowest_m3s": 123.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 268.3,
+     "lowest_m3s": 90.5,
+     "second_lowest_m3s": 114.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 268.5,
+     "high": 268.5,
+     "lowest_year_high": 90.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -6.16,
+      21.09
+     ],
+     "turned": [
+      -12.71,
+      19.0
+     ]
+    },
+    "beside": {
+     "name": "Mare Tranquillitatis",
+     "beside": true,
+     "km": 529
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 12.1,
+    "design_m3s": 259.3,
+    "none": {
+     "mean_m3s": 259.2,
+     "lowest_m3s": 75.9,
+     "second_lowest_m3s": 99.1,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 258.7,
+     "lowest_m3s": 88.7,
+     "second_lowest_m3s": 112.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 259.0,
+     "lowest_m3s": 80.3,
+     "second_lowest_m3s": 100.1,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 259.3,
+     "high": 259.3,
+     "lowest_year_high": 80.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -35.47,
+      151.22
+     ],
+     "turned": [
+      -32.17,
+      153.3
+     ]
+    },
+    "beside": {
+     "name": "Jules Verne",
+     "beside": true,
+     "km": 99
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 15487
+    },
+    "length_km": 6.2,
+    "design_m3s": 257.9,
+    "none": {
+     "mean_m3s": 311.9,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 10,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 269.8,
+     "lowest_m3s": 181.9,
+     "second_lowest_m3s": 192.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 259.1,
+     "lowest_m3s": 45.2,
+     "second_lowest_m3s": 47.0,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 257.8,
+     "high": 257.6,
+     "lowest_year_high": 44.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -34.09,
+      150.34
+     ],
+     "turned": [
+      -30.89,
+      152.26
+     ]
+    },
+    "beside": {
+     "name": "Jules Verne",
+     "beside": true,
+     "km": 80
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 511
+    },
+    "length_km": 1.6,
+    "design_m3s": 255.6,
+    "none": {
+     "mean_m3s": 307.7,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 9,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 266.4,
+     "lowest_m3s": 181.9,
+     "second_lowest_m3s": 183.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 256.4,
+     "lowest_m3s": 47.7,
+     "second_lowest_m3s": 51.5,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 255.6,
+     "high": 255.6,
+     "lowest_year_high": 47.7
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -0.66,
+      -105.34
+     ],
+     "turned": [
+      4.42,
+      -107.05
+     ]
+    },
+    "beside": {
+     "name": "Catena Michelson  GIRD",
+     "beside": true,
+     "km": 250
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 629
+    },
+    "length_km": 2.7,
+    "design_m3s": 254.1,
+    "none": {
+     "mean_m3s": 254.1,
+     "lowest_m3s": 51.4,
+     "second_lowest_m3s": 114.8,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 252.0,
+     "lowest_m3s": 140.6,
+     "second_lowest_m3s": 152.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 252.8,
+     "lowest_m3s": 85.9,
+     "second_lowest_m3s": 143.8,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 254.1,
+     "high": 254.1,
+     "lowest_year_high": 85.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -1.09,
+      -35.09
+     ],
+     "turned": [
+      -3.5,
+      -37.2
+     ]
+    },
+    "beside": {
+     "name": "Mare Insularum",
+     "beside": true,
+     "km": 301
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_south"
+    },
+    "length_km": 114.7,
+    "design_m3s": 248.8,
+    "none": {
+     "mean_m3s": 255.7,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 103.8,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 239.6,
+     "lowest_m3s": 141.1,
+     "second_lowest_m3s": 157.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 255.2,
+     "lowest_m3s": 77.1,
+     "second_lowest_m3s": 125.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 247.6,
+     "high": 227.0,
+     "lowest_year_high": 55.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      24.22,
+      -150.09
+     ],
+     "turned": [
+      30.92,
+      -152.19
+     ]
+    },
+    "beside": {
+     "name": "Ingalls G",
+     "beside": false,
+     "km": 45
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 13645
+    },
+    "length_km": 1.7,
+    "design_m3s": 233.8,
+    "none": {
+     "mean_m3s": 241.2,
+     "lowest_m3s": 24.4,
+     "second_lowest_m3s": 75.8,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 247.9,
+     "lowest_m3s": 107.0,
+     "second_lowest_m3s": 124.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 242.5,
+     "lowest_m3s": 59.5,
+     "second_lowest_m3s": 83.5,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 233.8,
+     "high": 233.8,
+     "lowest_year_high": 59.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -3.47,
+      18.84
+     ],
+     "turned": [
+      -9.96,
+      16.79
+     ]
+    },
+    "beside": {
+     "name": "Mare Tranquillitatis",
+     "beside": true,
+     "km": 510
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 111
+    },
+    "length_km": 28.2,
+    "design_m3s": 230.8,
+    "none": {
+     "mean_m3s": 230.7,
+     "lowest_m3s": 78.4,
+     "second_lowest_m3s": 97.7,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 230.6,
+     "lowest_m3s": 86.5,
+     "second_lowest_m3s": 108.5,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 230.7,
+     "lowest_m3s": 81.1,
+     "second_lowest_m3s": 100.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 230.8,
+     "high": 230.8,
+     "lowest_year_high": 81.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      26.41,
+      130.34
+     ],
+     "turned": [
+      26.98,
+      125.12
+     ]
+    },
+    "beside": {
+     "name": "Vernadskiy X",
+     "beside": true,
+     "km": 41
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 15185
+    },
+    "length_km": 6.1,
+    "design_m3s": 230.1,
+    "none": {
+     "mean_m3s": 234.2,
+     "lowest_m3s": 8.9,
+     "second_lowest_m3s": 43.6,
+     "years_at_the_threshold": 11,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 220.4,
+     "lowest_m3s": 67.8,
+     "second_lowest_m3s": 89.6,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 228.3,
+     "lowest_m3s": 49.1,
+     "second_lowest_m3s": 54.8,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 230.1,
+     "high": 230.0,
+     "lowest_year_high": 49.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      13.47,
+      -21.66
+     ],
+     "turned": [
+      9.6,
+      -22.38
+     ]
+    },
+    "beside": {
+     "name": "Rima Gay Lussac",
+     "beside": true,
+     "km": 22
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 43.1,
+    "design_m3s": 223.4,
+    "none": {
+     "mean_m3s": 225.6,
+     "lowest_m3s": 31.4,
+     "second_lowest_m3s": 39.3,
+     "years_at_the_threshold": 11,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 212.7,
+     "lowest_m3s": 75.1,
+     "second_lowest_m3s": 84.6,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 220.5,
+     "lowest_m3s": 52.4,
+     "second_lowest_m3s": 52.6,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 223.4,
+     "high": 223.4,
+     "lowest_year_high": 52.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -29.34,
+      -109.16
+     ],
+     "turned": [
+      -23.91,
+      -112.99
+     ]
+    },
+    "beside": {
+     "name": "Montes Rook",
+     "beside": true,
+     "km": 480
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 9626
+    },
+    "length_km": 11.2,
+    "design_m3s": 219.5,
+    "none": {
+     "mean_m3s": 224.2,
+     "lowest_m3s": 78.8,
+     "second_lowest_m3s": 81.3,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 224.6,
+     "lowest_m3s": 119.1,
+     "second_lowest_m3s": 145.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 224.0,
+     "lowest_m3s": 94.8,
+     "second_lowest_m3s": 142.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 219.2,
+     "high": 216.6,
+     "lowest_year_high": 91.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      2.53,
+      -14.34
+     ],
+     "turned": [
+      -1.96,
+      -16.17
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 1396
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 1334
+    },
+    "length_km": 19.9,
+    "design_m3s": 216.9,
+    "none": {
+     "mean_m3s": 216.8,
+     "lowest_m3s": 68.6,
+     "second_lowest_m3s": 77.0,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 216.1,
+     "lowest_m3s": 74.0,
+     "second_lowest_m3s": 109.7,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "wide": {
+     "mean_m3s": 216.6,
+     "lowest_m3s": 69.4,
+     "second_lowest_m3s": 92.9,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 216.9,
+     "high": 216.9,
+     "lowest_year_high": 69.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      4.47,
+      2.34
+     ],
+     "turned": [
+      -1.27,
+      0.59
+     ]
+    },
+    "beside": {
+     "name": "Rimae Triesnecker",
+     "beside": true,
+     "km": 78
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 13315
+    },
+    "length_km": 7.2,
+    "design_m3s": 216.6,
+    "none": {
+     "mean_m3s": 216.4,
+     "lowest_m3s": 86.2,
+     "second_lowest_m3s": 91.8,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 220.5,
+     "lowest_m3s": 115.9,
+     "second_lowest_m3s": 122.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 218.3,
+     "lowest_m3s": 93.9,
+     "second_lowest_m3s": 113.7,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 216.6,
+     "high": 216.6,
+     "lowest_year_high": 93.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      40.47,
+      -162.22
+     ],
+     "turned": [
+      46.9,
+      -165.94
+     ]
+    },
+    "beside": {
+     "name": "Schneller L",
+     "beside": false,
+     "km": 41
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 502
+    },
+    "length_km": 2.4,
+    "design_m3s": 216.1,
+    "none": {
+     "mean_m3s": 283.0,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 10,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 282.2,
+     "lowest_m3s": 139.4,
+     "second_lowest_m3s": 198.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 284.3,
+     "lowest_m3s": 8.5,
+     "second_lowest_m3s": 79.8,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "after_losses_m3s": {
+     "low": 216.0,
+     "high": 215.8,
+     "lowest_year_high": 8.2
+    },
+    "leaves_a_lake": true
+   }
+  ],
+  "sustained_only_with_storage": [
+   {
+    "end": {
+     "today": [
+      21.53,
+      -84.78
+     ],
+     "turned": [
+      24.62,
+      -84.08
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 793
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 241
+    },
+    "length_km": 5.3,
+    "design_m3s": 1315.9,
+    "none": {
+     "mean_m3s": 1384.1,
+     "lowest_m3s": 94.5,
+     "second_lowest_m3s": 265.3,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1473.7,
+     "lowest_m3s": 1193.0,
+     "second_lowest_m3s": 1204.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1366.5,
+     "lowest_m3s": 699.9,
+     "second_lowest_m3s": 774.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1315.4,
+     "high": 1312.5,
+     "lowest_year_high": 696.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      21.78,
+      -84.09
+     ],
+     "turned": [
+      24.79,
+      -83.35
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 773
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 1011
+    },
+    "length_km": 4.5,
+    "design_m3s": 1312.5,
+    "none": {
+     "mean_m3s": 1381.1,
+     "lowest_m3s": 93.4,
+     "second_lowest_m3s": 262.3,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1471.4,
+     "lowest_m3s": 1187.7,
+     "second_lowest_m3s": 1199.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1364.3,
+     "lowest_m3s": 698.7,
+     "second_lowest_m3s": 768.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1312.0,
+     "high": 1308.8,
+     "lowest_year_high": 695.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      21.22,
+      -81.41
+     ],
+     "turned": [
+      23.95,
+      -80.7
+     ]
+    },
+    "beside": {
+     "name": "Balboa B",
+     "beside": true,
+     "km": 40
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 3195
+    },
+    "length_km": 28.6,
+    "design_m3s": 1296.2,
+    "none": {
+     "mean_m3s": 1366.9,
+     "lowest_m3s": 85.5,
+     "second_lowest_m3s": 248.3,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1457.7,
+     "lowest_m3s": 1162.6,
+     "second_lowest_m3s": 1173.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1351.0,
+     "lowest_m3s": 696.3,
+     "second_lowest_m3s": 736.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1295.4,
+     "high": 1289.5,
+     "lowest_year_high": 689.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      44.09,
+      -159.72
+     ],
+     "turned": [
+      50.6,
+      -163.39
+     ]
+    },
+    "beside": {
+     "name": "Woltjer",
+     "beside": true,
+     "km": 24
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 10723
+    },
+    "length_km": 1.9,
+    "design_m3s": 1279.5,
+    "none": {
+     "mean_m3s": 1574.6,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1601.8,
+     "lowest_m3s": 1151.5,
+     "second_lowest_m3s": 1347.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1582.0,
+     "lowest_m3s": 653.6,
+     "second_lowest_m3s": 803.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1279.1,
+     "high": 1276.3,
+     "lowest_year_high": 650.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      16.84,
+      -76.84
+     ],
+     "turned": [
+      19.1,
+      -76.64
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 597
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 1715
+    },
+    "length_km": 60.3,
+    "design_m3s": 1244.4,
+    "none": {
+     "mean_m3s": 1318.6,
+     "lowest_m3s": 33.8,
+     "second_lowest_m3s": 215.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1409.2,
+     "lowest_m3s": 1103.9,
+     "second_lowest_m3s": 1125.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1304.6,
+     "lowest_m3s": 649.6,
+     "second_lowest_m3s": 711.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1243.0,
+     "high": 1230.7,
+     "lowest_year_high": 635.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      15.53,
+      -76.59
+     ],
+     "turned": [
+      17.77,
+      -76.55
+     ]
+    },
+    "beside": {
+     "name": "Oceanus Procellarum",
+     "beside": true,
+     "km": 602
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 11328
+    },
+    "length_km": 2.6,
+    "design_m3s": 1214.5,
+    "none": {
+     "mean_m3s": 1290.1,
+     "lowest_m3s": 12.5,
+     "second_lowest_m3s": 194.6,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1380.5,
+     "lowest_m3s": 1078.3,
+     "second_lowest_m3s": 1096.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1276.9,
+     "lowest_m3s": 596.4,
+     "second_lowest_m3s": 715.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1213.1,
+     "high": 1200.6,
+     "lowest_year_high": 582.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      40.41,
+      -154.97
+     ],
+     "turned": [
+      47.04,
+      -157.86
+     ]
+    },
+    "beside": {
+     "name": "Kulik L",
+     "beside": false,
+     "km": 30
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 177
+    },
+    "length_km": 13.4,
+    "design_m3s": 1198.6,
+    "none": {
+     "mean_m3s": 1366.7,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 142.7,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1402.4,
+     "lowest_m3s": 946.0,
+     "second_lowest_m3s": 1085.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1376.3,
+     "lowest_m3s": 604.0,
+     "second_lowest_m3s": 621.8,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1198.3,
+     "high": 1196.6,
+     "lowest_year_high": 602.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      40.78,
+      -156.28
+     ],
+     "turned": [
+      47.39,
+      -159.34
+     ]
+    },
+    "beside": {
+     "name": "Kulik",
+     "beside": false,
+     "km": 52
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 3291
+    },
+    "length_km": 11.9,
+    "design_m3s": 1197.9,
+    "none": {
+     "mean_m3s": 1366.6,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 139.4,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1402.5,
+     "lowest_m3s": 947.1,
+     "second_lowest_m3s": 1086.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1376.3,
+     "lowest_m3s": 609.7,
+     "second_lowest_m3s": 621.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1197.6,
+     "high": 1195.5,
+     "lowest_year_high": 607.2
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      38.34,
+      -153.53
+     ],
+     "turned": [
+      45.0,
+      -156.19
+     ]
+    },
+    "beside": {
+     "name": "Kulik K",
+     "beside": false,
+     "km": 45
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 630
+    },
+    "length_km": 14.4,
+    "design_m3s": 1189.5,
+    "none": {
+     "mean_m3s": 1344.0,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 152.0,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1386.4,
+     "lowest_m3s": 935.0,
+     "second_lowest_m3s": 1078.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1359.2,
+     "lowest_m3s": 578.4,
+     "second_lowest_m3s": 618.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1189.3,
+     "high": 1188.1,
+     "lowest_year_high": 577.0
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      37.84,
+      -153.97
+     ],
+     "turned": [
+      44.5,
+      -156.66
+     ]
+    },
+    "beside": {
+     "name": "Evershed D",
+     "beside": false,
+     "km": 56
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 359
+    },
+    "length_km": 1.5,
+    "design_m3s": 1188.9,
+    "none": {
+     "mean_m3s": 1341.6,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 156.7,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1384.3,
+     "lowest_m3s": 929.7,
+     "second_lowest_m3s": 1079.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1357.2,
+     "lowest_m3s": 579.6,
+     "second_lowest_m3s": 616.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1188.8,
+     "high": 1188.0,
+     "lowest_year_high": 578.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      37.66,
+      -154.66
+     ],
+     "turned": [
+      44.3,
+      -157.41
+     ]
+    },
+    "beside": {
+     "name": "Evershed D",
+     "beside": false,
+     "km": 43
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 119
+    },
+    "length_km": 10.5,
+    "design_m3s": 1187.4,
+    "none": {
+     "mean_m3s": 1339.6,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 158.5,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1382.1,
+     "lowest_m3s": 929.0,
+     "second_lowest_m3s": 1078.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1355.1,
+     "lowest_m3s": 576.2,
+     "second_lowest_m3s": 616.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1187.2,
+     "high": 1186.4,
+     "lowest_year_high": 575.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      36.22,
+      -155.28
+     ],
+     "turned": [
+      42.85,
+      -158.05
+     ]
+    },
+    "beside": {
+     "name": "Evershed C",
+     "beside": false,
+     "km": 59
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 797
+    },
+    "length_km": 4.3,
+    "design_m3s": 1166.2,
+    "none": {
+     "mean_m3s": 1313.8,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 172.7,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1356.1,
+     "lowest_m3s": 923.5,
+     "second_lowest_m3s": 1061.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1329.5,
+     "lowest_m3s": 545.0,
+     "second_lowest_m3s": 616.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1166.1,
+     "high": 1165.4,
+     "lowest_year_high": 544.2
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      41.72,
+      -157.03
+     ],
+     "turned": [
+      48.31,
+      -160.22
+     ]
+    },
+    "beside": {
+     "name": "Kulik",
+     "beside": false,
+     "km": 55
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 9983
+    },
+    "length_km": 1.9,
+    "design_m3s": 1163.1,
+    "none": {
+     "mean_m3s": 1338.8,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 77.4,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1377.5,
+     "lowest_m3s": 975.6,
+     "second_lowest_m3s": 1107.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1350.6,
+     "lowest_m3s": 613.8,
+     "second_lowest_m3s": 628.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1162.8,
+     "high": 1160.6,
+     "lowest_year_high": 611.2
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      35.34,
+      -155.16
+     ],
+     "turned": [
+      41.97,
+      -157.88
+     ]
+    },
+    "beside": {
+     "name": "Evdokimov",
+     "beside": false,
+     "km": 57
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 978
+    },
+    "length_km": 4.0,
+    "design_m3s": 1155.6,
+    "none": {
+     "mean_m3s": 1301.0,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 190.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1342.2,
+     "lowest_m3s": 922.9,
+     "second_lowest_m3s": 1048.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1316.2,
+     "lowest_m3s": 526.4,
+     "second_lowest_m3s": 619.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1155.5,
+     "high": 1154.8,
+     "lowest_year_high": 525.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      47.16,
+      -163.09
+     ],
+     "turned": [
+      53.54,
+      -167.47
+     ]
+    },
+    "beside": {
+     "name": "Montgolfier",
+     "beside": true,
+     "km": 62
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 39678
+    },
+    "length_km": 15.2,
+    "design_m3s": 1075.0,
+    "none": {
+     "mean_m3s": 1401.7,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 1403.1,
+     "lowest_m3s": 1081.0,
+     "second_lowest_m3s": 1094.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1396.8,
+     "lowest_m3s": 655.9,
+     "second_lowest_m3s": 662.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 1074.4,
+     "high": 1070.5,
+     "lowest_year_high": 651.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -35.16,
+      113.16
+     ],
+     "turned": [
+      -36.12,
+      116.08
+     ]
+    },
+    "beside": {
+     "name": "Milne M",
+     "beside": true,
+     "km": 27
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 2425
+    },
+    "length_km": 1.9,
+    "design_m3s": 877.5,
+    "none": {
+     "mean_m3s": 973.9,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 329.5,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 955.6,
+     "lowest_m3s": 865.1,
+     "second_lowest_m3s": 882.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 1002.3,
+     "lowest_m3s": 756.1,
+     "second_lowest_m3s": 839.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 877.5,
+     "high": 877.5,
+     "lowest_year_high": 756.1
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -36.41,
+      110.66
+     ],
+     "turned": [
+      -37.65,
+      113.8
+     ]
+    },
+    "beside": {
+     "name": "Milne N",
+     "beside": true,
+     "km": 23
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 481
+    },
+    "length_km": 6.1,
+    "design_m3s": 830.8,
+    "none": {
+     "mean_m3s": 930.9,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 293.2,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 907.6,
+     "lowest_m3s": 819.8,
+     "second_lowest_m3s": 824.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 956.7,
+     "lowest_m3s": 731.8,
+     "second_lowest_m3s": 800.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 830.7,
+     "high": 830.2,
+     "lowest_year_high": 731.2
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -36.16,
+      109.47
+     ],
+     "turned": [
+      -37.54,
+      112.56
+     ]
+    },
+    "beside": {
+     "name": "Milne P",
+     "beside": true,
+     "km": 52
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 156477
+    },
+    "length_km": 4.9,
+    "design_m3s": 821.3,
+    "none": {
+     "mean_m3s": 922.2,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 285.9,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 897.9,
+     "lowest_m3s": 807.6,
+     "second_lowest_m3s": 816.4,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 947.4,
+     "lowest_m3s": 726.9,
+     "second_lowest_m3s": 793.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 821.2,
+     "high": 820.3,
+     "lowest_year_high": 725.9
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -11.78,
+      66.28
+     ],
+     "turned": [
+      -17.42,
+      65.39
+     ]
+    },
+    "beside": {
+     "name": "Mare Fecunditatis",
+     "beside": true,
+     "km": 393
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 6276
+    },
+    "length_km": 12.5,
+    "design_m3s": 651.6,
+    "none": {
+     "mean_m3s": 936.1,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 13,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 690.9,
+     "lowest_m3s": 575.1,
+     "second_lowest_m3s": 579.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 781.5,
+     "lowest_m3s": 489.8,
+     "second_lowest_m3s": 505.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 651.6,
+     "high": 651.3,
+     "lowest_year_high": 489.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -50.59,
+      131.28
+     ],
+     "turned": [
+      -49.26,
+      137.28
+     ]
+    },
+    "beside": {
+     "name": "Hildegard",
+     "beside": true,
+     "km": 76
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 8878
+    },
+    "length_km": 6.7,
+    "design_m3s": 621.4,
+    "none": {
+     "mean_m3s": 823.1,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 8.1,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 604.6,
+     "lowest_m3s": 574.9,
+     "second_lowest_m3s": 576.3,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 573.4,
+     "lowest_m3s": 424.7,
+     "second_lowest_m3s": 466.1,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 621.1,
+     "high": 620.0,
+     "lowest_year_high": 423.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -9.03,
+      65.03
+     ],
+     "turned": [
+      -14.76,
+      63.92
+     ]
+    },
+    "beside": {
+     "name": "Mare Fecunditatis",
+     "beside": true,
+     "km": 342
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 1129
+    },
+    "length_km": 1.9,
+    "design_m3s": 619.4,
+    "none": {
+     "mean_m3s": 936.1,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 670.2,
+     "lowest_m3s": 493.4,
+     "second_lowest_m3s": 520.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 765.5,
+     "lowest_m3s": 396.7,
+     "second_lowest_m3s": 408.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 619.3,
+     "high": 619.0,
+     "lowest_year_high": 396.3
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -7.16,
+      65.53
+     ],
+     "turned": [
+      -12.86,
+      64.31
+     ]
+    },
+    "beside": {
+     "name": "Mare Fecunditatis",
+     "beside": true,
+     "km": 357
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 14960
+    },
+    "length_km": 11.8,
+    "design_m3s": 602.0,
+    "none": {
+     "mean_m3s": 920.7,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 651.8,
+     "lowest_m3s": 471.0,
+     "second_lowest_m3s": 504.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 747.5,
+     "lowest_m3s": 367.4,
+     "second_lowest_m3s": 396.2,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 601.8,
+     "high": 600.9,
+     "lowest_year_high": 366.4
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -4.97,
+      63.41
+     ],
+     "turned": [
+      -10.8,
+      62.02
+     ]
+    },
+    "beside": {
+     "name": "Mare Fecunditatis",
+     "beside": true,
+     "km": 307
+    },
+    "ends": {
+     "kind": "lake",
+     "lake_km2": 129
+    },
+    "length_km": 2.7,
+    "design_m3s": 574.0,
+    "none": {
+     "mean_m3s": 927.2,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 598.2,
+     "lowest_m3s": 454.9,
+     "second_lowest_m3s": 465.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 713.5,
+     "lowest_m3s": 309.2,
+     "second_lowest_m3s": 322.7,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 573.8,
+     "high": 572.4,
+     "lowest_year_high": 307.5
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -5.34,
+      63.03
+     ],
+     "turned": [
+      -11.2,
+      61.66
+     ]
+    },
+    "beside": {
+     "name": "Langrenus T",
+     "beside": true,
+     "km": 28
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "near_side_main"
+    },
+    "length_km": 2.7,
+    "design_m3s": 572.8,
+    "none": {
+     "mean_m3s": 926.2,
+     "lowest_m3s": 0.0,
+     "second_lowest_m3s": 0.0,
+     "years_at_the_threshold": 12,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 596.8,
+     "lowest_m3s": 453.5,
+     "second_lowest_m3s": 465.0,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 712.2,
+     "lowest_m3s": 307.4,
+     "second_lowest_m3s": 321.9,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 572.6,
+     "high": 571.0,
+     "lowest_year_high": 305.6
+    },
+    "leaves_a_lake": true
+   },
+   {
+    "end": {
+     "today": [
+      -21.34,
+      178.16
+     ],
+     "turned": [
+      -15.84,
+      177.61
+     ]
+    },
+    "beside": {
+     "name": "Bergstrand J",
+     "beside": false,
+     "km": 34
+    },
+    "ends": {
+     "kind": "sea",
+     "water": "south_pole_aitken"
+    },
+    "length_km": 43.3,
+    "design_m3s": 530.4,
+    "none": {
+     "mean_m3s": 531.4,
+     "lowest_m3s": 47.1,
+     "second_lowest_m3s": 309.1,
+     "years_at_the_threshold": 14,
+     "sustained": false
+    },
+    "narrow": {
+     "mean_m3s": 537.9,
+     "lowest_m3s": 296.7,
+     "second_lowest_m3s": 342.6,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "wide": {
+     "mean_m3s": 530.7,
+     "lowest_m3s": 213.9,
+     "second_lowest_m3s": 222.5,
+     "years_at_the_threshold": 15,
+     "sustained": true
+    },
+    "after_losses_m3s": {
+     "low": 530.2,
+     "high": 528.8,
+     "lowest_year_high": 212.2
+    },
+    "leaves_a_lake": true
+   }
+  ]
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/sustained_rivers/sustained_rivers_16ppd.npz",
+  "sha256": "e0087153e66b07e5184fdd9253f20e1e9c0982802c2b299f2743d3c0ee58dd34"
+ },
+ "reaches": {
+  "path": "/media/projectspace/terluna-research/atlas-round/sustained_rivers/sustained_rivers_reaches.json",
+  "sha256": "a79778573dc1c3c19854bc493c8aa48025c5245bcc0e228618ad223847d8faaa"
+ },
+ "seconds": 553
+}

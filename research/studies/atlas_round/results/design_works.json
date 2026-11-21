@@ -1,0 +1,184 @@
+{
+ "schema": "terluna.research.atlas-round-design-works/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/design_works.py": "dc28a4d235bb00bcdb35b4309b2c8f8b090e9e4b60548302416af6835366c550"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c"
+ },
+ "assembled_from": {
+  "/media/projectspace/terluna-research/atlas-round/sustained_rivers/work/design_structure.npz": "73e9934cc2c7430d7750335145f5b61b48db53bdea1ef39dbdfce2f50eb7b5af",
+  "/media/projectspace/terluna-research/atlas-round/lake_rule/work/balance_setting.npz": "a50c3efe014b595f8dcde85555971ff798137eefa2b212fcb00b8ac828b53bc8",
+  "structure_key": {
+   "record": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe",
+   "code": {
+    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
+    "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
+    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
+    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+    "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
+    "research/studies/atlas_round/moisture_final.py": "d9e84e6fda4474f0094e1ccd68c4f8c594e758e04d0b513a86a889fd90d2f4b4",
+    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
+    "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
+    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
+   }
+  },
+  "setting_key": {
+   "structure": "73e9934cc2c7430d7750335145f5b61b48db53bdea1ef39dbdfce2f50eb7b5af",
+   "code": {
+    "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
+    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
+    "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
+    "research/studies/south_sea_ocean/inflows.py": "c51a34dd93933b125371d08ce8511776acd180c1012db31a6f65d1d8b1acfaee",
+    "geography/crustal_loading.py": "b57a36e705b8b4e4294a7549ab1ccccd2086f83e9008230464adb1723491f954",
+    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
+   }
+  }
+ },
+ "evidence": "The design's fixed waters and works on the redrawn floor, assembled from the structure the routing modules built for the design on the present lake rule (sustained_rivers.design_structure, lake_rule_balance.setting): cells that follow from the floor, the seas' levels and the cuts chosen on 16 November, and depend on no climate and no lake rule. Not yet found again from the floor alone by this module.",
+ "reading_rule": "Levels in m above the redrawn common level; the product's own rule is in its metadata.",
+ "levels_above_common_m": {
+  "moscoviense": 3448.77,
+  "orientale": 2341.33,
+  "smythii_marginis": 719.95,
+  "south_pole_aitken": 0.0,
+  "humboldtianum": 0.0
+ },
+ "crest_above_common_m": -68.72,
+ "works": [
+  {
+   "kind": "salt_sea_weir",
+   "sign": 1,
+   "at": {
+    "today": [
+     -10.72,
+     175.09
+    ],
+    "settled": [
+     -5.45,
+     173.84
+    ]
+   }
+  },
+  {
+   "kind": "orientale",
+   "sign": 1,
+   "at": {
+    "today": [
+     -7.16,
+     272.03
+    ],
+    "settled": [
+     -3.59,
+     -90.35
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis",
+   "sign": 1,
+   "at": {
+    "today": [
+     24.78,
+     82.66
+    ],
+    "settled": [
+     20.26,
+     78.74
+    ]
+   }
+  },
+  {
+   "kind": "humboldtianum_branch",
+   "sign": 1,
+   "at": {
+    "today": [
+     35.22,
+     138.72
+    ],
+    "settled": [
+     36.68,
+     132.11
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis_branch",
+   "sign": 1,
+   "at": {
+    "today": [
+     35.22,
+     138.72
+    ],
+    "settled": [
+     36.68,
+     132.11
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis_branch",
+   "sign": -1,
+   "at": {
+    "today": [
+     36.09,
+     137.47
+    ],
+    "settled": [
+     37.4,
+     130.69
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis_branch",
+   "sign": 1,
+   "at": {
+    "today": [
+     34.22,
+     132.97
+    ],
+    "settled": [
+     35.02,
+     126.51
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis_branch",
+   "sign": -1,
+   "at": {
+    "today": [
+     33.34,
+     132.03
+    ],
+    "settled": [
+     34.05,
+     125.72
+    ]
+   }
+  },
+  {
+   "kind": "smythii_marginis_branch",
+   "sign": 1,
+   "at": {
+    "today": [
+     31.16,
+     131.53
+    ],
+    "settled": [
+     31.82,
+     125.58
+    ]
+   }
+  }
+ ],
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz",
+  "sha256": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
+ },
+ "seconds": 10
+}

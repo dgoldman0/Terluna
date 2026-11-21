@@ -1,0 +1,7562 @@
+{
+ "schema": "terluna.research.atlas-round-lunar-sounds/1",
+ "producer": "research.studies.atlas_round.lunar_sounds",
+ "inputs": {
+  "research/studies/atlas_round/district_names.py": "2d31e0809faf8987e024352cbf73cb15529971bc6330c57f3213c0048ec709fd",
+  "research/studies/atlas_round/place_names.json": "6310b57648748aec6264c94cb8ed61d5d52ccc3d83e0246d9624075da607304d",
+  "research/studies/atlas_round/results/districts.json": "7586a27c98d68c0b827cc2d7f948ec62d641d7e01d8e41b69db9a55e86957f92"
+ },
+ "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese, Esperanto, Louisiana French, Somali, Uyghur, Setswana, English and Spanish, and no speaker has checked them; a dictionary check of one batch of names is described in the paper.",
+ "reading_rule": "tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and whether the two agree (stands). record counts the draft record's generated names and those the words make today.",
+ "framework": {
+  "vowels": [
+   "a",
+   "e",
+   "i",
+   "o",
+   "u"
+  ],
+  "consonants": [
+   "ng",
+   "p",
+   "b",
+   "t",
+   "d",
+   "k",
+   "g",
+   "m",
+   "n",
+   "s",
+   "h",
+   "l",
+   "r",
+   "w",
+   "y",
+   "'",
+   "f",
+   "v"
+  ],
+  "diphthongs": [
+   "ai",
+   "au",
+   "oi",
+   "ou"
+  ],
+  "admitted_in_established_words": [
+   "f",
+   "v"
+  ],
+  "syllable": "(C)V(C)",
+  "stress": "the syllable before the last, or the rightmost long vowel",
+  "article": "h', written as the author writes it; its saying depends on the local language"
+ },
+ "rule_sheets": {
+  "kk": "Kazakh and Kyrgyz in their own letters. Kept: ng, final consonants, the rounding harmony. Changed: the uvular\nstop and fricative to k and g; sh and z to s; the j of жылан to y, the sound it answers to across the Turkic\nlanguages; front rounded ö and ü to o and u.",
+  "mn": "Mongolian in its own letters. Kept: long vowels, written double. Changed: its sibilants and affricates to s; a\nfinal soft sign is the old -i (говь, gobi).",
+  "qu": "Quechua in its standard spelling. Kept: the lowering of i and u to e and o beside the uvular q, which Quechua\nspeaks and does not write, so that qucha is kosa when q becomes k. Changed: q to k; ch and sh to s; ll and ñ to l\nand n; the aspirated and ejective stops to the plain ones.",
+  "ar": "Arabic and Tamazight in Latin letters, with ʿ and ʾ where the parent has them. Kept: the two throat stops as\nthe framework's glottal stop; f. Changed: the emphatics to their plain partners and q to k, as the reference does\nwith its Akkadian words; kh and the deep h to h; gh to g; sh, z and th to s, s and t; j to g, as Cairo says it;\nlong vowels to short.",
+  "sw": "Swahili in its standard spelling; m° marks the syllabic m of the tree-and-river class. Kept: its five vowels,\nwhich are the framework's; f and v; ng as the framework's ng. Changed: sh, ch and z to s; j to y; a syllabic nasal\ngets back the vowel it lost, mu- in the tree-and-river class (mto, muto) and i- before the nasal elsewhere, as\nits sister languages have it (mvua, imvua); a consonant and a glide that open a word get a vowel between.",
+  "tl": "Tagalog in its standard spelling, with its glottal stop written where it stands between vowels. Tagalog's\nsounds are the framework's own.",
+  "he": "Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k. A cluster\nopens with e, the vowel Hebrew itself puts there (zman, seman).",
+  "ja": "Japanese in the Hepburn spelling. Kept: its five vowels and long vowels. Changed to the spelling that follows\nits own sound system: shi, chi, tsu, fu are si, ti, tu, hu; z and j are s; a consonant and y before a vowel get\nan i between (kyo, kiyo).",
+  "eo": "Proto-Olivolingvo, the author's Esperanto-based tongue, in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. How its clusters open depends on the local language\nthat takes the word up; here they take the framework's own repair (kratero, karatero).",
+  "fr": "Louisiana French and the Creoles of Louisiana and Haiti beside it, each word as it is said, in the phonetic\nalphabet's letters, since French spelling carries letters that are not sounded. Kept: f and v, and the h that\nLouisiana still sounds. Changed: the hushing sounds and z to s; gn to n followed by y; the rounded front vowels\nunrounded, as the Creoles unround them (lune, lin; bleu, ble); a nasal vowel to its vowel with n; a final stop or\nfricative loses the l or r after it, as it does in Louisiana speech (sable, sab).",
+  "so": "Somali in its own spelling. Kept: long vowels, written double; the glottal stop. Changed: c, the deep throat\nsound, to the glottal stop; x and kh to h; q to k; sh to s; dh to d; j to y. Somali has no p or v, so a borrowed\nname comes with b and f.",
+  "ug": "Uyghur in Latin letters. Kept: ng, final consonants. Changed: q and gh to k and g; x to h; ch, sh, zh and z to\ns; j to y; ö, ü and é to o, u and e; v to w.",
+  "tn": "Setswana in its own spelling. Kept: ng, and its open syllables. Changed: kg to k and g, its throat sound, to h\n(Kgalagadi comes out as kalahadi, near the form English made of it); the breathed stops ph, th, kh to p, t, k;\ntl and tlh to t; ts, tsh and š to s; j to y.",
+  "en": "English of the American West, each word as it is said, in the phonetic alphabet's letters. Kept: f, v, h, the\nr that the West sounds, and the glides ai, au, oi and ou. Changed: th to t or d; the hushing sounds, z, ch and j\nto s; the vowel of 'say' to e; the short vowels to the nearest of the five.",
+  "es": "Spanish of New Mexico in its own spelling. Kept: its five vowels, the framework's own. Changed: ll to y; j and\nthe soft g to h; z and the soft c to s, ch to s; v to b, as Spanish says it; ñ to n followed by y; the silent h\ndropped; rr to r.",
+  "te": "Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the\nreference's fanga does.",
+  "la": "A name from elsewhere in Latin letters with its sounds marked (zh, sh, ch, ts, z, j, q, long vowels)."
+ },
+ "tongues": {
+  "terlunan": {
+   "label": "Terlunan",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "te:poka",
+     "read": "poka",
+     "passed": "poka",
+     "said": "PO.ka",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "te:galpoka",
+     "read": "galpoka",
+     "passed": "galpoka",
+     "said": "gal.PO.ka",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "te:loko",
+     "read": "loko",
+     "passed": "loko",
+     "said": "LO.ko",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "te:siyenloko",
+     "read": "siyenloko",
+     "passed": "siyenloko",
+     "said": "si.yen.LO.ko",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "te:awa",
+     "read": "awa",
+     "passed": "awa",
+     "said": "A.wa",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "te:awaawa",
+     "read": "awaawa",
+     "passed": "awaawa",
+     "said": "a.WAA.wa",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "te:mania",
+     "read": "mania",
+     "passed": "mania",
+     "said": "ma.NI.a",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "te:puke",
+     "read": "puke",
+     "passed": "puke",
+     "said": "PU.ke",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "te:kur",
+     "read": "kur",
+     "passed": "kur",
+     "said": "KUR",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "te:hiwi",
+     "read": "hiwi",
+     "passed": "hiwi",
+     "said": "HI.wi",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "te:pari",
+     "read": "pari",
+     "passed": "pari",
+     "said": "PA.ri",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "te:motu",
+     "read": "motu",
+     "passed": "motu",
+     "said": "MO.tu",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "te:fanga",
+     "read": "fanga",
+     "passed": "fanga",
+     "said": "FA.nga",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "te:tahatai",
+     "read": "tahatai",
+     "passed": "tahatai",
+     "said": "ta.HA.tai",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "te:koawa",
+     "read": "koawa",
+     "passed": "koawa",
+     "said": "ko.A.wa",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "te:moana",
+     "read": "moana",
+     "passed": "moana",
+     "said": "mo.A.na",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "te:lim",
+     "read": "lim",
+     "passed": "lim",
+     "said": "LIM",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "te:puehu",
+     "read": "puehu",
+     "passed": "puehu",
+     "said": "pu.E.hu",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "te:matie",
+     "read": "matie",
+     "passed": "matie",
+     "said": "ma.TI.e",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "te:fenua",
+     "read": "fenua",
+     "passed": "fenua",
+     "said": "fe.NU.a",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "te:rere",
+     "read": "rere",
+     "passed": "rere",
+     "said": "RE.re",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "te:puna",
+     "read": "puna",
+     "passed": "puna",
+     "said": "PU.na",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "te:pooiri",
+     "read": "pooiri",
+     "passed": "pooiri",
+     "said": "POO.i.ri",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "te:'uo'uo",
+     "read": "'uo'uo",
+     "passed": "'uo'uo",
+     "said": "'u.o.'U.o",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "te:'ute'ute",
+     "read": "'ute'ute",
+     "passed": "'ute'ute",
+     "said": "'u.te.'U.te",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "te:liyukset",
+     "read": "liyukset",
+     "passed": "liyukset",
+     "said": "li.YUK.set",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "te:kim",
+     "read": "kim",
+     "passed": "kim",
+     "said": "KIM",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "te:ninamu",
+     "read": "ninamu",
+     "passed": "ninamu",
+     "said": "ni.NA.mu",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "te:gal",
+     "read": "gal",
+     "passed": "gal",
+     "said": "GAL",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "te:iti",
+     "read": "iti",
+     "passed": "iti",
+     "said": "I.ti",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "te:teitei",
+     "read": "teitei",
+     "passed": "teitei",
+     "said": "te.i.TE.i",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "te:hohonu",
+     "read": "hohonu",
+     "passed": "hohonu",
+     "said": "ho.HO.nu",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "te:roa",
+     "read": "roa",
+     "passed": "roa",
+     "said": "RO.a",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "te:ul",
+     "read": "ul",
+     "passed": "ul",
+     "said": "UL",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "te:gibil",
+     "read": "gibil",
+     "passed": "gibil",
+     "said": "GI.bil",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "te:maroke",
+     "read": "maroke",
+     "passed": "maroke",
+     "said": "ma.RO.ke",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "te:maaku",
+     "read": "maaku",
+     "passed": "maaku",
+     "said": "MAA.ku",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "te:mehana",
+     "read": "mehana",
+     "passed": "mehana",
+     "said": "me.HA.na",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "te:maatao",
+     "read": "maatao",
+     "passed": "maatao",
+     "said": "MAA.ta.o",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "te:nuru",
+     "read": "nuru",
+     "passed": "nuru",
+     "said": "NU.ru",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "te:ata",
+     "read": "ata",
+     "passed": "ata",
+     "said": "A.ta",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "te:musu",
+     "read": "musu",
+     "passed": "musu",
+     "said": "MU.su",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "te:feti'a",
+     "read": "feti'a",
+     "passed": "feti'a",
+     "said": "fe.TI.'a",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "te:dungu",
+     "read": "dungu",
+     "passed": "dungu",
+     "said": "DU.ngu",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "te:kohu",
+     "read": "kohu",
+     "passed": "kohu",
+     "said": "KO.hu",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "te:ua",
+     "read": "ua",
+     "passed": "ua",
+     "said": "U.a",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "te:mata'i",
+     "read": "mata'i",
+     "passed": "mata'i",
+     "said": "ma.TA.'i",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "te:raa",
+     "read": "raa",
+     "passed": "raa",
+     "said": "RAA",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "te:honua",
+     "read": "honua",
+     "passed": "honua",
+     "said": "ho.NU.a",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "te:abnu",
+     "read": "abnu",
+     "passed": "abnu",
+     "said": "AB.nu",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "te:one",
+     "read": "one",
+     "passed": "one",
+     "said": "O.ne",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "te:miti",
+     "read": "miti",
+     "passed": "miti",
+     "said": "MI.ti",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "te:tama",
+     "read": "tama",
+     "passed": "tama",
+     "said": "TA.ma",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "te:rau",
+     "read": "rau",
+     "passed": "rau",
+     "said": "RAU",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "te:tiare",
+     "read": "tiare",
+     "passed": "tiare",
+     "said": "ti.A.re",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "te:siyen",
+     "read": "siyen",
+     "passed": "siyen",
+     "said": "SI.yen",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "te:liyong",
+     "read": "liyong",
+     "passed": "liyong",
+     "said": "LI.yong",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "te:vero",
+     "read": "vero",
+     "passed": "vero",
+     "said": "VE.ro",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "te:marino",
+     "read": "marino",
+     "passed": "marino",
+     "said": "ma.RI.no",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "te:maarama",
+     "read": "maarama",
+     "passed": "maarama",
+     "said": "MAA.ra.ma",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "te:momona",
+     "read": "momona",
+     "passed": "momona",
+     "said": "mo.MO.na",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "te:monamona",
+     "read": "monamona",
+     "passed": "monamona",
+     "said": "mo.na.MO.na",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "te:tamata",
+     "read": "tamata",
+     "passed": "tamata",
+     "said": "ta.MA.ta",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "te:motu",
+     "read": "motu",
+     "passed": "motu",
+     "said": "MO.tu",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "te:'ite",
+     "read": "'ite",
+     "passed": "'ite",
+     "said": "'I.te",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "te:tonga",
+     "read": "tonga",
+     "passed": "tonga",
+     "said": "TO.nga",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "te:hikina",
+     "read": "hikina",
+     "passed": "hikina",
+     "said": "hi.KI.na",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "te:taha",
+     "read": "taha",
+     "passed": "taha",
+     "said": "TA.ha",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "te:'are",
+     "read": "'are",
+     "passed": "'are",
+     "said": "'A.re",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "te:huka",
+     "read": "huka",
+     "passed": "huka",
+     "said": "HU.ka",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "te:nakahi",
+     "read": "nakahi",
+     "passed": "nakahi",
+     "said": "na.KA.hi",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "te:tomairangi",
+     "read": "tomairangi",
+     "passed": "tomairangi",
+     "said": "to.mai.RA.ngi",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "te:sung",
+     "read": "sung",
+     "passed": "sung",
+     "said": "SUNG",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "te:here",
+     "read": "here",
+     "passed": "here",
+     "said": "HE.re",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "te:taratara",
+     "read": "taratara",
+     "passed": "taratara",
+     "said": "ta.ra.TA.ra",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "te:aumaru",
+     "read": "aumaru",
+     "passed": "aumaru",
+     "said": "au.MA.ru",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "te:whakapono",
+     "read": "fakapono",
+     "passed": "fakapono",
+     "said": "fa.ka.PO.no",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "te:angitu",
+     "read": "angitu",
+     "passed": "angitu",
+     "said": "a.NGI.tu",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "te:mung",
+     "read": "mung",
+     "passed": "mung",
+     "said": "MUNG",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "te:mate",
+     "read": "mate",
+     "passed": "mate",
+     "said": "MA.te",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "te:taime",
+     "read": "taime",
+     "passed": "taime",
+     "said": "TAI.me",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "te:oto",
+     "read": "oto",
+     "passed": "oto",
+     "said": "O.to",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "te:koanga",
+     "read": "koanga",
+     "passed": "koanga",
+     "said": "ko.A.nga",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "te:ngahuru",
+     "read": "ngahuru",
+     "passed": "ngahuru",
+     "said": "nga.HU.ru",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "te:raumati",
+     "read": "raumati",
+     "passed": "raumati",
+     "said": "rau.MA.ti",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "te:hotoke",
+     "read": "hotoke",
+     "passed": "hotoke",
+     "said": "ho.TO.ke",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "te:mong",
+     "read": "mong",
+     "passed": "mong",
+     "said": "MONG",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "te:maru",
+     "read": "maru",
+     "passed": "maru",
+     "said": "MA.ru",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "te:damku",
+     "read": "damku",
+     "passed": "damku",
+     "said": "DAM.ku",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "te:manawanui",
+     "read": "manawanui",
+     "passed": "manawanui",
+     "said": "ma.na.wa.NU.i",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "te:mokemoke",
+     "read": "mokemoke",
+     "passed": "mokemoke",
+     "said": "mo.ke.MO.ke",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "te:wareware",
+     "read": "wareware",
+     "passed": "wareware",
+     "said": "wa.re.WA.re",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "te:mataku",
+     "read": "mataku",
+     "passed": "mataku",
+     "said": "ma.TA.ku",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "te:koa",
+     "read": "koa",
+     "passed": "koa",
+     "said": "KO.a",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "te:hiranga",
+     "read": "hiranga",
+     "passed": "hiranga",
+     "said": "hi.RA.nga",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "te:pooiri",
+     "read": "pooiri",
+     "passed": "pooiri",
+     "said": "POO.i.ri",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "te:salalu",
+     "read": "salalu",
+     "passed": "salalu",
+     "said": "sa.LA.lu",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "te:pirau",
+     "read": "pirau",
+     "passed": "pirau",
+     "said": "PI.rau",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "te:mate",
+     "read": "mate",
+     "passed": "mate",
+     "said": "MA.te",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "olivolingvo": {
+   "label": "Proto-Olivolingvo",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "eo:kratero",
+     "read": "kratero",
+     "passed": "karatero",
+     "said": "ka.ra.TE.ro",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "eo:emeko",
+     "read": "emeko",
+     "passed": "emeko",
+     "said": "e.ME.ko",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "eo:lago",
+     "read": "lago",
+     "passed": "lago",
+     "said": "LA.go",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "eo:lagim",
+     "read": "lagim",
+     "passed": "lagim",
+     "said": "LA.gim",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "eo:naharo",
+     "read": "naharo",
+     "passed": "naharo",
+     "said": "na.HA.ro",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "eo:valo",
+     "read": "valo",
+     "passed": "valo",
+     "said": "VA.lo",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "eo:ebeno",
+     "read": "ebeno",
+     "passed": "ebeno",
+     "said": "e.BE.no",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "eo:montetim",
+     "read": "montetim",
+     "passed": "montetim",
+     "said": "mon.TE.tim",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "eo:harim",
+     "read": "harim",
+     "passed": "harim",
+     "said": "HA.rim",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "eo:kresto",
+     "read": "kresto",
+     "passed": "keresto",
+     "said": "ke.RES.to",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "eo:klifo",
+     "read": "klifo",
+     "passed": "kilifo",
+     "said": "ki.LI.fo",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "eo:insulo",
+     "read": "insulo",
+     "passed": "insulo",
+     "said": "in.SU.lo",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "eo:golfo",
+     "read": "golfo",
+     "passed": "golfo",
+     "said": "GOL.fo",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "eo:bordo",
+     "read": "bordo",
+     "passed": "bordo",
+     "said": "BOR.do",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "eo:markolo",
+     "read": "markolo",
+     "passed": "markolo",
+     "said": "mar.KO.lo",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "eo:jamo",
+     "read": "yamo",
+     "passed": "yamo",
+     "said": "YA.mo",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "eo:jaaro",
+     "read": "yaaro",
+     "passed": "yaaro",
+     "said": "YAA.ro",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "eo:midbaro",
+     "read": "midbaro",
+     "passed": "midbaro",
+     "said": "mid.BA.ro",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "eo:kampo",
+     "read": "kampo",
+     "passed": "kampo",
+     "said": "KAM.po",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "eo:erco",
+     "read": "erso",
+     "passed": "erso",
+     "said": "ER.so",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "eo:akvofalo",
+     "read": "akvofalo",
+     "passed": "akvofalo",
+     "said": "ak.vo.FA.lo",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "eo:eino",
+     "read": "eino",
+     "passed": "eino",
+     "said": "e.I.no",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "eo:shaxora",
+     "read": "sahora",
+     "passed": "sahora",
+     "said": "sa.HO.ra",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "eo:lavana",
+     "read": "lavana",
+     "passed": "lavana",
+     "said": "la.VA.na",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "eo:aduma",
+     "read": "aduma",
+     "passed": "aduma",
+     "said": "a.DU.ma",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "eo:jaroka",
+     "read": "yaroka",
+     "passed": "yaroka",
+     "said": "ya.RO.ka",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "eo:zahava",
+     "read": "sahava",
+     "passed": "sahava",
+     "said": "sa.HA.va",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "eo:kaĥola",
+     "read": "kahola",
+     "passed": "kahola",
+     "said": "ka.HO.la",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "eo:gadola",
+     "read": "gadola",
+     "passed": "gadola",
+     "said": "ga.DO.la",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "eo:ketana",
+     "read": "ketana",
+     "passed": "ketana",
+     "said": "ke.TA.na",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "eo:alta",
+     "read": "alta",
+     "passed": "alta",
+     "said": "AL.ta",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "eo:profunda",
+     "read": "profunda",
+     "passed": "porofunda",
+     "said": "po.ro.FUN.da",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "eo:longa",
+     "read": "longa",
+     "passed": "longa",
+     "said": "LO.nga",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "eo:atika",
+     "read": "atika",
+     "passed": "atika",
+     "said": "a.TI.ka",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "eo:ĥadaŝa",
+     "read": "hadasa",
+     "passed": "hadasa",
+     "said": "ha.DA.sa",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "eo:seka",
+     "read": "seka",
+     "passed": "seka",
+     "said": "SE.ka",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "eo:malseka",
+     "read": "malseka",
+     "passed": "malseka",
+     "said": "mal.SE.ka",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "eo:varma",
+     "read": "varma",
+     "passed": "varma",
+     "said": "VAR.ma",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "eo:keraha",
+     "read": "keraha",
+     "passed": "keraha",
+     "said": "ke.RA.ha",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "eo:luma",
+     "read": "luma",
+     "passed": "luma",
+     "said": "LU.ma",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "eo:ŝaĥara",
+     "read": "sahara",
+     "passed": "sahara",
+     "said": "sa.HA.ra",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "eo:lajla",
+     "read": "laila",
+     "passed": "laila",
+     "said": "LAI.la",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "eo:kokava",
+     "read": "kokava",
+     "passed": "kokava",
+     "said": "ko.KA.va",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "eo:anana",
+     "read": "anana",
+     "passed": "anana",
+     "said": "a.NA.na",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "eo:nebula",
+     "read": "nebula",
+     "passed": "nebula",
+     "said": "ne.BU.la",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "eo:geŝema",
+     "read": "gesema",
+     "passed": "gesema",
+     "said": "ge.SE.ma",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "eo:ruaĥa",
+     "read": "ruaha",
+     "passed": "ruaha",
+     "said": "ru.A.ha",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "eo:ŝemeŝa",
+     "read": "semesa",
+     "passed": "semesa",
+     "said": "se.ME.sa",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "eo:tera",
+     "read": "tera",
+     "passed": "tera",
+     "said": "TE.ra",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "eo:ŝtona",
+     "read": "stona",
+     "passed": "sotona",
+     "said": "so.TO.na",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "eo:sabla",
+     "read": "sabla",
+     "passed": "sabla",
+     "said": "SAB.la",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "eo:melaĥa",
+     "read": "melaha",
+     "passed": "melaha",
+     "said": "me.LA.ha",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "eo:majima",
+     "read": "mayima",
+     "passed": "mayima",
+     "said": "ma.YI.ma",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "eo:folia",
+     "read": "folia",
+     "passed": "folia",
+     "said": "fo.LI.a",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "eo:flora",
+     "read": "flora",
+     "passed": "folora",
+     "said": "fo.LO.ra",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "eo:mila",
+     "read": "mila",
+     "passed": "mila",
+     "said": "MI.la",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "eo:ĝemela",
+     "read": "gemela",
+     "passed": "gemela",
+     "said": "ge.ME.la",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "eo:ŝtorma",
+     "read": "storma",
+     "passed": "sotorma",
+     "said": "so.TOR.ma",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "eo:trankvila",
+     "read": "trankvila",
+     "passed": "tarankivila",
+     "said": "ta.ran.ki.VI.la",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "eo:serena",
+     "read": "serena",
+     "passed": "serena",
+     "said": "se.RE.na",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "eo:fekunda",
+     "read": "fekunda",
+     "passed": "fekunda",
+     "said": "fe.KUN.da",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "eo:nektara",
+     "read": "nektara",
+     "passed": "nektara",
+     "said": "nek.TA.ra",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "eo:kriza",
+     "read": "krisa",
+     "passed": "kirisa",
+     "said": "ki.RI.sa",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "eo:insula",
+     "read": "insula",
+     "passed": "insula",
+     "said": "in.SU.la",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "eo:konata",
+     "read": "konata",
+     "passed": "konata",
+     "said": "ko.NA.ta",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "eo:suda",
+     "read": "suda",
+     "passed": "suda",
+     "said": "SU.da",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "eo:orienta",
+     "read": "orienta",
+     "passed": "orienta",
+     "said": "o.ri.EN.ta",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "eo:randa",
+     "read": "randa",
+     "passed": "randa",
+     "said": "RAN.da",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "eo:onda",
+     "read": "onda",
+     "passed": "onda",
+     "said": "ON.da",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "eo:ŝauma",
+     "read": "sauma",
+     "passed": "sauma",
+     "said": "SAU.ma",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "eo:serpenta",
+     "read": "serpenta",
+     "passed": "serpenta",
+     "said": "ser.PEN.ta",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "eo:rosa",
+     "read": "rosa",
+     "passed": "rosa",
+     "said": "RO.sa",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "eo:meza",
+     "read": "mesa",
+     "passed": "mesa",
+     "said": "ME.sa",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "eo:ama",
+     "read": "ama",
+     "passed": "ama",
+     "said": "A.ma",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "eo:malglata",
+     "read": "malglata",
+     "passed": "malgalata",
+     "said": "mal.ga.LA.ta",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "eo:konkorda",
+     "read": "konkorda",
+     "passed": "konkorda",
+     "said": "kon.KOR.da",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "eo:fida",
+     "read": "fida",
+     "passed": "fida",
+     "said": "FI.da",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "eo:sukcesa",
+     "read": "suksesa",
+     "passed": "suksesa",
+     "said": "suk.SE.sa",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "eo:sonĝa",
+     "read": "songa",
+     "passed": "songa",
+     "said": "SO.nga",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "eo:morta",
+     "read": "morta",
+     "passed": "morta",
+     "said": "MOR.ta",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "eo:tempa",
+     "read": "tempa",
+     "passed": "tempa",
+     "said": "TEM.pa",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "eo:dolora",
+     "read": "dolora",
+     "passed": "dolora",
+     "said": "do.LO.ra",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "eo:printempa",
+     "read": "printempa",
+     "passed": "pirintempa",
+     "said": "pi.rin.TEM.pa",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "eo:aŭtuna",
+     "read": "autuna",
+     "passed": "autuna",
+     "said": "au.TU.na",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "eo:somera",
+     "read": "somera",
+     "passed": "somera",
+     "said": "so.ME.ra",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "eo:vintra",
+     "read": "vintra",
+     "passed": "vintara",
+     "said": "vin.TA.ra",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "eo:espera",
+     "read": "espera",
+     "passed": "espera",
+     "said": "es.PE.ra",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "eo:milda",
+     "read": "milda",
+     "passed": "milda",
+     "said": "MIL.da",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "eo:bona",
+     "read": "bona",
+     "passed": "bona",
+     "said": "BO.na",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "eo:persista",
+     "read": "persista",
+     "passed": "persista",
+     "said": "per.SIS.ta",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "eo:sola",
+     "read": "sola",
+     "passed": "sola",
+     "said": "SO.la",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "eo:forgesa",
+     "read": "forgesa",
+     "passed": "forgesa",
+     "said": "for.GE.sa",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "eo:timema",
+     "read": "timema",
+     "passed": "timema",
+     "said": "ti.ME.ma",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "eo:ĝoja",
+     "read": "goya",
+     "passed": "goya",
+     "said": "GO.ya",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "eo:bonega",
+     "read": "bonega",
+     "passed": "bonega",
+     "said": "bo.NE.ga",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "eo:malluma",
+     "read": "malluma",
+     "passed": "maluma",
+     "said": "ma.LU.ma",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "eo:dorma",
+     "read": "dorma",
+     "passed": "dorma",
+     "said": "DOR.ma",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "eo:putra",
+     "read": "putra",
+     "passed": "putra",
+     "said": "PUT.ra",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "eo:pesta",
+     "read": "pesta",
+     "passed": "pesta",
+     "said": "PES.ta",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "sahran": {
+   "label": "Sahran (Arabic- and Amazigh-rooted)",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "ar:Hufra",
+     "read": "hufra",
+     "passed": "hufra",
+     "said": "HUF.ra",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "ar:Hawd",
+     "read": "haud",
+     "passed": "haud",
+     "said": "HAUD",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "ar:Tamda",
+     "read": "tamda",
+     "passed": "tamda",
+     "said": "TAM.da",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "ar:Tamdawin",
+     "read": "tamdawin",
+     "passed": "tamdawin",
+     "said": "tam.DA.win",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "ar:Asif",
+     "read": "asif",
+     "passed": "asif",
+     "said": "A.sif",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "ar:Wadi",
+     "read": "wadi",
+     "passed": "wadi",
+     "said": "WA.di",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "ar:Hamada",
+     "read": "hamada",
+     "passed": "hamada",
+     "said": "ha.MA.da",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "ar:Tilal",
+     "read": "tilal",
+     "passed": "tilal",
+     "said": "TI.lal",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "ar:Adrar",
+     "read": "adrar",
+     "passed": "adrar",
+     "said": "AD.rar",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "ar:Ighil",
+     "read": "igil",
+     "passed": "igil",
+     "said": "I.gil",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "ar:Jurf",
+     "read": "gurf",
+     "passed": "guruf",
+     "said": "GU.ruf",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "ar:Jazira",
+     "read": "gasira",
+     "passed": "gasira",
+     "said": "ga.SI.ra",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "ar:Halij",
+     "read": "halig",
+     "passed": "halig",
+     "said": "HA.lig",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "ar:Sahil",
+     "read": "sahil",
+     "passed": "sahil",
+     "said": "SA.hil",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "ar:Madik",
+     "read": "madik",
+     "passed": "madik",
+     "said": "MA.dik",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "ar:Bahr",
+     "read": "bahr",
+     "passed": "bahar",
+     "said": "BA.har",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "ar:Gaba",
+     "read": "gaba",
+     "passed": "gaba",
+     "said": "GA.ba",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "ar:ʿirq",
+     "read": "'irk",
+     "passed": "'irik",
+     "said": "'I.rik",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "ar:Marj",
+     "read": "marg",
+     "passed": "marag",
+     "said": "MA.rag",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "ar:Tamazirt",
+     "read": "tamasirt",
+     "passed": "tamasirit",
+     "said": "ta.ma.SI.rit",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "ar:Shallal",
+     "read": "salal",
+     "passed": "salal",
+     "said": "SA.lal",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "ar:Tala",
+     "read": "tala",
+     "passed": "tala",
+     "said": "TA.la",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "ar:Aswad",
+     "read": "aswad",
+     "passed": "aswad",
+     "said": "AS.wad",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "ar:Abyad",
+     "read": "abyad",
+     "passed": "abyad",
+     "said": "AB.yad",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "ar:Ahmar",
+     "read": "ahmar",
+     "passed": "ahmar",
+     "said": "AH.mar",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "ar:Ahdar",
+     "read": "ahdar",
+     "passed": "ahdar",
+     "said": "AH.dar",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "ar:Dahab",
+     "read": "dahab",
+     "passed": "dahab",
+     "said": "DA.hab",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "ar:Azrak",
+     "read": "asrak",
+     "passed": "asrak",
+     "said": "AS.rak",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "ar:Kabir",
+     "read": "kabir",
+     "passed": "kabir",
+     "said": "KA.bir",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "ar:Sagir",
+     "read": "sagir",
+     "passed": "sagir",
+     "said": "SA.gir",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "ar:Afella",
+     "read": "afela",
+     "passed": "afela",
+     "said": "a.FE.la",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "ar:ʿamiq",
+     "read": "'amik",
+     "passed": "'amik",
+     "said": "'A.mik",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "ar:Tawil",
+     "read": "tawil",
+     "passed": "tawil",
+     "said": "TA.wil",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "ar:Kadim",
+     "read": "kadim",
+     "passed": "kadim",
+     "said": "KA.dim",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "ar:Jadid",
+     "read": "gadid",
+     "passed": "gadid",
+     "said": "GA.did",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "ar:Yabis",
+     "read": "yabis",
+     "passed": "yabis",
+     "said": "YA.bis",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "ar:Ratib",
+     "read": "ratib",
+     "passed": "ratib",
+     "said": "RA.tib",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "ar:dafiʾ",
+     "read": "dafi'",
+     "passed": "dafi'",
+     "said": "DA.fi'",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "ar:Barid",
+     "read": "barid",
+     "passed": "barid",
+     "said": "BA.rid",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "ar:Nur",
+     "read": "nur",
+     "passed": "nur",
+     "said": "NUR",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "ar:Fajr",
+     "read": "fagr",
+     "passed": "fagar",
+     "said": "FA.gar",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "ar:Layl",
+     "read": "lail",
+     "passed": "lail",
+     "said": "LAIL",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "ar:Najm",
+     "read": "nagm",
+     "passed": "nagam",
+     "said": "NA.gam",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "ar:Sahab",
+     "read": "sahab",
+     "passed": "sahab",
+     "said": "SA.hab",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "ar:Dabab",
+     "read": "dabab",
+     "passed": "dabab",
+     "said": "DA.bab",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "ar:Matar",
+     "read": "matar",
+     "passed": "matar",
+     "said": "MA.tar",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "ar:Rih",
+     "read": "rih",
+     "passed": "rih",
+     "said": "RIH",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "ar:Shams",
+     "read": "sams",
+     "passed": "samas",
+     "said": "SA.mas",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "ar:Ard",
+     "read": "ard",
+     "passed": "arad",
+     "said": "A.rad",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "ar:Hajar",
+     "read": "hagar",
+     "passed": "hagar",
+     "said": "HA.gar",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "ar:Raml",
+     "read": "raml",
+     "passed": "ramal",
+     "said": "RA.mal",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "ar:Milh",
+     "read": "milh",
+     "passed": "milih",
+     "said": "MI.lih",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "ar:Aman",
+     "read": "aman",
+     "passed": "aman",
+     "said": "A.man",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "ar:Waraka",
+     "read": "waraka",
+     "passed": "waraka",
+     "said": "wa.RA.ka",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "ar:Zahr",
+     "read": "sahr",
+     "passed": "sahar",
+     "said": "SA.har",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "ar:Alf",
+     "read": "alf",
+     "passed": "alaf",
+     "said": "A.laf",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "ar:tawʾam",
+     "read": "tau'am",
+     "passed": "tau'am",
+     "said": "TAU.'am",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "ar:ʿasifa",
+     "read": "'asifa",
+     "passed": "'asifa",
+     "said": "'a.SI.fa",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "ar:hadiʾ",
+     "read": "hadi'",
+     "passed": "hadi'",
+     "said": "HA.di'",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "ar:Safi",
+     "read": "safi",
+     "passed": "safi",
+     "said": "SA.fi",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "ar:Khisb",
+     "read": "hisb",
+     "passed": "hisib",
+     "said": "HI.sib",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "ar:Shahd",
+     "read": "sahd",
+     "passed": "sahad",
+     "said": "SA.had",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "ar:Mihna",
+     "read": "mihna",
+     "passed": "mihna",
+     "said": "MIH.na",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "ar:Juzur",
+     "read": "gusur",
+     "passed": "gusur",
+     "said": "GU.sur",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "ar:maʿruf",
+     "read": "ma'ruf",
+     "passed": "ma'ruf",
+     "said": "MA'.ruf",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "ar:Janub",
+     "read": "ganub",
+     "passed": "ganub",
+     "said": "GA.nub",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "ar:Sharq",
+     "read": "sark",
+     "passed": "sarak",
+     "said": "SA.rak",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "ar:Hafa",
+     "read": "hafa",
+     "passed": "hafa",
+     "said": "HA.fa",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "ar:Mawj",
+     "read": "maug",
+     "passed": "maug",
+     "said": "MAUG",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "ar:Zabad",
+     "read": "sabad",
+     "passed": "sabad",
+     "said": "SA.bad",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "ar:Hayya",
+     "read": "haya",
+     "passed": "haya",
+     "said": "HA.ya",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "ar:Nada",
+     "read": "nada",
+     "passed": "nada",
+     "said": "NA.da",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "ar:Wasat",
+     "read": "wasat",
+     "passed": "wasat",
+     "said": "WA.sat",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "ar:Hubb",
+     "read": "hub",
+     "passed": "hub",
+     "said": "HUB",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "ar:Khashin",
+     "read": "hasin",
+     "passed": "hasin",
+     "said": "HA.sin",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "ar:wiʾam",
+     "read": "wi'am",
+     "passed": "wi'am",
+     "said": "WI.'am",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "ar:Iman",
+     "read": "iman",
+     "passed": "iman",
+     "said": "I.man",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "ar:Najah",
+     "read": "nagah",
+     "passed": "nagah",
+     "said": "NA.gah",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "ar:Ahlam",
+     "read": "ahlam",
+     "passed": "ahlam",
+     "said": "AH.lam",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "ar:Mawt",
+     "read": "maut",
+     "passed": "maut",
+     "said": "MAUT",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "ar:Zaman",
+     "read": "saman",
+     "passed": "saman",
+     "said": "SA.man",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "ar:Huzn",
+     "read": "husn",
+     "passed": "husun",
+     "said": "HU.sun",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "ar:rabiʿ",
+     "read": "rabi'",
+     "passed": "rabi'",
+     "said": "RA.bi'",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "ar:Kharif",
+     "read": "harif",
+     "passed": "harif",
+     "said": "HA.rif",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "ar:Sayf",
+     "read": "saif",
+     "passed": "saif",
+     "said": "SAIF",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "ar:shitaʾ",
+     "read": "sita'",
+     "passed": "sita'",
+     "said": "SI.ta'",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "ar:Amal",
+     "read": "amal",
+     "passed": "amal",
+     "said": "A.mal",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "ar:Latif",
+     "read": "latif",
+     "passed": "latif",
+     "said": "LA.tif",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "ar:Khayr",
+     "read": "hair",
+     "passed": "hair",
+     "said": "HAIR",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "ar:Sabr",
+     "read": "sabr",
+     "passed": "sabar",
+     "said": "SA.bar",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "ar:ʿuzla",
+     "read": "'usla",
+     "passed": "'usla",
+     "said": "'US.la",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "ar:Nisyan",
+     "read": "nisyan",
+     "passed": "nisyan",
+     "said": "NIS.yan",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "ar:Khawf",
+     "read": "hauf",
+     "passed": "hauf",
+     "said": "HAUF",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "ar:Farah",
+     "read": "farah",
+     "passed": "farah",
+     "said": "FA.rah",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "ar:Fadl",
+     "read": "fadl",
+     "passed": "fadal",
+     "said": "FA.dal",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "ar:ʿatma",
+     "read": "'atma",
+     "passed": "'atma",
+     "said": "'AT.ma",
+     "faults": [],
+     "note": "the draft's Zalam would read as the Arabic for peace once z is s; ʿatma is darkness"
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "ar:Nawm",
+     "read": "naum",
+     "passed": "naum",
+     "said": "NAUM",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "ar:ʿafan",
+     "read": "'afan",
+     "passed": "'afan",
+     "said": "'A.fan",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "ar:wabaʾ",
+     "read": "waba'",
+     "passed": "waba'",
+     "said": "WA.ba'",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "tagalhebrew": {
+   "label": "Tagalog-Hebrew",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "tl:Uka",
+     "read": "uka",
+     "passed": "uka",
+     "said": "U.ka",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "tl:Lambak",
+     "read": "lambak",
+     "passed": "lambak",
+     "said": "LAM.bak",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "tl:Lawa",
+     "read": "lawa",
+     "passed": "lawa",
+     "said": "LA.wa",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "tl:Lawalawa",
+     "read": "lawalawa",
+     "passed": "lawalawa",
+     "said": "la.wa.LA.wa",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "tl:Ilog",
+     "read": "ilog",
+     "passed": "ilog",
+     "said": "I.log",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "tl:Lambak",
+     "read": "lambak",
+     "passed": "lambak",
+     "said": "LAM.bak",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "tl:Kapatagan",
+     "read": "kapatagan",
+     "passed": "kapatagan",
+     "said": "ka.pa.TA.gan",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "tl:Burol",
+     "read": "burol",
+     "passed": "burol",
+     "said": "BU.rol",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "tl:Bundok",
+     "read": "bundok",
+     "passed": "bundok",
+     "said": "BUN.dok",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "tl:Gulod",
+     "read": "gulod",
+     "passed": "gulod",
+     "said": "GU.lod",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "tl:Bangin",
+     "read": "bangin",
+     "passed": "bangin",
+     "said": "BA.ngin",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "tl:Pulo",
+     "read": "pulo",
+     "passed": "pulo",
+     "said": "PU.lo",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "tl:lo'ok",
+     "read": "lo'ok",
+     "passed": "lo'ok",
+     "said": "LO.'ok",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "tl:Baybay",
+     "read": "baybay",
+     "passed": "baybay",
+     "said": "BAY.bay",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "tl:Kipot",
+     "read": "kipot",
+     "passed": "kipot",
+     "said": "KI.pot",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "tl:Dagat",
+     "read": "dagat",
+     "passed": "dagat",
+     "said": "DA.gat",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "tl:Gubat",
+     "read": "gubat",
+     "passed": "gubat",
+     "said": "GU.bat",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "tl:Ilang",
+     "read": "ilang",
+     "passed": "ilang",
+     "said": "I.lang",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "tl:Parang",
+     "read": "parang",
+     "passed": "parang",
+     "said": "PA.rang",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "tl:Lupa",
+     "read": "lupa",
+     "passed": "lupa",
+     "said": "LU.pa",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "tl:Talon",
+     "read": "talon",
+     "passed": "talon",
+     "said": "TA.lon",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "tl:Bukal",
+     "read": "bukal",
+     "passed": "bukal",
+     "said": "BU.kal",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "he:Shahor",
+     "read": "sahor",
+     "passed": "sahor",
+     "said": "SA.hor",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "he:Lavan",
+     "read": "lavan",
+     "passed": "lavan",
+     "said": "LA.van",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "he:Adom",
+     "read": "adom",
+     "passed": "adom",
+     "said": "A.dom",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "he:Yarok",
+     "read": "yarok",
+     "passed": "yarok",
+     "said": "YA.rok",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "he:Zahav",
+     "read": "sahav",
+     "passed": "sahav",
+     "said": "SA.hav",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "he:Kahol",
+     "read": "kahol",
+     "passed": "kahol",
+     "said": "KA.hol",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "he:Gadol",
+     "read": "gadol",
+     "passed": "gadol",
+     "said": "GA.dol",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "he:Katan",
+     "read": "katan",
+     "passed": "katan",
+     "said": "KA.tan",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "he:Gavoah",
+     "read": "gavoah",
+     "passed": "gavoah",
+     "said": "ga.VO.ah",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "he:Amok",
+     "read": "amok",
+     "passed": "amok",
+     "said": "A.mok",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "he:Aroh",
+     "read": "aroh",
+     "passed": "aroh",
+     "said": "A.roh",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "he:Atik",
+     "read": "atik",
+     "passed": "atik",
+     "said": "A.tik",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "he:Hadash",
+     "read": "hadas",
+     "passed": "hadas",
+     "said": "HA.das",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "he:Yavesh",
+     "read": "yaves",
+     "passed": "yaves",
+     "said": "YA.ves",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "he:Ratuv",
+     "read": "ratuv",
+     "passed": "ratuv",
+     "said": "RA.tuv",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "he:Ham",
+     "read": "ham",
+     "passed": "ham",
+     "said": "HAM",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "he:Kar",
+     "read": "kar",
+     "passed": "kar",
+     "said": "KAR",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "he:Or",
+     "read": "or",
+     "passed": "or",
+     "said": "OR",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "he:Shahar",
+     "read": "sahar",
+     "passed": "sahar",
+     "said": "SA.har",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "he:Laila",
+     "read": "laila",
+     "passed": "laila",
+     "said": "LAI.la",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "he:Kohav",
+     "read": "kohav",
+     "passed": "kohav",
+     "said": "KO.hav",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "he:Anan",
+     "read": "anan",
+     "passed": "anan",
+     "said": "A.nan",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "he:Arafel",
+     "read": "arafel",
+     "passed": "arafel",
+     "said": "a.RA.fel",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "he:Geshem",
+     "read": "gesem",
+     "passed": "gesem",
+     "said": "GE.sem",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "he:Ruah",
+     "read": "ruah",
+     "passed": "ruah",
+     "said": "RU.ah",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "he:Shemesh",
+     "read": "semes",
+     "passed": "semes",
+     "said": "SE.mes",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "he:Erets",
+     "read": "eres",
+     "passed": "eres",
+     "said": "E.res",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "he:Even",
+     "read": "even",
+     "passed": "even",
+     "said": "E.ven",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "he:Hol",
+     "read": "hol",
+     "passed": "hol",
+     "said": "HOL",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "he:Melah",
+     "read": "melah",
+     "passed": "melah",
+     "said": "ME.lah",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "he:Mayim",
+     "read": "mayim",
+     "passed": "mayim",
+     "said": "MA.yim",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "he:Ale",
+     "read": "ale",
+     "passed": "ale",
+     "said": "A.le",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "he:Perah",
+     "read": "perah",
+     "passed": "perah",
+     "said": "PE.rah",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "he:Elef",
+     "read": "elef",
+     "passed": "elef",
+     "said": "E.lef",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "he:Teom",
+     "read": "teom",
+     "passed": "teom",
+     "said": "TE.om",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "he:Sufa",
+     "read": "sufa",
+     "passed": "sufa",
+     "said": "SU.fa",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "he:Shaket",
+     "read": "saket",
+     "passed": "saket",
+     "said": "SA.ket",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "he:Tsalul",
+     "read": "salul",
+     "passed": "salul",
+     "said": "SA.lul",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "he:Shefa",
+     "read": "sefa",
+     "passed": "sefa",
+     "said": "SE.fa",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "he:Tsuf",
+     "read": "suf",
+     "passed": "suf",
+     "said": "SUF",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "he:Mashber",
+     "read": "masber",
+     "passed": "masber",
+     "said": "MAS.ber",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "he:Iyim",
+     "read": "iyim",
+     "passed": "iyim",
+     "said": "I.yim",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "he:Yadua",
+     "read": "yadua",
+     "passed": "yadua",
+     "said": "ya.DU.a",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "he:Darom",
+     "read": "darom",
+     "passed": "darom",
+     "said": "DA.rom",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "he:Kedem",
+     "read": "kedem",
+     "passed": "kedem",
+     "said": "KE.dem",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "he:Katzeh",
+     "read": "kaseh",
+     "passed": "kaseh",
+     "said": "KA.seh",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "he:Gal",
+     "read": "gal",
+     "passed": "gal",
+     "said": "GAL",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "he:Ketsef",
+     "read": "kesef",
+     "passed": "kesef",
+     "said": "KE.sef",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "he:Nachash",
+     "read": "nahas",
+     "passed": "nahas",
+     "said": "NA.has",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "he:Tal",
+     "read": "tal",
+     "passed": "tal",
+     "said": "TAL",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "he:Tikhon",
+     "read": "tihon",
+     "passed": "tihon",
+     "said": "TI.hon",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "he:Ahava",
+     "read": "ahava",
+     "passed": "ahava",
+     "said": "a.HA.va",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "he:Gas",
+     "read": "gas",
+     "passed": "gas",
+     "said": "GAS",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "he:Harmonia",
+     "read": "harmonia",
+     "passed": "harmonia",
+     "said": "har.mo.NI.a",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "he:Emuna",
+     "read": "emuna",
+     "passed": "emuna",
+     "said": "e.MU.na",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "he:Hatslaha",
+     "read": "haslaha",
+     "passed": "haslaha",
+     "said": "has.LA.ha",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "he:Halom",
+     "read": "halom",
+     "passed": "halom",
+     "said": "HA.lom",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "he:Mavet",
+     "read": "mavet",
+     "passed": "mavet",
+     "said": "MA.vet",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "he:Zman",
+     "read": "sman",
+     "passed": "seman",
+     "said": "SE.man",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "he:tsa'ar",
+     "read": "sa'ar",
+     "passed": "sa'ar",
+     "said": "SA.'ar",
+     "faults": [],
+     "note": "the throat stop between the two vowels of tsaʿar keeps them apart"
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "he:Aviv",
+     "read": "aviv",
+     "passed": "aviv",
+     "said": "A.viv",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "he:Stav",
+     "read": "stav",
+     "passed": "setav",
+     "said": "SE.tav",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "he:Kayits",
+     "read": "kayis",
+     "passed": "kayis",
+     "said": "KA.yis",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "he:Horef",
+     "read": "horef",
+     "passed": "horef",
+     "said": "HO.ref",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "he:Tikva",
+     "read": "tikva",
+     "passed": "tikva",
+     "said": "TIK.va",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "he:Adin",
+     "read": "adin",
+     "passed": "adin",
+     "said": "A.din",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "he:Tov",
+     "read": "tov",
+     "passed": "tov",
+     "said": "TOV",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "he:Hatmada",
+     "read": "hatmada",
+     "passed": "hatmada",
+     "said": "hat.MA.da",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "he:Bdidut",
+     "read": "bdidut",
+     "passed": "bedidut",
+     "said": "be.DI.dut",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "he:Shikhecha",
+     "read": "siheha",
+     "passed": "siheha",
+     "said": "si.HE.ha",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "he:Pahad",
+     "read": "pahad",
+     "passed": "pahad",
+     "said": "PA.had",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "he:Simha",
+     "read": "simha",
+     "passed": "simha",
+     "said": "SIM.ha",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "he:Metsuyan",
+     "read": "mesuyan",
+     "passed": "mesuyan",
+     "said": "me.SU.yan",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "he:Hoshekh",
+     "read": "hoseh",
+     "passed": "hoseh",
+     "said": "HO.seh",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "he:Shena",
+     "read": "sena",
+     "passed": "sena",
+     "said": "SE.na",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "he:Rikavon",
+     "read": "rikavon",
+     "passed": "rikavon",
+     "said": "ri.KA.von",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "he:Dever",
+     "read": "dever",
+     "passed": "dever",
+     "said": "DE.ver",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "pwani": {
+   "label": "Pwani (Swahili-rooted)",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "sw:Shimo",
+     "read": "simo",
+     "passed": "simo",
+     "said": "SI.mo",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "sw:Bonde",
+     "read": "bonde",
+     "passed": "bonde",
+     "said": "BON.de",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "sw:Ziwa",
+     "read": "siwa",
+     "passed": "siwa",
+     "said": "SI.wa",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "sw:Maziwa",
+     "read": "masiwa",
+     "passed": "masiwa",
+     "said": "ma.SI.wa",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "sw:m°to",
+     "read": "muto",
+     "passed": "muto",
+     "said": "MU.to",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "sw:Bonde",
+     "read": "bonde",
+     "passed": "bonde",
+     "said": "BON.de",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "sw:Tambarare",
+     "read": "tambarare",
+     "passed": "tambarare",
+     "said": "tam.ba.RA.re",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "sw:Vilima",
+     "read": "vilima",
+     "passed": "vilima",
+     "said": "vi.LI.ma",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "sw:Milima",
+     "read": "milima",
+     "passed": "milima",
+     "said": "mi.LI.ma",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "sw:Kingo",
+     "read": "kingo",
+     "passed": "kingo",
+     "said": "KI.ngo",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "sw:Genge",
+     "read": "genge",
+     "passed": "genge",
+     "said": "GE.nge",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "sw:Kisiwa",
+     "read": "kisiwa",
+     "passed": "kisiwa",
+     "said": "ki.SI.wa",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "sw:Guba",
+     "read": "guba",
+     "passed": "guba",
+     "said": "GU.ba",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "sw:Pwani",
+     "read": "pwani",
+     "passed": "puwani",
+     "said": "pu.WA.ni",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "sw:m°lango",
+     "read": "mulango",
+     "passed": "mulango",
+     "said": "mu.LA.ngo",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "sw:Bahari",
+     "read": "bahari",
+     "passed": "bahari",
+     "said": "ba.HA.ri",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "sw:m°situ",
+     "read": "musitu",
+     "passed": "musitu",
+     "said": "mu.SI.tu",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "sw:Jangwa",
+     "read": "yangwa",
+     "passed": "yangwa",
+     "said": "YANG.wa",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "sw:Mbuga",
+     "read": "imbuga",
+     "passed": "imbuga",
+     "said": "im.BU.ga",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "sw:Nchi",
+     "read": "insi",
+     "passed": "insi",
+     "said": "IN.si",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "sw:Maporomoko",
+     "read": "maporomoko",
+     "passed": "maporomoko",
+     "said": "ma.po.ro.MO.ko",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "sw:Chemchemi",
+     "read": "semsemi",
+     "passed": "semsemi",
+     "said": "sem.SE.mi",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "sw:Eusi",
+     "read": "eusi",
+     "passed": "eusi",
+     "said": "e.U.si",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "sw:Eupe",
+     "read": "eupe",
+     "passed": "eupe",
+     "said": "e.U.pe",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "sw:Ekundu",
+     "read": "ekundu",
+     "passed": "ekundu",
+     "said": "e.KUN.du",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "sw:Kijani",
+     "read": "kiyani",
+     "passed": "kiyani",
+     "said": "ki.YA.ni",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "sw:Dhahabu",
+     "read": "dahabu",
+     "passed": "dahabu",
+     "said": "da.HA.bu",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "sw:Samawati",
+     "read": "samawati",
+     "passed": "samawati",
+     "said": "sa.ma.WA.ti",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "sw:Kubwa",
+     "read": "kubwa",
+     "passed": "kubwa",
+     "said": "KUB.wa",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "sw:Dogo",
+     "read": "dogo",
+     "passed": "dogo",
+     "said": "DO.go",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "sw:Juu",
+     "read": "yuu",
+     "passed": "yuu",
+     "said": "YUU",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "sw:Kina",
+     "read": "kina",
+     "passed": "kina",
+     "said": "KI.na",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "sw:Refu",
+     "read": "refu",
+     "passed": "refu",
+     "said": "RE.fu",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "sw:Kale",
+     "read": "kale",
+     "passed": "kale",
+     "said": "KA.le",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "sw:Mpya",
+     "read": "impya",
+     "passed": "impiya",
+     "said": "im.PI.ya",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "sw:Kavu",
+     "read": "kavu",
+     "passed": "kavu",
+     "said": "KA.vu",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "sw:Rutuba",
+     "read": "rutuba",
+     "passed": "rutuba",
+     "said": "ru.TU.ba",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "sw:Joto",
+     "read": "yoto",
+     "passed": "yoto",
+     "said": "YO.to",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "sw:Baridi",
+     "read": "baridi",
+     "passed": "baridi",
+     "said": "ba.RI.di",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "sw:Nuru",
+     "read": "nuru",
+     "passed": "nuru",
+     "said": "NU.ru",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "sw:Alfajiri",
+     "read": "alfayiri",
+     "passed": "alfayiri",
+     "said": "al.fa.YI.ri",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "sw:Usiku",
+     "read": "usiku",
+     "passed": "usiku",
+     "said": "u.SI.ku",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "sw:Nyota",
+     "read": "inyota",
+     "passed": "inyota",
+     "said": "in.YO.ta",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "sw:Wingu",
+     "read": "wingu",
+     "passed": "wingu",
+     "said": "WI.ngu",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "sw:Ukungu",
+     "read": "ukungu",
+     "passed": "ukungu",
+     "said": "u.KU.ngu",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "sw:Mvua",
+     "read": "imvua",
+     "passed": "imvua",
+     "said": "im.VU.a",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "sw:Upepo",
+     "read": "upepo",
+     "passed": "upepo",
+     "said": "u.PE.po",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "sw:Jua",
+     "read": "yua",
+     "passed": "yua",
+     "said": "YU.a",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "sw:Dunia",
+     "read": "dunia",
+     "passed": "dunia",
+     "said": "du.NI.a",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "sw:Jiwe",
+     "read": "yiwe",
+     "passed": "yiwe",
+     "said": "YI.we",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "sw:m°changa",
+     "read": "musanga",
+     "passed": "musanga",
+     "said": "mu.SA.nga",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "sw:Chumvi",
+     "read": "sumvi",
+     "passed": "sumvi",
+     "said": "SUM.vi",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "sw:Maji",
+     "read": "mayi",
+     "passed": "mayi",
+     "said": "MA.yi",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "sw:Jani",
+     "read": "yani",
+     "passed": "yani",
+     "said": "YA.ni",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "sw:Ua",
+     "read": "ua",
+     "passed": "ua",
+     "said": "U.a",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "sw:Elfu",
+     "read": "elfu",
+     "passed": "elfu",
+     "said": "EL.fu",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "sw:Pacha",
+     "read": "pasa",
+     "passed": "pasa",
+     "said": "PA.sa",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "sw:Dhoruba",
+     "read": "doruba",
+     "passed": "doruba",
+     "said": "do.RU.ba",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "sw:Shwari",
+     "read": "swari",
+     "passed": "suwari",
+     "said": "su.WA.ri",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "sw:Angavu",
+     "read": "angavu",
+     "passed": "angavu",
+     "said": "a.NGA.vu",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "sw:Wingi",
+     "read": "wingi",
+     "passed": "wingi",
+     "said": "WI.ngi",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "sw:Asali",
+     "read": "asali",
+     "passed": "asali",
+     "said": "a.SA.li",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "sw:Shida",
+     "read": "sida",
+     "passed": "sida",
+     "said": "SI.da",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "sw:Visiwa",
+     "read": "visiwa",
+     "passed": "visiwa",
+     "said": "vi.SI.wa",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "sw:Julikana",
+     "read": "yulikana",
+     "passed": "yulikana",
+     "said": "yu.li.KA.na",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "sw:Kusini",
+     "read": "kusini",
+     "passed": "kusini",
+     "said": "ku.SI.ni",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "sw:Mashariki",
+     "read": "masariki",
+     "passed": "masariki",
+     "said": "ma.sa.RI.ki",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "sw:Ukingo",
+     "read": "ukingo",
+     "passed": "ukingo",
+     "said": "u.KI.ngo",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "sw:Mawimbi",
+     "read": "mawimbi",
+     "passed": "mawimbi",
+     "said": "ma.WIM.bi",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "sw:Povu",
+     "read": "povu",
+     "passed": "povu",
+     "said": "PO.vu",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "sw:Nyoka",
+     "read": "inyoka",
+     "passed": "inyoka",
+     "said": "in.YO.ka",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "sw:Umande",
+     "read": "umande",
+     "passed": "umande",
+     "said": "u.MAN.de",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "sw:Kati",
+     "read": "kati",
+     "passed": "kati",
+     "said": "KA.ti",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "sw:Upendo",
+     "read": "upendo",
+     "passed": "upendo",
+     "said": "u.PEN.do",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "sw:paruparu",
+     "read": "paruparu",
+     "passed": "paruparu",
+     "said": "pa.ru.PA.ru",
+     "faults": [],
+     "note": "the draft's Kparuparu was a slip for paruparu"
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "sw:Maelewano",
+     "read": "maelewano",
+     "passed": "maelewano",
+     "said": "ma.e.le.WA.no",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "sw:Imani",
+     "read": "imani",
+     "passed": "imani",
+     "said": "i.MA.ni",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "sw:Fanaka",
+     "read": "fanaka",
+     "passed": "fanaka",
+     "said": "fa.NA.ka",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "sw:Ndoto",
+     "read": "indoto",
+     "passed": "indoto",
+     "said": "in.DO.to",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "sw:Mauti",
+     "read": "mauti",
+     "passed": "mauti",
+     "said": "MAU.ti",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "sw:Wakati",
+     "read": "wakati",
+     "passed": "wakati",
+     "said": "wa.KA.ti",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "sw:Huzuni",
+     "read": "husuni",
+     "passed": "husuni",
+     "said": "hu.SU.ni",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "sw:Masika",
+     "read": "masika",
+     "passed": "masika",
+     "said": "ma.SI.ka",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "sw:Vuli",
+     "read": "vuli",
+     "passed": "vuli",
+     "said": "VU.li",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "sw:Kiangazi",
+     "read": "kiangasi",
+     "passed": "kiangasi",
+     "said": "ki.a.NGA.si",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "sw:Kipupwe",
+     "read": "kipupwe",
+     "passed": "kipupwe",
+     "said": "ki.PUP.we",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "sw:Tumaini",
+     "read": "tumaini",
+     "passed": "tumaini",
+     "said": "tu.MAI.ni",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "sw:Pole",
+     "read": "pole",
+     "passed": "pole",
+     "said": "PO.le",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "sw:Wema",
+     "read": "wema",
+     "passed": "wema",
+     "said": "WE.ma",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "sw:Subira",
+     "read": "subira",
+     "passed": "subira",
+     "said": "su.BI.ra",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "sw:Upweke",
+     "read": "upweke",
+     "passed": "upweke",
+     "said": "up.WE.ke",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "sw:Sahau",
+     "read": "sahau",
+     "passed": "sahau",
+     "said": "SA.hau",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "sw:Hofu",
+     "read": "hofu",
+     "passed": "hofu",
+     "said": "HO.fu",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "sw:Furaha",
+     "read": "furaha",
+     "passed": "furaha",
+     "said": "fu.RA.ha",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "sw:Bora",
+     "read": "bora",
+     "passed": "bora",
+     "said": "BO.ra",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "sw:Giza",
+     "read": "gisa",
+     "passed": "gisa",
+     "said": "GI.sa",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "sw:Usingizi",
+     "read": "usingisi",
+     "passed": "usingisi",
+     "said": "u.si.NGI.si",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "sw:Uozo",
+     "read": "uoso",
+     "passed": "uoso",
+     "said": "u.O.so",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "sw:Tauni",
+     "read": "tauni",
+     "passed": "tauni",
+     "said": "TAU.ni",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "dala": {
+   "label": "Dala (Turkic- and Mongolic-rooted)",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "kk:ой",
+     "read": "oi",
+     "passed": "oi",
+     "said": "OI",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "la:owa",
+     "read": "owa",
+     "passed": "owa",
+     "said": "O.wa",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "kk:көл",
+     "read": "kol",
+     "passed": "kol",
+     "said": "KOL",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "kk:көлдөр",
+     "read": "koldor",
+     "passed": "koldor",
+     "said": "KOL.dor",
+     "faults": [],
+     "note": "the draft's kollar is the Uzbek plural; көлдөр is the Kyrgyz"
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "mn:гол",
+     "read": "gol",
+     "passed": "gol",
+     "said": "GOL",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "kk:сай",
+     "read": "sai",
+     "passed": "sai",
+     "said": "SAI",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "kk:дала",
+     "read": "dala",
+     "passed": "dala",
+     "said": "DA.la",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "kk:төбе",
+     "read": "tobe",
+     "passed": "tobe",
+     "said": "TO.be",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "kk:тау",
+     "read": "tau",
+     "passed": "tau",
+     "said": "TAU",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "kk:қыр",
+     "read": "kir",
+     "passed": "kir",
+     "said": "KIR",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "kk:жар",
+     "read": "yar",
+     "passed": "yar",
+     "said": "YAR",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "kk:арал",
+     "read": "aral",
+     "passed": "aral",
+     "said": "A.ral",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "kk:қолтық",
+     "read": "koltuk",
+     "passed": "koltuk",
+     "said": "KOL.tuk",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "kk:жаға",
+     "read": "yaga",
+     "passed": "yaga",
+     "said": "YA.ga",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "kk:боғаз",
+     "read": "bogas",
+     "passed": "bogas",
+     "said": "BO.gas",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "kk:теңіз",
+     "read": "tengis",
+     "passed": "tengis",
+     "said": "TE.ngis",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "kk:орман",
+     "read": "orman",
+     "passed": "orman",
+     "said": "OR.man",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "mn:говь",
+     "read": "gobi",
+     "passed": "gobi",
+     "said": "GO.bi",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "kk:жайлау",
+     "read": "yailau",
+     "passed": "yailau",
+     "said": "YAI.lau",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "kk:жер",
+     "read": "yer",
+     "passed": "yer",
+     "said": "YER",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "kk:сарқырама",
+     "read": "sarkirama",
+     "passed": "sarkirama",
+     "said": "sar.ki.RA.ma",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "kk:бұлақ",
+     "read": "bulak",
+     "passed": "bulak",
+     "said": "BU.lak",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "kk:қара",
+     "read": "kara",
+     "passed": "kara",
+     "said": "KA.ra",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "kk:ақ",
+     "read": "ak",
+     "passed": "ak",
+     "said": "AK",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "kk:қызыл",
+     "read": "kisil",
+     "passed": "kisil",
+     "said": "KI.sil",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "kk:жасыл",
+     "read": "yasil",
+     "passed": "yasil",
+     "said": "YA.sil",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "kk:алтын",
+     "read": "altin",
+     "passed": "altin",
+     "said": "AL.tin",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "kk:көк",
+     "read": "kok",
+     "passed": "kok",
+     "said": "KOK",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "la:ulug",
+     "read": "ulug",
+     "passed": "ulug",
+     "said": "U.lug",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "kk:кіші",
+     "read": "kisi",
+     "passed": "kisi",
+     "said": "KI.si",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "kk:биік",
+     "read": "biik",
+     "passed": "biik",
+     "said": "BIIK",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "kk:терең",
+     "read": "tereng",
+     "passed": "tereng",
+     "said": "TE.reng",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "kk:ұзын",
+     "read": "usun",
+     "passed": "usun",
+     "said": "U.sun",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "kk:ескі",
+     "read": "eski",
+     "passed": "eski",
+     "said": "ES.ki",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "kk:жаңа",
+     "read": "yanga",
+     "passed": "yanga",
+     "said": "YA.nga",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "kk:құрғақ",
+     "read": "kurgak",
+     "passed": "kurgak",
+     "said": "KUR.gak",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "kk:ылғал",
+     "read": "ilgal",
+     "passed": "ilgal",
+     "said": "IL.gal",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "kk:жылы",
+     "read": "yili",
+     "passed": "yili",
+     "said": "YI.li",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "kk:суық",
+     "read": "suuk",
+     "passed": "suuk",
+     "said": "SUUK",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "kk:жарық",
+     "read": "yarik",
+     "passed": "yarik",
+     "said": "YA.rik",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "kk:таң",
+     "read": "tang",
+     "passed": "tang",
+     "said": "TANG",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "kk:түн",
+     "read": "tun",
+     "passed": "tun",
+     "said": "TUN",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "kk:жұлдыз",
+     "read": "yuldus",
+     "passed": "yuldus",
+     "said": "YUL.dus",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "kk:бұлт",
+     "read": "bult",
+     "passed": "bulut",
+     "said": "BU.lut",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "kk:тұман",
+     "read": "tuman",
+     "passed": "tuman",
+     "said": "TU.man",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "kk:жаңбыр",
+     "read": "yangbir",
+     "passed": "yangbir",
+     "said": "YANG.bir",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "kk:жел",
+     "read": "yel",
+     "passed": "yel",
+     "said": "YEL",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "kk:күн",
+     "read": "kun",
+     "passed": "kun",
+     "said": "KUN",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "kk:жер",
+     "read": "yer",
+     "passed": "yer",
+     "said": "YER",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "kk:тас",
+     "read": "tas",
+     "passed": "tas",
+     "said": "TAS",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "kk:құм",
+     "read": "kum",
+     "passed": "kum",
+     "said": "KUM",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "kk:тұз",
+     "read": "tus",
+     "passed": "tus",
+     "said": "TUS",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "kk:су",
+     "read": "su",
+     "passed": "su",
+     "said": "SU",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "kk:жапырақ",
+     "read": "yapirak",
+     "passed": "yapirak",
+     "said": "ya.PI.rak",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "kk:гүл",
+     "read": "gul",
+     "passed": "gul",
+     "said": "GUL",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "kk:мың",
+     "read": "ming",
+     "passed": "ming",
+     "said": "MING",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "kk:егіз",
+     "read": "egis",
+     "passed": "egis",
+     "said": "E.gis",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "kk:боран",
+     "read": "boran",
+     "passed": "boran",
+     "said": "BO.ran",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "kk:тыныш",
+     "read": "tinis",
+     "passed": "tinis",
+     "said": "TI.nis",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "kk:ашық",
+     "read": "asik",
+     "passed": "asik",
+     "said": "A.sik",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "kk:мол",
+     "read": "mol",
+     "passed": "mol",
+     "said": "MOL",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "kk:бал",
+     "read": "bal",
+     "passed": "bal",
+     "said": "BAL",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "kk:сынақ",
+     "read": "sinak",
+     "passed": "sinak",
+     "said": "SI.nak",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "kk:аралдар",
+     "read": "araldar",
+     "passed": "araldar",
+     "said": "a.RAL.dar",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "kk:белгілі",
+     "read": "belgili",
+     "passed": "belgili",
+     "said": "bel.GI.li",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "kk:оңтүстік",
+     "read": "ongtustuk",
+     "passed": "ongtustuk",
+     "said": "ong.TUS.tuk",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "kk:шығыс",
+     "read": "sigis",
+     "passed": "sigis",
+     "said": "SI.gis",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "kk:шет",
+     "read": "set",
+     "passed": "set",
+     "said": "SET",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "kk:толқын",
+     "read": "tolkun",
+     "passed": "tolkun",
+     "said": "TOL.kun",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "kk:көбік",
+     "read": "kobuk",
+     "passed": "kobuk",
+     "said": "KO.buk",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "kk:жылан",
+     "read": "yilan",
+     "passed": "yilan",
+     "said": "YI.lan",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "kk:шық",
+     "read": "sik",
+     "passed": "sik",
+     "said": "SIK",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "kk:орта",
+     "read": "orta",
+     "passed": "orta",
+     "said": "OR.ta",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "kk:махаббат",
+     "read": "mahabbat",
+     "passed": "mahabat",
+     "said": "ma.HA.bat",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "kk:кедір",
+     "read": "kedir",
+     "passed": "kedir",
+     "said": "KE.dir",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "kk:ынтымақ",
+     "read": "intimak",
+     "passed": "intimak",
+     "said": "in.TI.mak",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "kk:сенім",
+     "read": "senim",
+     "passed": "senim",
+     "said": "SE.nim",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "kk:жеңіс",
+     "read": "yengis",
+     "passed": "yengis",
+     "said": "YE.ngis",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "kk:арман",
+     "read": "arman",
+     "passed": "arman",
+     "said": "AR.man",
+     "faults": [],
+     "note": "the draft's tus (түс) would fall together with salt (тұз); арман is Kazakh for a dream or longing"
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "kk:өлім",
+     "read": "olum",
+     "passed": "olum",
+     "said": "O.lum",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "kk:уақыт",
+     "read": "wakit",
+     "passed": "wakit",
+     "said": "WA.kit",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "kk:қайғы",
+     "read": "kaigi",
+     "passed": "kaigi",
+     "said": "KAI.gi",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "kk:көктем",
+     "read": "koktem",
+     "passed": "koktem",
+     "said": "KOK.tem",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "kk:күз",
+     "read": "kus",
+     "passed": "kus",
+     "said": "KUS",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "kk:жаз",
+     "read": "yas",
+     "passed": "yas",
+     "said": "YAS",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "kk:қыс",
+     "read": "kis",
+     "passed": "kis",
+     "said": "KIS",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "kk:үміт",
+     "read": "umut",
+     "passed": "umut",
+     "said": "U.mut",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "kk:жұмсақ",
+     "read": "yumsak",
+     "passed": "yumsak",
+     "said": "YUM.sak",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "kk:жақсы",
+     "read": "yaksi",
+     "passed": "yaksi",
+     "said": "YAK.si",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "kk:төзім",
+     "read": "tosum",
+     "passed": "tosum",
+     "said": "TO.sum",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "kk:жалғыз",
+     "read": "yalgis",
+     "passed": "yalgis",
+     "said": "YAL.gis",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "kk:унут",
+     "read": "unut",
+     "passed": "unut",
+     "said": "U.nut",
+     "faults": [],
+     "note": "the draft's umyt (ұмыт) would fall together with hope (үміт); унут is the Kyrgyz"
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "kk:қорқы",
+     "read": "korku",
+     "passed": "korku",
+     "said": "KOR.ku",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "kk:қуаныш",
+     "read": "kuanis",
+     "passed": "kuanis",
+     "said": "ku.A.nis",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "kk:асыл",
+     "read": "asil",
+     "passed": "asil",
+     "said": "A.sil",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "kk:қараңғы",
+     "read": "karanggi",
+     "passed": "karanggi",
+     "said": "ka.RANG.gi",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "kk:ұйқы",
+     "read": "uyku",
+     "passed": "uyku",
+     "said": "UY.ku",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "kk:шірік",
+     "read": "sirik",
+     "passed": "sirik",
+     "said": "SI.rik",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "kk:оба",
+     "read": "oba",
+     "passed": "oba",
+     "said": "O.ba",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "runa": {
+   "label": "Runa (Quechua-rooted)",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "qu:hutku",
+     "read": "hutku",
+     "passed": "hutku",
+     "said": "HUT.ku",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "qu:kancha",
+     "read": "kansa",
+     "passed": "kansa",
+     "said": "KAN.sa",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "qu:qucha",
+     "read": "kosa",
+     "passed": "kosa",
+     "said": "KO.sa",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "qu:quchakuna",
+     "read": "kosakuna",
+     "passed": "kosakuna",
+     "said": "ko.sa.KU.na",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "qu:mayu",
+     "read": "mayu",
+     "passed": "mayu",
+     "said": "MA.yu",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "qu:wayqu",
+     "read": "waiko",
+     "passed": "waiko",
+     "said": "WAI.ko",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "qu:pampa",
+     "read": "pampa",
+     "passed": "pampa",
+     "said": "PAM.pa",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "qu:pata",
+     "read": "pata",
+     "passed": "pata",
+     "said": "PA.ta",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "qu:urqu",
+     "read": "orko",
+     "passed": "orko",
+     "said": "OR.ko",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "qu:qasa",
+     "read": "kasa",
+     "passed": "kasa",
+     "said": "KA.sa",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "qu:qaqa",
+     "read": "kaka",
+     "passed": "kaka",
+     "said": "KA.ka",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "qu:wata",
+     "read": "wata",
+     "passed": "wata",
+     "said": "WA.ta",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "qu:qucha",
+     "read": "kosa",
+     "passed": "kosa",
+     "said": "KO.sa",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "qu:chimpa",
+     "read": "simpa",
+     "passed": "simpa",
+     "said": "SIM.pa",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "qu:chaka",
+     "read": "saka",
+     "passed": "saka",
+     "said": "SA.ka",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "qu:mamaqucha",
+     "read": "mamakosa",
+     "passed": "mamakosa",
+     "said": "ma.ma.KO.sa",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "qu:sacha",
+     "read": "sasa",
+     "passed": "sasa",
+     "said": "SA.sa",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "qu:purun",
+     "read": "purun",
+     "passed": "purun",
+     "said": "PU.run",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "qu:chakra",
+     "read": "sakra",
+     "passed": "sakra",
+     "said": "SAK.ra",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "qu:llaqta",
+     "read": "lakta",
+     "passed": "lakta",
+     "said": "LAK.ta",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "qu:paqcha",
+     "read": "paksa",
+     "passed": "paksa",
+     "said": "PAK.sa",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "qu:pukyu",
+     "read": "pukyu",
+     "passed": "pukyu",
+     "said": "PUK.yu",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "qu:yana",
+     "read": "yana",
+     "passed": "yana",
+     "said": "YA.na",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "qu:yuraq",
+     "read": "yurak",
+     "passed": "yurak",
+     "said": "YU.rak",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "qu:puka",
+     "read": "puka",
+     "passed": "puka",
+     "said": "PU.ka",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "qu:qumir",
+     "read": "komir",
+     "passed": "komir",
+     "said": "KO.mir",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "qu:quri",
+     "read": "kori",
+     "passed": "kori",
+     "said": "KO.ri",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "qu:anqas",
+     "read": "ankas",
+     "passed": "ankas",
+     "said": "AN.kas",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "qu:hatun",
+     "read": "hatun",
+     "passed": "hatun",
+     "said": "HA.tun",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "qu:huchuy",
+     "read": "husuy",
+     "passed": "husuy",
+     "said": "HU.suy",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "qu:hanaq",
+     "read": "hanak",
+     "passed": "hanak",
+     "said": "HA.nak",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "qu:ukhu",
+     "read": "uku",
+     "passed": "uku",
+     "said": "U.ku",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "qu:suni",
+     "read": "suni",
+     "passed": "suni",
+     "said": "SU.ni",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "qu:ñawpa",
+     "read": "naupa",
+     "passed": "naupa",
+     "said": "NAU.pa",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "qu:musuq",
+     "read": "musok",
+     "passed": "musok",
+     "said": "MU.sok",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "qu:chaki",
+     "read": "saki",
+     "passed": "saki",
+     "said": "SA.ki",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "qu:huqu",
+     "read": "hoko",
+     "passed": "hoko",
+     "said": "HO.ko",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "qu:quni",
+     "read": "koni",
+     "passed": "koni",
+     "said": "KO.ni",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "qu:chiri",
+     "read": "siri",
+     "passed": "siri",
+     "said": "SI.ri",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "qu:kanchay",
+     "read": "kansai",
+     "passed": "kansai",
+     "said": "KAN.sai",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "qu:paqarin",
+     "read": "pakarin",
+     "passed": "pakarin",
+     "said": "pa.KA.rin",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "qu:tuta",
+     "read": "tuta",
+     "passed": "tuta",
+     "said": "TU.ta",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "qu:quyllur",
+     "read": "koilur",
+     "passed": "koilur",
+     "said": "KOI.lur",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "qu:puyu",
+     "read": "puyu",
+     "passed": "puyu",
+     "said": "PU.yu",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "qu:pukutay",
+     "read": "pukutai",
+     "passed": "pukutai",
+     "said": "pu.KU.tai",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "qu:para",
+     "read": "para",
+     "passed": "para",
+     "said": "PA.ra",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "qu:wayra",
+     "read": "waira",
+     "passed": "waira",
+     "said": "WAI.ra",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "qu:inti",
+     "read": "inti",
+     "passed": "inti",
+     "said": "IN.ti",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "qu:allpa",
+     "read": "alpa",
+     "passed": "alpa",
+     "said": "AL.pa",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "qu:rumi",
+     "read": "rumi",
+     "passed": "rumi",
+     "said": "RU.mi",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "qu:tiyu",
+     "read": "tiyu",
+     "passed": "tiyu",
+     "said": "TI.yu",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "qu:kachi",
+     "read": "kasi",
+     "passed": "kasi",
+     "said": "KA.si",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "qu:yaku",
+     "read": "yaku",
+     "passed": "yaku",
+     "said": "YA.ku",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "qu:rapi",
+     "read": "rapi",
+     "passed": "rapi",
+     "said": "RA.pi",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "qu:tika",
+     "read": "tika",
+     "passed": "tika",
+     "said": "TI.ka",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "qu:waranqa",
+     "read": "waranka",
+     "passed": "waranka",
+     "said": "wa.RAN.ka",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "qu:iskay",
+     "read": "iskai",
+     "passed": "iskai",
+     "said": "IS.kai",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "qu:wayrapara",
+     "read": "wairapara",
+     "passed": "wairapara",
+     "said": "wai.ra.PA.ra",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "qu:thak",
+     "read": "tak",
+     "passed": "tak",
+     "said": "TAK",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "qu:chuya",
+     "read": "suya",
+     "passed": "suya",
+     "said": "SU.ya",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "qu:achka",
+     "read": "aska",
+     "passed": "aska",
+     "said": "AS.ka",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "qu:mishki",
+     "read": "miski",
+     "passed": "miski",
+     "said": "MIS.ki",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "qu:sasa",
+     "read": "sasa",
+     "passed": "sasa",
+     "said": "SA.sa",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "qu:watakuna",
+     "read": "watakuna",
+     "passed": "watakuna",
+     "said": "wa.ta.KU.na",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "qu:riqsisqa",
+     "read": "rekseska",
+     "passed": "rekseska",
+     "said": "rek.SES.ka",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "qu:urin",
+     "read": "urin",
+     "passed": "urin",
+     "said": "U.rin",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "qu:inti",
+     "read": "inti",
+     "passed": "inti",
+     "said": "IN.ti",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "qu:kuchu",
+     "read": "kusu",
+     "passed": "kusu",
+     "said": "KU.su",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "qu:pusuqu",
+     "read": "pusoko",
+     "passed": "pusoko",
+     "said": "pu.SO.ko",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "qu:machaqway",
+     "read": "masakwai",
+     "passed": "masakwai",
+     "said": "ma.SAK.wai",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "qu:sulla",
+     "read": "sula",
+     "passed": "sula",
+     "said": "SU.la",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "qu:chawpi",
+     "read": "saupi",
+     "passed": "saupi",
+     "said": "SAU.pi",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "qu:munay",
+     "read": "munai",
+     "passed": "munai",
+     "said": "MU.nai",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "qu:huklla",
+     "read": "hukla",
+     "passed": "hukla",
+     "said": "HUK.la",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "qu:iñiy",
+     "read": "iniy",
+     "passed": "iniy",
+     "said": "I.niy",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "qu:atipay",
+     "read": "atipai",
+     "passed": "atipai",
+     "said": "a.TI.pai",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "qu:musquy",
+     "read": "moskoi",
+     "passed": "moskoi",
+     "said": "MOS.koi",
+     "faults": []
+    },
+    {
+     "key": "death",
+     "role": "meaning",
+     "parent": "qu:wañuy",
+     "read": "wanuy",
+     "passed": "wanuy",
+     "said": "WA.nuy",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "qu:mita",
+     "read": "mita",
+     "passed": "mita",
+     "said": "MI.ta",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "qu:llaki",
+     "read": "laki",
+     "passed": "laki",
+     "said": "LA.ki",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "qu:pawqar",
+     "read": "paukar",
+     "passed": "paukar",
+     "said": "PAU.kar",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "qu:aymuray",
+     "read": "aimurai",
+     "passed": "aimurai",
+     "said": "ai.MU.rai",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "qu:ruphay",
+     "read": "rupai",
+     "passed": "rupai",
+     "said": "RU.pai",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "qu:chiraw",
+     "read": "sirau",
+     "passed": "sirau",
+     "said": "SI.rau",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "qu:suyay",
+     "read": "suyai",
+     "passed": "suyai",
+     "said": "SU.yai",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "qu:llampu",
+     "read": "lampu",
+     "passed": "lampu",
+     "said": "LAM.pu",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "qu:alli",
+     "read": "ali",
+     "passed": "ali",
+     "said": "A.li",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "qu:kallpa",
+     "read": "kalpa",
+     "passed": "kalpa",
+     "said": "KAL.pa",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "qu:sapan",
+     "read": "sapan",
+     "passed": "sapan",
+     "said": "SA.pan",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "qu:qunqay",
+     "read": "konkai",
+     "passed": "konkai",
+     "said": "KON.kai",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "qu:manchay",
+     "read": "mansai",
+     "passed": "mansai",
+     "said": "MAN.sai",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "qu:kusi",
+     "read": "kusi",
+     "passed": "kusi",
+     "said": "KU.si",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "qu:sumaq",
+     "read": "sumak",
+     "passed": "sumak",
+     "said": "SU.mak",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "qu:tutayaq",
+     "read": "tutayak",
+     "passed": "tutayak",
+     "said": "tu.TA.yak",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "qu:puñuy",
+     "read": "punuy",
+     "passed": "punuy",
+     "said": "PU.nuy",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "qu:ismu",
+     "read": "ismu",
+     "passed": "ismu",
+     "said": "IS.mu",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "qu:unquy",
+     "read": "onkoi",
+     "passed": "onkoi",
+     "said": "ON.koi",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  },
+  "satoyama": {
+   "label": "Satogo (Japanese-rooted)",
+   "words": [
+    {
+     "key": "bowl",
+     "role": "head",
+     "parent": "ja:kubo",
+     "read": "kubo",
+     "passed": "kubo",
+     "said": "KU.bo",
+     "faults": []
+    },
+    {
+     "key": "basin",
+     "role": "head",
+     "parent": "ja:bonchi",
+     "read": "bonti",
+     "passed": "bonti",
+     "said": "BON.ti",
+     "faults": []
+    },
+    {
+     "key": "lake",
+     "role": "head",
+     "parent": "ja:ko",
+     "read": "ko",
+     "passed": "ko",
+     "said": "KO",
+     "faults": []
+    },
+    {
+     "key": "lakes",
+     "role": "head",
+     "parent": "ja:ikeno",
+     "read": "ikeno",
+     "passed": "ikeno",
+     "said": "i.KE.no",
+     "faults": []
+    },
+    {
+     "key": "river",
+     "role": "head",
+     "parent": "ja:kawa",
+     "read": "kawa",
+     "passed": "kawa",
+     "said": "KA.wa",
+     "faults": []
+    },
+    {
+     "key": "valley",
+     "role": "head",
+     "parent": "ja:tani",
+     "read": "tani",
+     "passed": "tani",
+     "said": "TA.ni",
+     "faults": []
+    },
+    {
+     "key": "plain",
+     "role": "head",
+     "parent": "ja:hara",
+     "read": "hara",
+     "passed": "hara",
+     "said": "HA.ra",
+     "faults": []
+    },
+    {
+     "key": "hills",
+     "role": "head",
+     "parent": "ja:oka",
+     "read": "oka",
+     "passed": "oka",
+     "said": "O.ka",
+     "faults": []
+    },
+    {
+     "key": "mountains",
+     "role": "head",
+     "parent": "ja:yama",
+     "read": "yama",
+     "passed": "yama",
+     "said": "YA.ma",
+     "faults": []
+    },
+    {
+     "key": "ridge",
+     "role": "head",
+     "parent": "ja:one",
+     "read": "one",
+     "passed": "one",
+     "said": "O.ne",
+     "faults": []
+    },
+    {
+     "key": "cliff",
+     "role": "head",
+     "parent": "ja:gake",
+     "read": "gake",
+     "passed": "gake",
+     "said": "GA.ke",
+     "faults": []
+    },
+    {
+     "key": "island",
+     "role": "head",
+     "parent": "ja:shima",
+     "read": "sima",
+     "passed": "sima",
+     "said": "SI.ma",
+     "faults": []
+    },
+    {
+     "key": "bay",
+     "role": "head",
+     "parent": "ja:ura",
+     "read": "ura",
+     "passed": "ura",
+     "said": "U.ra",
+     "faults": []
+    },
+    {
+     "key": "coast",
+     "role": "head",
+     "parent": "ja:hama",
+     "read": "hama",
+     "passed": "hama",
+     "said": "HA.ma",
+     "faults": []
+    },
+    {
+     "key": "strait",
+     "role": "head",
+     "parent": "ja:seto",
+     "read": "seto",
+     "passed": "seto",
+     "said": "SE.to",
+     "faults": []
+    },
+    {
+     "key": "sea",
+     "role": "head",
+     "parent": "ja:umi",
+     "read": "umi",
+     "passed": "umi",
+     "said": "U.mi",
+     "faults": []
+    },
+    {
+     "key": "forest",
+     "role": "head",
+     "parent": "ja:mori",
+     "read": "mori",
+     "passed": "mori",
+     "said": "MO.ri",
+     "faults": []
+    },
+    {
+     "key": "desert",
+     "role": "head",
+     "parent": "ja:suna",
+     "read": "suna",
+     "passed": "suna",
+     "said": "SU.na",
+     "faults": []
+    },
+    {
+     "key": "field",
+     "role": "head",
+     "parent": "ja:no",
+     "read": "no",
+     "passed": "no",
+     "said": "NO",
+     "faults": []
+    },
+    {
+     "key": "land",
+     "role": "head",
+     "parent": "ja:kuni",
+     "read": "kuni",
+     "passed": "kuni",
+     "said": "KU.ni",
+     "faults": []
+    },
+    {
+     "key": "falls",
+     "role": "head",
+     "parent": "ja:taki",
+     "read": "taki",
+     "passed": "taki",
+     "said": "TA.ki",
+     "faults": []
+    },
+    {
+     "key": "spring",
+     "role": "head",
+     "parent": "ja:izumi",
+     "read": "isumi",
+     "passed": "isumi",
+     "said": "i.SU.mi",
+     "faults": []
+    },
+    {
+     "key": "black",
+     "role": "modifier",
+     "parent": "ja:kuro",
+     "read": "kuro",
+     "passed": "kuro",
+     "said": "KU.ro",
+     "faults": []
+    },
+    {
+     "key": "white",
+     "role": "modifier",
+     "parent": "ja:shira",
+     "read": "sira",
+     "passed": "sira",
+     "said": "SI.ra",
+     "faults": []
+    },
+    {
+     "key": "red",
+     "role": "modifier",
+     "parent": "ja:aka",
+     "read": "aka",
+     "passed": "aka",
+     "said": "A.ka",
+     "faults": []
+    },
+    {
+     "key": "green",
+     "role": "modifier",
+     "parent": "ja:midori",
+     "read": "midori",
+     "passed": "midori",
+     "said": "mi.DO.ri",
+     "faults": []
+    },
+    {
+     "key": "gold",
+     "role": "modifier",
+     "parent": "ja:kogane",
+     "read": "kogane",
+     "passed": "kogane",
+     "said": "ko.GA.ne",
+     "faults": []
+    },
+    {
+     "key": "blue",
+     "role": "modifier",
+     "parent": "ja:ao",
+     "read": "ao",
+     "passed": "ao",
+     "said": "A.o",
+     "faults": []
+    },
+    {
+     "key": "great",
+     "role": "modifier",
+     "parent": "ja:ō",
+     "read": "oo",
+     "passed": "oo",
+     "said": "OO",
+     "faults": []
+    },
+    {
+     "key": "small",
+     "role": "modifier",
+     "parent": "ja:ko",
+     "read": "ko",
+     "passed": "ko",
+     "said": "KO",
+     "faults": []
+    },
+    {
+     "key": "high",
+     "role": "modifier",
+     "parent": "ja:taka",
+     "read": "taka",
+     "passed": "taka",
+     "said": "TA.ka",
+     "faults": []
+    },
+    {
+     "key": "deep",
+     "role": "modifier",
+     "parent": "ja:fuka",
+     "read": "huka",
+     "passed": "huka",
+     "said": "HU.ka",
+     "faults": []
+    },
+    {
+     "key": "long",
+     "role": "modifier",
+     "parent": "ja:naga",
+     "read": "naga",
+     "passed": "naga",
+     "said": "NA.ga",
+     "faults": []
+    },
+    {
+     "key": "old",
+     "role": "modifier",
+     "parent": "ja:furu",
+     "read": "huru",
+     "passed": "huru",
+     "said": "HU.ru",
+     "faults": []
+    },
+    {
+     "key": "new",
+     "role": "modifier",
+     "parent": "ja:nii",
+     "read": "nii",
+     "passed": "nii",
+     "said": "NII",
+     "faults": []
+    },
+    {
+     "key": "dry",
+     "role": "modifier",
+     "parent": "ja:kara",
+     "read": "kara",
+     "passed": "kara",
+     "said": "KA.ra",
+     "faults": []
+    },
+    {
+     "key": "wet",
+     "role": "modifier",
+     "parent": "ja:nure",
+     "read": "nure",
+     "passed": "nure",
+     "said": "NU.re",
+     "faults": []
+    },
+    {
+     "key": "warm",
+     "role": "modifier",
+     "parent": "ja:nuku",
+     "read": "nuku",
+     "passed": "nuku",
+     "said": "NU.ku",
+     "faults": []
+    },
+    {
+     "key": "cold",
+     "role": "modifier",
+     "parent": "ja:samu",
+     "read": "samu",
+     "passed": "samu",
+     "said": "SA.mu",
+     "faults": []
+    },
+    {
+     "key": "light",
+     "role": "modifier",
+     "parent": "ja:hikari",
+     "read": "hikari",
+     "passed": "hikari",
+     "said": "hi.KA.ri",
+     "faults": []
+    },
+    {
+     "key": "dawn",
+     "role": "modifier",
+     "parent": "ja:asa",
+     "read": "asa",
+     "passed": "asa",
+     "said": "A.sa",
+     "faults": []
+    },
+    {
+     "key": "night",
+     "role": "modifier",
+     "parent": "ja:yo",
+     "read": "yo",
+     "passed": "yo",
+     "said": "YO",
+     "faults": []
+    },
+    {
+     "key": "star",
+     "role": "modifier",
+     "parent": "ja:hoshi",
+     "read": "hosi",
+     "passed": "hosi",
+     "said": "HO.si",
+     "faults": []
+    },
+    {
+     "key": "cloud",
+     "role": "modifier",
+     "parent": "ja:kumo",
+     "read": "kumo",
+     "passed": "kumo",
+     "said": "KU.mo",
+     "faults": []
+    },
+    {
+     "key": "mist",
+     "role": "modifier",
+     "parent": "ja:kiri",
+     "read": "kiri",
+     "passed": "kiri",
+     "said": "KI.ri",
+     "faults": []
+    },
+    {
+     "key": "rain",
+     "role": "modifier",
+     "parent": "ja:ame",
+     "read": "ame",
+     "passed": "ame",
+     "said": "A.me",
+     "faults": []
+    },
+    {
+     "key": "wind",
+     "role": "modifier",
+     "parent": "ja:kaze",
+     "read": "kase",
+     "passed": "kase",
+     "said": "KA.se",
+     "faults": []
+    },
+    {
+     "key": "sun",
+     "role": "modifier",
+     "parent": "ja:hi",
+     "read": "hi",
+     "passed": "hi",
+     "said": "HI",
+     "faults": []
+    },
+    {
+     "key": "earth",
+     "role": "modifier",
+     "parent": "ja:tsuchi",
+     "read": "tuti",
+     "passed": "tuti",
+     "said": "TU.ti",
+     "faults": []
+    },
+    {
+     "key": "stone",
+     "role": "modifier",
+     "parent": "ja:ishi",
+     "read": "isi",
+     "passed": "isi",
+     "said": "I.si",
+     "faults": []
+    },
+    {
+     "key": "sand",
+     "role": "modifier",
+     "parent": "ja:suna",
+     "read": "suna",
+     "passed": "suna",
+     "said": "SU.na",
+     "faults": []
+    },
+    {
+     "key": "salt",
+     "role": "modifier",
+     "parent": "ja:shio",
+     "read": "sio",
+     "passed": "sio",
+     "said": "SI.o",
+     "faults": []
+    },
+    {
+     "key": "water",
+     "role": "modifier",
+     "parent": "ja:mizu",
+     "read": "misu",
+     "passed": "misu",
+     "said": "MI.su",
+     "faults": []
+    },
+    {
+     "key": "leaf",
+     "role": "modifier",
+     "parent": "ja:ha",
+     "read": "ha",
+     "passed": "ha",
+     "said": "HA",
+     "faults": []
+    },
+    {
+     "key": "flower",
+     "role": "modifier",
+     "parent": "ja:hana",
+     "read": "hana",
+     "passed": "hana",
+     "said": "HA.na",
+     "faults": []
+    },
+    {
+     "key": "thousand",
+     "role": "modifier",
+     "parent": "ja:chi",
+     "read": "ti",
+     "passed": "ti",
+     "said": "TI",
+     "faults": []
+    },
+    {
+     "key": "twin",
+     "role": "modifier",
+     "parent": "ja:futa",
+     "read": "huta",
+     "passed": "huta",
+     "said": "HU.ta",
+     "faults": []
+    },
+    {
+     "key": "storm",
+     "role": "meaning",
+     "parent": "ja:arashi",
+     "read": "arasi",
+     "passed": "arasi",
+     "said": "a.RA.si",
+     "faults": []
+    },
+    {
+     "key": "calm",
+     "role": "meaning",
+     "parent": "ja:nagi",
+     "read": "nagi",
+     "passed": "nagi",
+     "said": "NA.gi",
+     "faults": []
+    },
+    {
+     "key": "clear",
+     "role": "meaning",
+     "parent": "ja:hare",
+     "read": "hare",
+     "passed": "hare",
+     "said": "HA.re",
+     "faults": []
+    },
+    {
+     "key": "plenty",
+     "role": "meaning",
+     "parent": "ja:yutaka",
+     "read": "yutaka",
+     "passed": "yutaka",
+     "said": "yu.TA.ka",
+     "faults": []
+    },
+    {
+     "key": "nectar",
+     "role": "meaning",
+     "parent": "ja:mitsu",
+     "read": "mitu",
+     "passed": "mitu",
+     "said": "MI.tu",
+     "faults": []
+    },
+    {
+     "key": "trial",
+     "role": "meaning",
+     "parent": "ja:kiki",
+     "read": "kiki",
+     "passed": "kiki",
+     "said": "KI.ki",
+     "faults": []
+    },
+    {
+     "key": "islands",
+     "role": "meaning",
+     "parent": "ja:shima",
+     "read": "sima",
+     "passed": "sima",
+     "said": "SI.ma",
+     "faults": []
+    },
+    {
+     "key": "known",
+     "role": "meaning",
+     "parent": "ja:shiru",
+     "read": "siru",
+     "passed": "siru",
+     "said": "SI.ru",
+     "faults": []
+    },
+    {
+     "key": "south",
+     "role": "meaning",
+     "parent": "ja:minami",
+     "read": "minami",
+     "passed": "minami",
+     "said": "mi.NA.mi",
+     "faults": []
+    },
+    {
+     "key": "east",
+     "role": "meaning",
+     "parent": "ja:higashi",
+     "read": "higasi",
+     "passed": "higasi",
+     "said": "hi.GA.si",
+     "faults": []
+    },
+    {
+     "key": "edge",
+     "role": "meaning",
+     "parent": "ja:fuchi",
+     "read": "huti",
+     "passed": "huti",
+     "said": "HU.ti",
+     "faults": []
+    },
+    {
+     "key": "wave",
+     "role": "meaning",
+     "parent": "ja:nami",
+     "read": "nami",
+     "passed": "nami",
+     "said": "NA.mi",
+     "faults": []
+    },
+    {
+     "key": "foam",
+     "role": "meaning",
+     "parent": "ja:awa",
+     "read": "awa",
+     "passed": "awa",
+     "said": "A.wa",
+     "faults": []
+    },
+    {
+     "key": "serpent",
+     "role": "meaning",
+     "parent": "ja:hebi",
+     "read": "hebi",
+     "passed": "hebi",
+     "said": "HE.bi",
+     "faults": []
+    },
+    {
+     "key": "dew",
+     "role": "meaning",
+     "parent": "ja:tsuyu",
+     "read": "tuyu",
+     "passed": "tuyu",
+     "said": "TU.yu",
+     "faults": []
+    },
+    {
+     "key": "middle",
+     "role": "meaning",
+     "parent": "ja:naka",
+     "read": "naka",
+     "passed": "naka",
+     "said": "NA.ka",
+     "faults": []
+    },
+    {
+     "key": "love",
+     "role": "meaning",
+     "parent": "ja:ai",
+     "read": "ai",
+     "passed": "ai",
+     "said": "AI",
+     "faults": []
+    },
+    {
+     "key": "rough",
+     "role": "meaning",
+     "parent": "ja:ara",
+     "read": "ara",
+     "passed": "ara",
+     "said": "A.ra",
+     "faults": []
+    },
+    {
+     "key": "harmony",
+     "role": "meaning",
+     "parent": "ja:wa",
+     "read": "wa",
+     "passed": "wa",
+     "said": "WA",
+     "faults": []
+    },
+    {
+     "key": "faith",
+     "role": "meaning",
+     "parent": "ja:shin",
+     "read": "sin",
+     "passed": "sin",
+     "said": "SIN",
+     "faults": []
+    },
+    {
+     "key": "success",
+     "role": "meaning",
+     "parent": "ja:sachi",
+     "read": "sati",
+     "passed": "sati",
+     "said": "SA.ti",
+     "faults": []
+    },
+    {
+     "key": "dream",
+     "role": "meaning",
+     "parent": "ja:yume",
+     "read": "yume",
+     "passed": "yume",
+     "said": "YU.me",
+     "faults": []
+    },
+    {
+     "key": "time",
+     "role": "meaning",
+     "parent": "ja:toki",
+     "read": "toki",
+     "passed": "toki",
+     "said": "TO.ki",
+     "faults": []
+    },
+    {
+     "key": "sorrow",
+     "role": "meaning",
+     "parent": "ja:kanashi",
+     "read": "kanasi",
+     "passed": "kanasi",
+     "said": "ka.NA.si",
+     "faults": []
+    },
+    {
+     "key": "springtime",
+     "role": "meaning",
+     "parent": "ja:haru",
+     "read": "haru",
+     "passed": "haru",
+     "said": "HA.ru",
+     "faults": []
+    },
+    {
+     "key": "autumn",
+     "role": "meaning",
+     "parent": "ja:aki",
+     "read": "aki",
+     "passed": "aki",
+     "said": "A.ki",
+     "faults": []
+    },
+    {
+     "key": "summer",
+     "role": "meaning",
+     "parent": "ja:natsu",
+     "read": "natu",
+     "passed": "natu",
+     "said": "NA.tu",
+     "faults": []
+    },
+    {
+     "key": "winter",
+     "role": "meaning",
+     "parent": "ja:fuyu",
+     "read": "huyu",
+     "passed": "huyu",
+     "said": "HU.yu",
+     "faults": []
+    },
+    {
+     "key": "hope",
+     "role": "meaning",
+     "parent": "ja:nozomi",
+     "read": "nosomi",
+     "passed": "nosomi",
+     "said": "no.SO.mi",
+     "faults": []
+    },
+    {
+     "key": "gentle",
+     "role": "meaning",
+     "parent": "ja:yasa",
+     "read": "yasa",
+     "passed": "yasa",
+     "said": "YA.sa",
+     "faults": []
+    },
+    {
+     "key": "good",
+     "role": "meaning",
+     "parent": "ja:yoi",
+     "read": "yoi",
+     "passed": "yoi",
+     "said": "YOI",
+     "faults": []
+    },
+    {
+     "key": "endure",
+     "role": "meaning",
+     "parent": "ja:shinobu",
+     "read": "sinobu",
+     "passed": "sinobu",
+     "said": "si.NO.bu",
+     "faults": []
+    },
+    {
+     "key": "alone",
+     "role": "meaning",
+     "parent": "ja:hitori",
+     "read": "hitori",
+     "passed": "hitori",
+     "said": "hi.TO.ri",
+     "faults": []
+    },
+    {
+     "key": "forget",
+     "role": "meaning",
+     "parent": "ja:wasure",
+     "read": "wasure",
+     "passed": "wasure",
+     "said": "wa.SU.re",
+     "faults": []
+    },
+    {
+     "key": "fear",
+     "role": "meaning",
+     "parent": "ja:osore",
+     "read": "osore",
+     "passed": "osore",
+     "said": "o.SO.re",
+     "faults": []
+    },
+    {
+     "key": "joy",
+     "role": "meaning",
+     "parent": "ja:yoro",
+     "read": "yoro",
+     "passed": "yoro",
+     "said": "YO.ro",
+     "faults": []
+    },
+    {
+     "key": "excellent",
+     "role": "meaning",
+     "parent": "ja:masa",
+     "read": "masa",
+     "passed": "masa",
+     "said": "MA.sa",
+     "faults": []
+    },
+    {
+     "key": "dark",
+     "role": "meaning",
+     "parent": "ja:yami",
+     "read": "yami",
+     "passed": "yami",
+     "said": "YA.mi",
+     "faults": []
+    },
+    {
+     "key": "sleep",
+     "role": "meaning",
+     "parent": "ja:nemuri",
+     "read": "nemuri",
+     "passed": "nemuri",
+     "said": "ne.MU.ri",
+     "faults": []
+    },
+    {
+     "key": "decay",
+     "role": "meaning",
+     "parent": "ja:kuchi",
+     "read": "kuti",
+     "passed": "kuti",
+     "said": "KU.ti",
+     "faults": []
+    },
+    {
+     "key": "plague",
+     "role": "meaning",
+     "parent": "ja:eki",
+     "read": "eki",
+     "passed": "eki",
+     "said": "E.ki",
+     "faults": []
+    }
+   ],
+   "faults": 0,
+   "fallen_together": [],
+   "joined_names_at_fault": 0
+  }
+ },
+ "pins": [
+  {
+   "anchor": "sea:near-side sea",
+   "name": "Uamoana",
+   "tongue": "terlunan",
+   "from_the_words": "Uamoana",
+   "said": "u.a.mo.A.na",
+   "stands": true,
+   "how": "terlunan: rain + sea",
+   "faults": []
+  },
+  {
+   "anchor": "sea:southern near-side seas",
+   "name": "Bultengis",
+   "tongue": "dala",
+   "from_the_words": "Bultengis",
+   "said": "bul.TE.ngis",
+   "stands": true,
+   "how": "dala: cloud + sea",
+   "faults": []
+  },
+  {
+   "anchor": "sea:South Pole–Aitken Sea",
+   "name": "H'Yamo Melaha",
+   "tongue": "olivolingvo",
+   "from_the_words": "H'Yamo Melaha",
+   "said": "h'YA.mo me.LA.ha",
+   "stands": true,
+   "how": "olivolingvo: salt + sea",
+   "faults": []
+  },
+  {
+   "anchor": "sea:Mare Humboldtianum",
+   "name": "Yuldustengis",
+   "tongue": "dala",
+   "from_the_words": "Yuldustengis",
+   "said": "yul.dus.TE.ngis",
+   "stands": true,
+   "how": "dala: star + sea",
+   "faults": []
+  },
+  {
+   "anchor": "sea:Mare Moscoviense",
+   "name": "Hanakosa",
+   "tongue": "runa",
+   "from_the_words": "Hanakosa",
+   "said": "ha.na.KO.sa",
+   "stands": true,
+   "how": "runa: high + lake",
+   "faults": []
+  },
+  {
+   "anchor": "sea:Mare Orientale",
+   "name": "Bahari Masariki",
+   "tongue": "pwani",
+   "from_the_words": "Bahari Masariki",
+   "said": "ba.HA.ri ma.sa.RI.ki",
+   "stands": true,
+   "how": "pwani: east + sea",
+   "faults": []
+  },
+  {
+   "anchor": "sea:Smythii–Marginis Sea",
+   "name": "Dagat na Kaseh",
+   "tongue": "tagalhebrew",
+   "from_the_words": "Dagat na Kaseh",
+   "said": "DA.gat na KA.seh",
+   "stands": true,
+   "how": "tagalhebrew: edge + sea",
+   "faults": []
+  },
+  {
+   "anchor": "feature:Sinus Iridum",
+   "name": "Anuanuafanga",
+   "tongue": "terlunan",
+   "from_the_words": "Anuanuafanga",
+   "said": "a.nu.a.nu.a.FA.nga",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
+   "faults": []
+  },
+  {
+   "anchor": "feature:Montes Jura",
+   "name": "Jura",
+   "tongue": null,
+   "from_the_words": "Jura",
+   "said": "JU.ra",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
+   "faults": []
+  },
+  {
+   "anchor": "feature:Mare Ingenii",
+   "name": "Ingenii",
+   "tongue": null,
+   "from_the_words": "Ingenii",
+   "said": "i.nge.NII",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
+   "faults": []
+  },
+  {
+   "anchor": "river:-22.9,173.3",
+   "name": "Hatunmayu",
+   "tongue": "runa",
+   "from_the_words": "Hatunmayu",
+   "said": "ha.tun.MA.yu",
+   "stands": true,
+   "how": "runa: great + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:47.5,49.7",
+   "name": "Ninamuawa",
+   "tongue": "terlunan",
+   "from_the_words": "Ninamuawa",
+   "said": "ni.na.mu.A.wa",
+   "stands": true,
+   "how": "terlunan: blue + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:2.3,177.7",
+   "name": "Paramayu",
+   "tongue": "runa",
+   "from_the_words": "Paramayu",
+   "said": "pa.ra.MA.yu",
+   "stands": true,
+   "how": "runa: rain + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:21.3,105.0",
+   "name": "Hukagawa",
+   "tongue": "satoyama",
+   "from_the_words": "Hukagawa",
+   "said": "hu.ka.GA.wa",
+   "stands": true,
+   "how": "satoyama: deep + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:15.0,287.7",
+   "name": "Muto Kiyani",
+   "tongue": "pwani",
+   "from_the_words": "Muto Kiyani",
+   "said": "MU.to ki.YA.ni",
+   "stands": true,
+   "how": "pwani: green + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:-13.4,253.1",
+   "name": "Ilog na Gavoah",
+   "tongue": "tagalhebrew",
+   "from_the_words": "Ilog na Gavoah",
+   "said": "I.log na ga.VO.ah",
+   "stands": true,
+   "how": "tagalhebrew: high + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:-23.0,192.3",
+   "name": "Pukutaimayu",
+   "tongue": "runa",
+   "from_the_words": "Pukutaimayu",
+   "said": "pu.ku.tai.MA.yu",
+   "stands": true,
+   "how": "runa: mist + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:25.8,103.0",
+   "name": "Niigawa",
+   "tongue": "satoyama",
+   "from_the_words": "Niigawa",
+   "said": "NII.ga.wa",
+   "stands": true,
+   "how": "satoyama: new + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:19.9,184.6",
+   "name": "Rereawa",
+   "tongue": "terlunan",
+   "from_the_words": "Rereawa",
+   "said": "re.re.A.wa",
+   "stands": true,
+   "how": "te:rere+te:awa",
+   "faults": []
+  },
+  {
+   "anchor": "river:3.6,302.2",
+   "name": "Yarikgol",
+   "tongue": "dala",
+   "from_the_words": "Yarikgol",
+   "said": "ya.RIK.gol",
+   "stands": true,
+   "how": "dala: light + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:-45.1,230.0",
+   "name": "Muto Yiwe",
+   "tongue": "pwani",
+   "from_the_words": "Muto Yiwe",
+   "said": "MU.to YI.we",
+   "stands": true,
+   "how": "pwani: stone + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:57.1,111.8",
+   "name": "Asif Dahab",
+   "tongue": "sahran",
+   "from_the_words": "Asif Dahab",
+   "said": "A.sif DA.hab",
+   "stands": true,
+   "how": "sahran: gold + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:16.8,13.5",
+   "name": "Tiareawa",
+   "tongue": "terlunan",
+   "from_the_words": "Tiareawa",
+   "said": "ti.a.re.A.wa",
+   "stands": true,
+   "how": "terlunan: flower + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:18.1,184.8",
+   "name": "Wairamayu",
+   "tongue": "runa",
+   "from_the_words": "Wairamayu",
+   "said": "wai.ra.MA.yu",
+   "stands": true,
+   "how": "runa: wind + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:3.3,156.4",
+   "name": "Puyumayu",
+   "tongue": "runa",
+   "from_the_words": "Puyumayu",
+   "said": "pu.yu.MA.yu",
+   "stands": true,
+   "how": "runa: cloud + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:8.8,146.9",
+   "name": "Koilurmayu",
+   "tongue": "runa",
+   "from_the_words": "Koilurmayu",
+   "said": "koi.lur.MA.yu",
+   "stands": true,
+   "how": "runa: star + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:1.4,302.5",
+   "name": "Muto Yani",
+   "tongue": "pwani",
+   "from_the_words": "Muto Yani",
+   "said": "MU.to YA.ni",
+   "stands": true,
+   "how": "pwani: leaf + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:-14.1,311.5",
+   "name": "Muto Pasa",
+   "tongue": "pwani",
+   "from_the_words": "Muto Pasa",
+   "said": "MU.to PA.sa",
+   "stands": true,
+   "how": "pwani: twin + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:-50.2,131.6",
+   "name": "H'Naharo Longa",
+   "tongue": "olivolingvo",
+   "from_the_words": "H'Naharo Longa",
+   "said": "h'na.HA.ro LO.nga",
+   "stands": true,
+   "how": "olivolingvo: long + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:12.3,346.0",
+   "name": "Pooiriawa",
+   "tongue": "terlunan",
+   "from_the_words": "Pooiriawa",
+   "said": "POO.i.ri.a.wa",
+   "stands": true,
+   "how": "terlunan: black + river",
+   "faults": []
+  },
+  {
+   "anchor": "river:47.4,186.0",
+   "name": "H'Naharo Atika",
+   "tongue": "olivolingvo",
+   "from_the_words": "H'Naharo Atika",
+   "said": "h'na.HA.ro a.TI.ka",
+   "stands": true,
+   "how": "olivolingvo: old + river",
+   "faults": []
+  }
+ ],
+ "record": {
+  "generated_names": 658,
+  "made_by_the_words": 658
+ },
+ "seconds": 0.12
+}
