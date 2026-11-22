@@ -49,6 +49,13 @@
    "doi_or_url": "research/studies/sky_ecology/phosphorus.md",
    "use": "What a sky reef drops per m2 a year as litter and whole bodies under three kinds of pools, the reefs' 1% of the Moon, and the new phosphorus a mature sky needs, which sea-feeding flyers bring",
    "access": "its table and summary read; arithmetic in the README"
+  },
+  {
+   "key": "kruss2020",
+   "citation": "Kruss M, Musiolik G, Demirci T, Wurm G, Teiser J 2020, Wind erosion on Mars and other small terrestrial planets, Icarus 337, 113438",
+   "doi_or_url": "https://arxiv.org/abs/1911.01692",
+   "use": "Shear-stress thresholds and erosion rates of a 100 \u00b5m Mars simulant at 600 Pa on parabolic flights from 0.15 to 1 g: the nearest measurement to wind erosion at lunar gravity, in thin air and without a count of dust",
+   "access": "search summary of the abstract"
   }
  ]
 }

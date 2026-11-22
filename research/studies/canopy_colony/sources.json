@@ -49,6 +49,41 @@
    "doi_or_url": "https://doi.org/10.5194/bg-11-4587-2014 ; https://doi.org/10.1111/j.1529-8817.2008.00537.x",
    "use": "That corals release hydrogen peroxide to the water and that their algae make it in the light when electrons pass to oxygen (the Mehler reaction). No rate was retrieved and none is used",
    "access": "search summaries"
+  },
+  {
+   "key": "giering2014",
+   "citation": "Giering SLC and colleagues 2014, Reconciliation of the carbon budget in the ocean's twilight zone, Nature 507, 480-483",
+   "doi_or_url": "https://doi.org/10.1038/nature13123",
+   "use": "At the Porcupine Abyssal Plain site zooplankton fragment and ingest about half of the fast-sinking particles, releasing over 30% of it again as suspended or slowly sinking matter",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "katija2017",
+   "citation": "Katija K, Sherlock RE, Sherman AD, Robison BH 2017, New technology reveals the role of giant larvaceans in oceanic carbon cycling, Science Advances 3, e1602374",
+   "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5415331",
+   "use": "Giant larvaceans (Bathochordaeus) filter more than 20 mL a second, about 80 litres an hour; at their greatest numbers in Monterey Bay they would clear the particles from their depths in about 13 days",
+   "access": "search summary and news reports"
+  },
+  {
+   "key": "stukel2019",
+   "citation": "Stukel MR, Ohman MD, Kelly TB, Biard T 2019, The roles of suspension-feeding and flux-feeding zooplankton as gatekeepers of particle flux into the mesopelagic ocean, Frontiers in Marine Science 6, 397",
+   "doi_or_url": "https://doi.org/10.3389/fmars.2019.00397",
+   "use": "Flux feeders can account for a substantial part of the flux lost in the shallow twilight zone, less deeper; suspension feeders act on slowly sinking particles",
+   "access": "search summary"
+  },
+  {
+   "key": "schmitz1979",
+   "citation": "Schmitz K, Srivastava LM 1979, Long distance transport in Macrocystis integrifolia, Plant Physiology 63, 995-1002; Drobnitch ST and colleagues 2015 on the Laminariales",
+   "doi_or_url": "https://doi.org/10.1104/pp.63.6.995 ; https://pmc.ncbi.nlm.nih.gov/articles/PMC4614777",
+   "use": "Labelled carbon moves through giant kelp's sieve tubes at 35-72 cm an hour; kelps as a group at 50-780 mm an hour",
+   "access": "search summary"
+  },
+  {
+   "key": "sponge_pump",
+   "citation": "Larsen PS, Riisg\u00e5rd HU 1994, The sponge pump, Journal of Theoretical Biology 168, 53-63; Asadzadeh and colleagues 2024 on a calcareous sponge, Marine Biology; Riisg\u00e5rd and Larsen on pumping costs, Marine Ecology Progress Series 746",
+   "doi_or_url": "https://orbit.dtu.dk/en/publications/the-sponge-pump/ ; https://link.springer.com/article/10.1007/s00227-024-04532-0 ; https://int-res.com/abstracts/meps/v746/p141-151",
+   "use": "A choanocyte chamber raises about 5.5 Pa, a whole sponge up to about 2.4 mm of water (24 Pa); volume-specific pumping of 10-30 a minute; pumping power 1.3-22% of respiration",
+   "access": "search summaries; the authors of the 2024 paper are named from memory and unchecked"
   }
  ]
 }
