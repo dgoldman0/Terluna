@@ -1,0 +1,12 @@
+{
+ "source_admission": "This study adds no outside source of its own. Its lake relations, the land's loss, the dust's range and people's losses are the phosphorus study's, whose sources and how far each was read are in resources/sea_phosphorus_sources.json. Values the README marks as recalled were not looked up.",
+ "sources": [
+  {
+   "key": "sea_phosphorus_study",
+   "citation": "Phosphorus from the waters, resources/sea_phosphorus.md with resources/sea_phosphorus_sources.json (11 October 2026)",
+   "doi_or_url": "resources/sea_phosphorus_sources.json",
+   "use": "Vollenweider's (1976) relation for the phosphorus a lake passes on, Siyam's (2000) form of Brune's (1953) trap curves, the land's loss and its dissolved share, the inherited dust range and Earth's oceans' deposition from the air (Paytan & McLaughlin 2007), the reactive share of river particles (Compton et al. 2000 in the same), and the food design's loss a person",
+   "access": "as that study records"
+  }
+ ]
+}
