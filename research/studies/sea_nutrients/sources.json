@@ -1,5 +1,5 @@
 {
- "source_admission": "This study adds no outside source of its own. Its lake relations, the land's loss, the dust's range and people's losses are the phosphorus study's, whose sources and how far each was read are in resources/sea_phosphorus_sources.json. Values the README marks as recalled were not looked up.",
+ "source_admission": "Its lake relations, the land's loss and people's losses are the phosphorus study's, whose sources and how far each was read are in resources/sea_phosphorus_sources.json. The dust rests on two project notes and the nitrogen on one outside source, checked on 22 November 2026 by a search summary only. Values the README marks as recalled were not looked up.",
  "sources": [
   {
    "key": "sea_phosphorus_study",
@@ -7,6 +7,34 @@
    "doi_or_url": "resources/sea_phosphorus_sources.json",
    "use": "Vollenweider's (1976) relation for the phosphorus a lake passes on, Siyam's (2000) form of Brune's (1953) trap curves, the land's loss and its dissolved share, the inherited dust range and Earth's oceans' deposition from the air (Paytan & McLaughlin 2007), the reactive share of river particles (Compton et al. 2000 in the same), and the food design's loss a person",
    "access": "as that study records"
+  },
+  {
+   "key": "sand_study",
+   "citation": "Wind-blown sand on the design surface, research/studies/atlas_round/sand.md with results/sand.json (19 November 2026)",
+   "doi_or_url": "research/studies/atlas_round/results/sand.json",
+   "use": "The drift potential over bare loose ground in the dry land by the case for unresolved gusts, the ground that is bare and moving in each variant, the land's area by aridity class and the bulk density of loose sand",
+   "access": "the product, read by the code"
+  },
+  {
+   "key": "aerosol_dust_note",
+   "citation": "Dust, salt and fog aerosol over the Open Moon's dry plains: literature values (the aerosol study's note, 5 October 2026)",
+   "doi_or_url": "research drive: atmospheric-electricity/aerosol_dust_fog.md, sections 1.4, 1.5 and 8.2",
+   "use": "The vertical dust flux as F = alpha Q with Earth's alpha of 1e-5 to 1e-4 per metre (Kok et al. 2012; Gonz\u00e1lez-Fl\u00f3rez et al. 2023), and the note's central choice that alpha follows gravity at the Moon, 0.165 of Earth's (Lu & Shao 1999; Shao 2004), with alpha unscaled as its high scheme (Marticorena & Bergametti 1995)",
+   "access": "the note's key numbers and section 8 read; its sources not re-read"
+  },
+  {
+   "key": "lewis1999",
+   "citation": "Lewis WM, Melack JM, McDowell WH, McClain M, Richey JE 1999, Nitrogen yields from undisturbed watersheds in the Americas, Biogeochemistry 46, 149-162",
+   "doi_or_url": "https://doi.org/10.1007/BF01007577",
+   "use": "Total nitrogen leaving undisturbed tropical watersheds, 5.1 kg per hectare a year on average, 70% of it dissolved, rising with runoff at about two thirds of its rate: the high end of the land's nitrogen loss, with a low end of a fifth of it for the Open Moon's drier land chosen here",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "lightning_study",
+   "citation": "Nitrogen fixed by lightning, research/studies/atmospheric_electricity (8 October 2026)",
+   "doi_or_url": "research/studies/atmospheric_electricity/results/nitrogen_oxides.json",
+   "use": "0.07 and 4.6 kg of nitrogen per km2 a year at its site, counted per flash and per joule released",
+   "access": "the product, read by the code"
   }
  ]
 }

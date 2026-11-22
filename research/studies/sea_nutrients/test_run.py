@@ -9,6 +9,7 @@ import pytest
 
 from research.studies.canopy_colony import column as CL
 from research.studies.canopy_colony import run as CC
+from research.studies.sea_nutrients import dust as DU
 from research.studies.sea_nutrients import loads as LO
 from research.studies.sea_nutrients import run as R
 
@@ -107,6 +108,38 @@ def test_salt_water_frees_part_of_the_particles_and_fresh_water_none():
     assert fresh['rivers_and_dust'] == pytest.approx([2.1, 22.2])
 
 
+def test_dust_is_a_share_of_the_sand_carried_and_falls_over_the_whole_moon():
+    assert DU.dust_raised(36.0, 1.65e-6) == pytest.approx(1.65e-6 * 36.0 * 1600.0)        # kg per m2 of moving ground a year
+    assert DU.phosphorus_fall(1.0e9, 5.0e-4, 4.0e13) == pytest.approx(1e6 * 1.0e9 * 5.0e-4 / 4.0e13)   # mg per m2 a year
+    sand = dict(winds=dict(over_sand=dict(central=dict(by_group={
+        'hyper-arid': dict(drift_potential_m2_yr=dict(mean=40.0)), 'arid': dict(drift_potential_m2_yr=dict(mean=30.0)),
+        'semi-arid': dict(drift_potential_m2_yr=dict(mean=20.0))}))),
+        land=dict(by_class_km2={'hyper-arid': 1.0, 'arid': 1.0, 'semi-arid': 2.0}))
+    assert DU.drift_potential(sand, 'central') == pytest.approx((40.0 + 30.0 + 2 * 20.0) / 4.0)
+    out = json.loads(DU.OUT.read_text())
+    for rel, digest in out['inputs'].items():
+        assert DU.sha256(ROOT / rel) == digest, rel
+    central, outer = out['natural']['phosphorus_mg_m2_yr']['central'], out['natural']['phosphorus_mg_m2_yr']['outer']
+    assert outer[0] < central[0] < central[1] < outer[1] < 5.0
+    assert central[1] == pytest.approx(10.0 * central[0] * out['setting']['soil_phosphorus_grade'][1] / out['setting']['soil_phosphorus_grade'][0])
+    assert out['inherited_mg_m2_yr'] == pytest.approx([0.7, 28.0]) and central[1] < out['inherited_mg_m2_yr'][0]
+    assert out['with_earths_alpha_factor'] == pytest.approx(1.0 / 0.165)
+    raised = [c['dust_kg_per_m2_of_moving_ground_yr'] for c in out['natural']['central']]
+    assert 0.05 < raised[0] < raised[1] < 2.0                                      # the rate of Earth's active deserts
+    assert json.loads(json.dumps(DU.build())) == out
+
+
+def test_nitrogen_is_taken_up_with_the_phosphorus():
+    assert R.N_MG_PER_MG_P == pytest.approx(16.0 * 14.007 / 30.974)
+    load = dict(share_of_the_lands_runoff=0.2, of_it_crossed_no_lake=0.05)
+    sea = dict(area_km2=1.0e6)
+    out = R.nitrogen(load, sea, dict(rivers_and_dust=[1.0, 4.0]), land_km2=2.0e7, lightning=[0.1, 5.0])
+    assert out['taken_up_with_the_phosphorus_mg_m2_yr'] == pytest.approx([R.N_MG_PER_MG_P, 4.0 * R.N_MG_PER_MG_P])
+    assert out['rivers_mg_m2_yr'] == pytest.approx([1e3 * 0.1 * 2.0e13 * 0.01 / 1e12, 1e3 * 0.5 * 2.0e13 * 0.2 / 1e12])
+    assert out['arrives_mg_m2_yr'] == pytest.approx([20.1, 2005.0])
+    assert out['fixing_needed_in_the_sea_mg_m2_yr'] == pytest.approx([0.0, 4.0 * R.N_MG_PER_MG_P - 20.1])
+
+
 # --- the products
 
 def test_the_lakes_keep_most_of_the_lands_phosphorus(loads):
@@ -147,6 +180,11 @@ def test_the_rivers_bring_far_less_than_the_nutrient_poor_state_takes(product, l
                 assert end['export_g_c_m2_yr'] * share * R.P_MG_PER_G_C == pytest.approx(end['supply_mg_m2_yr'])
                 assert end['oxygen_spent_below_250_m_mol_m2_yr'] == pytest.approx(end['supply_mg_m2_yr'] * R.O2_MMOL_PER_MG_P / 1e3)
         assert sea['what_the_supply_does']['rivers_alone']['high']['unaided_sea_holds_through_years'] == 3000.0
+        assert sea['what_the_supply_does']['rivers_and_dust']['high']['unaided_sea_holds_through_years'] == 3000.0
+        assert supply['dust'] == setting['dust_mg_m2_yr']['used'] and supply['dust_inherited'] == pytest.approx([0.7, 28.0])
+        n = sea['nitrogen']
+        assert n['arrives_mg_m2_yr'][0] <= n['arrives_mg_m2_yr'][1] and 0.0 <= n['fixing_needed_in_the_sea_mg_m2_yr'][1] < 25.0
+        assert n['taken_up_with_the_phosphorus_mg_m2_yr'][1] == pytest.approx(supply['rivers_and_dust'][1] * R.N_MG_PER_MG_P)
         d = sea['delivered_water']
         assert d['70 mg/m3']['oxygen_it_takes_below_mol_m2'] == pytest.approx(70.0 * d['1 mg/m3']['oxygen_it_takes_below_mol_m2'])
         assert 200.0 < sea['water_above_250_m_per_m2'] <= 250.0

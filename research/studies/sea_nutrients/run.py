@@ -33,6 +33,7 @@ import numpy as np
 
 from research.studies.canopy_colony import column as CL
 from research.studies.canopy_colony import run as CC
+from research.studies.sea_nutrients import dust as dust_module
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -41,6 +42,8 @@ SCHEMA = 'terluna.research.sea-nutrients/1'
 LOADS = HERE / 'results' / 'loads.json'
 PHOSPHORUS = ROOT / 'resources' / 'results' / 'sea_phosphorus.json'
 SEAS = CC.SEAS
+DUST = HERE / 'results' / 'dust.json'
+LIGHTNING = ROOT / 'research' / 'studies' / 'atmospheric_electricity' / 'results' / 'nitrogen_oxides.json'
 
 P_G_PER_MOL = 30.974
 C_TO_P = 106.0                              # Redfield, mol of carbon for each mol of phosphorus (recalled)
@@ -53,6 +56,11 @@ REACTIVE_PARTICLES = (0.1, 0.3)             # the share of river particles' phos
 PEOPLE = (4.0e9, 8.0e9)
 SHALLOWS_M = (20, 50)
 DELIVERED_MG_M3 = (1.0, 10.0, 70.0)         # phosphorus in the water the seas are filled with; 70 is Earth's ocean mean
+N_G_PER_MOL = 14.007
+N_TO_P = 16.0                               # Redfield, mol of nitrogen for each mol of phosphorus (recalled)
+N_MG_PER_MG_P = N_TO_P * N_G_PER_MOL / P_G_PER_MOL                 # 7.2 mg of nitrogen taken up with each mg of phosphorus
+LAND_N_LOSS_G_M2_YR = (0.1, 0.5)            # nitrogen leaving undisturbed land a year: Lewis et al. (1999) find 5.1 kg/ha
+#                                             for tropical watersheds, falling with the runoff; the low end is for dry land
 
 
 def sha256(path) -> str:
@@ -99,8 +107,10 @@ def safe_export(col, stretch, years, top_g_o2=400.0):
     return lo
 
 
-def supply_cases(load, land, dust, salt):
-    """What enters a sea's water each year, mg of phosphorus per m2 of sea, low and high."""
+def supply_cases(load, land, dust, salt, lunar_dust=None):
+    """What enters a sea's water each year, mg of phosphorus per m2 of sea, low and high. dust is the phosphorus
+    study's inherited range (g/m2 a year) and lunar_dust this study's reckoning (mg/m2 a year), which the budget
+    uses where it is given."""
     area = load['area_m2']
     per_m2 = lambda share, kg: [1e6 * share * kg[0] / area, 1e6 * share * kg[1] / area]     # noqa: E731
     dissolved = per_m2(load['share_of_the_lands_dissolved_loss'] + load['dissolved_share_from_other_seas'], land['dissolved_kg_yr'])
@@ -108,9 +118,12 @@ def supply_cases(load, land, dust, salt):
                  1e6 * load['share_of_the_lands_particles']['high'] * land['particulate_kg_yr'][1] / area]
     freed = [particles[0] * REACTIVE_PARTICLES[0], particles[1] * REACTIVE_PARTICLES[1]] if salt else [0.0, 0.0]
     rivers = [dissolved[0] + freed[0], dissolved[1] + freed[1]]
+    inherited = [1e3 * dust[0], 1e3 * dust[1]]
+    fall = list(lunar_dust) if lunar_dust is not None else inherited
     return dict(rivers_dissolved=dissolved, rivers_particles=particles, freed_from_particles=freed,
-                dust=[1e3 * dust[0], 1e3 * dust[1]], rivers_alone=rivers,
-                rivers_and_dust=[rivers[0] + 1e3 * dust[0], rivers[1] + 1e3 * dust[1]])
+                dust=fall, dust_inherited=inherited, rivers_alone=rivers,
+                rivers_and_dust=[rivers[0] + fall[0], rivers[1] + fall[1]],
+                rivers_and_inherited_dust=[rivers[0] + inherited[0], rivers[1] + inherited[1]])
 
 
 def what_a_supply_does(supply_mg, shares, safe):
@@ -126,16 +139,34 @@ def what_a_supply_does(supply_mg, shares, safe):
                 unaided_sea_holds_through_years=max(held) if held else 0.0)
 
 
-def one_sea(name, sea, load, col, stretch, land, dust):
+def nitrogen(load, sea, supply, land_km2, lightning):
+    """Nitrogen against the phosphorus: what the sea's life takes up with the phosphorus supplied, and what arrives
+    without any being fixed in the sea. The rivers' part is bounded, since no relation for the nitrogen a lake keeps is
+    carried here: at least what reaches the sea without crossing a lake, at most all that the runoff carries."""
+    area = sea['area_km2'] * 1e6
+    share = load['share_of_the_lands_runoff']
+    least, most = share * load['of_it_crossed_no_lake'], share
+    rivers = [1e3 * LAND_N_LOSS_G_M2_YR[0] * land_km2 * 1e6 * least / area, 1e3 * LAND_N_LOSS_G_M2_YR[1] * land_km2 * 1e6 * most / area]
+    lightning = list(lightning)                                       # kg per km2 is mg per m2
+    arrives = [rivers[0] + lightning[0], rivers[1] + lightning[1]]
+    need = [supply['rivers_and_dust'][0] * N_MG_PER_MG_P, supply['rivers_and_dust'][1] * N_MG_PER_MG_P]
+    return dict(taken_up_with_the_phosphorus_mg_m2_yr=need, rivers_mg_m2_yr=rivers, lightning_mg_m2_yr=lightning,
+                arrives_mg_m2_yr=arrives,
+                fixing_needed_in_the_sea_mg_m2_yr=[max(need[0] - arrives[1], 0.0), max(need[1] - arrives[0], 0.0)],
+                arriving_n_to_p_mol=[arrives[0] / N_G_PER_MOL / (supply['rivers_and_dust'][1] / P_G_PER_MOL),
+                                     arrives[1] / N_G_PER_MOL / (supply['rivers_and_dust'][0] / P_G_PER_MOL)])
+
+
+def one_sea(name, sea, load, col, stretch, land, dust, lunar_dust=None, land_km2=None, lightning=None):
     shares = passing_shares(col, stretch)
     safe = {}
     for years in HORIZONS:
         e = safe_export(col, stretch, years)
         e_c = e / CL.G_O2_PER_MOL / CL.O2_PER_C * CL.G_C_PER_MOL
         safe[f'{int(years)} years'] = dict(export_g_c_m2_yr=e_c, supply_mg_m2_yr=e_c * shares['below_250_m'] * P_MG_PER_G_C)
-    supply = supply_cases(load, land, dust, sea['salt'])
+    supply = supply_cases(load, land, dust, sea['salt'], lunar_dust)
     does = {case: {end: what_a_supply_does(supply[case][i], shares, safe) for i, end in enumerate(('low', 'high'))}
-            for case in ('rivers_alone', 'rivers_and_dust')}
+            for case in ('rivers_alone', 'rivers_and_dust', 'rivers_and_inherited_dust')}
     area = sea['area_km2'] * 1e6
     deeper = {b['depth_m']: b['area_km2'] for b in sea['below']}
     shallows = {f'under {z} m': sea['area_km2'] - deeper.get(z, 0.0) for z in SHALLOWS_M}
@@ -164,7 +195,8 @@ def one_sea(name, sea, load, col, stretch, land, dust):
                 shares_of_the_exports_phosphorus=shares, supply_mg_m2_yr=supply, what_the_supply_does=does,
                 supply_the_unaided_sea_can_take=safe, room_beside_rivers_and_dust=room, river_mouths=mouths,
                 water_above_250_m_per_m2=upper, oxygen_above_2_mg_l_at_250_900_m_mol_m2=usable,
-                delivered_water=delivered, levels_above_250_m=int(above.sum()))
+                delivered_water=delivered, levels_above_250_m=int(above.sum()),
+                nitrogen=nitrogen(load, sea, supply, land_km2, lightning) if land_km2 else None)
 
 
 def build(log=print):
@@ -180,10 +212,17 @@ def build(log=print):
     dust = phosphorus['seas']['earth_ocean_air_deposition']['g_m2_yr']
     envelope_area = phosphorus['seas']['area_m2']
     inherited = [x / envelope_area * 1e3 for x in phosphorus['seas']['dust_kg_yr_inherited_envelope']]   # g/m2 a year
+    dust_product = json.loads(DUST.read_text())
+    natural = dust_product['natural']['phosphorus_mg_m2_yr']
+    lunar_dust = [natural['central'][0], natural['outer'][1]]       # from the central case's low end to every term high
+    land_km2 = json.loads(dust_module.SAND.read_text())['land']['km2']
+    fixed = json.loads(LIGHTNING.read_text())['estimate']        # the lightning study's site, counted per flash and per joule
+    lightning = [fixed['per_flash']['kg_n_per_km2_yr'], fixed['per_joule']['kg_n_per_km2_yr']]
     out = {}
     for name, sea in seas.items():
         load = dict(loads['seas'][name], area_m2=sea['area_km2'] * 1e6)
-        out[name] = one_sea(name, sea, load, sea_column(name, sea, salt_col, fresh_saturation), stretch, land, inherited)
+        out[name] = one_sea(name, sea, load, sea_column(name, sea, salt_col, fresh_saturation), stretch, land, inherited,
+                            lunar_dust, land_km2, lightning)
         s = out[name]
         log(f'{name}: rivers {s["supply_mg_m2_yr"]["rivers_alone"][0]:.2f}-{s["supply_mg_m2_yr"]["rivers_alone"][1]:.2f} mg/m2/yr, '
             f'safe for 1,000 years {s["supply_the_unaided_sea_can_take"]["1000 years"]["supply_mg_m2_yr"]:.1f}, {time.time() - started:.0f} s')
@@ -192,7 +231,8 @@ def build(log=print):
     all_seas = dict(
         area_km2=area / 1e6,
         kt_yr=dict(rivers_dissolved=total('rivers_dissolved'), rivers_particles=total('rivers_particles'),
-                   dust_inherited_envelope=total('dust'), dust_at_earths_oceans_rate=[dust[0] * area / 1e9, dust[1] * area / 1e9]),
+                   dust=total('dust'), dust_inherited_envelope=total('dust_inherited'),
+                   dust_at_earths_oceans_rate=[dust[0] * area / 1e9, dust[1] * area / 1e9]),
         share_of_the_lands_loss_reaching_the_seas=dict(
             dissolved=sum(v['share_of_the_lands_dissolved_loss'] for v in loads['seas'].values()),
             particles={c: sum(v['share_of_the_lands_particles'][c] for v in loads['seas'].values()) for c in ('low', 'central', 'high')}),
@@ -203,7 +243,7 @@ def build(log=print):
         schema=SCHEMA,
         producer=dict(module='research.studies.sea_nutrients.run',
                       code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()),
-        inputs={str(p.relative_to(ROOT)): sha256(p) for p in (LOADS, PHOSPHORUS, SEAS, CC.MIXING, CC.ESTIMATE, CC.SEA_OXYGEN)},
+        inputs={str(p.relative_to(ROOT)): sha256(p) for p in (LOADS, DUST, PHOSPHORUS, LIGHTNING, SEAS, CC.MIXING, CC.ESTIMATE, CC.SEA_OXYGEN)},
         evidence=('Arithmetic on the phosphorus study\'s loss from the land, this study\'s routing of it through the '
                   'design surface\'s lakes, and the canopy colony study\'s one-dimensional column of each sea. The '
                   'rule that a layered sea without an outlet spends 106 mol of oxygen below its renewed water for '
@@ -223,6 +263,11 @@ def build(log=print):
                          n: reference_c * out[n]['shares_of_the_exports_phosphorus']['below_250_m'] * P_MG_PER_G_C for n in out},
                      land_loss_kg_yr=dict(dissolved=land['dissolved_kg_yr'], particulate=land['particulate_kg_yr']),
                      dust_g_m2_yr=dict(inherited_envelope=inherited, earths_oceans=dust),
+                     dust_mg_m2_yr=dict(used=lunar_dust, central=natural['central'], outer=natural['outer'],
+                                        per_percent_of_dry_land_bared=dust_product['per_percent_of_dry_land_bared_mg_m2_yr'],
+                                        with_earths_alpha_factor=dust_product['with_earths_alpha_factor']),
+                     nitrogen=dict(n_mg_per_mg_p=N_MG_PER_MG_P, land_loss_g_m2_yr=list(LAND_N_LOSS_G_M2_YR),
+                                   lightning_kg_n_km2_yr=lightning, land_km2=land_km2),
                      reactive_particles=list(REACTIVE_PARTICLES), catch=CC.CATCH, trunk_foot_m=list(CC.TRUNKS[CC.CENTRAL_TRUNK])),
         all_seas=all_seas, seas=out, seconds=round(time.time() - started))
 
