@@ -16,3 +16,25 @@ __pycache__/
 /illumination/sky/work
 /immersion/node_modules
 /protection/sources
+
+# Frozen products (shared/frozen_products.json): large results of closed studies. A checkout links each to the
+# store's copy or restores it from history (python3 shared/frozen_products.py).
+/provisioning/enclosed_industry/results/asset_stock.json.gz
+/provisioning/enclosed_industry/results/bottlenecks.json.gz
+/provisioning/enclosed_industry/results/industry.json.gz
+/provisioning/enclosed_industry/results/reclamation.json.gz
+/provisioning/enclosed_industry/results/revised_asset_stock.json.gz
+/provisioning/enclosed_industry/results/revised_industry.json.gz
+/research/studies/complex_returns/results/consolidated.json
+/research/studies/complex_returns/results/credit.json
+/research/studies/complex_returns/results/policy.json
+/research/studies/complex_returns/results/returns.json
+/research/studies/complex_returns/results/staged.json
+/research/studies/enclosed_returns/results/bottleneck_orders.json
+/research/studies/enclosed_returns/results/bottlenecks.json
+/research/studies/enclosed_returns/results/orders.json
+/research/studies/enclosed_returns/results/returns.json
+/research/studies/monetary_system/results/pressure.json
+/research/studies/monetary_wealth/results/revised.json.gz
+/research/studies/monetary_wealth/results/wealth.json.gz
+/resources/enclosed_mining/results/assessment.json.gz

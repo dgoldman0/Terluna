@@ -1,0 +1,125 @@
+{
+  "schema": "terluna.shared.frozen-products/1",
+  "store": "/media/projectspace/terluna-research/frozen-products",
+  "reading_rule": "Each file is a generated result of a closed study, read only by that study's own chain. Its path is ignored by Git from the commit after tracked_through; a checkout holds a link to the store's copy, a plain copy written from the blob named here, or nothing. bytes and sha256 are of the file; git_blob is the Git object that holds the same bytes in this repository's history.",
+  "evidence": "Byte identity only: each entry was read from the tracked file at tracked_through and compared with its blob. The results themselves keep the evidence state their studies give them.",
+  "tracked_through": "24180c9b59af99e3320138b7a0e71f354f17ac3a",
+  "frozen": "2026-11-21",
+  "reason": "The staged studies of the vacuum buildout's economy, written from 12 to 14 November 2026, stand as written with the study closed for now; their run outputs of 3 MB or more are frozen, the ones no later model reads.",
+  "files": [
+    {
+      "path": "provisioning/enclosed_industry/results/asset_stock.json.gz",
+      "bytes": 4266856,
+      "sha256": "fc80c1174aa62406bc1e351557fddbc278416918933ac691c9d91d97c2ddd1ef",
+      "git_blob": "6746c19bf0f0dfaed85764d63a0b2d1570bf5f02"
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/bottlenecks.json.gz",
+      "bytes": 7459132,
+      "sha256": "0d8b15a1cca896edb2974601cf68369c065f93108b244cf1124bee5d982ae816",
+      "git_blob": "abc459a995ebc32f99f5b1419649179b7d3df53b"
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/industry.json.gz",
+      "bytes": 21382609,
+      "sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7",
+      "git_blob": "fd69e85213b90704cb7a027b5e71e6d88841804e"
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/reclamation.json.gz",
+      "bytes": 18397867,
+      "sha256": "8e419ca26889371c6ebfcc114031a9d3163d29491873733006ec08871cfde161",
+      "git_blob": "961d6ff50da274f01998c77017adf988c6a865fd"
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/revised_asset_stock.json.gz",
+      "bytes": 5037138,
+      "sha256": "3479b003d38ab2f4d8152668c612be32b812d166f096821771a44f9d938be1bf",
+      "git_blob": "ee1026ee37d194e61673d3bb420e5845876d3b57"
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
+      "bytes": 54771763,
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f",
+      "git_blob": "854ede723369c8f7793276146d2f04ccf5ecf886"
+    },
+    {
+      "path": "research/studies/complex_returns/results/consolidated.json",
+      "bytes": 11123529,
+      "sha256": "351448ca297b3edaaa1cb5c31f3725e4af52549f0d95dc07f7f6ae84e1ba0138",
+      "git_blob": "d159f5c6d54cc42452357674fefbca589f81c721"
+    },
+    {
+      "path": "research/studies/complex_returns/results/credit.json",
+      "bytes": 6936233,
+      "sha256": "fd41767332965429974db0b960c5dfd224652543a56559b9f92bde62f1da8626",
+      "git_blob": "1358ddbbf8c40b11356a2a20b4e9ab967efeb56e"
+    },
+    {
+      "path": "research/studies/complex_returns/results/policy.json",
+      "bytes": 3817737,
+      "sha256": "016773d53fec06f6029fbb849ca33f5affa58b2dfa7fee85f4154b0490c23f6e",
+      "git_blob": "306bb04d4e149ffc1d383122544d87edcb0d1d2c"
+    },
+    {
+      "path": "research/studies/complex_returns/results/returns.json",
+      "bytes": 4046033,
+      "sha256": "654d2b952af3adf5159ae3158e84048c09cff9af13a84e9a6761cd55ebdf6144",
+      "git_blob": "5a230984996633542cfcb62df977ef4ba217adcf"
+    },
+    {
+      "path": "research/studies/complex_returns/results/staged.json",
+      "bytes": 3410555,
+      "sha256": "9cff19e503ddb87ccb7a9a5082a7a04d3cc5c402fd82fdb5cbbf51a9b9b5d6ac",
+      "git_blob": "fb27a82cdf634183aa96c609985fa57c252472a9"
+    },
+    {
+      "path": "research/studies/enclosed_returns/results/bottleneck_orders.json",
+      "bytes": 10210677,
+      "sha256": "cb638534e60cf7f796316d8b371ba0e0b7a97c76c1332ebb8b73be1aa92b8aee",
+      "git_blob": "53df465592733789df54cdcd441e67ff32081d8f"
+    },
+    {
+      "path": "research/studies/enclosed_returns/results/bottlenecks.json",
+      "bytes": 5371519,
+      "sha256": "626583295106a0efdae308e5b8f178f63635c9b3e99745dfa60a5878a5c90a0a",
+      "git_blob": "02963a62e3a8548f89df4350ce877a8a6837a09f"
+    },
+    {
+      "path": "research/studies/enclosed_returns/results/orders.json",
+      "bytes": 29345590,
+      "sha256": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+      "git_blob": "5c1dee826d64602e17569c5f37f30fe479bf3f60"
+    },
+    {
+      "path": "research/studies/enclosed_returns/results/returns.json",
+      "bytes": 14889083,
+      "sha256": "d70a765ecec255747444953e52fbd8378b000639cae2b16785080a732d579798",
+      "git_blob": "2a8de0a53146fc967f1ee58e255b93b88246387f"
+    },
+    {
+      "path": "research/studies/monetary_system/results/pressure.json",
+      "bytes": 5739503,
+      "sha256": "7c14205ac0699c04787b96e8e96297322b3fef1abe80377b19c4b4177182cb2b",
+      "git_blob": "f2a435096b48cb48ae2ee9c3d797efc56adf9d00"
+    },
+    {
+      "path": "research/studies/monetary_wealth/results/revised.json.gz",
+      "bytes": 18161319,
+      "sha256": "b7f400c33201f62a865ca125c90421c9145d61dbb9535a584721dc8ff21e00d5",
+      "git_blob": "339f3cab63c72fe613c4950106bbb291a3679c42"
+    },
+    {
+      "path": "research/studies/monetary_wealth/results/wealth.json.gz",
+      "bytes": 26232945,
+      "sha256": "76c21269cc537e679b1e4be366db6db8ba7876e125e3e7cfd399c0cd9e47a1a9",
+      "git_blob": "798fa98d39c75614148dc08b7c8ba3c88f88a529"
+    },
+    {
+      "path": "resources/enclosed_mining/results/assessment.json.gz",
+      "bytes": 8356681,
+      "sha256": "1cbdc123b36910ec4d44230f272092a04118ad00e18a3612868214a0898b3a8d",
+      "git_blob": "344caddbb5059fa33ddc71a97d45343cbc2adfc6"
+    }
+  ]
+}

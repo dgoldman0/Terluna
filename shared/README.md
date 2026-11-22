@@ -149,3 +149,17 @@ workflow tools such as DVC and Snakemake, which track the parameters a step
 uses. The optical, sky and cloud-twilight producers follow it; the wave, tide
 and coastal products still record the constants file's hash as a record of
 their run, without a test of it.
+
+## Frozen products
+
+A closed study's large results can leave every checkout's tracked files while their bytes stay in Git's history. [frozen_products.json](frozen_products.json) lists each one with its size, its SHA-256 and the Git blob that holds it, and from the commit after the one it names their paths are ignored. A checkout then holds, at each path, a link to the one copy in a store outside the repository, a plain copy written from history, or nothing:
+
+```
+python3 shared/frozen_products.py              # each product: present, absent or differing
+python3 shared/frozen_products.py --link       # link the absent ones to the store's copies, each checked first
+python3 shared/frozen_products.py --restore    # write the absent ones from Git's history as plain files
+```
+
+The store is the folder named by `TERLUNA_FROZEN_STORE`, or else the manifest's `store` on the research drive. A product is frozen when its study is closed, only that study's own chain reads it and it is large enough to weigh on a checkout; a product that a later study reads stays tracked. A frozen product keeps its bytes, so the hashes its readers record still hold. A test that opens an absent one is reported as skipped with the restoring command (the repository's [conftest.py](../conftest.py)), and a product whose bytes differ from the manifest is reported and never overwritten, linked over or copied into the store. Changing a frozen product means reopening its study on a branch: the results are regenerated there, held as plain files in that branch's checkout, and tracked or frozen again with a new manifest entry when the work is done.
+
+The first set, of 21 November 2026, is the 19 run outputs of 3 MB or more from the vacuum buildout's staged economy studies of 12 to 14 November, 259 MB.
