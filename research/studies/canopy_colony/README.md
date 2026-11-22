@@ -105,7 +105,7 @@ Four relations make the loop hold itself *(reasoning on the computed sizes; no p
 3. **Oxygen and nutrients travel the same loop in opposite directions.** The trunk's descending water carries oxygen and its rising water carries the regenerated nutrients of its reach, 8.6% of the export's, back to the light. Pumping alone is nearly oxygen-neutral over time, as the brief notes, because the nutrients it lifts make new matter that sinks again; the feeders break that circle by taking half the matter before it reaches the still layer, so the two together gain.
 4. **A colony that dies costs little.** Its living carbon is 0.5–1.7 g per m², a twentieth of a year's export, so a die-off after a storm or a long night is a small pulse of demand.
 
-The colony's catch is also a lever on how rich the sea is. Catching three quarters halves the loss below the trunk's reach, so the same rivers hold twice the export; the author's open question of how the salt sea's waters are kept rich enough for its shores then has one answer in the colony's density.
+The colony's catch is also a lever on how rich the sea is. Catching three quarters halves the loss below the trunk's reach, so the same rivers hold twice the export; the author's open question of how the salt sea's waters are kept rich enough for its shores then has one answer in the colony's density. The register's row of 22 November takes this way for all the seas: the open water is made richer by recycling what it receives, and feeding it from the deltas is set aside.
 
 ## The fresh seas and the lakes
 

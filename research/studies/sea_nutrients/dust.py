@@ -39,6 +39,7 @@ OUT = HERE / 'results' / 'dust.json'
 SCHEMA = 'terluna.research.sea-nutrients-dust/1'
 SAND = ROOT / 'research' / 'studies' / 'atlas_round' / 'results' / 'sand.json'
 PHOSPHORUS = ROOT / 'resources' / 'results' / 'sea_phosphorus.json'
+LAND_USE = ROOT / 'research' / 'studies' / 'atlas_round' / 'results' / 'land_use.json'
 ALPHA_EARTH_PER_M = (1.0e-5, 1.0e-4)        # the dust note, 8.2: Earth's typical sandblasting efficiency (Kok et al. 2012;
 #                                             González-Flórez et al. 2023 measured mostly 1e-5 to 1e-4 on a dry lake bed)
 ALPHA_MOON_OVER_EARTH = 0.165               # the note's central choice: alpha follows gravity (Lu & Shao 1999; Shao 2004)
@@ -86,14 +87,21 @@ def build():
 
     central = [case('central', alpha[0], 'central', grade[0]), case('central', alpha[1], 'central', grade[1])]
     outer = [case('low', alpha[0], 'low', grade[0]), case('high', alpha[1], 'high', grade[1])]
+    # with no upkeep of the crust on sand, plants alone holding it: the sand study's open-sand variant
+    untended = [case('central', alpha[0], 'high', grade[0]), case('central', alpha[1], 'high', grade[1])]
     dry_m2 = sum(sand['land']['by_class_km2'][c] for c in ('arid', 'semi-arid')) * 1e6
     bared = [phosphorus_fall(dust_raised(drift['central'], a) * 0.01 * dry_m2, g, moon) for a, g in zip(alpha, grade)]
+    per_10000_km2 = [phosphorus_fall(dust_raised(drift['central'], a) * 1.0e10, g, moon) for a, g in zip(alpha, grade)]
+    use = json.loads(LAND_USE.read_text())
+    classes = use['inventory']['by_moisture_class']
+    dry_all = sum(classes[c]['km2'] for c in ('hyper_arid', 'arid', 'semi_arid'))
+    gardens = sum(use['variants']['A']['hybrid']['gardens_by_class'][c] for c in ('hyper_arid', 'arid', 'semi_arid'))
     inherited = json.loads(PHOSPHORUS.read_text())['seas']
     old = [1e6 * x / inherited['area_m2'] for x in inherited['dust_kg_yr_inherited_envelope']]        # kg to mg
     return dict(
         schema=SCHEMA,
         producer=dict(module='research.studies.sea_nutrients.dust', code_sha256=sha256(Path(__file__))),
-        inputs={str(p.relative_to(ROOT)): sha256(p) for p in (SAND, PHOSPHORUS)},
+        inputs={str(p.relative_to(ROOT)): sha256(p) for p in (SAND, PHOSPHORUS, LAND_USE)},
         evidence=('A first reckoning from the sand study\'s drift potentials and moving ground on the design climate '
                   'and the aerosol study\'s dust note: published relations fitted on Earth and carried to lunar '
                   'gravity, with no measurement of dust raised at 1.62 m/s2. The fallout is taken as even over the '
@@ -103,16 +111,26 @@ def build():
                       'with the gusts, the alpha and the moving ground all at their low or all at their high ends. '
                       'per_percent_of_dry_land_bared: what each percent of the arid and semi-arid land laid bare and '
                       'loose would add in the central case. with_earths_alpha: the factor by which the note\'s high '
-                      'scheme, alpha unscaled by gravity, multiplies every figure. inherited: the phosphorus '
-                      'study\'s earlier range, for comparison.'),
+                      'scheme, alpha unscaled by gravity, multiplies every figure. natural.without_crust_upkeep: '
+                      'the central case with the sand study\'s variant in which no crust is kept on sand and plants '
+                      'alone hold it. per_10000_km2_bared: what each 10,000 km2 of dry ground left bare and loose '
+                      'adds. dry_land: the hybrid gardens\' part of the dry land in the land-use screen. inherited: '
+                      'the phosphorus study\'s earlier range, for comparison.'),
         setting=dict(alpha_per_m=alpha, alpha_earth_per_m=list(ALPHA_EARTH_PER_M), alpha_moon_over_earth=ALPHA_MOON_OVER_EARTH,
                      bulk_kg_m3=BULK_KG_M3, soil_phosphorus_grade=grade, moon_m2=moon,
                      drift_potential_m2_yr=drift, moving_ground_km2={k: v / 1e6 for k, v in moving.items()},
                      arid_and_semi_arid_km2=dry_m2 / 1e6),
         natural=dict(central=central, outer=outer,
+                     without_crust_upkeep=untended,
                      phosphorus_mg_m2_yr=dict(central=[c['phosphorus_mg_m2_yr'] for c in central],
-                                              outer=[c['phosphorus_mg_m2_yr'] for c in outer])),
+                                              outer=[c['phosphorus_mg_m2_yr'] for c in outer],
+                                              without_crust_upkeep=[c['phosphorus_mg_m2_yr'] for c in untended])),
         per_percent_of_dry_land_bared_mg_m2_yr=bared,
+        per_10000_km2_bared_mg_m2_yr=per_10000_km2,
+        dry_land=dict(hyper_arid_arid_and_semi_arid_km2=dry_all, hybrid_gardens_km2=gardens,
+                      hybrid_gardens_share=gardens / dry_all, wild_share_set=use['parameters']['register']['wild_shares'],
+                      note='the land-use screen\'s variant A; the rest is wild land and land without use, with people\'s '
+                           'fields and pasture a small part of it in the dry classes'),
         with_earths_alpha_factor=1.0 / ALPHA_MOON_OVER_EARTH,
         inherited_mg_m2_yr=old,
         not_counted=['particles of living origin: pollen, spores, fragments and the fall of aerial life',

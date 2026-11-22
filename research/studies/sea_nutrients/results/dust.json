@@ -2,14 +2,15 @@
  "schema": "terluna.research.sea-nutrients-dust/1",
  "producer": {
   "module": "research.studies.sea_nutrients.dust",
-  "code_sha256": "788b021be66ca75183b4a8c362628d2d582aec1ebe830a8c7fa0f991cb567061"
+  "code_sha256": "8140c6cd785ad40080cc9a16d42e2d91dede37330485f0fa3e7d095a15847770"
  },
  "inputs": {
   "research/studies/atlas_round/results/sand.json": "3d2cc9087aaa3c2d3bd56f407ed76ea9810548aac82c981fa87e13498a90c9b1",
-  "resources/results/sea_phosphorus.json": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1"
+  "resources/results/sea_phosphorus.json": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1",
+  "research/studies/atlas_round/results/land_use.json": "cdfcc5253f68a68949b542685c28eb3f2dfc07d23dd8f59da8e1493fea8e0dc4"
  },
  "evidence": "A first reckoning from the sand study's drift potentials and moving ground on the design climate and the aerosol study's dust note: published relations fitted on Earth and carried to lunar gravity, with no measurement of dust raised at 1.62 m/s2. The fallout is taken as even over the Moon, and all of the dust's phosphorus as usable. Not validated.",
- "reading_rule": "natural: the phosphorus that dust from the ground the sand study finds bare and moving brings each m2 of the Moon a year (mg), central as a range over the dust note's alpha, and outer with the gusts, the alpha and the moving ground all at their low or all at their high ends. per_percent_of_dry_land_bared: what each percent of the arid and semi-arid land laid bare and loose would add in the central case. with_earths_alpha: the factor by which the note's high scheme, alpha unscaled by gravity, multiplies every figure. inherited: the phosphorus study's earlier range, for comparison.",
+ "reading_rule": "natural: the phosphorus that dust from the ground the sand study finds bare and moving brings each m2 of the Moon a year (mg), central as a range over the dust note's alpha, and outer with the gusts, the alpha and the moving ground all at their low or all at their high ends. per_percent_of_dry_land_bared: what each percent of the arid and semi-arid land laid bare and loose would add in the central case. with_earths_alpha: the factor by which the note's high scheme, alpha unscaled by gravity, multiplies every figure. natural.without_crust_upkeep: the central case with the sand study's variant in which no crust is kept on sand and plants alone hold it. per_10000_km2_bared: what each 10,000 km2 of dry ground left bare and loose adds. dry_land: the hybrid gardens' part of the dry land in the land-use screen. inherited: the phosphorus study's earlier range, for comparison.",
  "setting": {
   "alpha_per_m": [
    1.6500000000000003e-06,
@@ -63,6 +64,18 @@
     "phosphorus_mg_m2_yr": 2.6882337289219245
    }
   ],
+  "without_crust_upkeep": [
+   {
+    "dust_kg_per_m2_of_moving_ground_yr": 0.09109323364971623,
+    "dust_mt_yr": 4.406544084571373,
+    "phosphorus_mg_m2_yr": 0.05576922583783612
+   },
+   {
+    "dust_kg_per_m2_of_moving_ground_yr": 0.9109323364971621,
+    "dust_mt_yr": 44.065440845713724,
+    "phosphorus_mg_m2_yr": 0.6590908508107903
+   }
+  ],
   "phosphorus_mg_m2_yr": {
    "central": [
     0.03042439884773835,
@@ -71,6 +84,10 @@
    "outer": [
     0.0016303654508734173,
     2.6882337289219245
+   ],
+   "without_crust_upkeep": [
+    0.05576922583783612,
+    0.6590908508107903
    ]
   }
  },
@@ -78,6 +95,20 @@
   0.11781027029604071,
   1.3923031944077535
  ],
+ "per_10000_km2_bared_mg_m2_yr": [
+  0.011528760457650002,
+  0.1362489872267727
+ ],
+ "dry_land": {
+  "hyper_arid_arid_and_semi_arid_km2": 10625308,
+  "hybrid_gardens_km2": 2056588,
+  "hybrid_gardens_share": 0.1935556126937685,
+  "wild_share_set": [
+   0.3,
+   0.5
+  ],
+  "note": "the land-use screen's variant A; the rest is wild land and land without use, with people's fields and pasture a small part of it in the dry classes"
+ },
  "with_earths_alpha_factor": 6.0606060606060606,
  "inherited_mg_m2_yr": [
   0.7,

@@ -126,6 +126,13 @@ def test_dust_is_a_share_of_the_sand_carried_and_falls_over_the_whole_moon():
     assert out['with_earths_alpha_factor'] == pytest.approx(1.0 / 0.165)
     raised = [c['dust_kg_per_m2_of_moving_ground_yr'] for c in out['natural']['central']]
     assert 0.05 < raised[0] < raised[1] < 2.0                                      # the rate of Earth's active deserts
+    untended = out['natural']['phosphorus_mg_m2_yr']['without_crust_upkeep']
+    moving = out['setting']['moving_ground_km2']
+    assert untended == pytest.approx([c * moving['high'] / moving['central'] for c in central])   # plants alone hold the sand
+    assert central[1] < untended[1] < outer[1]
+    per = out['per_10000_km2_bared_mg_m2_yr']
+    assert per == pytest.approx([b * 1.0e4 / (0.01 * out['setting']['arid_and_semi_arid_km2']) for b in out['per_percent_of_dry_land_bared_mg_m2_yr']])
+    assert 0.15 < out['dry_land']['hybrid_gardens_share'] < 0.25
     assert json.loads(json.dumps(DU.build())) == out
 
 
