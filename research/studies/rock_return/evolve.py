@@ -11,6 +11,8 @@ forward:
   first mean lowering is the rock module's;
 - what is cut is carried to the first hollow on its way and laid down there from the bottom up, a level floor;
   what reaches the region's edge or a sea leaves;
+- soil creeps between neighbouring cells, and ground steeper than 35 degrees, about the steepest the starting map
+  holds at this grain, fails toward its steepest neighbour until it is not;
 - carriers take a share of what comes to rest at each hollow, and of what leaves at the edge or the sea, and set it
   down on the land round it by a rule: on worn ground in proportion to its wear, on worn ground up to what each
   piece lost and no more (healed), on ground worn by district, on crests, evenly, or not at all.
@@ -65,7 +67,11 @@ DISTRICT_M = 10000.0                 # the distance over which the district rule
 SURROUNDINGS_M = 5000.0              # the distance a crest is judged against
 SURROUNDINGS_CELLS = 3               # the half-width, in cells, of the ground whose height range is the local relief (about 5 km)
 FLOOR_ROUGHNESS_M = 0.01             # laid floors are left this rough, so that water crossing them does not follow the grid
-MARGIN = 32                          # cells left out of the measures along each edge, where the open edge acts
+CRITICAL_DEG = 35.0                  # ground steeper than this fails: about the steepest the starting map holds at this grain (36 and 38 degrees at its two steepest cells)
+LOOSE_DEG = 30.0                     # the same for loose ground, the study's repose slope
+CREEP_M2_YR = 0.01                   # soil creep's diffusivity, the terrain study's middle value
+SLIDE_SWEEPS = 40
+MARGIN = 64                          # cells left out of the measures along each edge, where the open edge acts (about 120 km)
 FORM_CELLS = 8                       # forms are the ground against its mean over this half-width (about 30 km across)
 HOLLOWS_FOLLOWED = 12
 RULES = ('none', 'worn', 'healed', 'worn_by_district', 'crest', 'even')
@@ -252,6 +258,66 @@ def fill_hollows(h, filled, cells, starts, volume, cell_area):
     return over
 
 
+@njit(cache=True)
+def slide(h, fixed, hold, pending, tan_critical, ny, nx, east_west, north_south, cell_area, sweeps):
+    """Ground steeper than the critical slope fails toward its steepest neighbour until no slope is steeper. A cell
+    that is fixed (an outlet) or held (under standing water) does not rise: what slides onto it is kept in pending,
+    a volume for each cell, as rock come to rest there. Returns the volume moved."""
+    n = ny * nx
+    moved = 0.0
+    for _ in range(sweeps):
+        changed = False
+        for i in range(n):
+            if fixed[i] or hold[i]:
+                continue
+            y = i // nx
+            x = i - y * nx
+            best, to, dist = tan_critical, -1, 1.0
+            for dy in range(-1, 2):
+                yy = y + dy
+                if yy < 0 or yy >= ny:
+                    continue
+                for dx in range(-1, 2):
+                    xx = x + dx
+                    if xx < 0 or xx >= nx or (dy == 0 and dx == 0):
+                        continue
+                    j = yy * nx + xx
+                    d = math.sqrt((dy * north_south) ** 2 + (dx * east_west) ** 2)
+                    slope = (h[i] - h[j]) / d
+                    if slope > best + 1e-9:
+                        best, to, dist = slope, j, d
+            if to < 0:
+                continue
+            over = h[i] - h[to] - tan_critical * dist
+            if fixed[to] or hold[to]:
+                h[i] -= over
+                pending[to] += over * cell_area
+                moved += over * cell_area
+            else:
+                h[i] -= 0.5 * over
+                h[to] += 0.5 * over
+                moved += 0.5 * over * cell_area
+            changed = True
+        if not changed:
+            break
+    return moved
+
+
+def creep(h, land, g, dt):
+    """Soil creep for one step: ground moves between neighbouring land cells in proportion to the slope between them."""
+    kappa = g.get('kappa', CREEP_M2_YR)
+    if kappa <= 0:
+        return h
+    z, ok = h.reshape(g['shape']).copy(), land.reshape(g['shape'])
+    flow = kappa * dt * (z[:, 1:] - z[:, :-1]) / g['east_west'] ** 2 * (ok[:, 1:] & ok[:, :-1])
+    z[:, :-1] += flow
+    z[:, 1:] -= flow
+    flow = kappa * dt * (z[1:, :] - z[:-1, :]) / g['north_south'] ** 2 * (ok[1:, :] & ok[:-1, :])
+    z[:-1, :] += flow
+    z[1:, :] -= flow
+    return z.ravel()
+
+
 # ---- one step ----------------------------------------------------------------------------------------------------
 def near(field, g, distance_m):
     """A field spread over the ground round each cell: a bell of half-width distance_m / 2 in both directions on the
@@ -305,9 +371,10 @@ def heal(lying, lost, g, range_m=RANGE_M, passes=3):
     return back, left
 
 
-def step(h, g, water, rule, rate, dt, reach=1.0, range_m=RANGE_M):
-    """One step of a region's ground. g holds the grid (shape, outlet, the cell's sides); returns the new ground and
-    the step's volumes: cut, laid in hollows, set down by carriers, gone from the region."""
+def step(h, g, water, rule, rate, dt, reach=1.0, range_m=RANGE_M, pending=None):
+    """One step of a region's ground. g holds the grid (shape, outlet, the cell's sides, the critical slope and the
+    creep); pending is rock that slid onto water or an outlet in the step before. Returns the new ground, the step's
+    volumes (cut, laid in hollows, set down by carriers, gone from the region, slid) and the new pending rock."""
     ny, nx = g['shape']
     outlet, cell_area = g['outlet'], g['cell_area']
     filled, down, upward = flood(h, outlet, ny, nx, EPSILON_M)
@@ -325,6 +392,10 @@ def step(h, g, water, rule, rate, dt, reach=1.0, range_m=RANGE_M):
     volume = cut * cell_area
     arrives = np.bincount(entry[entry >= 0], weights=volume[entry >= 0], minlength=h.size)
     gone = float(volume[entry < 0].sum())
+    if pending is not None:
+        rests = in_hollow | outlet
+        arrives += np.where(rests, pending, 0.0)
+        new = new + np.where(rests, 0.0, pending) / cell_area          # where the water has gone, the rock is ground again
     back = np.zeros_like(h)
     if rule != 'none' and reach > 0:
         # carriers work from every place the rock comes to rest, the region's edge and the sea among them: what
@@ -351,17 +422,22 @@ def step(h, g, water, rule, rate, dt, reach=1.0, range_m=RANGE_M):
             new[raised] += g['rng'].uniform(-FLOOR_ROUGHNESS_M, FLOOR_ROUGHNESS_M, raised.size)
         laid = float(per_hollow.sum() - over)
         gone += float(over)
-    new = new + back / cell_area
-    return new, dict(cut=float(volume.sum()), laid=laid, set_down=float(back.sum()), gone=gone)
+    new = creep(new + back / cell_area, ~wet & ~outlet, g, dt)
+    held = np.zeros_like(h)
+    slid = 0.0
+    if g.get('tan_critical', 0.0) > 0:
+        slid = slide(new, outlet, wet, held, g['tan_critical'], ny, nx, g['east_west'], g['north_south'], cell_area, SLIDE_SWEEPS)
+    return new, dict(cut=float(volume.sum()), laid=laid, set_down=float(back.sum()), gone=gone, slid=float(slid)), held
 
 
-def grid_of(region):
+def grid_of(region, critical_deg=CRITICAL_DEG, kappa=CREEP_M2_YR):
     ny, nx = region['ground'].shape
     outlet = np.zeros((ny, nx), bool)
     outlet[0, :] = outlet[-1, :] = outlet[:, 0] = outlet[:, -1] = True
     outlet |= region['sea']
     return dict(shape=(ny, nx), outlet=outlet.ravel(), east_west=float(region['east_west_m']), north_south=float(region['north_south_m']),
-                cell_area=float(region['east_west_m'] * region['north_south_m']))
+                cell_area=float(region['east_west_m'] * region['north_south_m']),
+                tan_critical=math.tan(math.radians(critical_deg)) if critical_deg else 0.0, kappa=kappa)
 
 
 def start_of(region):
@@ -372,7 +448,8 @@ def start_of(region):
 def interior(region):
     ny, nx = region['ground'].shape
     m = np.zeros((ny, nx), bool)
-    m[MARGIN:ny - MARGIN, MARGIN:nx - MARGIN] = True
+    edge = region.get('margin', MARGIN)
+    m[edge:ny - edge, edge:nx - edge] = True
     return (m & ~region['sea']).ravel()
 
 
@@ -395,38 +472,42 @@ def calibrate(region, water):
     return trial * target / got, target
 
 
-def run(region, water, rule, years=YEARS, dt=STEP_YR, reach=1.0, rate=None, range_m=RANGE_M, seed=None):
+def run(region, water, rule, years=YEARS, dt=STEP_YR, reach=1.0, rate=None, range_m=RANGE_M, seed=None,
+        critical_deg=CRITICAL_DEG, kappa=CREEP_M2_YR):
     """A region's ground at each of the years, with the volumes moved up to each. With a seed, laid floors are left
-    a centimetre rough."""
-    g, h = grid_of(region), start_of(region)
+    a centimetre rough. The books add the rock held where it slid onto water or an outlet, and the ground's whole
+    change of volume: the two with what is gone sum to nothing."""
+    g, h = grid_of(region, critical_deg, kappa), start_of(region)
+    h0, pending = h.copy(), None
     if seed is not None:
         g['rng'] = np.random.default_rng(seed)
     if rate is None:
         rate, _ = calibrate(region, water)
     marks = sorted(years)
-    shots, books, total = {}, {}, dict(cut=0.0, laid=0.0, set_down=0.0, gone=0.0)
+    shots, books, total = {}, {}, dict(cut=0.0, laid=0.0, set_down=0.0, gone=0.0, slid=0.0)
     t = 0.0
     for mark in marks:
         while t < mark - 1e-6:
-            h, moved = step(h, g, water, rule, rate, min(dt, mark - t), reach, range_m)
+            h, moved, pending = step(h, g, water, rule, rate, min(dt, mark - t), reach, range_m, pending)
             for k in total:
                 total[k] += moved[k]
             t += min(dt, mark - t)
         shots[mark] = h.copy()
-        books[mark] = dict(total)
+        books[mark] = dict(total, held=float(pending.sum()), ground=float((h - h0).sum() * g['cell_area']))
     return shots, books, rate
 
 
 # ---- the measures ------------------------------------------------------------------------------------------------
-def forms(h, shape):
-    """The ground against its own mean over the forms' half-width: what is left is the map's forms at that scale."""
+def forms(h, shape, scale=1):
+    """The ground against its own mean over the forms' half-width: what is left is the map's forms at that scale.
+    scale is the number of cells to one cell of the design surface, on a finer grid."""
     g = h.reshape(shape)
-    return (g - ndimage.uniform_filter(g, size=2 * FORM_CELLS + 1, mode='nearest')).ravel()
+    return (g - ndimage.uniform_filter(g, size=2 * FORM_CELLS * scale + 1, mode='nearest')).ravel()
 
 
-def local_relief(h, shape, half=SURROUNDINGS_CELLS):
+def local_relief(h, shape, half=SURROUNDINGS_CELLS, scale=1):
     g = h.reshape(shape)
-    size = 2 * half + 1
+    size = 2 * half * scale + 1
     return (ndimage.maximum_filter(g, size=size, mode='nearest') - ndimage.minimum_filter(g, size=size, mode='nearest')).ravel()
 
 
@@ -490,8 +571,9 @@ def measure(h, h0, region, followed, start_marks):
     shape = g['shape']
     inside = interior(region)
     land = inside & region['eroding'].ravel()
-    f0, f1 = forms(h0, shape)[inside], forms(h, shape)[inside]
-    r0, r1 = local_relief(h0, shape)[land], local_relief(h, shape)[land]
+    scale = region.get('finer', 1)
+    f0, f1 = forms(h0, shape, scale)[inside], forms(h, shape, scale)[inside]
+    r0, r1 = local_relief(h0, shape, scale=scale)[land], local_relief(h, shape, scale=scale)[land]
     depth, labels, count = hollows_of(h, g)
     d0, _, _ = hollows_of(h0, g)
     marks = [hollow_now(h, hol, g) for hol in followed]
@@ -506,7 +588,7 @@ def measure(h, h0, region, followed, start_marks):
                 relief_over_start=float(r1.mean() / r0.mean()),
                 hollow_volume_over_start=float(depth[inside].sum() / max(d0[inside].sum(), 1e-9)),
                 hollow_area_over_start=float((depth[inside] > UNDER_M).sum() / max((d0[inside] > UNDER_M).sum(), 1)),
-                followed_hollows=dict(depth_over_start=dict(median=float(np.median(depth_kept)), least=float(np.min(depth_kept)), most=float(np.max(depth_kept))),
+                followed_hollows=dict(depth_over_start=dict(median=float(np.median(depth_kept)), least=float(np.min(depth_kept)), most=float(np.max(depth_kept))) if depth_kept else None,
                                       roundness=dict(at_start=float(np.median(round_then)) if round_then else None,
                                                      now=float(np.median(round_now)) if round_now else None, counted=len(round_now))))
 
@@ -610,8 +692,9 @@ def build(names=('korolev', 'southern_highlands'), workers=4, log=print):
         ignored_inputs={str(REGIONS): placement['product']['sha256']},
         snapshots=dict(path=str(SNAPSHOTS), sha256=sha256(SNAPSHOTS)), pictures=pictures,
         evidence=('A landscape model on squares of the design surface at 1.9 km: the stream-power law for cutting, '
-                  'scaled to the rock module\'s lowering, every hollow a trap that fills from the bottom, and rules of '
-                  'placement that are design guesses. No hillslope process is resolved at this grain, rain is even, '
+                  'scaled to the rock module\'s lowering, every hollow a trap that fills from the bottom, soil creep, '
+                  'ground that fails where it is steeper than 35 degrees, and rules of placement that are design '
+                  'guesses. Where on a slope rock is set down is below this grain, rain is even, '
                   'the rock has one strength, and the region\'s edge is open. It shows what kinds of change each rule '
                   'makes and how large; it predicts no place. Not validated.'),
         reading_rule=('regions: for each region, each case of water (wet: every hollow holds a lake and spills; dry: '
@@ -622,9 +705,10 @@ def build(names=('korolev', 'southern_highlands'), workers=4, log=print):
                       'relief_over_start, the mean height range within about 5 km over its start; hollow_volume and '
                       'hollow_area over their starts; followed_hollows, for the largest hollows of the starting map, '
                       'their depth below their rims over its start and the roundness of their outline at half depth '
-                      '(0 for a disc); rock, km3 cut, laid in hollows, set down by carriers and gone from the region.'),
+                      '(0 for a disc); rock, km3 cut, laid in hollows, set down by carriers, gone from the region and '
+                      'slid, with what is held where it slid onto water and the ground\'s whole change of volume.'),
         setting=dict(area_exponent=AREA_EXPONENT, step_yr=STEP_YR, years=list(YEARS), range_m=RANGE_M, far_range_m=FAR_RANGE_M, district_m=DISTRICT_M,
-                     surroundings_m=SURROUNDINGS_M, floor_roughness_m=FLOOR_ROUGHNESS_M, margin_cells=MARGIN, form_cells=FORM_CELLS,
+                     surroundings_m=SURROUNDINGS_M, floor_roughness_m=FLOOR_ROUGHNESS_M, critical_deg=CRITICAL_DEG, creep_m2_yr=CREEP_M2_YR, margin_cells=MARGIN, form_cells=FORM_CELLS,
                      hollows_followed=HOLLOWS_FOLLOWED, cases=CASES, waters=list(WATERS),
                      regions={name: dict(centre=regions[name]['centre'], east_west_m=regions[name]['east_west_m'],
                                          north_south_m=regions[name]['north_south_m'], **regions[name]['stats']) for name in names}),

@@ -267,3 +267,13 @@ def test_the_rock_product_regenerates(rock):
         assert math.isclose(fresh['the_way_back'][place]['rock_share'], rock['the_way_back'][place]['rock_share'], rel_tol=1e-9)
     assert fresh['lakes']['keep_half'] == rock['lakes']['keep_half']
     assert math.isclose(fresh['carried_on']['central']['reaches_the_seas'], rock['carried_on']['central']['reaches_the_seas'], rel_tol=1e-9)
+
+
+def test_the_unfilled_open_land_is_shared_between_the_hybrid_land_and_the_wild(product):
+    for key in ('A', 'B'):
+        row = product['wild_and_managed'][key]
+        shared = row['with_the_unfilled_land_shared']
+        assert math.isclose(shared['wild_gt_yr'] + shared['hybrid_gt_yr'] + shared['peoples_gt_yr'], product['job']['gt_yr']['central'], rel_tol=1e-9)
+        assert math.isclose(sum(shared['share_of_land'].values()), 1.0, rel_tol=1e-9)
+        assert math.isclose(shared['wild_gt_yr'] - row['wild_gt_yr'], 0.5 * row['open_beyond_need_gt_yr'], rel_tol=1e-9)
+    assert 0.47 < product['wild_and_managed']['A']['with_the_unfilled_land_shared']['share_of_land']['wild'] < 0.48

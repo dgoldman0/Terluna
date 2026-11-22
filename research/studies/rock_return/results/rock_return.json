@@ -3,7 +3,7 @@
  "producer": {
   "module": "research.studies.rock_return.run",
   "code_sha256": {
-   "run.py": "92b5fb600e1a4af0bcb96ee854d504566cbe5a73c6038bf946fe24281ce50f5d",
+   "run.py": "a79548ce87181d48906cc25c4a6d62b06144b7843ee8c5d8ecf2ae526cee9997",
    "carriers.py": "1bce1886b230a635d104930c7de33aa2a1a9115641fd46e8ddcbf92c458c6b44"
   }
  },
@@ -1000,7 +1000,21 @@
    "machines_for_the_hybrid_and_peoples_land_gw": [
     0.2905371628093785,
     1.640526145018239
-   ]
+   ],
+   "with_the_unfilled_land_shared": {
+    "wild_gt_yr": 1.49465329736041,
+    "hybrid_gt_yr": 1.0887511153781637,
+    "peoples_gt_yr": 0.6500236992005342,
+    "share_of_land": {
+     "wild": 0.47683438945063517,
+     "hybrid": 0.37683583046808217,
+     "peoples": 0.1463297800812826
+    },
+    "machines_for_the_hybrid_and_peoples_land_gw": [
+     0.39498645422408846,
+     2.230301964873975
+    ]
+   }
   },
   "B": {
    "what": "half of the land wild",
@@ -1010,7 +1024,21 @@
    "machines_for_the_hybrid_and_peoples_land_gw": [
     0.25430564922316545,
     1.4359438990259634
-   ]
+   ],
+   "with_the_unfilled_land_shared": {
+    "wild_gt_yr": 1.9107155762354533,
+    "hybrid_gt_yr": 0.8221242889067483,
+    "peoples_gt_yr": 0.5005882467969063,
+    "share_of_land": {
+     "wild": 0.5916087788796571,
+     "hybrid": 0.29161003858733836,
+     "peoples": 0.11678118253300449
+    },
+    "machines_for_the_hybrid_and_peoples_land_gw": [
+     0.3004722233464884,
+     1.6966247397930536
+    ]
+   }
   },
   "machines_gw_per_gt": [
    0.227163661971831,

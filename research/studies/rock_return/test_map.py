@@ -159,15 +159,15 @@ def small_region(n=14, seed=5):
 def test_a_step_keeps_the_rock(water, rule):
     region = small_region()
     g, h = EV.grid_of(region), EV.start_of(region)
-    total = dict(cut=0.0, laid=0.0, set_down=0.0, gone=0.0)
-    new = h
+    total = dict(cut=0.0, laid=0.0, set_down=0.0, gone=0.0, slid=0.0)
+    new, pending = h, None
     for _ in range(4):
-        new, moved = EV.step(new, g, water, rule, 2.0e-6, 25000.0)
+        new, moved, pending = EV.step(new, g, water, rule, 2.0e-6, 25000.0, pending=pending)
         for k in total:
             total[k] += moved[k]
     assert total['cut'] > 0
-    assert math.isclose((new - h).sum() * g['cell_area'], -total['gone'], rel_tol=1e-9, abs_tol=1e-3 * total['cut'])
-    assert math.isclose(total['cut'], total['laid'] + total['set_down'] + total['gone'], rel_tol=1e-9)
+    # the ground's change, the rock held where it slid onto water and the rock gone sum to nothing
+    assert abs((new - h).sum() * g['cell_area'] + pending.sum() + total['gone']) < 1e-9 * total['cut']
 
 
 def test_roundness_tells_a_disc_from_an_ellipse():
@@ -234,7 +234,7 @@ def test_the_evolution_product_is_whole(evolution, placement):
                 assert set(row['years']) == {f'{y:g}' for y in EV.YEARS}
                 for at in row['years'].values():
                     rock = at['rock']
-                    assert math.isclose(rock['cut'], rock['laid'] + rock['set_down'] + rock['gone'], rel_tol=1e-6)
+                    assert abs(rock['ground'] + rock['held'] + rock['gone']) < 1e-4 * rock['cut']       # the floors' roughness is the remainder
                     assert -1.0 <= at['forms_kept'] <= 1.0
 
 
@@ -255,6 +255,42 @@ def test_healing_gives_no_ground_more_than_it_lost_and_keeps_the_rock():
     assert back.sum() == 0.0 and left.sum() == 0.0
 
 
+def test_ground_too_steep_fails_until_it_is_not_and_keeps_its_rock():
+    n = 9
+    h = np.zeros((n, n))
+    h[4, 4] = 5000.0                                                  # a needle on a plain of 1.9 km cells
+    h = h.ravel()
+    fixed = np.zeros(n * n, bool)
+    hold = np.zeros(n * n, bool)
+    pending = np.zeros(n * n)
+    tan = math.tan(math.radians(35.0))
+    before = h.sum()
+    moved = EV.slide(h, fixed, hold, pending, tan, n, n, 1900.0, 1900.0, 1.0, 200)
+    assert moved > 0 and math.isclose(h.sum(), before, rel_tol=1e-12) and pending.sum() == 0.0
+    z = h.reshape(n, n)
+    assert max(np.abs(np.diff(z, axis=0)).max(), np.abs(np.diff(z, axis=1)).max()) <= tan * 1900.0 * (1 + 1e-6)
+    assert z[4, 4] < 5000.0 and z[4, 4] == z.max()
+    # onto water or an outlet the rock does not pile: it is held as come to rest there
+    h = np.zeros(n * n)
+    h[40] = 5000.0
+    hold[41] = True
+    EV.slide(h, fixed, hold, pending, tan, n, n, 1900.0, 1900.0, 1.0, 200)
+    assert h[41] == 0.0 and pending[41] > 0 and math.isclose(h.sum() + pending.sum(), 5000.0, rel_tol=1e-12)
+
+
+def test_creep_smooths_and_keeps_the_rock():
+    g = dict(shape=(5, 5), north_south=100.0, east_west=100.0, kappa=0.01)
+    h = np.zeros(25)
+    h[12] = 10.0
+    land = np.ones(25, bool)
+    new = EV.creep(h, land, g, 1000.0)
+    assert math.isclose(new.sum(), 10.0) and new[12] < 10.0 and new[11] > 0.0
+    land[11] = False
+    new = EV.creep(h, land, g, 1000.0)
+    assert new[11] == 0.0 and math.isclose(new.sum(), 10.0)           # nothing creeps onto water
+    assert (EV.creep(h, land, dict(g, kappa=0.0), 1000.0) == h).all()
+
+
 @pytest.fixture(scope='module')
 def process():
     from research.studies.rock_return import process as PR
@@ -268,30 +304,46 @@ def test_the_process_product_is_whole(process, placement):
     assert product['ignored_inputs'][str(EV.REGIONS)] == placement['product']['sha256']
     for name, design in PR.DESIGN.items():
         for reading in PR.READINGS:
-            for label in design['reaches']:
+            for label in design['cases']:
                 row = product['regions'][name][reading][label]
                 assert set(row['years']) == {f'{y:g}' for y in PR.YEARS}
+                limit = row['settings'].get('critical_deg', EV.CRITICAL_DEG)
                 for at in row['years'].values():
                     rock = at['rock']
-                    assert math.isclose(rock['cut'], rock['laid'] + rock['set_down'] + rock['gone'], rel_tol=1e-6)
+                    assert abs(rock['ground'] + rock['held'] + rock['gone']) < 1e-4 * rock['cut']
+                    assert at['mean_slope_deg'] < limit
+    for reading in PR.READINGS:
+        assert set(product['checks']['grain'][reading]) == {'1', '2'} and set(product['checks']['step'][reading]) == {'half_the_step'}
 
 
 def test_what_the_write_up_says_of_the_return_as_designed(process):
     PR, product = process
+    regions = product['regions']
     for name in PR.DESIGN:
-        shared = product['regions'][name]['shared_by_wear']['all_of_it']
-        capped = product['regions'][name]['no_more_than_it_lost']['all_of_it']
-        top = shared['start']['heights']['highest']
-        # both readings keep the map's forms through ten million years, and neither raises its highest summits
-        assert shared['years']['1e+07']['forms_kept'] > 0.94 and capped['years']['1e+07']['forms_kept'] > 0.94
+        shared, capped = regions[name]['shared_by_wear']['all_of_it'], regions[name]['no_more_than_it_lost']['all_of_it']
+        # both readings keep the forms through thirty million years, and neither raises the map's own summits
+        assert shared['years']['3e+07']['forms_kept'] > 0.9 and capped['years']['3e+07']['forms_kept'] > 0.9
         for row in (shared, capped):
             assert all(at['summits']['median_m'] < 0 for at in row['years'].values())
-        # shared by wear, some ground outgrows the starting map's highest point; taken no more than lost, none does
-        assert shared['years']['3e+07']['heights']['highest'] > top + 1000.0
-        assert all(at['heights']['highest'] <= top for at in capped['years'].values())
-        assert shared['years']['1e+08']['forms_kept'] < 0.2
-    south = product['regions']['southern_highlands']['no_more_than_it_lost']['all_of_it']['years']['1e+08']
-    assert south['forms_kept'] > 0.8 and south['followed_hollows']['depth_over_start']['median'] > 0.85
-    korolev = product['regions']['korolev']['no_more_than_it_lost']
-    assert korolev['all_of_it']['years']['3e+07']['forms_kept'] < 0.7
-    assert korolev['flyers_and_waders_alone']['years']['1e+07']['forms_kept'] < korolev['all_of_it']['years']['1e+07']['forms_kept']
+        # with ground that fails, nothing grows without limit
+        assert all(at['heights']['highest'] < shared['start']['heights']['highest'] + 1500.0 for at in shared['years'].values())
+        assert all(at['heights']['highest'] <= capped['start']['heights']['highest'] for at in capped['years'].values())
+        # loose ground changes the forms kept by little
+        for reading in PR.READINGS:
+            a, b = regions[name][reading]['all_of_it'], regions[name][reading]['all_of_it_on_loose_ground']
+            assert all(abs(a['years'][y]['forms_kept'] - b['years'][y]['forms_kept']) < 0.03 for y in a['years'])
+    south, korolev = regions['southern_highlands'], regions['korolev']
+    assert south['no_more_than_it_lost']['all_of_it']['years']['1e+08']['forms_kept'] > 0.9 > 0.65 > south['shared_by_wear']['all_of_it']['years']['1e+08']['forms_kept']
+    assert south['shared_by_wear']['all_of_it']['years']['1e+08']['share_risen_over_300_m'] > 0.15
+    assert korolev['shared_by_wear']['all_of_it']['years']['1e+08']['share_of_land_at_the_failing_slope'] > 0.05
+    far = 'all_of_it_within_50_km'
+    for reading in PR.READINGS:                                       # the longer range serves Korolev under either reading
+        assert korolev[reading][far]['years']['1e+08']['forms_kept'] > korolev[reading]['all_of_it']['years']['1e+08']['forms_kept'] + 0.05
+        assert korolev[reading]['flyers_and_waders_alone']['years']['3e+07']['forms_kept'] < 0.4
+    assert korolev['no_more_than_it_lost'][far]['years']['1e+08']['forms_kept'] > 0.94
+    # the model's own grain and step do not shape the answer
+    for reading in PR.READINGS:
+        grain = product['checks']['grain'][reading]
+        assert abs(grain['1']['years']['3e+07']['forms_kept'] - grain['2']['years']['3e+07']['forms_kept']) < 0.02
+        half = product['checks']['step'][reading]['half_the_step']['years']['3e+07']['forms_kept']
+        assert abs(half - south[reading]['all_of_it']['years']['3e+07']['forms_kept']) < 0.002

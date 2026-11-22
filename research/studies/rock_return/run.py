@@ -69,6 +69,7 @@ REPOSE_SLOPE = math.tan(math.radians(30.0))   # about where loose soil slides (d
 LOOPS = dict(slow=dict(growth=0.05, death=0.02, half_years=100.0), central=dict(growth=0.10, death=0.03, half_years=30.0),
              fast=dict(growth=0.30, death=0.10, half_years=10.0))   # design guesses: a great flyer's yearly increase and loss, and the years of supply standing where carriers find half their fill
 SPANS_YR = (1e4, 1e5, 1e6, 1e7, 1e8)
+UNFILLED_TO_THE_WILD = 0.5           # the register's row of 22 November 2026: half of the open land people do not fill goes to the wild, half to the hybrid land; its rock is taken to divide as its area does
 
 
 def sha256(path) -> str:
@@ -290,8 +291,18 @@ def wild_and_managed(job, terrain):
     out = {}
     for key, kk in job['by_kind_of_land'].items():
         managed = kk['hybrid']['gt_yr'] + kk['peoples']['gt_yr']
-        out[key] = dict(what=kk['what'], wild_gt_yr=kk['wild']['gt_yr'], open_beyond_need_gt_yr=kk['open_beyond_need']['gt_yr'],
-                        hybrid_and_peoples_gt_yr=managed, machines_for_the_hybrid_and_peoples_land_gw=[managed * x for x in per_gt])
+        # the register's row of 22 November: half of the open land people do not fill goes to the hybrid land, half to the wild
+        spare, spare_km2 = kk['open_beyond_need']['gt_yr'], kk['open_beyond_need']['land_km2']
+        land = sum(kk[n]['land_km2'] for n in ('wild', 'hybrid', 'peoples', 'open_beyond_need'))
+        shared = dict(wild_gt_yr=kk['wild']['gt_yr'] + UNFILLED_TO_THE_WILD * spare,
+                      hybrid_gt_yr=kk['hybrid']['gt_yr'] + (1.0 - UNFILLED_TO_THE_WILD) * spare, peoples_gt_yr=kk['peoples']['gt_yr'],
+                      share_of_land=dict(wild=(kk['wild']['land_km2'] + UNFILLED_TO_THE_WILD * spare_km2) / land,
+                                         hybrid=(kk['hybrid']['land_km2'] + (1.0 - UNFILLED_TO_THE_WILD) * spare_km2) / land,
+                                         peoples=kk['peoples']['land_km2'] / land))
+        shared['machines_for_the_hybrid_and_peoples_land_gw'] = [(shared['hybrid_gt_yr'] + shared['peoples_gt_yr']) * x for x in per_gt]
+        out[key] = dict(what=kk['what'], wild_gt_yr=kk['wild']['gt_yr'], open_beyond_need_gt_yr=spare,
+                        hybrid_and_peoples_gt_yr=managed, machines_for_the_hybrid_and_peoples_land_gw=[managed * x for x in per_gt],
+                        with_the_unfilled_land_shared=shared)
     out['machines_gw_per_gt'] = per_gt
     return out
 
