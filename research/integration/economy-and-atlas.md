@@ -78,6 +78,10 @@ An independent reviewer read the merged tree at the records commit, `16c842b3`, 
 
 The reviewer did not run the suite, rerun the salt producer or read the substance of the two studies, and the complete suite ran on the last merge, `e6759adb`, before the records.
 
+## Afterwards
+
+Main moved up to the round's head, `90ce93a4`, by fast-forward from `2257668e` on 21 November, at the author's word ([register](../decisions.md#the-atlas-round-and-the-vacuum-economy-closed-for-now-and-the-ninth-integration-21-november-2026)), and the complete suite passed in main's checkout in one run, 19:24 to 19:48 (`session-tools/integration9/make_check_main.log` on the research drive): the layers' 1,966 files without a violation, 7,106 Python tests passed and 34 skipped, 191 JavaScript tests, the calendar's build, the provenance reproduction and the ensemble's validation. The eleven links to the research drive were made in main's checkout before it. The worktrees come up to main after the economy's large fixed results move to the research drive (register, 21 November), so that no checkout gains a copy of them.
+
 ## Still to do from the integration
 
 - **The two studies** are closed for now, and each README lists what is open: [the atlas round](../studies/atlas_round/README.md#what-is-open), its names in the middle of a rework, and [the economy](../studies/vacuum_economy_periods/README.md#where-the-study-stands-21-november-2026), with trade within the zone designed and unbuilt.
@@ -85,7 +89,6 @@ The reviewer did not run the suite, rerun the salt producer or read the substanc
 - **The heritage register** (`research/studies/conservation/results/heritage_register.json`) lists the Shoemaker scattering site and the Cabeus impact as under water; on the design surface both are dry bowls.
 - **The economy's layered studies** of 12 to 14 November, and the register's and the plan's sections of 12 November, keep the prose they were written in; they have had no editorial pass. The nine commits of those days already on main, the register's and the plan's sections, `habitation/crater_gardens` and the check selector, were to be reviewed with the economy (the seventh and eighth rounds' lists); this round reviewed the integration and its records, so that review is carried with the pass.
 - **The recorded digests that differ**, 39 in nine of the atlas round's products and 34 in the studies of 12 to 14 November, are brought to their files when those products are next rebuilt. The mining study's sources name a retained register at `research/studies/vacuum_buildout/sources.json`, which no longer exists.
-- **Main's checkout** needs eleven links to the research drive when it moves up, the ones made in the round's worktree.
 - **The research index** (`research/README.md`) gains the atlas round's row with this round and still lacks rows for ten studies of earlier rounds: cold_waters, drainage_network, littoral_community, polar_light, river_deltas, seawater_lakes, south_sea_ocean, storm_water, underwater_light and vacuum_buildout.
 - **The south sea's oxygen run** stays paused on `domain/hydrosphere` at model year 53, its remaining 47 model years about 13–18 hours of machine time; its basin is redrawn in the atlas round's first step, and no ocean run has been made on it.
 - **The shared population scenario** (`shared/scenarios/population.json`) still lists comparison cases only, while the register holds the distribution of 11 October (C′: the Moon 8 billion, 4 on the ground and 4 aloft; the array 5; Earth 9; the colonies 3).
