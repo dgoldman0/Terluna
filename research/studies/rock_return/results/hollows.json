@@ -1,0 +1,327 @@
+{
+ "schema": "terluna.research.rock-return-hollows/1",
+ "producer": {
+  "module": "research.studies.rock_return.hollows",
+  "code_sha256": {
+   "hollows.py": "4fa75a779d7516b0ec2bf11b8c4df5ff3feeacd65e18545b1a24bac5c5a30b4b",
+   "evolve.py": "97b671325048743ec911a84874c76519c642c4b21a988f39d675bba7061e7bd5",
+   "process.py": "1236c7d202dda942c4ca444a23741392ca634a715f7939a33160870c7c1f1b6d"
+  }
+ },
+ "inputs": {
+  "research/studies/rock_return/results/process.json": "5e621d4d64f4c4b755d2c1e7ede9125007740c40b57bded5f3905277519ebdd0"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/terrain-return/evolution/process_snapshots.npz": "1a2ba26476db6c4b76fd2732e4ef0ac3dca03ca3610454ba6aeefe4e35a81643"
+ },
+ "evidence": "A count on the ground of process.py's runs with all the rock reached: every hollow that the model's flood finds, at the start and after 30 and 100 million years. A hollow is ground below the lip its water would spill over, at 1.9 km a cell; hollows under 10 km2 are a few cells and near the model's grain. Whether a hollow holds a lake depends on the region's water. Not validated.",
+ "reading_rule": "For each region and reading: number, the hollows by class of size; share_of_ground, the share of the measured ground in a hollow; volume_km3, the volume below the lips; and for hollows of 10 km2 or more, how many stand on ground that was hollow at the start (nine tenths or more of their ground), on ground that was not (under a tenth) or on both, with their area and depths. A starting hollow that is cut in two by rock set down across it counts afterwards as two hollows on old ground.",
+ "setting": {
+  "classes_km2": [
+   "under 10 km2",
+   "10-100 km2",
+   "100-1,000 km2",
+   "over 1,000 km2"
+  ],
+  "counted_km2": 10.0,
+  "in_a_hollow_m": 1.0,
+  "years": [
+   "3e+07",
+   "1e+08"
+  ]
+ },
+ "regions": {
+  "korolev": {
+   "water": "wet",
+   "start": {
+    "number": {
+     "under 10 km2": 91,
+     "10-100 km2": 120,
+     "100-1,000 km2": 38,
+     "over 1,000 km2": 12
+    },
+    "share_of_ground": 0.7034454345703125,
+    "volume_km3": 425209.1724000514,
+    "hollows_of_10_km2_or_more": 170
+   },
+   "shared_by_wear": {
+    "3e+07": {
+     "number": {
+      "under 10 km2": 83,
+      "10-100 km2": 154,
+      "100-1,000 km2": 70,
+      "over 1,000 km2": 19
+     },
+     "share_of_ground": 0.73974609375,
+     "volume_km3": 374925.5043390026,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 66,
+       "area_km2": 172123.4775474551,
+       "median_depth_m": 335.3596286406282,
+       "deepest_m": 6291.537593550842
+      },
+      "on_new_ground": {
+       "number": 95,
+       "area_km2": 6567.765817571196,
+       "median_depth_m": 302.22461337500135,
+       "deepest_m": 1094.5092793437507
+      },
+      "on_both": {
+       "number": 82,
+       "area_km2": 52617.370993471384,
+       "median_depth_m": 455.5959552656277,
+       "deepest_m": 3434.9077838437734
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0737457275390625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.037445068359375
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 134,
+      "10-100 km2": 209,
+      "100-1,000 km2": 62,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.7006378173828125,
+     "volume_km3": 344554.5426123732,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 91,
+       "area_km2": 173062.24167413462,
+       "median_depth_m": 428.7451191875007,
+       "deepest_m": 6079.814440019589
+      },
+      "on_new_ground": {
+       "number": 105,
+       "area_km2": 6309.784836193605,
+       "median_depth_m": 356.77050881250034,
+       "deepest_m": 1709.381106515626
+      },
+      "on_both": {
+       "number": 88,
+       "area_km2": 36178.249569021486,
+       "median_depth_m": 398.8461929062505,
+       "deepest_m": 3225.441474250023
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.054473876953125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.057281494140625
+    }
+   },
+   "no_more_than_it_lost": {
+    "3e+07": {
+     "number": {
+      "under 10 km2": 55,
+      "10-100 km2": 113,
+      "100-1,000 km2": 39,
+      "over 1,000 km2": 10
+     },
+     "share_of_ground": 0.5500640869140625,
+     "volume_km3": 177929.35577672356,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 158,
+       "area_km2": 166397.73298854686,
+       "median_depth_m": 235.17065729687602,
+       "deepest_m": 3807.2092415156294
+      },
+      "on_new_ground": {
+       "number": 1,
+       "area_km2": 14.332276743199557,
+       "median_depth_m": 4.825440453124884,
+       "deepest_m": 4.825440453124884
+      },
+      "on_both": {
+       "number": 3,
+       "area_km2": 107.49207557399667,
+       "median_depth_m": 40.33789162500034,
+       "deepest_m": 231.53466996875068
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.000457763671875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.153839111328125
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 95,
+      "10-100 km2": 78,
+      "100-1,000 km2": 29,
+      "over 1,000 km2": 9
+     },
+     "share_of_ground": 0.4016571044921875,
+     "volume_km3": 44453.88536211148,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 92,
+       "area_km2": 118843.2387546107,
+       "median_depth_m": 380.9755914375012,
+       "deepest_m": 2216.9407218281412
+      },
+      "on_new_ground": {
+       "number": 10,
+       "area_km2": 171.9873209183947,
+       "median_depth_m": 2.739015171875508,
+       "deepest_m": 53.54931740625034
+      },
+      "on_both": {
+       "number": 14,
+       "area_km2": 813.3567051765749,
+       "median_depth_m": 6.978522624999641,
+       "deepest_m": 131.82617287500034
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.001556396484375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.3033447265625
+    }
+   }
+  },
+  "southern_highlands": {
+   "water": "dry",
+   "start": {
+    "number": {
+     "under 10 km2": 138,
+     "10-100 km2": 108,
+     "100-1,000 km2": 29,
+     "over 1,000 km2": 16
+    },
+    "share_of_ground": 0.617340087890625,
+    "volume_km3": 116915.68804250803,
+    "hollows_of_10_km2_or_more": 153
+   },
+   "shared_by_wear": {
+    "3e+07": {
+     "number": {
+      "under 10 km2": 164,
+      "10-100 km2": 90,
+      "100-1,000 km2": 36,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.602203369140625,
+     "volume_km3": 109165.34249868618,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 59,
+       "area_km2": 110991.77105731076,
+       "median_depth_m": 285.8128682109375,
+       "deepest_m": 4046.2661582812552
+      },
+      "on_new_ground": {
+       "number": 5,
+       "area_km2": 86.35317763777867,
+       "median_depth_m": 75.18444161279297,
+       "deepest_m": 102.28441056933593
+      },
+      "on_both": {
+       "number": 77,
+       "area_km2": 9564.884323055132,
+       "median_depth_m": 93.57533128042793,
+       "deepest_m": 1912.4218561118164
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0245513916015625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0396881103515625
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 298,
+      "10-100 km2": 90,
+      "100-1,000 km2": 55,
+      "over 1,000 km2": 18
+     },
+     "share_of_ground": 0.533050537109375,
+     "volume_km3": 86462.47763486781,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 56,
+       "area_km2": 77623.88729833617,
+       "median_depth_m": 222.66010543688964,
+       "deepest_m": 3727.2815901757813
+      },
+      "on_new_ground": {
+       "number": 11,
+       "area_km2": 507.9598684575216,
+       "median_depth_m": 34.572875115539546,
+       "deepest_m": 346.67584328515625
+      },
+      "on_both": {
+       "number": 96,
+       "area_km2": 26205.649613723537,
+       "median_depth_m": 172.1211849880371,
+       "deepest_m": 3269.073895539067
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0551605224609375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.1394500732421875
+    }
+   },
+   "no_more_than_it_lost": {
+    "3e+07": {
+     "number": {
+      "under 10 km2": 57,
+      "10-100 km2": 78,
+      "100-1,000 km2": 38,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.6051483154296875,
+     "volume_km3": 114002.04283822962,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 98,
+       "area_km2": 117254.916235392,
+       "median_depth_m": 213.0855660302734,
+       "deepest_m": 3790.937282859375
+      },
+      "on_new_ground": {
+       "number": 0,
+       "area_km2": 0.0,
+       "median_depth_m": null,
+       "deepest_m": null
+      },
+      "on_both": {
+       "number": 31,
+       "area_km2": 5011.02410233345,
+       "median_depth_m": 101.4305439921875,
+       "deepest_m": 1210.7958195141607
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.00640869140625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0186004638671875
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 18,
+      "10-100 km2": 50,
+      "100-1,000 km2": 40,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.523895263671875,
+     "volume_km3": 94197.64018755768,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 71,
+       "area_km2": 93025.23050996823,
+       "median_depth_m": 272.56818026953124,
+       "deepest_m": 3629.7667556328124
+      },
+      "on_new_ground": {
+       "number": 0,
+       "area_km2": 0.0,
+       "median_depth_m": null,
+       "deepest_m": null
+      },
+      "on_both": {
+       "number": 34,
+       "area_km2": 6976.828793264059,
+       "median_depth_m": 82.64749595507811,
+       "deepest_m": 926.0560757910156
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0160064697265625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.1094512939453125
+    }
+   }
+  }
+ }
+}

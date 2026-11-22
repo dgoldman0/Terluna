@@ -347,3 +347,49 @@ def test_what_the_write_up_says_of_the_return_as_designed(process):
         assert abs(grain['1']['years']['3e+07']['forms_kept'] - grain['2']['years']['3e+07']['forms_kept']) < 0.02
         half = product['checks']['step'][reading]['half_the_step']['years']['3e+07']['forms_kept']
         assert abs(half - south[reading]['all_of_it']['years']['3e+07']['forms_kept']) < 0.002
+
+
+# ---- hollows that fill and hollows that form ---------------------------------------------------------------------
+def test_the_count_tells_old_hollows_from_new():
+    from research.studies.rock_return import hollows as HO
+    n = 30
+    ground = np.full((n, n), 100.0)
+    ground[5:10, 5:10] = 50.0                                        # one hollow of 25 cells at the start
+    region = dict(ground=ground.astype(np.float32), water=np.full((n, n), np.nan, np.float32), sea=np.zeros((n, n), bool),
+                  eroding=np.ones((n, n), bool), lowering=np.zeros((n, n), np.float32), east_west_m=1000.0, north_south_m=1000.0, margin=2)
+    g, h0 = EV.grid_of(region), EV.start_of(region)
+    inside = EV.interior(region).reshape(g['shape'])
+    start, old = HO.census(h0, g, inside)
+    assert start['number']['10-100 km2'] == 1 and math.isclose(start['volume_km3'], 25 * 50.0 / 1e3, rel_tol=1e-4) and old.sum() == 25
+    later = h0.reshape(n, n).copy()
+    later[5:10, 7] = 100.0                                           # rock set down across it cuts it in two
+    later[20:24, 20:24] = 80.0                                       # and a new hollow of 16 cells stands elsewhere
+    row, _ = HO.census(later.ravel(), g, inside, old)
+    kinds = row['hollows_of_10_km2_or_more']
+    assert kinds['on_old_ground']['number'] == 2 and kinds['on_new_ground']['number'] == 1 and kinds['on_both']['number'] == 0
+    assert math.isclose(row['ground_in_a_hollow_now_and_not_at_the_start'], 16 / inside.sum())
+    assert math.isclose(row['ground_in_a_hollow_at_the_start_and_not_now'], 5 / inside.sum())
+    assert row['volume_km3'] < start['volume_km3'] + 16 * 20.0 / 1e3 + 1e-9
+
+
+def test_the_hollows_product_and_what_the_write_up_says_of_it():
+    from research.studies.rock_return import hollows as HO
+    product = json.loads(HO.OUT.read_text())
+    assert product['schema'] == HO.SCHEMA
+    assert product['producer']['code_sha256'] == {name: sha256(HERE / name) for name in ('hollows.py', 'evolve.py', 'process.py')}
+    assert product['inputs']['research/studies/rock_return/results/process.json'] == sha256(HERE / 'results' / 'process.json')
+    for name, region in product['regions'].items():
+        start = region['start']
+        shared, capped = region['shared_by_wear']['1e+08'], region['no_more_than_it_lost']['1e+08']
+        counted = lambda row: sum(v['number'] for v in row['hollows_of_10_km2_or_more'].values())      # noqa: E731
+        # shared by wear the hollows grow in number and shrink in volume; new ones form, and they are small
+        assert counted(shared) > start['hollows_of_10_km2_or_more']
+        assert 0.7 < shared['volume_km3'] / start['volume_km3'] < 0.85
+        new = shared['hollows_of_10_km2_or_more']['on_new_ground']
+        assert new['number'] >= 10 and new['area_km2'] < 0.05 * sum(v['area_km2'] for v in shared['hollows_of_10_km2_or_more'].values())
+        # taken no more than it lost, almost none form
+        assert capped['hollows_of_10_km2_or_more']['on_new_ground']['number'] <= 10
+        assert capped['hollows_of_10_km2_or_more']['on_new_ground']['area_km2'] < 0.1 * new['area_km2']
+    korolev = product['regions']['korolev']
+    assert korolev['no_more_than_it_lost']['1e+08']['volume_km3'] < 0.2 * korolev['start']['volume_km3']
+    assert abs(korolev['shared_by_wear']['1e+08']['share_of_ground'] - korolev['start']['share_of_ground']) < 0.01

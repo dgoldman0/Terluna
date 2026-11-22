@@ -144,6 +144,18 @@ The design says that carriers set rock down on bare, freshly worn ground. It doe
 - **So does reach.** In Korolev's lake country with the rock of the delta fronts reached (95%), forms kept at a hundred million years is 0.67 shared by wear and 0.30 taken no more than it lost; with flyers and waders alone (42%), 0.34 and 0.26 at thirty million years and about 0.1 at a hundred.
 - **The failing slope hardly matters.** With loose ground that fails at 30° the forms kept move by 0.02 or less in every case.
 
+**Hollows fill, and new ones form** *(computed on the runs with all the rock reached: [hollows.py](hollows.py))*. The largest hollows of the starting map lose depth under either reading, which does not say whether the land keeps hollows. Counted three ways after a hundred million years, the answers differ:
+
+| | Korolev, start | shared by wear | no more than it lost | Southern highlands, start | shared by wear | no more than it lost |
+|---|---|---|---|---|---|---|
+| Hollows of 10 km² or more | 170 | 284 | 116 | 153 | 163 | 105 |
+| of them on ground that was not hollow at the start | | 105 | 10 | | 11 | 0 |
+| Hollows under 10 km² | 91 | 134 | 95 | 138 | 298 | 18 |
+| Share of the ground in a hollow | 70% | 70% | 40% | 62% | 53% | 52% |
+| Volume below the lips, against the start | | 0.81 | 0.10 | | 0.74 | 0.81 |
+
+Shared by wear, the hollows grow in number and shrink in volume. New ones form where rock set down on steep ground, and the slides from it, close a valley or an outlet: 105 in Korolev's country, where they hold lakes and are typically 360 m deep, and 11 in the dry southern highlands, typically 35 m deep. They are small. Together they are 3% of Korolev's hollow area and under 1% of the southern highlands', so nearly all the volume is still the old craters, which go on filling: a fifth of the volume is gone in Korolev and a quarter in the southern highlands. Taken no more than it lost, almost no hollow forms, the small ones vanish, and in Korolev's lake country nine tenths of the volume goes, since spilling lakes cut their outlets down and nothing sets rock back on them. Rock shared by wear goes to exactly those fast-wearing outlets, which is why its lakes last. Hollows under 10 km² are a few cells and near the model's grain.
+
 **Whether the model's grain and step shape the answer** *(process.py's checks)*. One crater's surroundings in the southern highlands, run on the design surface's cells and on cells half their size, keep 0.92 and 0.93 of their forms at thirty million years shared by wear and 0.98 and 0.98 taken no more than it lost, with 7.4% and 7.1% of the ground risen over 300 m under the first. Half the time step changes the forms kept by less than 0.001. An earlier form of the model, with no failing slope, grew single cells without limit under the first reading; that was the model's, and the figures here replace it.
 
 **Other rules, for comparison** *(evolve.py, thirty million years)*. Rock set down on crests raises the relief 2.5–2.9 times before failing slopes hold it, and keeps 0.45–0.6 of the forms. Rock set down evenly, or by wear judged over a district of 10 km, blurs the map: forms kept 0.1–0.7. Pictures of every case are on the research drive, `terrain-return/evolution/`: for each region and reading, a file ending `_as_designed_<reading>.png` shows the map at the start and after 30 and 100 million years, where the ground rose and fell and how it is spread over height, and a file ending `_closer_<reading>.png` shows one crater or shore from above, slanted, and in a cut through the ground; `korolev_wet.png` and the three like it set the rules side by side.
@@ -175,7 +187,7 @@ The sizing turns the aim into requirements, each a target no organism meets toda
 5. **Divers for the delta fronts and floors**, of a bird's breath to 200 m and of a seal's or whale's beyond.
 6. **Builders that lay the dissolved rock within reach**, in barriers upstream and reefs in the shallows.
 7. **A range that covers the way from the hollows to the highest ground**: 20 km serves country crowded with hollows, and wide uplands need 50 km or more. This weighs as much as the next.
-8. **A rule for when to stop.** A carrier that goes on setting rock down where wear is fastest fattens the walls, fills the small craters and makes landslide country of the steep ground; one that leaves ground once it is made good keeps the map wherever rock is in range, and leaves the surplus lying in the hollows.
+8. **Rock shared by wear, with nothing to stop it.** The register's row of 22 November takes this reading: holding each piece of ground to what it lost would be hard to arrange, and the unheld return is the one under which new hollows form and lakes keep their outlets. Its cost is walls that fatten, small craters that fill and steep ground that slides.
 9. **A cover that takes the fall and binds it**, with 1.5–7.3 g of binder per m² a year, and for rim rock a carbonate cement on dry land and an iron cement, or roots, on wet land.
 
 ## How far Earth's organisms go toward each part
@@ -222,8 +234,9 @@ The last row bears on the size of the job: the central case here lowers the land
 | [placement.py](placement.py) | The rules of placement on the whole surface at one moment, and the regions cut for the runs through time; writes [results/placement.json](results/placement.json) |
 | [evolve.py](evolve.py) | The landscape model and the rules side by side on two regions for 30 million years; writes [results/evolution.json](results/evolution.json) |
 | [process.py](process.py) | The return as designed, in two readings, for 100 million years; writes [results/process.json](results/process.json) |
+| [hollows.py](hollows.py) | The hollows of the runs counted by number, ground and volume, old and new; writes [results/hollows.json](results/hollows.json) |
 | [cement.py](cement.py) | The cement's arithmetic, with its own checks |
-| [test_run.py](test_run.py), [test_map.py](test_map.py), [test_cement.py](test_cement.py) | 62 tests, and the regeneration of rock.json from the research drive when `TERLUNA_ROCK_RETURN_REGENERATE=1` |
+| [test_run.py](test_run.py), [test_map.py](test_map.py), [test_cement.py](test_cement.py) | 64 tests, and the regeneration of rock.json from the research drive when `TERLUNA_ROCK_RETURN_REGENERATE=1` |
 | [sources.json](sources.json) | Each source and how far it was read |
 
 `ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.rock_return.rock` reads the design routing and the land-use grid on the research drive, as does `placement`; `python -m research.studies.rock_return.run` reads only committed products. `evolve` and `process` read the regions `placement` writes to the drive and want numba for speed (the research drive's `venvs/optics`); `evolve` takes about fifteen minutes on six cores and `process` about half an hour, and their snapshots and pictures stay on the drive. The tests check the arithmetic of each function, that the loop rests where the return equals the supply and is stable over its settings, that the stored sizing is what the code gives, that the way back agrees with the terrain study's within a tenth, and the figures this page states.
