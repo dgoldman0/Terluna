@@ -1,0 +1,103 @@
+{
+ "source_admission": "The study's quantities come from committed project products, each named below with what is read from it. The outside sources are Earth's evidence for the parts of a carrier; each was checked on 22 November 2026 by a search summary only, and none was read in full. Values the README marks as recalled were not looked up, and those it marks as design guesses rest on no source.",
+ "sources": [
+  {
+   "key": "terrain_through_time",
+   "citation": "The terrain through time, research/studies/terrain_through_time/README.md and results/terrain_through_time.json",
+   "doi_or_url": "research/studies/terrain_through_time/README.md",
+   "use": "The rule for where the land's rock comes off (local relief within about 5 km) and its function, the range of soil creep, the mean way back on the earlier drainage for comparison, the machines' costs for a gigatonne, and the stone the seas shed each year",
+   "access": "product and code read in-tree"
+  },
+  {
+   "key": "sand_study",
+   "citation": "Sand on the design surface, research/studies/atlas_round/sand.md and sand.py",
+   "doi_or_url": "research/studies/atlas_round/sand.md",
+   "use": "The terrain study's central lowering by band of latitude, 79 to 25 m a million years, with its slow and fast cases at 0.2 and 2 times, as that study reads them",
+   "access": "code read in-tree"
+  },
+  {
+   "key": "design_routing",
+   "citation": "The design routing and its lakes, research/studies/atlas_round/results/design_routing.json, through the sea nutrients study's set-up (research/studies/sea_nutrients/loads.py)",
+   "doi_or_url": "research/studies/atlas_round/results/design_routing.json",
+   "use": "The receivers, the lakes with their volumes and outflows, the lowest points that pass nothing on, the seas and their levels, and Brune's curves in Siyam's form for the particles a lake keeps",
+   "access": "product read through its loaders"
+  },
+  {
+   "key": "land_use",
+   "citation": "The land-use screen, research/studies/atlas_round/land_use.md and results/land_use.json",
+   "doi_or_url": "research/studies/atlas_round/land_use.md",
+   "use": "Whose land each cell is with 30% and with half of the land wild: wild, hybrid, filled by people, or open beyond their need",
+   "access": "product read"
+  },
+  {
+   "key": "river_deltas",
+   "citation": "The river deltas screen, research/studies/river_deltas/README.md and results/river_deltas.json",
+   "doi_or_url": "research/studies/river_deltas/README.md",
+   "use": "The share of a river's load that the delta plain keeps and that the plain and front keep together, for the mature Moon's soils from clay to sand",
+   "access": "product read"
+  },
+  {
+   "key": "sky_ecology",
+   "citation": "The sky's ecology, research/studies/sky_ecology/README.md, food_web.py and results/sky_ecology.json",
+   "doi_or_url": "research/studies/sky_ecology/README.md",
+   "use": "The flight rule (weight over glide ratio over muscle efficiency), the glide ratio of 15 to 25 and muscle efficiency of 0.2 to 0.25, the flyer six times the wandering albatross in every length (1.72 t, 185 MJ a day), birds' upkeep by weight (Nagy 2005) and the flyers that study already counts on",
+   "access": "product and code read in-tree"
+  },
+  {
+   "key": "biomass_comparison",
+   "citation": "The biomass comparison, research/studies/light_limitation/biomass_comparison.md and results/biomass_comparison.json",
+   "doi_or_url": "research/studies/light_limitation/biomass_comparison.md",
+   "use": "The land's plant growth, 649 to 857 g of carbon per m2 a year",
+   "access": "product read"
+  },
+  {
+   "key": "carbon_cycle_delta_carbon",
+   "citation": "Hedges JI, Keil RG 1995, Sedimentary organic matter preservation: an assessment and speculative synthesis, Marine Chemistry 49, 81-115, as the carbon cycle study takes it (research/studies/carbon_cycle/run.py, DELTA_OC)",
+   "doi_or_url": "research/studies/carbon_cycle/README.md",
+   "use": "Organic carbon of deltaic sediment, 0.7 to 1.5%",
+   "access": "the carbon cycle study's constant; the paper was not read here"
+  },
+  {
+   "key": "nelson1987",
+   "citation": "Nelson CH, Johnson KR, Barber JH 1987, Gray whale and walrus feeding excavation on the Bering Shelf, Alaska, Journal of Sedimentary Petrology 57, 419-430",
+   "doi_or_url": "https://pubs.usgs.gov/publication/70014728",
+   "use": "Gray whales excavate at least 172 million tonnes of sediment a year on the north-eastern Bering shelf, about three times the Yukon River's yearly load: one animal population lifting sediment at a tenth of a gigatonne a year",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "hornero_nest",
+   "citation": "Rufous hornero nests, BBC Wildlife (Discover Wildlife), summarising a study of the species' nests",
+   "doi_or_url": "https://www.discoverwildlife.com/animal-facts/birds/rufous-hornero-nests",
+   "use": "A bird of about 60 g builds a mud nest of up to 80 times its own weight each season",
+   "access": "search summary of a popular account; the study behind it was not identified"
+  },
+  {
+   "key": "martin2018",
+   "citation": "Martin SJ, Funch RR, Hanson PR, Yoo E-H 2018, A vast 4,000-year-old spatial pattern of termite mounds, Current Biology 28, R1292-R1293",
+   "doi_or_url": "https://doi.org/10.1016/j.cub.2018.09.061",
+   "use": "About 200 million evenly spaced mounds of carried earth over 230,000 km2 of north-east Brazil, dated at 690 to 3,820 years: bound earth standing for millennia, spread evenly by the builders' own spacing",
+   "access": "search summary of the paper and its press accounts"
+  },
+  {
+   "key": "micp_review",
+   "citation": "State-of-the-art review of microbial-induced calcite precipitation and its sustainability in engineering applications, Sustainability (MDPI) 2020",
+   "doi_or_url": "https://www.mdpi.com/2071-1050/12/15/6281",
+   "use": "Reviews of the method report sand treated with urea-splitting bacteria reaching unconfined compressive strengths from about 1.3 to about 19.6 MPa in engineering trials",
+   "access": "search summary of several reviews, which did not say which review gives which figure; the relation between carbonate content and strength was not found"
+  },
+  {
+   "key": "vonblanckenburg2004",
+   "citation": "von Blanckenburg F, Hewawasam T, Kubik PW 2004, Cosmogenic nuclide evidence for low weathering and denudation in the wet, tropical highlands of Sri Lanka, Journal of Geophysical Research 109, F03008",
+   "doi_or_url": "https://cir.nii.ac.jp/crid/1361981469478214656",
+   "use": "Steep, wet, forested highlands without tectonic uplift lose 2 to 11 m of rock a million years: how low living cover holds erosion on Earth",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "matmon2003",
+   "citation": "Matmon A, Bierman PR, Larsen J, Southworth S, Pavich M, Finkel R, Caffee M 2003, Erosion of an ancient mountain range, the Great Smoky Mountains, North Carolina and Tennessee, American Journal of Science 303, 817-855",
+   "doi_or_url": "https://pubs.usgs.gov/publication/70024865",
+   "use": "A forested old range loses 25 to 30 m of rock a million years",
+   "access": "search summary of the abstract"
+  }
+ ]
+}

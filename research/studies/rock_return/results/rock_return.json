@@ -1,0 +1,1020 @@
+{
+ "schema": "terluna.research.rock-return/1",
+ "producer": {
+  "module": "research.studies.rock_return.run",
+  "code_sha256": {
+   "run.py": "92b5fb600e1a4af0bcb96ee854d504566cbe5a73c6038bf946fe24281ce50f5d",
+   "carriers.py": "1bce1886b230a635d104930c7de33aa2a1a9115641fd46e8ddcbf92c458c6b44"
+  }
+ },
+ "inputs": {
+  "research/studies/rock_return/results/rock.json": "656c6b0d6226fa0c60a13e80924e33cd951c9f8055ec2a8547c391d195a23116",
+  "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
+  "research/studies/river_deltas/results/river_deltas.json": "4c00b76dde0ae4b885e8a0d6fb54f9719e1e938f8f27d961c045371669251f23",
+  "research/studies/terrain_through_time/results/terrain_through_time.json": "69768211e77dab706e1e83a1c0e68a712c093012026033f9727f2f05eb17a19a",
+  "research/studies/light_limitation/results/biomass_comparison.json": "0637782ab2db465735aaaf8df349ed281e149dbd8750e0dd6d5955ae36964dcd",
+  "resources/results/sea_phosphorus.json": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1"
+ },
+ "evidence": "A sizing on committed products: the rock and its way back on the design surface (rock.py), the sky ecology study's flyer and flight rule, the river deltas screen's shares, the terrain study's creep and stone and the biomass comparison's plant growth. No animal carries sediment kilometres uphill; loads, trips, the reach of a dive, what an animal digests of a sediment and the loop's rates are design guesses, named in the setting. Flight with a load at lunar gravity is not measured. Not validated.",
+ "reading_rule": "job: the rock to return and whose land it leaves. reach: the shares of the rock a flyer or wader, a diver at the delta fronts and a diver on the floors within a dive can get at, with the deltas' soil from clay to sand; the dry hollows' part is all within a flyer's reach. carriers: kJ of metabolism for each kg delivered, pairs from the best glide and muscle to the worst, on the Moon and for the same way on Earth; numbers of flyers of the albatross scale for all the land's central rock by trips and load, with what the hauling adds to their upkeep and what they eat. staying_put: how far each side a line of returned rock can feed ground losing rock at each rate before creep needs more than the repose slope; lime and opal against the particles by mass; the calcite the carriers' own nitrogen could lay. loop: the resting deposit and carriers, the rates at which a disturbance dies away, and recoveries. waters: the share of the lakes' area still open after each span for each reach.",
+ "setting": {
+  "flyer": "wandering albatross (Diomedea exulans)",
+  "smaller_carriers_kg": {
+   "hornero": 0.06,
+   "crow": 1.0,
+   "goose": 10.0
+  },
+  "payloads_over_body": [
+   0.25,
+   0.6,
+   1.0
+  ],
+  "trips_a_year": [
+   300,
+   1000,
+   3000
+  ],
+  "earth_payloads": [
+   0.05,
+   0.25
+  ],
+  "cruise_m_s": 15.0,
+  "handling_s": 1200.0,
+  "dive_m": 200.0,
+  "earth_dives_m": {
+   "diving_bird": 200.0,
+   "seal": 1500.0,
+   "whale": 2000.0
+  },
+  "delta_organic_carbon": [
+   0.007,
+   0.015
+  ],
+  "kj_per_g_c": 40.0,
+  "digestible": [
+   0.05,
+   0.3
+  ],
+  "food_kj_per_g": 15.0,
+  "food_nitrogen": [
+   0.01,
+   0.03
+  ],
+  "loose_soil_kg_m3": 1300.0,
+  "repose_slope": 0.5773502691896257,
+  "loops": {
+   "slow": {
+    "growth": 0.05,
+    "death": 0.02,
+    "half_years": 100.0
+   },
+   "central": {
+    "growth": 0.1,
+    "death": 0.03,
+    "half_years": 30.0
+   },
+   "fast": {
+    "growth": 0.3,
+    "death": 0.1,
+    "half_years": 10.0
+   }
+  },
+  "delta_shares": {
+   "clay": {
+    "plain": 0.08423,
+    "plain_and_front": 0.3371
+   },
+   "clay_loam": {
+    "plain": 0.16,
+    "plain_and_front": 0.5493
+   },
+   "loam": {
+    "plain": 0.1842,
+    "plain_and_front": 0.6609
+   },
+   "sandy_loam": {
+    "plain": 0.3384,
+    "plain_and_front": 0.8469
+   },
+   "sand": {
+    "plain": 0.4229,
+    "plain_and_front": 0.9479
+   }
+  }
+ },
+ "job": {
+  "gt_yr": {
+   "slow": 0.6466856223878217,
+   "central": 3.2334281119391077,
+   "fast": 6.4668562238782155
+  },
+  "kg_m2_yr_central": 0.14610692461043642,
+  "mean_lowering_m_per_myr": 56.194971004014,
+  "returned_where_it_left_mm_per_century": {
+   "as_rock": 5.6194971004014,
+   "as_loose_soil": 11.2389942008028
+  },
+  "phosphorus_with_it_mt_yr": [
+   1.552276936138057,
+   1.8345091063449768
+  ],
+  "by_kind_of_land": {
+   "A": {
+    "what": "30% of the land wild",
+    "wild": {
+     "land_km2": 6639134.79963825,
+     "gt_yr": 1.0348557641279077,
+     "share": 0.3200491021608945
+    },
+    "hybrid": {
+     "land_km2": 4426110.65564438,
+     "gt_yr": 0.6289535821456613,
+     "share": 0.1945160245942421
+    },
+    "peoples": {
+     "land_km2": 3238360.028384922,
+     "gt_yr": 0.6500236992005342,
+     "share": 0.20103236462885538
+    },
+    "open_beyond_need": {
+     "land_km2": 7826954.861506835,
+     "gt_yr": 0.9195950664650046,
+     "share": 0.28440250861600797
+    }
+   },
+   "B": {
+    "what": "half of the land wild",
+    "wild": {
+     "land_km2": 11065250.016000258,
+     "gt_yr": 1.7074851223741851,
+     "share": 0.5280727027978349
+    },
+    "hybrid": {
+     "land_km2": 4426109.790484799,
+     "gt_yr": 0.61889383504548,
+     "share": 0.19140485380215405
+    },
+    "peoples": {
+     "land_km2": 2584433.007227481,
+     "gt_yr": 0.5005882467969063,
+     "share": 0.15481656912319608
+    },
+    "open_beyond_need": {
+     "land_km2": 4054767.5314618484,
+     "gt_yr": 0.4064609077225365,
+     "share": 0.1257058742768149
+    }
+   }
+  },
+  "against_the_terrain_study": {
+   "rock_gt_yr": 3.55,
+   "mean_lift_m": 1032.75,
+   "mean_distance_km": 9.33542,
+   "here_mean_lift_m": 997.4710187221832,
+   "here_mean_distance_km": 9.358240982864384
+  }
+ },
+ "reach": {
+  "all_the_land": {
+   "first_settles": {
+    "sea": 0.05930803095347915,
+    "lake_that_spills": 0.39048372895731964,
+    "lake_that_passes_nothing_on": 0.13778810653175944,
+    "dry_hollow": 0.4124201335574417
+   },
+   "reach": {
+    "deltas of clay": {
+     "flyers_and_waders": 0.4619119857078984,
+     "with_divers_at_the_delta_fronts": 0.6104933065352282,
+     "with_divers_on_the_floors_within_a_dive": 0.7257160968816798,
+     "left_on_the_deeper_floors": 0.2742839031183201
+    },
+    "deltas of sand": {
+     "flyers_and_waders": 0.6609076590759996,
+     "with_divers_at_the_delta_fronts": 0.9693870889583427,
+     "with_divers_on_the_floors_within_a_dive": 0.9784429154435592,
+     "left_on_the_deeper_floors": 0.02155708455644062
+    }
+   }
+  },
+  "floor_within_a_dive": {
+   "lakes": 0.283757298807618,
+   "closed": 0.4101074710471514,
+   "seas": 0.10969352961239591
+  },
+  "dive_m": 200.0,
+  "pressure_at_the_dive_atm": 4.20595879903442,
+  "moons_depth_at_the_pressure_of_earths_deepest_dives_m": {
+   "diving_bird": 1207.5527678590954,
+   "seal": 9056.645758943216,
+   "whale": 12075.527678590954
+  },
+  "raising_a_kg_of_grains_through_water_j": {
+   "200 m": [
+    799.6154469222463,
+    999.5193086528078
+   ],
+   "1000 m": [
+    3998.0772346112317,
+    4997.59654326404
+   ],
+   "3000 m": [
+    11994.231703833695,
+    14992.789629792118
+   ]
+  },
+  "the_wild_land_A": {
+   "first_settles": {
+    "sea": 0.033963168132893004,
+    "lake_that_spills": 0.3338760121800648,
+    "lake_that_passes_nothing_on": 0.20147079151163966,
+    "dry_hollow": 0.4306900281754026
+   },
+   "reach": {
+    "deltas of clay": {
+     "flyers_and_waders": 0.47864300710218843,
+     "with_divers_at_the_delta_fronts": 0.6226044196774744,
+     "with_divers_on_the_floors_within_a_dive": 0.7426489620757695,
+     "left_on_the_deeper_floors": 0.25735103792423064
+    },
+    "deltas of sand": {
+     "flyers_and_waders": 0.6714512152600248,
+     "with_divers_at_the_delta_fronts": 0.9703389504679384,
+     "with_divers_on_the_floors_within_a_dive": 0.979773738005955,
+     "left_on_the_deeper_floors": 0.02022626199404499
+    }
+   }
+  },
+  "the_wild_land_B": {
+   "first_settles": {
+    "sea": 0.043041176434591946,
+    "lake_that_spills": 0.3630226533910112,
+    "lake_that_passes_nothing_on": 0.1665546790268283,
+    "dry_hollow": 0.4273814911475686
+   },
+   "reach": {
+    "deltas of clay": {
+     "flyers_and_waders": 0.47561314814820893,
+     "with_divers_at_the_delta_fronts": 0.6204111904817233,
+     "with_divers_on_the_floors_within_a_dive": 0.7371061073746907,
+     "left_on_the_deeper_floors": 0.26289389262530943
+    },
+    "deltas of sand": {
+     "flyers_and_waders": 0.6695418585412619,
+     "with_divers_at_the_delta_fronts": 0.9701665756887884,
+     "with_divers_on_the_floors_within_a_dive": 0.9793381025708574,
+     "left_on_the_deeper_floors": 0.0206618974291426
+    }
+   }
+  }
+ },
+ "carriers": {
+  "glide_ratio": [
+   15.0,
+   25.0
+  ],
+  "muscle_efficiency": [
+   0.2,
+   0.25
+  ],
+  "flyer": {
+   "mass_kg": 1720.0,
+   "span_m": 18.1,
+   "upkeep_j_day": 185175775.2011566,
+   "upkeep_range_j_day": [
+    55552732.560346976,
+    314798817.8419662
+   ]
+  },
+  "cost_kj_per_kg_delivered": {
+   "moon": {
+    "all": {
+     "the_load_alone": [
+      8.91241809464739,
+      13.167166839079018
+     ],
+     "with_the_carrier": {
+      "load 0.25 of body": [
+       46.377632747090466,
+       72.74872329812548
+      ],
+      "load 0.6 of body": [
+       24.52292419983201,
+       37.992815363681714
+      ],
+      "load 1 of body": [
+       18.278721757758163,
+       28.062555953840633
+      ]
+     }
+    },
+    "dry_hollow": {
+     "the_load_alone": [
+      9.555872157924519,
+      14.144238489797774
+     ],
+     "with_the_carrier": {
+      "load 0.25 of body": [
+       49.96844255210207,
+       78.83207067669176
+      ],
+      "load 0.6 of body": [
+       26.3944431554985,
+       41.097501901003604
+      ],
+      "load 1 of body": [
+       19.659014756468906,
+       30.31619653652127
+      ]
+     }
+    },
+    "lake_that_spills": {
+     "the_load_alone": [
+      7.660870798706603,
+      11.370133366907371
+     ],
+     "with_the_carrier": {
+      "load 0.25 of body": [
+       39.918183003997875,
+       63.11391422318533
+      ],
+      "load 0.6 of body": [
+       21.1014175509113,
+       32.93004205702319
+      ],
+      "load 1 of body": [
+       15.725198850029422,
+       24.306078580976862
+      ]
+     }
+    }
+   },
+   "earth": {
+    "the_load_alone": [
+     53.811075692544705,
+     79.50024380696182
+    ],
+    "with_the_carrier": {
+     "load 0.05 of body": [
+      1184.8416669923643,
+      1878.1970791938247
+     ],
+     "load 0.25 of body": [
+      280.0171939525086,
+      439.23961088433435
+     ]
+    }
+   },
+   "usable_energy_in_a_kg_of_sediment_kj": [
+    14.0,
+    180.0
+   ],
+   "sediments_energy_over_the_flight": {
+    "moon": [
+     0.1924432397614425,
+     9.847515728149938
+    ],
+    "earth": [
+     0.007453956858461943,
+     0.6428176693697185
+    ]
+   }
+  },
+  "numbers": {
+   "300 trips, load 0.25 of body": {
+    "rock_t_a_flyer_a_year": 129.0,
+    "body_weights_a_year": 75.0,
+    "flyers_for_all_the_land_central": 25065334.201078355,
+    "live_mass_mt": 43.11237482585477,
+    "hours_a_year": 203.98045536515983,
+    "share_of_the_year": 0.02326950209504447,
+    "hauling_over_upkeep": [
+     0.08845530645538034,
+     0.13875245958898283
+    ],
+    "metabolism_gw": [
+     58.47288599288739,
+     61.17489836170532
+    ],
+    "dry_food_mt_yr": [
+     123.0175964672762,
+     128.7021981692901
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     5.558720364443932,
+     5.815586960379604
+    ]
+   },
+   "300 trips, load 0.6 of body": {
+    "rock_t_a_flyer_a_year": 309.6,
+    "body_weights_a_year": 180.0,
+    "flyers_for_all_the_land_central": 10443889.250449315,
+    "live_mass_mt": 17.96348951077282,
+    "hours_a_year": 203.98045536515983,
+    "share_of_the_year": 0.02326950209504447,
+    "hauling_over_upkeep": [
+     0.11225322105286394,
+     0.17391139273142736
+    ],
+    "metabolism_gw": [
+     24.89638887181384,
+     26.276529464062676
+    ],
+    "dry_food_mt_yr": [
+     52.37801876407683,
+     55.28161374767362
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     2.3667732740214125,
+     2.4979762322072374
+    ]
+   },
+   "300 trips, load 1 of body": {
+    "rock_t_a_flyer_a_year": 516.0,
+    "body_weights_a_year": 300.0,
+    "flyers_for_all_the_land_central": 6266333.550269589,
+    "live_mass_mt": 10.778093706463693,
+    "hours_a_year": 203.98045536515983,
+    "share_of_the_year": 0.02326950209504447,
+    "hauling_over_upkeep": [
+     0.13945083773570233,
+     0.2140930306085068
+    ],
+    "metabolism_gw": [
+     15.303103980078538,
+     16.305566921879063
+    ],
+    "dry_food_mt_yr": [
+     32.19528227744843,
+     34.304303912926045
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     1.4547883910435497,
+     1.5500874527294186
+    ]
+   },
+   "1000 trips, load 0.25 of body": {
+    "rock_t_a_flyer_a_year": 430.0,
+    "body_weights_a_year": 250.0,
+    "flyers_for_all_the_land_central": 7519600.260323507,
+    "live_mass_mt": 12.933712447756431,
+    "hours_a_year": 679.9348512171994,
+    "share_of_the_year": 0.07756500698348157,
+    "hauling_over_upkeep": [
+     0.29485102151793446,
+     0.4625081986299428
+    ],
+    "metabolism_gw": [
+     20.868199836029483,
+     23.570212204847405
+    ],
+    "dry_food_mt_yr": [
+     43.903353543032274,
+     49.58795524504616
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     1.983833796264697,
+     2.240700392200368
+    ]
+   },
+   "1000 trips, load 0.6 of body": {
+    "rock_t_a_flyer_a_year": 1032.0,
+    "body_weights_a_year": 600.0,
+    "flyers_for_all_the_land_central": 3133166.7751347944,
+    "live_mass_mt": 5.3890468532318465,
+    "hours_a_year": 679.9348512171994,
+    "share_of_the_year": 0.07756500698348157,
+    "hauling_over_upkeep": [
+     0.37417740350954637,
+     0.5797046424380912
+    ],
+    "metabolism_gw": [
+     9.227769639789711,
+     10.607910232038547
+    ],
+    "dry_food_mt_yr": [
+     19.413750878975186,
+     22.317345862571976
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.8772372039467311,
+     1.008440162132556
+    ]
+   },
+   "1000 trips, load 1 of body": {
+    "rock_t_a_flyer_a_year": 1720.0,
+    "body_weights_a_year": 1000.0,
+    "flyers_for_all_the_land_central": 1879900.0650808767,
+    "live_mass_mt": 3.2334281119391077,
+    "hours_a_year": 679.9348512171994,
+    "share_of_the_year": 0.07756500698348157,
+    "hauling_over_upkeep": [
+     0.46483612578567435,
+     0.7136434353616893
+    ],
+    "metabolism_gw": [
+     5.901932440864062,
+     6.904395382664586
+    ],
+    "dry_food_mt_yr": [
+     12.41672154638745,
+     14.525743181865062
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.561066748998741,
+     0.6563658106846098
+    ]
+   },
+   "3000 trips, load 0.25 of body": {
+    "rock_t_a_flyer_a_year": 1290.0,
+    "body_weights_a_year": 750.0,
+    "flyers_for_all_the_land_central": 2506533.4201078354,
+    "live_mass_mt": 4.311237482585477,
+    "hours_a_year": 2039.804553651598,
+    "share_of_the_year": 0.2326950209504447,
+    "hauling_over_upkeep": [
+     0.8845530645538033,
+     1.3875245958898281
+    ],
+    "metabolism_gw": [
+     10.124003791212935,
+     12.826016160030857
+    ],
+    "dry_food_mt_yr": [
+     21.29928413610542,
+     26.983885838119317
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.9624376339277724,
+     1.2193042298634433
+    ]
+   },
+   "3000 trips, load 0.6 of body": {
+    "rock_t_a_flyer_a_year": 3096.0,
+    "body_weights_a_year": 1800.0,
+    "flyers_for_all_the_land_central": 1044388.9250449315,
+    "live_mass_mt": 1.796348951077282,
+    "hours_a_year": 2039.804553651598,
+    "share_of_the_year": 0.2326950209504447,
+    "hauling_over_upkeep": [
+     1.122532210528639,
+     1.7391139273142735
+    ],
+    "metabolism_gw": [
+     4.751021287782817,
+     6.1311618800316525
+    ],
+    "dry_food_mt_yr": [
+     9.995388626089001,
+     12.898983609685793
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.4516554696396793,
+     0.5828584278255043
+    ]
+   },
+   "3000 trips, load 1 of body": {
+    "rock_t_a_flyer_a_year": 5160.0,
+    "body_weights_a_year": 3000.0,
+    "flyers_for_all_the_land_central": 626633.3550269589,
+    "live_mass_mt": 1.0778093706463692,
+    "hours_a_year": 2039.804553651598,
+    "share_of_the_year": 0.2326950209504447,
+    "hauling_over_upkeep": [
+     1.394508377357023,
+     2.1409303060850675
+    ],
+    "metabolism_gw": [
+     3.215883429659926,
+     4.218346371460449
+    ],
+    "dry_food_mt_yr": [
+     6.765704194655739,
+     8.874725830133352
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.3057177084145099,
+     0.40101677010037856
+    ]
+   }
+  },
+  "the_lands_plant_growth_g_dry_m2_yr": {
+   "low": 1441.1830623262922,
+   "illustrative_middle": 1672.513369298245,
+   "high": 1903.8436762701974
+  },
+  "food_over_plant_growth": [
+   0.0004607716562450749,
+   0.0006997307895811499
+  ],
+  "flyers_by_kind_of_land_at_1000_trips_and_0p6": {
+   "A": {
+    "wild": 1002767.2133022362,
+    "hybrid": 609451.1454899819,
+    "peoples": 629867.9255819129,
+    "open_beyond_need": 891080.4907606633
+   },
+   "B": {
+    "wild": 1654539.8472618072,
+    "hybrid": 599703.3285324418,
+    "peoples": 485066.13061715727,
+    "open_beyond_need": 393857.46872338804
+   }
+  },
+  "by_size_at_1000_trips_and_0p6": {
+   "hornero": {
+    "mass_kg": 0.06,
+    "upkeep_j_day": 170651.57488219376,
+    "carriers": 89817447553.8641,
+    "live_mass_mt": 5.389046853231846,
+    "a_km2_of_land": 4058.525683623234,
+    "metres_between_carriers": 15.696970810225713,
+    "hauling_over_upkeep": [
+     0.014163618855009311,
+     0.021943376395691674
+    ],
+    "dry_food_mt_yr": [
+     378.51056165376195,
+     381.41415663735876
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     17.103523622992988,
+     17.234726581178812
+    ],
+    "food_over_plant_growth": [
+     0.008983680664633318,
+     0.01195873517508546
+    ]
+   },
+   "crow": {
+    "mass_kg": 1.0,
+    "upkeep_j_day": 1159282.550897177,
+    "carriers": 5389046853.231847,
+    "live_mass_mt": 5.3890468532318465,
+    "a_km2_of_land": 243.51154101739405,
+    "metres_between_carriers": 64.08261498735806,
+    "hauling_over_upkeep": [
+     0.03474913373171918,
+     0.05383605197972821
+    ],
+    "dry_food_mt_yr": [
+     157.41107888372406,
+     160.31467386732083
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     7.112837471286526,
+     7.244040429472351
+    ],
+    "food_over_plant_growth": [
+     0.003736040705411917,
+     0.00502645404240274
+    ]
+   },
+   "goose": {
+    "mass_kg": 10.0,
+    "upkeep_j_day": 5561466.16086241,
+    "carriers": 538904685.3231846,
+    "live_mass_mt": 5.389046853231846,
+    "a_km2_of_land": 24.3511541017394,
+    "metres_between_carriers": 202.64702177969377,
+    "hauling_over_upkeep": [
+     0.07243425245929708,
+     0.11222075953369517
+    ],
+    "dry_food_mt_yr": [
+     78.26559667214252,
+     81.1691916557393
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     3.536539312670793,
+     3.6677422708566176
+    ],
+    "food_over_plant_growth": [
+     0.0018575786220007278,
+     0.0025449523844225
+    ]
+   },
+   "albatross_scale": {
+    "mass_kg": 1720.0,
+    "upkeep_j_day": 185175775.2011566,
+    "carriers": 3133166.7751347944,
+    "live_mass_mt": 5.3890468532318465,
+    "a_km2_of_land": 0.1415764773356942,
+    "metres_between_carriers": 2657.690774906461,
+    "hauling_over_upkeep": [
+     0.37417740350954637,
+     0.5797046424380912
+    ],
+    "dry_food_mt_yr": [
+     19.413750878975186,
+     22.317345862571976
+    ],
+    "dry_food_g_per_m2_of_land_yr": [
+     0.8772372039467311,
+     1.008440162132556
+    ],
+    "food_over_plant_growth": [
+     0.0004607716562450749,
+     0.0006997307895811499
+    ]
+   }
+  },
+  "slow_and_fast_erosion_scale_the_numbers_by": [
+   0.2,
+   2.0
+  ],
+  "sky_ecology_for_comparison": {
+   "flyers_the_sky_feeds_at_1_percent_cover": [
+    1817105.3730495637,
+    4795139.178880794
+   ],
+   "flyers_to_return_the_lands_dissolved_phosphorus": [
+    2000372.1402875688,
+    10668651.414867034
+   ]
+  }
+ },
+ "staying_put": {
+  "repose_slope": 0.5773502691896257,
+  "how_far_each_side_a_line_of_returned_rock_can_feed_m": {
+   "creep 0.003 m2/yr": {
+    "slow": 154.1108373777039,
+    "central": 30.822167475540777,
+    "fast": 15.411083737770388
+   },
+   "creep 0.01 m2/yr": {
+    "slow": 513.7027912590129,
+    "central": 102.74055825180258,
+    "fast": 51.37027912590129
+   },
+   "creep 0.04 m2/yr": {
+    "slow": 2054.8111650360515,
+    "central": 410.96223300721033,
+    "fast": 205.48111650360516
+   }
+  },
+  "slope_needed_if_only_main_crests_are_fed": {
+   "100 m to each side": {
+    "creep 0.003 m2/yr": 1.8731657001337998,
+    "creep 0.01 m2/yr": 0.5619497100401399,
+    "creep 0.04 m2/yr": 0.14048742751003498
+   },
+   "1000 m to each side": {
+    "creep 0.003 m2/yr": 18.731657001337997,
+    "creep 0.01 m2/yr": 5.619497100401399,
+    "creep 0.04 m2/yr": 1.4048742751003498
+   },
+   "5000 m to each side": {
+    "creep 0.003 m2/yr": 93.65828500669,
+    "creep 0.01 m2/yr": 28.097485502006997,
+    "creep 0.04 m2/yr": 7.024371375501749
+   }
+  },
+  "the_rock_that_leaves_in_solution_mt_yr": {
+   "calcite": 149.665,
+   "magnesite": 94.8914,
+   "opal": 281.581
+  },
+  "lime_over_the_particles_by_mass": {
+   "fast": 0.03781689147456226,
+   "central": 0.07563378294912453,
+   "slow": 0.37816891474562253
+  },
+  "opal_over_the_particles_by_mass": {
+   "fast": 0.043542177257674376,
+   "central": 0.08708435451534875,
+   "slow": 0.43542177257674364
+  },
+  "the_carriers_nitrogen_mt_yr": [
+   0.19413750878975186,
+   0.6695203758771593
+  ],
+  "calcite_it_could_lay_by_the_urea_route_mt_yr": [
+   0.6936046563232633,
+   2.3920284807745142
+  ],
+  "that_calcite_over_the_rock_returned": [
+   0.0002145106160740664,
+   0.0007397809377428834
+  ]
+ },
+ "loop": {
+  "slow": {
+   "setting": {
+    "growth": 0.05,
+    "death": 0.02,
+    "half_years": 100.0
+   },
+   "standing_deposit_years_of_supply": 66.66666666666667,
+   "carriers_live_mass_mt": 13.472617133079618,
+   "carriers_work_at_share_of_full_duty": 0.39999999999999997,
+   "eigenvalues_per_yr": [
+    [
+     -0.004499999999999998,
+     0.012639224659764536
+    ],
+    [
+     -0.004499999999999998,
+     -0.012639224659764536
+    ]
+   ],
+   "settles_in_years": 222.2222222222223,
+   "after_half_the_carriers_are_lost": {
+    "years_until_the_return_is_within_5_percent": 545.4,
+    "most_sediment_left_standing_years_of_supply": 102.85511467609504
+   },
+   "after_the_erosion_doubles": {
+    "years_until_the_return_is_within_5_percent": 238.20000000000002,
+    "carriers_end_at_times_the_start": 1.9999999999999256,
+    "standing_deposit_ends_at_years_of_the_old_supply": 66.6666666666681
+   }
+  },
+  "central": {
+   "setting": {
+    "growth": 0.1,
+    "death": 0.03,
+    "half_years": 30.0
+   },
+   "standing_deposit_years_of_supply": 12.857142857142854,
+   "carriers_live_mass_mt": 17.963489510772824,
+   "carriers_work_at_share_of_full_duty": 0.3,
+   "eigenvalues_per_yr": [
+    [
+     -0.027222222222222224,
+     0.02987112235282237
+    ],
+    [
+     -0.027222222222222224,
+     -0.02987112235282237
+    ]
+   ],
+   "settles_in_years": 36.73469387755102,
+   "after_half_the_carriers_are_lost": {
+    "years_until_the_return_is_within_5_percent": 107.60000000000001,
+    "most_sediment_left_standing_years_of_supply": 22.453543221425125
+   },
+   "after_the_erosion_doubles": {
+    "years_until_the_return_is_within_5_percent": 74.2,
+    "carriers_end_at_times_the_start": 2.0000000000000107,
+    "standing_deposit_ends_at_years_of_the_old_supply": 12.857142857142646
+   }
+  },
+  "fast": {
+   "setting": {
+    "growth": 0.3,
+    "death": 0.1,
+    "half_years": 10.0
+   },
+   "standing_deposit_years_of_supply": 5.000000000000001,
+   "carriers_live_mass_mt": 16.167140559695536,
+   "carriers_work_at_share_of_full_duty": 0.33333333333333337,
+   "eigenvalues_per_yr": [
+    [
+     -0.06666666666666665,
+     0.09428090415820632
+    ],
+    [
+     -0.06666666666666665,
+     -0.09428090415820632
+    ]
+   ],
+   "settles_in_years": 15.000000000000004,
+   "after_half_the_carriers_are_lost": {
+    "years_until_the_return_is_within_5_percent": 38.300000000000004,
+    "most_sediment_left_standing_years_of_supply": 8.587661118336502
+   },
+   "after_the_erosion_doubles": {
+    "years_until_the_return_is_within_5_percent": 26.700000000000003,
+    "carriers_end_at_times_the_start": 1.9999999999999993,
+    "standing_deposit_ends_at_years_of_the_old_supply": 4.999999999999993
+   }
+  },
+  "the_lakes_for_scale": {
+   "years_for_a_hundredth_of_their_area_to_fill": 11435.841912037187,
+   "years_for_a_tenth": 462405.8902947529,
+   "years_for_half": 10440935.224035693
+  }
+ },
+ "waters": {
+  "lake_area_still_open": {
+   "nothing returned": {
+    "10000": 0.9906384254268709,
+    "100000": 0.9573557647075694,
+    "1e+06": 0.8431665203318964,
+    "1e+07": 0.5111223732984906,
+    "1e+08": 0.09679244833410716
+   },
+   "deltas of clay, flyers_and_waders": {
+    "share_of_the_lakes_rock_returned": 0.08422999999999996,
+    "10000": 0.9910571194986397,
+    "100000": 0.9590888581127436,
+    "1e+06": 0.8496499907855481,
+    "1e+07": 0.5338032359012537,
+    "1e+08": 0.10659049824721512
+   },
+   "deltas of clay, with_divers_at_the_delta_fronts": {
+    "share_of_the_lakes_rock_returned": 0.33710000000000007,
+    "10000": 0.9925947624344735,
+    "100000": 0.965453597934227,
+    "1e+06": 0.8734603650299891,
+    "1e+07": 0.6123065832838568,
+    "1e+08": 0.13666646090529966
+   },
+   "deltas of clay, with_divers_on_the_floors_within_a_dive": {
+    "share_of_the_lakes_rock_returned": 0.5331972404382339,
+    "10000": 0.9942636248881745,
+    "100000": 0.9723614925228298,
+    "1e+06": 0.8993026712371648,
+    "1e+07": 0.6773753835670473,
+    "1e+08": 0.16930904890104526
+   },
+   "deltas of sand, flyers_and_waders": {
+    "share_of_the_lakes_rock_returned": 0.42289999999999994,
+    "10000": 0.9932543211245007,
+    "100000": 0.9681836982463294,
+    "1e+06": 0.8836736199279515,
+    "1e+07": 0.6380227185958167,
+    "1e+08": 0.14956728597319335
+   },
+   "deltas of sand, with_divers_at_the_delta_fronts": {
+    "share_of_the_lakes_rock_returned": 0.9479,
+    "10000": 1.0,
+    "100000": 0.993740944021277,
+    "1e+06": 0.9701979683066785,
+    "1e+07": 0.8912089670609793,
+    "1e+08": 0.6569961025396751
+   },
+   "deltas of sand, with_divers_on_the_floors_within_a_dive": {
+    "share_of_the_lakes_rock_returned": 0.9633120775785666,
+    "10000": 1.0,
+    "100000": 0.995409806474978,
+    "1e+06": 0.977105862895281,
+    "1e+07": 0.9099933911689037,
+    "1e+08": 0.7142778458554765
+   }
+  },
+  "seas": {
+   "volume_km3": 12037261.00698677,
+   "the_seas_own_stone_km3_yr": 0.230657,
+   "years_for_their_own_stone_to_fill_them": 52186844.56568312,
+   "the_lands_rock_km3_yr_at_1000_kg_m3": 0.19747119904157132,
+   "years_on_rock_and_stone_together": 28116020.00039701,
+   "each": {
+    "near_side_main": {
+     "years_on_the_lands_rock": 41422615.37511687,
+     "floor_within_a_dive": 0.13285281534092866
+    },
+    "near_side_south": {
+     "years_on_the_lands_rock": 29769963.018356048,
+     "floor_within_a_dive": 0.2941564213049463
+    },
+    "south_pole_aitken": {
+     "years_on_the_lands_rock": 205710329.15727744,
+     "floor_within_a_dive": 0.02529872186457315
+    },
+    "humboldtianum": {
+     "years_on_the_lands_rock": 73744035.62238154,
+     "floor_within_a_dive": 0.07218957042005328
+    },
+    "moscoviense": {
+     "years_on_the_lands_rock": 46509414.1788943,
+     "floor_within_a_dive": 0.06634342695942272
+    },
+    "orientale": {
+     "years_on_the_lands_rock": 17234789.245707627,
+     "floor_within_a_dive": 0.10069401387195856
+    },
+    "smythii_marginis": {
+     "years_on_the_lands_rock": 31340145.04874146,
+     "floor_within_a_dive": 0.08428209521265544
+    }
+   }
+  }
+ },
+ "wild_and_managed": {
+  "A": {
+   "what": "30% of the land wild",
+   "wild_gt_yr": 1.0348557641279077,
+   "open_beyond_need_gt_yr": 0.9195950664650046,
+   "hybrid_and_peoples_gt_yr": 1.2789772813461955,
+   "machines_for_the_hybrid_and_peoples_land_gw": [
+    0.2905371628093785,
+    1.640526145018239
+   ]
+  },
+  "B": {
+   "what": "half of the land wild",
+   "wild_gt_yr": 1.7074851223741851,
+   "open_beyond_need_gt_yr": 0.4064609077225365,
+   "hybrid_and_peoples_gt_yr": 1.1194820818423863,
+   "machines_for_the_hybrid_and_peoples_land_gw": [
+    0.25430564922316545,
+    1.4359438990259634
+   ]
+  },
+  "machines_gw_per_gt": [
+   0.227163661971831,
+   1.2826859154929577
+  ]
+ }
+}

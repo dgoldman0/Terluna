@@ -1,0 +1,672 @@
+{
+ "schema": "terluna.research.rock-return-rock/1",
+ "producer": {
+  "module": "research.studies.rock_return.rock",
+  "code_sha256": "7fd25e1da4d98b03a1c72bc841d74431a3128a74e97bf147bd67dd05d6c5a4a0"
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/land_use.json": "cdfcc5253f68a68949b542685c28eb3f2dfc07d23dd8f59da8e1493fea8e0dc4",
+  "research/studies/terrain_through_time/results/terrain_through_time.json": "69768211e77dab706e1e83a1c0e68a712c093012026033f9727f2f05eb17a19a",
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/session-tools/agents/atlas_land_use/land_use_16ppd.npz": "e727274a12fbaf5d7de2869f267980a78b1661a837fdc1c2184b1e757be83771"
+ },
+ "evidence": "The terrain study's central lowering by latitude, spread by local relief within its bands, on the design surface, and followed down the design routing with Earth's reservoir relation for the particles a lake keeps at lunar settling. The lowering is a published range for Earth carried to the Moon by the conservation study; no erosion has been modelled on this ground. Each lake is a box that does not change as it fills. Not validated.",
+ "reading_rule": "rock: kg a year off the dry land in the central case; the terrain study's slow and fast cases are 0.2 and 2 times it. the_way_back: for the rock first settling in each kind of place, its share of all the rock and the distance and height from that place to the cell it left, as means and percentiles weighted by rock; glides_home_share is the rock for which a flyer released at the source could glide back to the place at that glide ratio. kinds: the same by whose land the rock leaves, for each wild share. carried_on: with the lakes passing on what Brune's curves pass, the shares the lakes, the closed waters and the seas keep. lakes: the spilling lakes, how few keep half and nine tenths of what the lakes keep, and the share of their area still open after each span of years with nothing returned. floors: the share of each water's floor shallower than each depth.",
+ "setting": {
+  "rock_density_kg_m3": 2600.0,
+  "central_lowering_m_per_myr": {
+   "7.5": 79.0,
+   "22.5": 77.0,
+   "37.5": 57.0,
+   "52.5": 35.0,
+   "75.0": 25.0
+  },
+  "slow_and_fast_against_central": [
+   0.2,
+   2.0
+  ],
+  "relief_half_width_km": 5.0,
+  "terrain_study": {
+   "mean_lift_m": 1032.75,
+   "mean_distance_km": 9.33542,
+   "where_the_rock_settles": {
+    "lakes": 0.382226,
+    "dry_hollows": 0.411727,
+    "common_level_waters": 0.206046
+   },
+   "rock_gt_yr_central": 3.55
+  }
+ },
+ "rock": {
+  "kg_yr_central": 3233428111939.108,
+  "land_km2": 22130560.345174387,
+  "mean_lowering_m_per_myr": 56.194971004014,
+  "mean_relief_m": 1079.2993416018971
+ },
+ "the_way_back": {
+  "all": {
+   "rock_share": 1.0000000000000002,
+   "haul_m": {
+    "mean": 9358.240982864383,
+    "percentiles": {
+     "10%": 2405.011409393122,
+     "50%": 7580.837606037285,
+     "90%": 19030.89280635421
+    }
+   },
+   "lift_m": {
+    "mean": 997.4710187221832,
+    "percentiles": {
+     "10%": 93.95978062357838,
+     "50%": 707.2421693747714,
+     "90%": 2334.0762727994843
+    }
+   },
+   "glides_home_share": {
+    "glide 15": 0.6588997204400944,
+    "glide 25": 0.8133673538536439
+   }
+  },
+  "sea": {
+   "rock_share": 0.05930803095347915,
+   "haul_m": {
+    "mean": 8074.07276880955,
+    "percentiles": {
+     "10%": 1895.2094015093453,
+     "50%": 5838.828388677891,
+     "90%": 16519.739033841768
+    }
+   },
+   "lift_m": {
+    "mean": 869.3654181938861,
+    "percentiles": {
+     "10%": 101.370849609375,
+     "50%": 647.6623282021334,
+     "90%": 1933.8336942482713
+    }
+   },
+   "glides_home_share": {
+    "glide 15": 0.7092369198228868,
+    "glide 25": 0.841045927111197
+   }
+  },
+  "lake_that_spills": {
+   "rock_share": 0.39048372895731964,
+   "haul_m": {
+    "mean": 8284.189223574214,
+    "percentiles": {
+     "10%": 1895.2094015093694,
+     "50%": 5987.460964009857,
+     "90%": 17148.860666017594
+    }
+   },
+   "lift_m": {
+    "mean": 847.7947516748109,
+    "percentiles": {
+     "10%": 87.53477287885951,
+     "50%": 600.6200447230873,
+     "90%": 1912.4583234716001
+    }
+   },
+   "glides_home_share": {
+    "glide 15": 0.650886803416407,
+    "glide 25": 0.8125942204239474
+   }
+  },
+  "lake_that_passes_nothing_on": {
+   "rock_share": 0.13778810653175944,
+   "haul_m": {
+    "mean": 10567.12315577864,
+    "percentiles": {
+     "10%": 2631.1730830713427,
+     "50%": 8401.560342948225,
+     "90%": 21012.54332713164
+    }
+   },
+   "lift_m": {
+    "mean": 1275.8491116083221,
+    "percentiles": {
+     "10%": 160.706298828125,
+     "50%": 1040.7921834407762,
+     "90%": 2730.0301167617595
+    }
+   },
+   "glides_home_share": {
+    "glide 15": 0.7427822145958991,
+    "glide 25": 0.8656731237925451
+   }
+  },
+  "dry_hollow": {
+   "rock_share": 0.4124201335574417,
+   "haul_m": {
+    "mean": 10155.950919539335,
+    "percentiles": {
+     "10%": 2539.6192574366264,
+     "50%": 8256.395154686339,
+     "90%": 19971.207733365427
+    }
+   },
+   "lift_m": {
+    "mean": 1064.6031619980074,
+    "percentiles": {
+     "10%": 85.55082387273153,
+     "50%": 750.0042699185708,
+     "90%": 2527.459343747888
+    }
+   },
+   "glides_home_share": {
+    "glide 15": 0.6312228550981873,
+    "glide 25": 0.7926438780578775
+   }
+  }
+ },
+ "kinds": {
+  "A": {
+   "what": "30% of the land wild",
+   "wild": {
+    "land_km2": 6639134.79963825,
+    "rock_share": 0.3200491021608945,
+    "haul_m": {
+     "mean": 9440.768298074317,
+     "percentiles": {
+      "10%": 2464.7499083935927,
+      "50%": 7580.837606037381,
+      "90%": 19123.69459297657
+     }
+    },
+    "lift_m": {
+     "mean": 1033.8363020691106,
+     "percentiles": {
+      "10%": 94.59033203125,
+      "50%": 745.9873711857708,
+      "90%": 2410.6822184297257
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.6712698745024611,
+     "glide 25": 0.8161264035885132
+    },
+    "by_place": {
+     "sea": 0.01086988146747191,
+     "lake_that_spills": 0.10685671793128962,
+     "lake_that_passes_nothing_on": 0.06448054593494504,
+     "dry_hollow": 0.13784195682718794
+    }
+   },
+   "hybrid": {
+    "land_km2": 4426110.65564438,
+    "rock_share": 0.1945160245942421,
+    "haul_m": {
+     "mean": 9767.134871672328,
+     "percentiles": {
+      "10%": 2568.119413034247,
+      "50%": 7869.479814466603,
+      "90%": 19052.83005562321
+     }
+    },
+    "lift_m": {
+     "mean": 878.4891980733227,
+     "percentiles": {
+      "10%": 92.43049688418358,
+      "50%": 611.705322265625,
+      "90%": 2050.719579105562
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.5609418081510897,
+     "glide 25": 0.7612007272033068
+    },
+    "by_place": {
+     "sea": 0.024490519987436756,
+     "lake_that_spills": 0.09205234519224774,
+     "lake_that_passes_nothing_on": 0.013818582259032059,
+     "dry_hollow": 0.06415457715552558
+    }
+   },
+   "peoples": {
+    "land_km2": 3238360.028384922,
+    "rock_share": 0.20103236462885538,
+    "haul_m": {
+     "mean": 7759.653422856924,
+     "percentiles": {
+      "10%": 1895.2094015093453,
+      "50%": 5685.6282045280595,
+      "90%": 16078.949131333762
+     }
+    },
+    "lift_m": {
+     "mean": 947.3989903497459,
+     "percentiles": {
+      "10%": 96.912654491178,
+      "50%": 664.7040074154462,
+      "90%": 2175.7694496470435
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.7353448002571426,
+     "glide 25": 0.8644134503608418
+    },
+    "by_place": {
+     "sea": 0.016354680806033858,
+     "lake_that_spills": 0.14069124438507002,
+     "lake_that_passes_nothing_on": 0.013499579914112759,
+     "dry_hollow": 0.03048685952363874
+    }
+   },
+   "open_beyond_need": {
+    "land_km2": 7826954.861506835,
+    "rock_share": 0.28440250861600797,
+    "haul_m": {
+     "mean": 10115.683775596344,
+     "percentiles": {
+      "10%": 2465.4837851167586,
+      "50%": 7975.229337826045,
+      "90%": 20465.325333248526
+     }
+    },
+    "lift_m": {
+     "mean": 1073.3187770174177,
+     "percentiles": {
+      "10%": 92.34505701908259,
+      "50%": 782.0674188205007,
+      "90%": 2494.840024227947
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.6579411909727105,
+     "glide 25": 0.8098592833773455
+    },
+    "by_place": {
+     "sea": 0.007592948692536621,
+     "lake_that_spills": 0.05088342144871231,
+     "lake_that_passes_nothing_on": 0.04598939842366957,
+     "dry_hollow": 0.17993674005108948
+    }
+   },
+   "not_classed": {
+    "land_km2": 0.0,
+    "rock_share": 0.0
+   }
+  },
+  "B": {
+   "what": "half of the land wild",
+   "wild": {
+    "land_km2": 11065250.016000258,
+    "rock_share": 0.5280727027978349,
+    "haul_m": {
+     "mean": 9440.415289718012,
+     "percentiles": {
+      "10%": 2433.9329635363088,
+      "50%": 7580.837606037381,
+      "90%": 19227.878144838684
+     }
+    },
+    "lift_m": {
+     "mean": 1036.646008109991,
+     "percentiles": {
+      "10%": 95.33111770222295,
+      "50%": 749.0592100146177,
+      "90%": 2417.9826859102272
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.6775243794714495,
+     "glide 25": 0.8216776347382667
+    },
+    "by_place": {
+     "sea": 0.02272887037141345,
+     "lake_that_spills": 0.1917023537530329,
+     "lake_that_passes_nothing_on": 0.08795297951732309,
+     "dry_hollow": 0.2256884991560655
+    }
+   },
+   "hybrid": {
+    "land_km2": 4426109.790484799,
+    "rock_share": 0.19140485380215405,
+    "haul_m": {
+     "mean": 9777.83164316498,
+     "percentiles": {
+      "10%": 2565.280616958911,
+      "50%": 7830.23822655229,
+      "90%": 19169.771084584685
+     }
+    },
+    "lift_m": {
+     "mean": 876.2359416782299,
+     "percentiles": {
+      "10%": 91.4444110104684,
+      "50%": 606.7409508149708,
+      "90%": 2049.1219985752555
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.5579560173483729,
+     "glide 25": 0.758837418102499
+    },
+    "by_place": {
+     "sea": 0.023776411843466485,
+     "lake_that_spills": 0.09029151052001179,
+     "lake_that_passes_nothing_on": 0.013242569007513104,
+     "dry_hollow": 0.06409436243116269
+    }
+   },
+   "peoples": {
+    "land_km2": 2584433.007227481,
+    "rock_share": 0.15481656912319608,
+    "haul_m": {
+     "mean": 7685.67009151109,
+     "percentiles": {
+      "10%": 1895.2094015093453,
+      "50%": 5685.6282045280595,
+      "90%": 15786.935496478072
+     }
+    },
+    "lift_m": {
+     "mean": 941.1389473874912,
+     "percentiles": {
+      "10%": 99.29752740861207,
+      "50%": 663.9720776602293,
+      "90%": 2144.8153417857266
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.7383344995831909,
+     "glide 25": 0.8691231085338226
+    },
+    "by_place": {
+     "sea": 0.012738633659068178,
+     "lake_that_spills": 0.0989299009716798,
+     "lake_that_passes_nothing_on": 0.014113667084457554,
+     "dry_hollow": 0.02903436740799055
+    }
+   },
+   "open_beyond_need": {
+    "land_km2": 4054767.5314618484,
+    "rock_share": 0.1257058742768149,
+    "haul_m": {
+     "mean": 10434.053791775163,
+     "percentiles": {
+      "10%": 2472.7734305377267,
+      "50%": 8386.888698877063,
+      "90%": 20866.070604728262
+     }
+    },
+    "lift_m": {
+     "mean": 1086.8771642145257,
+     "percentiles": {
+      "10%": 86.537109375,
+      "50%": 787.4174988720789,
+      "90%": 2528.6626205877496
+     }
+    },
+    "glides_home_share": {
+     "glide 15": 0.6365310022475169,
+     "glide 25": 0.7928189684199239
+    },
+    "by_place": {
+     "sea": 6.411507953103495e-05,
+     "lake_that_spills": 0.00955996371259525,
+     "lake_that_passes_nothing_on": 0.022478890922465668,
+     "dry_hollow": 0.09360290456222295
+    }
+   },
+   "not_classed": {
+    "land_km2": 0.0,
+    "rock_share": 0.0
+   }
+  }
+ },
+ "carried_on": {
+  "low": {
+   "kept_by_lakes_that_spill": 0.3667642934238978,
+   "ends_where_water_ends": 0.5734728544321803,
+   "reaches_each_sea": {
+    "near_side_main": 0.02028295805746446,
+    "near_side_south": 0.003719990067156163,
+    "south_pole_aitken": 0.008584772365865015,
+    "humboldtianum": 0.0013981611523594365,
+    "moscoviense": 0.009476171199089617,
+    "orientale": 0.008014000191951745,
+    "smythii_marginis": 0.008286798880195753
+   },
+   "reaches_the_seas": 0.0597628519140822
+  },
+  "central": {
+   "kept_by_lakes_that_spill": 0.36502872678950027,
+   "ends_where_water_ends": 0.5738994966062577,
+   "reaches_each_sea": {
+    "near_side_main": 0.020784989858961232,
+    "near_side_south": 0.0038350478987027948,
+    "south_pole_aitken": 0.008713213727767895,
+    "humboldtianum": 0.0013982236454035254,
+    "moscoviense": 0.00957863122428281,
+    "orientale": 0.008415327600363723,
+    "smythii_marginis": 0.00834634256320071
+   },
+   "reaches_the_seas": 0.06107177651868269
+  },
+  "high": {
+   "kept_by_lakes_that_spill": 0.3638415407538128,
+   "ends_where_water_ends": 0.5742615420398366,
+   "reaches_each_sea": {
+    "near_side_main": 0.02107804216170764,
+    "near_side_south": 0.003918227357743838,
+    "south_pole_aitken": 0.00880057324535179,
+    "humboldtianum": 0.0013982867617410928,
+    "moscoviense": 0.009654208578989302,
+    "orientale": 0.008652787777606715,
+    "smythii_marginis": 0.008394791354335508
+   },
+   "reaches_the_seas": 0.06189691723747589
+  }
+ },
+ "lakes": {
+  "count": 25452,
+  "area_km2": 6024874.74175152,
+  "volume_km3": 5646675.223765872,
+  "keep_half": 1075,
+  "keep_nine_tenths": 9529,
+  "area_still_open_with_no_return": {
+   "500 kg/m3": {
+    "1000": 0.9976795341594327,
+    "10000": 0.9852776996687379,
+    "100000": 0.9400723379140093,
+    "1e+06": 0.78348350127115,
+    "1e+07": 0.3217107570566239,
+    "1e+08": 0.031250906408899076
+   },
+   "1000 kg/m3": {
+    "1000": 0.9988100646306187,
+    "10000": 0.9909445153608295,
+    "100000": 0.9593672471827087,
+    "1e+06": 0.8479050021827138,
+    "1e+07": 0.5033708291144595,
+    "1e+08": 0.08431906721956733
+   },
+   "1500 kg/m3": {
+    "1000": 0.9992286774609609,
+    "10000": 0.9934676548863733,
+    "100000": 0.9675843199089661,
+    "1e+06": 0.8758457083767822,
+    "1e+07": 0.6091842812072574,
+    "1e+08": 0.11335425071751554
+   }
+  },
+  "years_to_fill_by_share_of_area": {
+   "0.001": 834.2621544740883,
+   "0.003": 2626.5671685955813,
+   "0.01": 11435.841912037187,
+   "0.02": 31674.463622205592,
+   "0.05": 145274.65423985486,
+   "0.1": 462405.8902947529,
+   "0.2": 1796484.84053901,
+   "0.3": 4132122.341729835,
+   "0.4": 7083625.025262817,
+   "0.5": 10440935.224035693,
+   "0.6": 14376390.862862907,
+   "0.7": 21520589.622000836,
+   "0.8": 33567995.221142046,
+   "0.9": 98296610.57777002,
+   "0.95": 128484082.71741457,
+   "0.98": 305166614.7197139,
+   "0.99": 309999477.3375401
+  }
+ },
+ "closed_waters": {
+  "lowest_points": 147891,
+  "under_a_lake": 18501,
+  "rock_share_under_a_lake": 0.16146757523685973,
+  "rock_share_on_dry_ground": 0.4124319213693978
+ },
+ "wild_part_of_the_lakes": {
+  "A": {
+   "of_what_the_lakes_keep": 0.2783586049971631,
+   "lake_area_share": {
+    "nine tenths wild or more": 0.05804698951484181,
+    "a tenth wild or less": 0.4841469717540619
+   },
+   "kept_share": {
+    "in lakes nine tenths wild or more": 0.11603472973030984,
+    "in lakes a tenth wild or less": 0.5513825949571786
+   }
+  },
+  "B": {
+   "of_what_the_lakes_keep": 0.5004749732339906,
+   "lake_area_share": {
+    "nine tenths wild or more": 0.16933819289660357,
+    "a tenth wild or less": 0.2834738610231522
+   },
+   "kept_share": {
+    "in lakes nine tenths wild or more": 0.24397360593552908,
+    "in lakes a tenth wild or less": 0.29997920171432263
+   }
+  }
+ },
+ "floors": {
+  "lakes_that_spill": {
+   "under 2 m": 0.007432165497321059,
+   "under 20 m": 0.056057054976846356,
+   "under 200 m": 0.283757298807618
+  },
+  "lakes_that_pass_nothing_on": {
+   "under 2 m": 0.04303819639581761,
+   "under 20 m": 0.11033671991577287,
+   "under 200 m": 0.4101074710471514
+  },
+  "seas": {
+   "under 2 m": 0.0008657831143529604,
+   "under 20 m": 0.0092857859662637,
+   "under 200 m": 0.10969352961239591
+  }
+ },
+ "seas": {
+  "near_side_main": {
+   "area_km2": 3839221.7884897003,
+   "volume_km3": 2783880.2057018694,
+   "floor": {
+    "under 2 m": 0.0010622064755531557,
+    "under 20 m": 0.011342505022522063,
+    "under 200 m": 0.13285281534092866
+   },
+   "rock_share_central": 0.020784989858961232,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 20711307.687558435,
+    "1000 kg/m3": 41422615.37511687,
+    "1500 kg/m3": 62133923.06267531
+   }
+  },
+  "near_side_south": {
+   "area_km2": 973033.5985735413,
+   "volume_km3": 369158.011115719,
+   "floor": {
+    "under 2 m": 0.0021447906785652293,
+    "under 20 m": 0.023332407255658244,
+    "under 200 m": 0.2941564213049463
+   },
+   "rock_share_central": 0.0038350478987027948,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 14884981.509178024,
+    "1000 kg/m3": 29769963.018356048,
+    "1500 kg/m3": 44654944.527534075
+   }
+  },
+  "south_pole_aitken": {
+   "area_km2": 2410253.292512606,
+   "volume_km3": 5795590.287783284,
+   "floor": {
+    "under 2 m": 0.00020585458479877348,
+    "under 20 m": 0.0022379669421782235,
+    "under 200 m": 0.02529872186457315
+   },
+   "rock_share_central": 0.008713213727767895,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 102855164.57863872,
+    "1000 kg/m3": 205710329.15727744,
+    "1500 kg/m3": 308565493.73591614
+   }
+  },
+  "humboldtianum": {
+   "area_km2": 279469.76243540243,
+   "volume_km3": 333400.88830156624,
+   "floor": {
+    "under 2 m": 0.0006510565659345449,
+    "under 20 m": 0.00670354771969191,
+    "under 200 m": 0.07218957042005328
+   },
+   "rock_share_central": 0.0013982236454035254,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 36872017.81119077,
+    "1000 kg/m3": 73744035.62238154,
+    "1500 kg/m3": 110616053.4335723
+   }
+  },
+  "moscoviense": {
+   "area_km2": 844219.4749065948,
+   "volume_km3": 1440480.9937755174,
+   "floor": {
+    "under 2 m": 0.0005366886989513275,
+    "under 20 m": 0.005926333782129685,
+    "under 200 m": 0.06634342695942272
+   },
+   "rock_share_central": 0.00957863122428281,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 23254707.08944715,
+    "1000 kg/m3": 46509414.1788943,
+    "1500 kg/m3": 69764121.26834145
+   }
+  },
+  "orientale": {
+   "area_km2": 297888.7927765544,
+   "volume_km3": 468964.7653378189,
+   "floor": {
+    "under 2 m": 0.0009289879465072823,
+    "under 20 m": 0.009142191556005697,
+    "under 200 m": 0.10069401387195856
+   },
+   "rock_share_central": 0.008415327600363723,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 8617394.622853814,
+    "1000 kg/m3": 17234789.245707627,
+    "1500 kg/m3": 25852183.868561443
+   }
+  },
+  "smythii_marginis": {
+   "area_km2": 599347.6736802767,
+   "volume_km3": 845785.8549709952,
+   "floor": {
+    "under 2 m": 0.000717245307779455,
+    "under 20 m": 0.007656583958901643,
+    "under 200 m": 0.08428209521265544
+   },
+   "rock_share_central": 0.00834634256320071,
+   "years_to_fill_on_the_lands_rock": {
+    "500 kg/m3": 15670072.52437073,
+    "1000 kg/m3": 31340145.04874146,
+    "1500 kg/m3": 47010217.57311219
+   }
+  }
+ },
+ "seconds": 162
+}
