@@ -393,3 +393,39 @@ def test_the_hollows_product_and_what_the_write_up_says_of_it():
     korolev = product['regions']['korolev']
     assert korolev['no_more_than_it_lost']['1e+08']['volume_km3'] < 0.2 * korolev['start']['volume_km3']
     assert abs(korolev['shared_by_wear']['1e+08']['share_of_ground'] - korolev['start']['share_of_ground']) < 0.01
+
+
+# ---- whether it settles ------------------------------------------------------------------------------------------
+@pytest.fixture(scope='module')
+def settle():
+    from research.studies.rock_return import settle as ST
+    return ST, json.loads(ST.OUT.read_text())
+
+
+def test_the_long_runs_product_is_whole(settle, placement):
+    ST, product = settle
+    assert product['schema'] == ST.SCHEMA and product['producer']['compiled']
+    assert product['producer']['code_sha256'] == {name: sha256(HERE / name) for name in ('settle.py', 'evolve.py', 'hollows.py')}
+    assert product['ignored_inputs'][str(EV.REGIONS)] == placement['product']['sha256']
+    for label in ST.RUNS:
+        assert list(product['runs'][label]['years']) == [f'{y:g}' for y in ST.YEARS]
+
+
+def test_what_the_write_up_says_of_settling(settle):
+    ST, product = settle
+    years = [f'{y:g}' for y in ST.YEARS]
+    lakes, dry, given = (product['runs'][k]['years'] for k in ('korolev_with_lakes', 'southern_highlands_dry', 'southern_highlands_with_lakes'))
+    # lake country keeps most of its hollows' volume from fifty million years to five hundred, and its wear does not wind down
+    volumes = [lakes[y]['volume_over_start'] for y in years]
+    assert min(volumes) > 0.7 and max(volumes) < 0.85 and volumes[0] - volumes[-1] < 0.12
+    assert all(240 < sum(v['number'] for v in lakes[y]['hollows_of_10_km2_or_more'].values()) < 300 for y in years)
+    assert lakes[years[-1]]['rock_cut_km3_per_myr'] > 1.4 * lakes[years[0]]['rock_cut_km3_per_myr']
+    assert 1.0 < lakes[years[-1]]['relief_over_start'] < 1.15 and 0.6 < lakes[years[-1]]['forms_kept'] < 0.7
+    # dry crater country winds down: volume, relief and wear all fall, and go on falling
+    for key in ('volume_over_start', 'relief_over_start', 'rock_cut_km3_per_myr'):
+        series = [dry[y][key] for y in years]
+        assert all(a > b for a, b in zip(series, series[1:])), key
+    assert dry[years[-1]]['volume_over_start'] < 0.3 and dry[years[-1]]['relief_over_start'] < 0.5 and dry['2e+08']['forms_kept'] < 0.2
+    # the same country given lakes builds up
+    assert given[years[-1]]['relief_over_start'] > 1.3 and given[years[-1]]['volume_over_start'] > 0.55
+    assert given[years[-1]]['highest_m'] > product['runs']['southern_highlands_with_lakes']['start']['highest_m'] + 4000.0

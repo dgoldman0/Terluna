@@ -1,0 +1,1340 @@
+{
+ "schema": "terluna.research.rock-return-settle/1",
+ "producer": {
+  "module": "research.studies.rock_return.settle",
+  "code_sha256": {
+   "settle.py": "28034b4ab24ab0b941330c780ea2e74330063d4aba1b92022818468c2686f050",
+   "evolve.py": "97b671325048743ec911a84874c76519c642c4b21a988f39d675bba7061e7bd5",
+   "hollows.py": "4fa75a779d7516b0ec2bf11b8c4df5ff3feeacd65e18545b1a24bac5c5a30b4b"
+  },
+  "compiled": true
+ },
+ "inputs": {
+  "research/studies/rock_return/results/placement.json": "6f96ea3bc43430ea8ed85cae66890c1c4617161766af22fe74d4e9c718861ec7"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/terrain-return/evolution/regions_16ppd.npz": "0d3198ef76c6cafb837a9d362f498b1cb0b49d2aa1cf2d29b21ed43bbc7687dc"
+ },
+ "evidence": "evolve.py's landscape model run for five hundred million years under the reading the register takes, rock shared by wear, all of it reached and set down within 20 km. Over such a span the model's fixed rain, its one strength of rock and its open edge weigh more than over a hundred million years; it shows a tendency and predicts no place. Not validated.",
+ "reading_rule": "runs: for each region and water, at every fifty million years: hollows.py's census (number by class of size, share of the ground in a hollow, volume below the lips, hollows on old and new ground); volume_over_start; relief_over_start; forms_kept; the mean fall to a neighbour; the highest ground; rock_cut_km3_per_myr over the fifty million years before, which falls if the land's wear is winding down.",
+ "setting": {
+  "years": [
+   50000000.0,
+   100000000.0,
+   150000000.0,
+   200000000.0,
+   250000000.0,
+   300000000.0,
+   350000000.0,
+   400000000.0,
+   450000000.0,
+   500000000.0
+  ],
+  "runs": {
+   "korolev_with_lakes": [
+    "korolev",
+    "wet"
+   ],
+   "southern_highlands_dry": [
+    "southern_highlands",
+    "dry"
+   ],
+   "southern_highlands_with_lakes": [
+    "southern_highlands",
+    "wet"
+   ]
+  },
+  "rule": "worn",
+  "range_m": 20000.0,
+  "step_yr": 25000.0,
+  "critical_deg": 35.0,
+  "creep_m2_yr": 0.01
+ },
+ "runs": {
+  "korolev_with_lakes": {
+   "water": "wet",
+   "rate": 3.171831115415491e-07,
+   "start": {
+    "number": {
+     "under 10 km2": 91,
+     "10-100 km2": 120,
+     "100-1,000 km2": 38,
+     "over 1,000 km2": 12
+    },
+    "share_of_ground": 0.7034454345703125,
+    "volume_km3": 425209.1724000514,
+    "highest_m": 9013.8359375
+   },
+   "years": {
+    "5e+07": {
+     "number": {
+      "under 10 km2": 113,
+      "10-100 km2": 171,
+      "100-1,000 km2": 68,
+      "over 1,000 km2": 17
+     },
+     "share_of_ground": 0.7266693115234375,
+     "volume_km3": 354838.0157498613,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 73,
+       "area_km2": 175516.64406640758,
+       "median_depth_m": 501.30810170791574,
+       "deepest_m": 6141.202218751396
+      },
+      "on_new_ground": {
+       "number": 90,
+       "area_km2": 6736.170069303792,
+       "median_depth_m": 339.15881929814714,
+       "deepest_m": 1324.9057358857958
+      },
+      "on_both": {
+       "number": 93,
+       "area_km2": 41803.66819072731,
+       "median_depth_m": 445.73995057169304,
+       "deepest_m": 4269.5781167401365
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0685577392578125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0453338623046875,
+     "volume_over_start": 0.8345022609625588,
+     "relief_over_start": 0.9015544808585032,
+     "forms_kept": 0.8973932235576743,
+     "mean_fall_to_a_neighbour_deg": 5.862651883569497,
+     "highest_m": 9584.487350055053,
+     "mean_change_m": -16.313970741093755,
+     "rock_cut_km3_per_myr": 20771.794553222164,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 167735.30348535432
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 134,
+      "10-100 km2": 209,
+      "100-1,000 km2": 62,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.7006378173828125,
+     "volume_km3": 344554.5133719514,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 91,
+       "area_km2": 173062.24167413462,
+       "median_depth_m": 428.74494279550163,
+       "deepest_m": 6079.814212581398
+      },
+      "on_new_ground": {
+       "number": 105,
+       "area_km2": 6309.784836193605,
+       "median_depth_m": 356.7705498977366,
+       "deepest_m": 1709.381336398772
+      },
+      "on_both": {
+       "number": 88,
+       "area_km2": 36178.249569021486,
+       "median_depth_m": 398.8461071082111,
+       "deepest_m": 3225.441289483746
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.054473876953125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.057281494140625,
+     "volume_over_start": 0.8103176877091981,
+     "relief_over_start": 0.9495591151885393,
+     "forms_kept": 0.8117580653233186,
+     "mean_fall_to_a_neighbour_deg": 6.3637891739739185,
+     "highest_m": 10151.85759747165,
+     "mean_change_m": -29.552041923963817,
+     "rock_cut_km3_per_myr": 22031.573429568405,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 606586.2337637023
+    },
+    "1.5e+08": {
+     "number": {
+      "under 10 km2": 163,
+      "10-100 km2": 204,
+      "100-1,000 km2": 64,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.688079833984375,
+     "volume_km3": 343749.75135671697,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 90,
+       "area_km2": 183539.1359734136,
+       "median_depth_m": 457.91191170154707,
+       "deepest_m": 6094.64341091789
+      },
+      "on_new_ground": {
+       "number": 104,
+       "area_km2": 6030.305439701213,
+       "median_depth_m": 398.4011510413957,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 87,
+       "area_km2": 15554.103335557322,
+       "median_depth_m": 363.23360206605685,
+       "deepest_m": 2562.8356567036826
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.049407958984375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0647735595703125,
+     "volume_over_start": 0.8084250615207929,
+     "relief_over_start": 0.9973601082105003,
+     "forms_kept": 0.7647579926085096,
+     "mean_fall_to_a_neighbour_deg": 6.721864160574104,
+     "highest_m": 10613.746473690024,
+     "mean_change_m": -44.38295928059992,
+     "rock_cut_km3_per_myr": 24966.127596464703,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 1190239.0232857752
+    },
+    "2e+08": {
+     "number": {
+      "under 10 km2": 179,
+      "10-100 km2": 197,
+      "100-1,000 km2": 51,
+      "over 1,000 km2": 17
+     },
+     "share_of_ground": 0.6803741455078125,
+     "volume_km3": 339767.1431137787,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 73,
+       "area_km2": 173040.74325901986,
+       "median_depth_m": 631.177990101758,
+       "deepest_m": 6066.645488120898
+      },
+      "on_new_ground": {
+       "number": 112,
+       "area_km2": 7201.969063457777,
+       "median_depth_m": 370.13347564890364,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 80,
+       "area_km2": 23289.94970769928,
+       "median_depth_m": 383.90167123377887,
+       "deepest_m": 2260.6316797727522
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0467071533203125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0697784423828125,
+     "volume_over_start": 0.7990588283785047,
+     "relief_over_start": 1.0224508686607,
+     "forms_kept": 0.7314679996459447,
+     "mean_fall_to_a_neighbour_deg": 6.8617292407976835,
+     "highest_m": 11242.548864537237,
+     "mean_change_m": -58.28777094782694,
+     "rock_cut_km3_per_myr": 27167.43555642117,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 1917295.967481781
+    },
+    "2.5e+08": {
+     "number": {
+      "under 10 km2": 205,
+      "10-100 km2": 219,
+      "100-1,000 km2": 42,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.67034912109375,
+     "volume_km3": 337783.9218365717,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 76,
+       "area_km2": 180049.22658644445,
+       "median_depth_m": 734.7903106365243,
+       "deepest_m": 6060.693649593966
+      },
+      "on_new_ground": {
+       "number": 119,
+       "area_km2": 5621.835552520026,
+       "median_depth_m": 236.49670300906928,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 79,
+       "area_km2": 17918.928998185245,
+       "median_depth_m": 445.6042532221554,
+       "deepest_m": 2325.4127970997406
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0428466796875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0759429931640625,
+     "volume_over_start": 0.794394720908732,
+     "relief_over_start": 1.0483657958966073,
+     "forms_kept": 0.7063840772126105,
+     "mean_fall_to_a_neighbour_deg": 6.927001332541499,
+     "highest_m": 12566.358228965477,
+     "mean_change_m": -68.96174649825855,
+     "rock_cut_km3_per_myr": 28882.1956274838,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 2723990.610365113
+    },
+    "3e+08": {
+     "number": {
+      "under 10 km2": 192,
+      "10-100 km2": 224,
+      "100-1,000 km2": 46,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.6644287109375,
+     "volume_km3": 336952.53184807714,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 74,
+       "area_km2": 180719.260524189,
+       "median_depth_m": 905.2929855056218,
+       "deepest_m": 6060.83931240552
+      },
+      "on_new_ground": {
+       "number": 131,
+       "area_km2": 5732.910697279823,
+       "median_depth_m": 221.1074976814889,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 78,
+       "area_km2": 14683.417523407947,
+       "median_depth_m": 337.38071149499,
+       "deepest_m": 2107.5827996810867
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0413970947265625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.080413818359375,
+     "volume_over_start": 0.792439471486896,
+     "relief_over_start": 1.0805886723697715,
+     "forms_kept": 0.6832333032795368,
+     "mean_fall_to_a_neighbour_deg": 7.096187510746972,
+     "highest_m": 12566.3621195259,
+     "mean_change_m": -76.07214572657657,
+     "rock_cut_km3_per_myr": 30468.3508039679,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 3678918.2989182947
+    },
+    "3.5e+08": {
+     "number": {
+      "under 10 km2": 202,
+      "10-100 km2": 217,
+      "100-1,000 km2": 32,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.6699676513671875,
+     "volume_km3": 334589.36415371543,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 76,
+       "area_km2": 180321.53984456524,
+       "median_depth_m": 785.4540010148116,
+       "deepest_m": 6045.423543189898
+      },
+      "on_new_ground": {
+       "number": 112,
+       "area_km2": 4933.886268846449,
+       "median_depth_m": 150.56220920450005,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 75,
+       "area_km2": 14321.527535642157,
+       "median_depth_m": 362.64630217414833,
+       "deepest_m": 1916.7045693290365
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0478515625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.081329345703125,
+     "volume_over_start": 0.7868818122270473,
+     "relief_over_start": 1.0803036992816617,
+     "forms_kept": 0.6637027483008836,
+     "mean_fall_to_a_neighbour_deg": 7.006100408538608,
+     "highest_m": 12566.359807978955,
+     "mean_change_m": -82.7076814955002,
+     "rock_cut_km3_per_myr": 31543.292663149463,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 4617837.02394838
+    },
+    "4e+08": {
+     "number": {
+      "under 10 km2": 186,
+      "10-100 km2": 199,
+      "100-1,000 km2": 43,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.6549224853515625,
+     "volume_km3": 320719.983931184,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 78,
+       "area_km2": 173280.80889446844,
+       "median_depth_m": 666.9892602149525,
+       "deepest_m": 5935.47732459786
+      },
+      "on_new_ground": {
+       "number": 99,
+       "area_km2": 5385.352986257233,
+       "median_depth_m": 220.74746382378999,
+       "deepest_m": 1455.9515335165038
+      },
+      "on_both": {
+       "number": 79,
+       "area_km2": 23028.385657135892,
+       "median_depth_m": 178.4541507785707,
+       "deepest_m": 2480.127564349006
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0413665771484375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0898895263671875,
+     "volume_over_start": 0.754264029914763,
+     "relief_over_start": 1.075089283027074,
+     "forms_kept": 0.6546116258347069,
+     "mean_fall_to_a_neighbour_deg": 7.076371666886173,
+     "highest_m": 12566.367995246757,
+     "mean_change_m": -91.39973951224137,
+     "rock_cut_km3_per_myr": 32473.948659607122,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 5651770.652696276
+    },
+    "4.5e+08": {
+     "number": {
+      "under 10 km2": 214,
+      "10-100 km2": 221,
+      "100-1,000 km2": 37,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.65289306640625,
+     "volume_km3": 314785.7491163394,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 67,
+       "area_km2": 148794.11407871198,
+       "median_depth_m": 780.3342485738203,
+       "deepest_m": 5886.908672849974
+      },
+      "on_new_ground": {
+       "number": 116,
+       "area_km2": 4665.156079911456,
+       "median_depth_m": 114.51937269541077,
+       "deepest_m": 1772.7468832232953
+      },
+      "on_both": {
+       "number": 90,
+       "area_km2": 43369.46942492187,
+       "median_depth_m": 333.4815998206054,
+       "deepest_m": 4299.616259937517
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0426025390625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0931549072265625,
+     "volume_over_start": 0.7403079932155794,
+     "relief_over_start": 1.0584088987329476,
+     "forms_kept": 0.646297027709862,
+     "mean_fall_to_a_neighbour_deg": 7.081860088001953,
+     "highest_m": 12666.990421437033,
+     "mean_change_m": -100.37027957485084,
+     "rock_cut_km3_per_myr": 33326.14993806544,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 6866051.415334225
+    },
+    "5e+08": {
+     "number": {
+      "under 10 km2": 212,
+      "10-100 km2": 218,
+      "100-1,000 km2": 43,
+      "over 1,000 km2": 12
+     },
+     "share_of_ground": 0.654449462890625,
+     "volume_km3": 314677.6661102523,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 62,
+       "area_km2": 147235.4789828891,
+       "median_depth_m": 667.3886972314922,
+       "deepest_m": 5886.743778023192
+      },
+      "on_new_ground": {
+       "number": 114,
+       "area_km2": 4905.221715360049,
+       "median_depth_m": 162.48172513273767,
+       "deepest_m": 1772.7468823176068
+      },
+      "on_both": {
+       "number": 97,
+       "area_km2": 48231.69431005231,
+       "median_depth_m": 415.16806065881883,
+       "deepest_m": 4299.616259937517
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.044952392578125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0939483642578125,
+     "volume_over_start": 0.7400538053638053,
+     "relief_over_start": 1.0773380990439778,
+     "forms_kept": 0.6350133749677737,
+     "mean_fall_to_a_neighbour_deg": 7.343993941536333,
+     "highest_m": 12666.988781620945,
+     "mean_change_m": -105.71800854578333,
+     "rock_cut_km3_per_myr": 34062.18222752956,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 8084275.311300766
+    }
+   },
+   "seconds": 2094
+  },
+  "southern_highlands_with_lakes": {
+   "water": "wet",
+   "rate": 6.094754418751499e-07,
+   "start": {
+    "number": {
+     "under 10 km2": 138,
+     "10-100 km2": 108,
+     "100-1,000 km2": 29,
+     "over 1,000 km2": 16
+    },
+    "share_of_ground": 0.617340087890625,
+    "volume_km3": 116915.68804250803,
+    "highest_m": 1995.9805908203125
+   },
+   "years": {
+    "5e+07": {
+     "number": {
+      "under 10 km2": 195,
+      "10-100 km2": 213,
+      "100-1,000 km2": 50,
+      "over 1,000 km2": 16
+     },
+     "share_of_ground": 0.5751953125,
+     "volume_km3": 104992.75821615022,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 105,
+       "area_km2": 92476.6338520341,
+       "median_depth_m": 374.1673590021653,
+       "deepest_m": 4083.079945773543
+      },
+      "on_new_ground": {
+       "number": 98,
+       "area_km2": 3202.6869706246734,
+       "median_depth_m": 294.02176148788374,
+       "deepest_m": 1025.4580804240659
+      },
+      "on_both": {
+       "number": 76,
+       "area_km2": 14192.398724703151,
+       "median_depth_m": 315.392819333288,
+       "deepest_m": 4235.977102810582
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.044921875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.087066650390625,
+     "volume_over_start": 0.8980211293627003,
+     "relief_over_start": 1.0280951836567505,
+     "forms_kept": 0.8612512979413457,
+     "mean_fall_to_a_neighbour_deg": 6.191587098080053,
+     "highest_m": 3414.35348598654,
+     "mean_change_m": -20.05804454750541,
+     "rock_cut_km3_per_myr": 25494.030944739654,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 191900.73069950903
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 276,
+      "10-100 km2": 246,
+      "100-1,000 km2": 37,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.5308837890625,
+     "volume_km3": 95480.1163867341,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 99,
+       "area_km2": 83028.58029872416,
+       "median_depth_m": 355.018684614439,
+       "deepest_m": 3967.1034194187405
+      },
+      "on_new_ground": {
+       "number": 123,
+       "area_km2": 3271.2615528664383,
+       "median_depth_m": 234.7042444157808,
+       "deepest_m": 1266.8286612807728
+      },
+      "on_both": {
+       "number": 75,
+       "area_km2": 23907.131208953255,
+       "median_depth_m": 215.8621500815269,
+       "deepest_m": 4249.711617065062
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0438385009765625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.1302947998046875,
+     "volume_over_start": 0.8166578667528311,
+     "relief_over_start": 1.114336845839122,
+     "forms_kept": 0.7309180822740766,
+     "mean_fall_to_a_neighbour_deg": 6.887364281228321,
+     "highest_m": 4337.218660670829,
+     "mean_change_m": -38.7395325760319,
+     "rock_cut_km3_per_myr": 32069.852246480576,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 629820.7740220556
+    },
+    "1.5e+08": {
+     "number": {
+      "under 10 km2": 268,
+      "10-100 km2": 227,
+      "100-1,000 km2": 36,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.520660400390625,
+     "volume_km3": 87579.01922391236,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 92,
+       "area_km2": 76519.07458444107,
+       "median_depth_m": 526.7180636081899,
+       "deepest_m": 3544.421104767318
+      },
+      "on_new_ground": {
+       "number": 107,
+       "area_km2": 3123.953191013758,
+       "median_depth_m": 278.0957560133842,
+       "deepest_m": 1495.7343336528738
+      },
+      "on_both": {
+       "number": 78,
+       "area_km2": 37606.8088612526,
+       "median_depth_m": 219.87836511490926,
+       "deepest_m": 4320.649039857594
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.056915283203125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.153594970703125,
+     "volume_over_start": 0.7490784230091561,
+     "relief_over_start": 1.1712476660707916,
+     "forms_kept": 0.6557624044469497,
+     "mean_fall_to_a_neighbour_deg": 7.236847681016252,
+     "highest_m": 5268.745110834474,
+     "mean_change_m": -59.178132634366975,
+     "rock_cut_km3_per_myr": 37671.646606684735,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 1207004.0105867535
+    },
+    "2e+08": {
+     "number": {
+      "under 10 km2": 278,
+      "10-100 km2": 229,
+      "100-1,000 km2": 42,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.492950439453125,
+     "volume_km3": 81984.41948230009,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 97,
+       "area_km2": 77656.90468978591,
+       "median_depth_m": 690.6957673089012,
+       "deepest_m": 4073.149826428252
+      },
+      "on_new_ground": {
+       "number": 100,
+       "area_km2": 3400.7913193231075,
+       "median_depth_m": 354.49235830438494,
+       "deepest_m": 1528.2756965538438
+      },
+      "on_both": {
+       "number": 89,
+       "area_km2": 12973.2950404051,
+       "median_depth_m": 209.42578531009667,
+       "deepest_m": 1906.1900921278698
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.048614501953125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.173004150390625,
+     "volume_over_start": 0.701226848637219,
+     "relief_over_start": 1.2280257229344875,
+     "forms_kept": 0.614478659753917,
+     "mean_fall_to_a_neighbour_deg": 7.614665935020862,
+     "highest_m": 5263.889005260709,
+     "mean_change_m": -72.93586407413939,
+     "rock_cut_km3_per_myr": 41091.2782169628,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 1890962.5335696912
+    },
+    "2.5e+08": {
+     "number": {
+      "under 10 km2": 308,
+      "10-100 km2": 230,
+      "100-1,000 km2": 45,
+      "over 1,000 km2": 12
+     },
+     "share_of_ground": 0.4682159423828125,
+     "volume_km3": 79374.60571603832,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 95,
+       "area_km2": 77654.36489044363,
+       "median_depth_m": 532.6602415282722,
+       "deepest_m": 4004.3712217219118
+      },
+      "on_new_ground": {
+       "number": 107,
+       "area_km2": 2730.2842929591784,
+       "median_depth_m": 222.45152169053165,
+       "deepest_m": 1563.1356346668904
+      },
+      "on_both": {
+       "number": 85,
+       "area_km2": 6656.814076135819,
+       "median_depth_m": 241.67793553605208,
+       "deepest_m": 1949.8102602059118
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0398406982421875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.18896484375,
+     "volume_over_start": 0.6789046623681453,
+     "relief_over_start": 1.2536481741955696,
+     "forms_kept": 0.5877753156792899,
+     "mean_fall_to_a_neighbour_deg": 7.8122746730313954,
+     "highest_m": 5277.322895826355,
+     "mean_change_m": -87.8668161011938,
+     "rock_cut_km3_per_myr": 44600.56573724552,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 2627853.750840615
+    },
+    "3e+08": {
+     "number": {
+      "under 10 km2": 311,
+      "10-100 km2": 241,
+      "100-1,000 km2": 33,
+      "over 1,000 km2": 17
+     },
+     "share_of_ground": 0.460784912109375,
+     "volume_km3": 75302.82133472976,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 83,
+       "area_km2": 70898.49863995858,
+       "median_depth_m": 630.1937866007238,
+       "deepest_m": 3962.30475365482
+      },
+      "on_new_ground": {
+       "number": 114,
+       "area_km2": 3271.261552866439,
+       "median_depth_m": 298.8262217022488,
+       "deepest_m": 1563.1356346668904
+      },
+      "on_both": {
+       "number": 94,
+       "area_km2": 12450.096375893854,
+       "median_depth_m": 135.63704221548102,
+       "deepest_m": 2338.0127356468097
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0460968017578125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2026519775390625,
+     "volume_over_start": 0.6440779898361567,
+     "relief_over_start": 1.282383904128127,
+     "forms_kept": 0.5648290483672047,
+     "mean_fall_to_a_neighbour_deg": 7.985296804535404,
+     "highest_m": 5804.266789303679,
+     "mean_change_m": -97.68860178378031,
+     "rock_cut_km3_per_myr": 47141.972254128035,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 3384696.414442627
+    },
+    "3.5e+08": {
+     "number": {
+      "under 10 km2": 322,
+      "10-100 km2": 248,
+      "100-1,000 km2": 35,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.4662017822265625,
+     "volume_km3": 74502.52917065866,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 81,
+       "area_km2": 39915.48646339205,
+       "median_depth_m": 618.3418027048582,
+       "deepest_m": 3507.508418394362
+      },
+      "on_new_ground": {
+       "number": 128,
+       "area_km2": 3720.806036451346,
+       "median_depth_m": 218.68803795922844,
+       "deepest_m": 1482.2902791313938
+      },
+      "on_both": {
+       "number": 88,
+       "area_km2": 48781.92596731808,
+       "median_depth_m": 246.93455751093347,
+       "deepest_m": 3978.9895772807895
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.057098388671875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2082366943359375,
+     "volume_over_start": 0.6372329532335399,
+     "relief_over_start": 1.3188689732730576,
+     "forms_kept": 0.5368180066246422,
+     "mean_fall_to_a_neighbour_deg": 8.272892087250105,
+     "highest_m": 6423.262174258494,
+     "mean_change_m": -98.45543179035954,
+     "rock_cut_km3_per_myr": 49906.5111396126,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 4152647.2705050753
+    },
+    "4e+08": {
+     "number": {
+      "under 10 km2": 354,
+      "10-100 km2": 278,
+      "100-1,000 km2": 36,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.4480743408203125,
+     "volume_km3": 73209.66491296097,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 91,
+       "area_km2": 50389.61895098614,
+       "median_depth_m": 858.9505471369359,
+       "deepest_m": 3925.1652747178864
+      },
+      "on_new_ground": {
+       "number": 117,
+       "area_km2": 3446.507707484284,
+       "median_depth_m": 327.90498814345085,
+       "deepest_m": 1625.2853241974772
+      },
+      "on_both": {
+       "number": 120,
+       "area_km2": 33040.249643819494,
+       "median_depth_m": 211.06407174058825,
+       "deepest_m": 3464.8023164383594
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.049163818359375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2184295654296875,
+     "volume_over_start": 0.6261748627467643,
+     "relief_over_start": 1.37365727624705,
+     "forms_kept": 0.5155573323430107,
+     "mean_fall_to_a_neighbour_deg": 8.710441011638327,
+     "highest_m": 6475.016763309018,
+     "mean_change_m": -95.91658901263634,
+     "rock_cut_km3_per_myr": 51578.90005780591,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 4949179.211084449
+    },
+    "4.5e+08": {
+     "number": {
+      "under 10 km2": 341,
+      "10-100 km2": 275,
+      "100-1,000 km2": 36,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.47076416015625,
+     "volume_km3": 74052.9925345918,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 72,
+       "area_km2": 38399.22625604634,
+       "median_depth_m": 967.4257529452325,
+       "deepest_m": 3447.954397370101
+      },
+      "on_new_ground": {
+       "number": 129,
+       "area_km2": 3934.149181203505,
+       "median_depth_m": 462.6512352031249,
+       "deepest_m": 1851.844247873304
+      },
+      "on_both": {
+       "number": 123,
+       "area_km2": 56721.33871130915,
+       "median_depth_m": 343.7556544751009,
+       "deepest_m": 3901.6094137759983
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0635223388671875,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2100982666015625,
+     "volume_over_start": 0.6333879890239171,
+     "relief_over_start": 1.403726792425285,
+     "forms_kept": 0.5013464207610708,
+     "mean_fall_to_a_neighbour_deg": 9.033725386976618,
+     "highest_m": 6474.346248389351,
+     "mean_change_m": -98.30146350352265,
+     "rock_cut_km3_per_myr": 53010.36180008656,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 5732755.652299289
+    },
+    "5e+08": {
+     "number": {
+      "under 10 km2": 337,
+      "10-100 km2": 285,
+      "100-1,000 km2": 37,
+      "over 1,000 km2": 17
+     },
+     "share_of_ground": 0.452239990234375,
+     "volume_km3": 69301.32683249639,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 82,
+       "area_km2": 67185.3120015341,
+       "median_depth_m": 894.238411379019,
+       "deepest_m": 3880.119013163449
+      },
+      "on_new_ground": {
+       "number": 137,
+       "area_km2": 3748.743829216509,
+       "median_depth_m": 336.58371720331985,
+       "deepest_m": 1625.2853241974772
+      },
+      "on_both": {
+       "number": 120,
+       "area_km2": 19828.213465239358,
+       "median_depth_m": 211.64738855212863,
+       "deepest_m": 1876.717839716023
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0544586181640625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2195587158203125,
+     "volume_over_start": 0.5927461745535801,
+     "relief_over_start": 1.4148456550994095,
+     "forms_kept": 0.47256968022894563,
+     "mean_fall_to_a_neighbour_deg": 9.13463481907068,
+     "highest_m": 6696.06270516366,
+     "mean_change_m": -108.38226235528786,
+     "rock_cut_km3_per_myr": 54303.11947171512,
+     "rock_gone_km3": 0.0,
+     "rock_slid_km3": 6547476.910674356
+    }
+   },
+   "seconds": 2367
+  },
+  "southern_highlands_dry": {
+   "water": "dry",
+   "rate": 1.653268261143175e-07,
+   "start": {
+    "number": {
+     "under 10 km2": 138,
+     "10-100 km2": 108,
+     "100-1,000 km2": 29,
+     "over 1,000 km2": 16
+    },
+    "share_of_ground": 0.617340087890625,
+    "volume_km3": 116915.68804250803,
+    "highest_m": 1995.9805908203125
+   },
+   "years": {
+    "5e+07": {
+     "number": {
+      "under 10 km2": 219,
+      "10-100 km2": 99,
+      "100-1,000 km2": 39,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.5768890380859375,
+     "volume_km3": 101662.17912587701,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 57,
+       "area_km2": 94119.88402649418,
+       "median_depth_m": 211.53267330746235,
+       "deepest_m": 3941.0768383196382
+      },
+      "on_new_ground": {
+       "number": 13,
+       "area_km2": 213.34314475215908,
+       "median_depth_m": 51.286966224321674,
+       "deepest_m": 161.39664238791354
+      },
+      "on_both": {
+       "number": 83,
+       "area_km2": 19305.014800728102,
+       "median_depth_m": 153.46512112322668,
+       "deepest_m": 3899.8358975949845
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.03167724609375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.0721282958984375,
+     "volume_over_start": 0.8695341132399171,
+     "relief_over_start": 0.8679710733997663,
+     "forms_kept": 0.8462500908325151,
+     "mean_fall_to_a_neighbour_deg": 5.14694626100052,
+     "highest_m": 1912.6662356229722,
+     "mean_change_m": -4.462847335420046,
+     "rock_cut_km3_per_myr": 15750.188270644623,
+     "rock_gone_km3": 106.17715948039078,
+     "rock_slid_km3": 294.0313938709584
+    },
+    "1e+08": {
+     "number": {
+      "under 10 km2": 298,
+      "10-100 km2": 90,
+      "100-1,000 km2": 55,
+      "over 1,000 km2": 18
+     },
+     "share_of_ground": 0.533050537109375,
+     "volume_km3": 86462.47776218089,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 56,
+       "area_km2": 77623.88729833617,
+       "median_depth_m": 222.66008814756503,
+       "deepest_m": 3727.281633657166
+      },
+      "on_new_ground": {
+       "number": 11,
+       "area_km2": 507.9598684575216,
+       "median_depth_m": 34.57287556847806,
+       "deepest_m": 346.6758411855758
+      },
+      "on_both": {
+       "number": 96,
+       "area_km2": 26205.649613723537,
+       "median_depth_m": 172.12118761614477,
+       "deepest_m": 3269.0739050976954
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0551605224609375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.1394500732421875,
+     "volume_over_start": 0.7395284517398981,
+     "relief_over_start": 0.7853868618502675,
+     "forms_kept": 0.5797983669140627,
+     "mean_fall_to_a_neighbour_deg": 4.849686998840399,
+     "highest_m": 1826.6681760219037,
+     "mean_change_m": -8.815960021449346,
+     "rock_cut_km3_per_myr": 13361.402840661001,
+     "rock_gone_km3": 317.25019375943975,
+     "rock_slid_km3": 1168.7351953970574
+    },
+    "1.5e+08": {
+     "number": {
+      "under 10 km2": 365,
+      "10-100 km2": 112,
+      "100-1,000 km2": 70,
+      "over 1,000 km2": 15
+     },
+     "share_of_ground": 0.4796600341796875,
+     "volume_km3": 69645.87737669825,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 83,
+       "area_km2": 52502.73200376943,
+       "median_depth_m": 140.48787173954906,
+       "deepest_m": 3330.5420151618746
+      },
+      "on_new_ground": {
+       "number": 11,
+       "area_km2": 868.6113750623618,
+       "median_depth_m": 34.01384379853845,
+       "deepest_m": 88.6339680754105
+      },
+      "on_both": {
+       "number": 103,
+       "area_km2": 39161.166058732626,
+       "median_depth_m": 203.37530410814986,
+       "deepest_m": 3222.30267174398
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0714874267578125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.20916748046875,
+     "volume_over_start": 0.5956931746522888,
+     "relief_over_start": 0.722762011305817,
+     "forms_kept": 0.3145352854563625,
+     "mean_fall_to_a_neighbour_deg": 4.561878040599591,
+     "highest_m": 2199.6849236965504,
+     "mean_change_m": -13.292451005459633,
+     "rock_cut_km3_per_myr": 11946.123418002746,
+     "rock_gone_km3": 574.3196640440194,
+     "rock_slid_km3": 2885.561697136885
+    },
+    "2e+08": {
+     "number": {
+      "under 10 km2": 398,
+      "10-100 km2": 118,
+      "100-1,000 km2": 74,
+      "over 1,000 km2": 13
+     },
+     "share_of_ground": 0.436492919921875,
+     "volume_km3": 57748.3092636779,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 92,
+       "area_km2": 41137.129947032394,
+       "median_depth_m": 180.04690054758632,
+       "deepest_m": 3020.6185164025947
+      },
+      "on_new_ground": {
+       "number": 11,
+       "area_km2": 459.703680954057,
+       "median_depth_m": 3.5041421163576842,
+       "deepest_m": 27.740322880099086
+      },
+      "on_both": {
+       "number": 102,
+       "area_km2": 43450.887147856396,
+       "median_depth_m": 155.18990025296605,
+       "deepest_m": 3200.2815936824372
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0803985595703125,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.2612457275390625,
+     "volume_over_start": 0.4939312271136945,
+     "relief_over_start": 0.6733440237312107,
+     "forms_kept": 0.10255965605641848,
+     "mean_fall_to_a_neighbour_deg": 4.254212737730843,
+     "highest_m": 2182.3610481607634,
+     "mean_change_m": -16.510816765130585,
+     "rock_cut_km3_per_myr": 11077.393083517021,
+     "rock_gone_km3": 864.8453207442454,
+     "rock_slid_km3": 6511.684254813356
+    },
+    "2.5e+08": {
+     "number": {
+      "under 10 km2": 398,
+      "10-100 km2": 125,
+      "100-1,000 km2": 73,
+      "over 1,000 km2": 14
+     },
+     "share_of_ground": 0.405364990234375,
+     "volume_km3": 51020.96309589836,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 95,
+       "area_km2": 33797.10984782119,
+       "median_depth_m": 122.70639908424096,
+       "deepest_m": 2860.7671951824595
+      },
+      "on_new_ground": {
+       "number": 11,
+       "area_km2": 698.4448191290921,
+       "median_depth_m": 11.621816235347787,
+       "deepest_m": 53.54921779113731
+      },
+      "on_both": {
+       "number": 106,
+       "area_km2": 47024.38482245506,
+       "median_depth_m": 134.5578231488301,
+       "deepest_m": 3118.775151167199
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0887603759765625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.3007354736328125,
+     "volume_over_start": 0.4363910776229469,
+     "relief_over_start": 0.6293519531596213,
+     "forms_kept": -0.026303668871313635,
+     "mean_fall_to_a_neighbour_deg": 3.891913507511975,
+     "highest_m": 2739.973467059336,
+     "mean_change_m": -18.932326553735244,
+     "rock_cut_km3_per_myr": 10375.25500278714,
+     "rock_gone_km3": 1207.673399392579,
+     "rock_slid_km3": 10379.765911174234
+    },
+    "3e+08": {
+     "number": {
+      "under 10 km2": 416,
+      "10-100 km2": 129,
+      "100-1,000 km2": 63,
+      "over 1,000 km2": 12
+     },
+     "share_of_ground": 0.376495361328125,
+     "volume_km3": 44856.27761690588,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 84,
+       "area_km2": 20973.662968611065,
+       "median_depth_m": 86.05532059231106,
+       "deepest_m": 2776.8167406234766
+      },
+      "on_new_ground": {
+       "number": 16,
+       "area_km2": 505.42006911523396,
+       "median_depth_m": 6.199917548066736,
+       "deepest_m": 34.34706179228216
+      },
+      "on_both": {
+       "number": 104,
+       "area_km2": 57066.75142186026,
+       "median_depth_m": 80.23382132434202,
+       "deepest_m": 2990.8624490973298
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.089996337890625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.330841064453125,
+     "volume_over_start": 0.3836634618324027,
+     "relief_over_start": 0.5881767229342282,
+     "forms_kept": -0.08874377112221837,
+     "mean_fall_to_a_neighbour_deg": 3.5649063878931684,
+     "highest_m": 2963.4269241122665,
+     "mean_change_m": -22.349855932961304,
+     "rock_cut_km3_per_myr": 9719.55536992586,
+     "rock_gone_km3": 1592.4292212388557,
+     "rock_slid_km3": 13963.54416473812
+    },
+    "3.5e+08": {
+     "number": {
+      "under 10 km2": 489,
+      "10-100 km2": 131,
+      "100-1,000 km2": 69,
+      "over 1,000 km2": 9
+     },
+     "share_of_ground": 0.3586883544921875,
+     "volume_km3": 40740.42622481665,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 83,
+       "area_km2": 18845.31111977405,
+       "median_depth_m": 75.29989734067954,
+       "deepest_m": 2806.656930567347
+      },
+      "on_new_ground": {
+       "number": 19,
+       "area_km2": 650.1886316256275,
+       "median_depth_m": 7.390592616179731,
+       "deepest_m": 110.76843056818825
+      },
+      "on_both": {
+       "number": 107,
+       "area_km2": 55113.645727641095,
+       "median_depth_m": 59.46874946771163,
+       "deepest_m": 2919.332641788291
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0920562744140625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.3507080078125,
+     "volume_over_start": 0.34845987657365796,
+     "relief_over_start": 0.5447964882470475,
+     "forms_kept": -0.10382701429297957,
+     "mean_fall_to_a_neighbour_deg": 3.258860886580957,
+     "highest_m": 2861.9516408922036,
+     "mean_change_m": -25.996997234506125,
+     "rock_cut_km3_per_myr": 9138.50854114654,
+     "rock_gone_km3": 1991.915324536885,
+     "rock_slid_km3": 18253.532141245083
+    },
+    "4e+08": {
+     "number": {
+      "under 10 km2": 562,
+      "10-100 km2": 129,
+      "100-1,000 km2": 62,
+      "over 1,000 km2": 8
+     },
+     "share_of_ground": 0.3185882568359375,
+     "volume_km3": 36474.84889424309,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 87,
+       "area_km2": 14903.542540543682,
+       "median_depth_m": 37.49252811193833,
+       "deepest_m": 2750.161606888241
+      },
+      "on_new_ground": {
+       "number": 19,
+       "area_km2": 667.9672270216407,
+       "median_depth_m": 6.300087217560872,
+       "deepest_m": 60.85353623340268
+      },
+      "on_both": {
+       "number": 93,
+       "area_km2": 51451.25507606236,
+       "median_depth_m": 49.83193904912156,
+       "deepest_m": 2804.9425109565
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0816650390625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.3804168701171875,
+     "volume_over_start": 0.31197565959652584,
+     "relief_over_start": 0.5088446847134644,
+     "forms_kept": -0.09622788390825587,
+     "mean_fall_to_a_neighbour_deg": 3.011793821220055,
+     "highest_m": 2910.141884396672,
+     "mean_change_m": -30.104426479830884,
+     "rock_cut_km3_per_myr": 8638.78791866185,
+     "rock_gone_km3": 2479.478041223107,
+     "rock_slid_km3": 24067.87230256341
+    },
+    "4.5e+08": {
+     "number": {
+      "under 10 km2": 697,
+      "10-100 km2": 131,
+      "100-1,000 km2": 45,
+      "over 1,000 km2": 9
+     },
+     "share_of_ground": 0.2882232666015625,
+     "volume_km3": 33204.81141048427,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 81,
+       "area_km2": 3642.07225684043,
+       "median_depth_m": 30.397512502701648,
+       "deepest_m": 750.5412784607906
+      },
+      "on_new_ground": {
+       "number": 22,
+       "area_km2": 652.7284309679151,
+       "median_depth_m": 4.90803294756865,
+       "deepest_m": 71.6685925780057
+      },
+      "on_both": {
+       "number": 82,
+       "area_km2": 58039.49456995641,
+       "median_depth_m": 33.93860837274522,
+       "deepest_m": 2787.38885925495
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0745697021484375,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.4036865234375,
+     "volume_over_start": 0.28400646625294385,
+     "relief_over_start": 0.4746917775754334,
+     "forms_kept": -0.09023803498667872,
+     "mean_fall_to_a_neighbour_deg": 2.7732313790281404,
+     "highest_m": 3357.6705380730186,
+     "mean_change_m": -34.15335985522249,
+     "rock_cut_km3_per_myr": 8211.436647852299,
+     "rock_gone_km3": 2910.606308802896,
+     "rock_slid_km3": 31081.427204966534
+    },
+    "5e+08": {
+     "number": {
+      "under 10 km2": 957,
+      "10-100 km2": 118,
+      "100-1,000 km2": 27,
+      "over 1,000 km2": 9
+     },
+     "share_of_ground": 0.2618408203125,
+     "volume_km3": 31042.700105381515,
+     "hollows_of_10_km2_or_more": {
+      "on_old_ground": {
+       "number": 62,
+       "area_km2": 3238.2441614167,
+       "median_depth_m": 22.76309707020281,
+       "deepest_m": 542.2753031434335
+      },
+      "on_new_ground": {
+       "number": 28,
+       "area_km2": 1000.6809408613175,
+       "median_depth_m": 12.21069385752397,
+       "deepest_m": 59.06911359074738
+      },
+      "on_both": {
+       "number": 64,
+       "area_km2": 49300.04503314476,
+       "median_depth_m": 24.711231382801856,
+       "deepest_m": 2707.8060392336947
+      }
+     },
+     "ground_in_a_hollow_now_and_not_at_the_start": 0.0671539306640625,
+     "ground_in_a_hollow_at_the_start_and_not_now": 0.4226531982421875,
+     "volume_over_start": 0.2655135561798606,
+     "relief_over_start": 0.4361931970814819,
+     "forms_kept": -0.07739062217747089,
+     "mean_fall_to_a_neighbour_deg": 2.510027015090064,
+     "highest_m": 3203.0104404011895,
+     "mean_change_m": -38.8359336689298,
+     "rock_cut_km3_per_myr": 7804.362889497999,
+     "rock_gone_km3": 3339.473566743326,
+     "rock_slid_km3": 39105.58609369537
+    }
+   },
+   "seconds": 3019
+  }
+ },
+ "seconds": 3019
+}
