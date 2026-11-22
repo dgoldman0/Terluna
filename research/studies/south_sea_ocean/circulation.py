@@ -52,6 +52,7 @@ from climate.ocean import stratified as ST
 from research.studies.south_sea_ocean import inflows as I
 from research.studies.south_sea_ocean import run as R
 from research.studies.south_sea_ocean import spray as SP
+from shared.constants import STANDARD_GRAVITY
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -79,6 +80,10 @@ SEA_OXYGEN = 'research/studies/sea_oxygen/results/sea_oxygen.json'    # the desi
 HYPOXIC_MG_L = 2.0                      # the oxygen under which most fish fail (the sea oxygen study's threshold)
 MARTIN_B = 0.86                         # an ocean's sinking flux falls as depth^-0.86 below 100 m (Martin et al. 1987,
 MARTIN_FROM_M = 100.0                   # recalled); warm water decays its matter shallower
+EARTH_FLUX_WATER_C = 7.5                # the water Martin's curve was measured in below 100 m, about 5-10 C (recalled)
+SINKING_WATER_C = 28.0                  # this sea between 100 and 500 m, 27.6-29.5 C in the 50-year run's last years
+DECAY_Q10 = 2.0                         # the decay's rise for each 10 K of warmth (recalled, a usual value for microbes)
+SINKING_FORMS = ('ocean_moon_sinking', 'ocean_moon_sinking_warm_decay')
 RENEWAL_YEARS = 10                      # the dye's last years over which each level's renewal is read
 AIR_KEPT_YEARS = 2.0                    # water younger than this is the air's to keep: the estimate leaves it out
 SALT_CLASSES = ((0.0, 0.5, 'fresh'), (0.5, 5.0, 'nearly fresh'), (5.0, 18.0, 'brackish'), (18.0, 30.0, 'mixed'),
@@ -663,11 +668,26 @@ def demand_lake_form(basin, s):
     return dict(water=total - floor, floor=floor)
 
 
-def demand_ocean_form(basin, s, b=MARTIN_B, z_ref=MARTIN_FROM_M):
+def sinking_stretch(water_c=SINKING_WATER_C, gravity=lunar.GRAVITY, decay_q10=None):
+    """How many times shorter a sinking particle's fall is than on Earth before the same share of it has decayed.
+    By Stokes's law a particle of one size and excess density sinks at a speed proportional to gravity over the
+    water's viscosity, so under the Moon's gravity it falls slower by the ratio of the gravities, and in water warmer
+    than Martin's (EARTH_FLUX_WATER_C) faster by the ratio of the viscosities. With decay_q10 the matter also decays
+    faster in the warmer water, by that factor for each 10 K. Earth's own curve is 1."""
+    from biosphere.ecology import lake as L
+    stretch = STANDARD_GRAVITY / gravity * float(L.viscosity(water_c) / L.viscosity(EARTH_FLUX_WATER_C))
+    if decay_q10:
+        stretch *= decay_q10 ** ((water_c - EARTH_FLUX_WATER_C) / 10.0)
+    return stretch
+
+
+def demand_ocean_form(basin, s, b=MARTIN_B, z_ref=MARTIN_FROM_M, stretch=1.0):
     """The same nutrient state's demand with its depth below z_ref taken from an ocean: above z_ref the lake form's,
     and what the lake form spends below z_ref leaves that depth as a sinking flux that falls as depth^-b, as Martin
     et al. measured it from 100 m in the open ocean. Each level's water takes what the flux loses across the level
-    and the floor within it takes the flux that reaches it. The whole is kept."""
+    and the floor within it takes the flux that reaches it. The whole is kept. With `stretch` (sinking_stretch) the
+    flux at a depth z below z_ref is Earth's at z_ref + stretch (z - z_ref): the matter decays over a fall that many
+    times shorter, so more of the demand lies high and less reaches the floor."""
     lake = demand_lake_form(basin, s)
     z_ref = min(z_ref, basin.depth)
     top, bottom = basin.z[:-1], basin.z[1:]
@@ -675,13 +695,16 @@ def demand_ocean_form(basin, s, b=MARTIN_B, z_ref=MARTIN_FROM_M):
     export = float(((lake['water'] + lake['floor']) * basin.volume * share).sum())      # g a year
     a_ref = float(np.interp(z_ref, basin.z, basin.area))
     per_m2 = export / a_ref if a_ref > 0 else 0.0                       # a sea with no water below z_ref exports none
-    flux = lambda z: per_m2 * (np.maximum(z, z_ref) / z_ref) ** -b                      # g/m2 a year
+    # at stretch 1 the depth is taken as it stands, so that Earth's form keeps its values to the last digit
+    fall = (lambda z: np.maximum(z, z_ref)) if stretch == 1.0 else \
+        (lambda z: z_ref + stretch * (np.maximum(z, z_ref) - z_ref))
+    flux = lambda z: per_m2 * (fall(z) / z_ref) ** -b                                   # g/m2 a year
     a_top, a_bottom = basin.area[:-1], basin.area[1:]
     entry = flux(np.maximum(top, z_ref))
     water = np.where(share > 0, (entry - flux(bottom)) * a_bottom / basin.volume, 0.0) + lake['water'] * (1.0 - share)
     floor = entry * (a_top - a_bottom) * share / basin.volume + lake['floor'] * (1.0 - share)
     floor[-1] += flux(bottom[-1]) * a_bottom[-1] / basin.volume[-1]      # the flat floor at the bottom takes the rest
-    return dict(water=water, floor=floor, export_g_m2_yr=per_m2, from_m=z_ref)
+    return dict(water=water, floor=floor, export_g_m2_yr=per_m2, from_m=z_ref, stretch=float(stretch))
 
 
 def water_age(years, n):
@@ -713,10 +736,11 @@ def mean_over(values, weights, where):
 def oxygen_estimate(sea, years, volume, level_mid):
     """The deeps' oxygen as the dye and the sea oxygen study's demand give it, level by level: water that left the
     surface at saturation and has spent demand D over its mean age since (water_age) holds saturation less D times
-    the age, and none where that exceeds it. For each nutrient state, in the lake model's form and with the same
-    demand set at an ocean's depths below 100 m. The age is the dye's; D is the level's own. Levels whose water is
-    younger than AIR_KEPT_YEARS are left out (None): the air keeps them near saturation, and the dye's yearly means
-    cannot say how near."""
+    the age, and none where that exceeds it. For each nutrient state, in the lake model's form, with the same
+    demand set at an ocean's depths below 100 m by Earth's curve, and with that curve shortened for the Moon's slower
+    sinking, alone and with the warm water's faster decay (SINKING_FORMS, sinking_stretch). The age is the dye's; D is
+    the level's own. Levels whose water is younger than AIR_KEPT_YEARS are left out (None): the air keeps them near
+    saturation, and the dye's yearly means cannot say how near."""
     from biosphere.ecology import lake as L
     from research.studies.lake_oxygen import run as LO
     basin = hypsometry(sea, volume)
@@ -731,10 +755,13 @@ def oxygen_estimate(sea, years, volume, level_mid):
     saturation = float(L.oxygen_saturation(cold, LO.DESIGN_PRESSURE_PA / 101325.0, salt_g_kg, o2_fraction))
     mid = np.asarray(level_mid[:n])
     eels = (mid >= 270.0) & (mid <= 500.0)
+    stretches = (sinking_stretch(), sinking_stretch(decay_q10=DECAY_Q10))
     states = {}
     for trophic, sc in central_scenarios().items():
         forms = {}
-        for form, demand in (('lake', demand_lake_form(basin, sc)), ('ocean', demand_ocean_form(basin, sc))):
+        for form, demand in (('lake', demand_lake_form(basin, sc)), ('ocean', demand_ocean_form(basin, sc)),
+                             (SINKING_FORMS[0], demand_ocean_form(basin, sc, stretch=stretches[0])),
+                             (SINKING_FORMS[1], demand_ocean_form(basin, sc, stretch=stretches[1]))):
             d = demand['water'] + demand['floor']
             o2 = np.where(young, np.nan, np.clip(saturation - np.where(d > 0, d * age, 0.0), 0.0, None))
             low = np.flatnonzero(o2 < HYPOXIC_MG_L)
@@ -744,7 +771,7 @@ def oxygen_estimate(sea, years, volume, level_mid):
                 hypoxic_from_m=float(basin.z[low[0]]) if low.size else None,
                 eels_layer_mg_l=mean_over(o2, basin.volume, eels),
                 below_1000_m_mg_l=mean_over(o2, basin.volume, mid > 1000.0),
-                **({k: demand[k] for k in ('export_g_m2_yr', 'from_m')} if form == 'ocean' else {}))
+                **({k: demand[k] for k in ('export_g_m2_yr', 'from_m')} if form != 'lake' else {}))
         states[trophic] = forms
     return dict(saturation_mg_l=saturation, at_c=cold, salinity_g_kg=salt_g_kg, o2_fraction=o2_fraction,
                 tail_from_years=list(aged['span']), age_years=[float(x) for x in age],
@@ -752,7 +779,9 @@ def oxygen_estimate(sea, years, volume, level_mid):
                 renewed_within_the_first_year=[bool(x) for x in renewed],
                 left_to_the_air=[bool(x) for x in young], air_kept_years=AIR_KEPT_YEARS,
                 level_mid_m=[float(x) for x in mid], basin_volume_km3=[float(x) / 1e9 for x in basin.volume],
-                eels_layer_m=[270.0, 500.0], hypoxic_mg_l=HYPOXIC_MG_L, martin_b=MARTIN_B, states=states)
+                eels_layer_m=[270.0, 500.0], hypoxic_mg_l=HYPOXIC_MG_L, martin_b=MARTIN_B,
+                sinking=dict(water_c=SINKING_WATER_C, earth_curve_water_c=EARTH_FLUX_WATER_C, decay_q10=DECAY_Q10,
+                             stretch=dict(zip(SINKING_FORMS, stretches))), states=states)
 
 
 def tide_trial(args):
@@ -1081,7 +1110,10 @@ def read(args):
                              'of the sea taken as the lake model\'s basin, saturation at the coldest band\'s surface '
                              'less the demand over the renewal rate the dye shows across its last years, for the '
                              'sea oxygen study\'s central column of each nutrient state, with that demand as the lake '
-                             'model sets it in depth and as an ocean\'s sinking flux would (martin_b). deep_flow_m_s '
+                             'model sets it in depth, as an ocean\'s sinking flux would on Earth (martin_b), and '
+                             'with that flux shortened for the Moon\'s slower sinking, alone and with the warm '
+                             'water\'s faster decay (sinking.stretch: Earth\'s depth below 100 m is that many '
+                             'times the Moon\'s). deep_flow_m_s '
                              'gives the speeds of the latest yearly mean at four depths.'),
                setting=setting, level_mid_m=level_mid, model_years=len(years), years=years, months=months,
                oxygen_estimate=oxygen, deep_flow_m_s=flows)

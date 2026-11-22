@@ -272,6 +272,44 @@ def test_the_sea_is_the_lake_models_basin_and_keeps_its_demand(tmp_path, monkeyp
     assert kept(ocean, deep) == pytest.approx(kept(C.demand_lake_form(deep, s), deep), rel=1e-9)
 
 
+def test_the_moons_sinking_shortens_the_fall_and_keeps_the_whole():
+    from biosphere.ecology import lake as L
+    from shared.constants import STANDARD_GRAVITY
+    # Stokes: speed as gravity over viscosity, so Earth's water at Earth's gravity is the curve as measured
+    assert C.sinking_stretch(C.EARTH_FLUX_WATER_C, gravity=STANDARD_GRAVITY) == pytest.approx(1.0)
+    moon = C.sinking_stretch()
+    assert moon == pytest.approx(STANDARD_GRAVITY / lunar.GRAVITY * L.viscosity(28.0) / L.viscosity(7.5))
+    assert moon == pytest.approx(3.60, abs=0.02)                            # a sixth of the gravity, warm thin water
+    assert C.sinking_stretch(decay_q10=2.0) == pytest.approx(moon * 2.0 ** 2.05)
+    s = C.central_scenarios()['oligotrophic']
+    deep = L.Basin(np.linspace(0.0, 2000.0, 201), np.full(201, 1e12))        # a cylinder: only the last floor
+    kept = lambda d: float(((d['water'] + d['floor']) * deep.volume).sum())
+    earth = C.demand_ocean_form(deep, s)
+    again = C.demand_ocean_form(deep, s, stretch=1.0)
+    assert (again['water'] == earth['water']).all() and (again['floor'] == earth['floor']).all()
+    slow = C.demand_ocean_form(deep, s, stretch=moon)
+    assert kept(slow) == pytest.approx(kept(earth), rel=1e-9) and slow['export_g_m2_yr'] == earth['export_g_m2_yr']
+    below = deep.z[:-1] >= 400.0
+    part = lambda d: float(((d['water'] + d['floor']) * deep.volume)[below].sum()) / (d['export_g_m2_yr'] * 1e12)
+    assert part(earth) == pytest.approx(4.0 ** -0.86, rel=1e-6)             # 30% of the export passes 400 m on Earth
+    assert part(slow) == pytest.approx((1.0 + moon * 3.0) ** -0.86, rel=1e-6) and 0.11 < part(slow) < 0.13
+    assert slow['floor'][-1] < earth['floor'][-1] and slow['water'][10] > earth['water'][10]
+
+
+def test_the_stored_estimate_carries_the_moons_sinking():
+    est = json.loads((C.HERE / 'results' / 'circulation_1deg.json').read_text())['oxygen_estimate']
+    assert est['sinking']['stretch'][C.SINKING_FORMS[0]] == pytest.approx(C.sinking_stretch())
+    assert est['sinking']['stretch'][C.SINKING_FORMS[1]] == pytest.approx(C.sinking_stretch(decay_q10=C.DECAY_Q10))
+    volume = np.array(est['basin_volume_km3'])
+    for forms in est['states'].values():
+        assert set(forms) == {'lake', 'ocean', *C.SINKING_FORMS}
+        total = {k: float(((np.array(f['demand_g_m3_yr']['water']) + np.array(f['demand_g_m3_yr']['floor'])) * volume).sum())
+                 for k, f in forms.items()}
+        assert all(v == pytest.approx(total['lake'], rel=1e-9) for v in total.values())
+        eels = [forms[k]['eels_layer_mg_l'] for k in ('ocean', *C.SINKING_FORMS)]
+        assert eels == sorted(eels) and eels[-1] > eels[0]                  # less sinks into the eels' layer
+
+
 def test_the_waters_age_is_the_area_under_its_dye():
     # a level whose dye falls by 1% a year holds water 100 years old on average; one cleared at once, none
     years = [dict(year=float(y), old_water_by_depth=[0.0, float(np.exp(-0.01 * (y - 0.5) * C.YEAR_S / C.R.YEAR_S))])

@@ -61,3 +61,24 @@ def test_oxygen_scales_with_the_export_and_is_bounded_by_the_dye():
     assert reference['low'].tolist() == [5.0, 0.0, 0.0]                     # water not renewed since the start
     half = M.oxygen_at_exports(6.0, used, new, 2.0 * M.EXPORTS_G_C[0])[M.EXPORTS_G_C[0]]
     assert half['high'].tolist() == [5.5, 4.5, 1.5]
+
+
+def test_the_paused_runs_reading_shows_a_renewed_top_and_a_still_layer():
+    import json
+    out = json.loads((M.HERE / 'results' / 'lunar_mixing_1deg.json').read_text())
+    assert out['schema'] == 'terluna.research.south-sea-lunar-mixing/1' and out['model_years'] == len(out['years']) == 3
+    assert out['setting']['tracers'] == list(M.RUN_TRACERS) and [y['year'] for y in out['years']] == [51.0, 52.0, 53.0]
+    mid = np.array(out['level_mid_m'])
+    at = lambda depth: int(np.abs(mid - depth).argmin())
+    dye = np.array([[np.nan if v is None else v for v in y['new_water_by_depth']] for y in out['years']])
+    used = np.array([[np.nan if v is None else v for v in y['used_by_depth_mg_l']] for y in out['years']])
+    k = np.array([np.nan if v is None else v for v in out['years'][-1]['diffusivity_by_depth_m2_s']])
+    for depth in (117.0, 179.0, 269.0):
+        assert (np.diff(dye[:, at(depth)]) < 0).all()                       # the upper zone's water reaches the surface
+    assert dye[-1, at(117.0)] < 0.4 < 0.8 < dye[-1, at(269.0)]
+    assert (dye[-1, mid > 580.0][:6] > 0.9998).all()                        # under 0.02% from 585 m down in three years
+    assert k[at(328.0)] > 10.0 * k[at(399.0)] and (k[(mid > 390.0) & (mid < 900.0)] < 1e-6).all()
+    assert k[at(1493.0)] > 1e-3                                             # the deep pool, stirred within itself
+    assert (np.diff(used[:, at(483.0)]) > 0).all() and used[-1, at(117.0)] < 0.5
+    bounds = out['oxygen']['34 g C']
+    assert bounds['high']['eels_layer_mg_l'] > 6.0 and bounds['low']['eels_layer_mg_l'] < 0.5
