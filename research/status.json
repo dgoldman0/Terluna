@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -2253,6 +2253,22 @@
         "What is open is listed in studies/atlas_round/README.md under 'Where the round stands (21 November 2026)' and 'What is open'. The naming samples and the map of parent cultures are on the research drive (session-tools/atlas_places/), none adopted."
       ],
       "next_session_task": "Resumes on the author's word."
+    },
+    {
+      "topic": "river_oxygen",
+      "condition": "computed_22_november_2026_on_the_design_surface; rivers_bring_each_fresh_sea_about_a_thousandth_of_its_volume_a_year; bound_if_every_river_sank_6_percent_of_the_oligotrophic_deep_demand; river_water_out_of_lakes_as_warm_as_the_seas_surface_or_warmer; central_case_4_percent_of_river_water_below_the_nights_mixing_and_half_a_percent_of_the_demand; temperatures_on_the_earlier_design_years; no_underflow_computed; no_independent_review",
+      "material": [
+        "studies/river_oxygen/README.md",
+        "studies/river_oxygen/results/river_oxygen.json",
+        "studies/river_oxygen/results/mouths.json",
+        "studies/river_oxygen/results/waters.json",
+        "studies/river_oxygen/sources.json"
+      ],
+      "unresolved": [
+        "The rivers' and lakes' temperatures on the design climate's own record, once a run on the design surface writes one.",
+        "The river deltas study's plume classes with the large rivers at their lakes' temperature."
+      ],
+      "next_session_task": "None set; the study answers its question."
     }
   ]
 }

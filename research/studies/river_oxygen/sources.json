@@ -1,0 +1,85 @@
+{
+ "schema": "terluna.research.river-oxygen-sources/1",
+ "accessed": "2026-11-22",
+ "scope": "Values the study carries from outside the project, each with how far it was read in the bounded lookup of 22 November 2026 (30 searches, 25 documents opened; the lookup's full table of equations and values, with what could not be verified, is on the research drive in session-tools/agents/river_oxygen/values.md). Search summaries are second-hand and stay open until checked.",
+ "sources": [
+  {
+   "citation": "Piton, V.; Soulignac, F.; Lemmin, U.; Graf, B.; Wynn, H. K.; Blanckaert, K.; Barry, D. A. (2022), Tracing unconfined nearfield spreading of a river plume interflow in a large lake (Lake Geneva): hydrodynamics, suspended particulate matter, and associated fluxes. Frontiers in Water 4:943242",
+   "use": "The Rhone in Lake Geneva, a mouth open on wide water: about two volumes of lake water taken in for each of the river's by 400 m from the mouth, and the inflow settling at 7-20 m in summer and autumn. The upper end of the bracket of surface water taken in (two volumes) and part of the reading that large inflows settle in the upper layers.",
+   "read": "Read at the source",
+   "url": "https://www.frontiersin.org/journals/water/articles/10.3389/frwa.2022.943242/pdf"
+  },
+  {
+   "citation": "Hogg, C. A. R. (2014), The Flow of Rivers into Lakes: Experiments and Models. PhD dissertation, University of Cambridge",
+   "use": "Review of the mixing where an inflow plunges: 0.02-0.7 volumes where a drowned valley confines the inflow (Fleenor 2001; Elder & Wunderlich 1972), 1.87 and 1.94 at two inflows to Lake Taupo (Spigel et al. 2005), a dilution of 2.5 at Lake Iseo. The bracket of 0.2, 1 and 2 volumes.",
+   "read": "Read at the source; the older studies it quotes were not opened",
+   "url": "https://www.repository.cam.ac.uk/bitstream/1810/245315/3/Hogg%20-%202014%20-%20The%20flow%20of%20rivers%20into%20lakes.pdf"
+  },
+  {
+   "citation": "Akiyama, J.; Katayama, T.; Nishi, K.; Doi, M. (2004), Flow characteristics of plunge flows in well-mixed and stratified reservoirs. Annual Journal of Hydraulic Engineering, JSCE 48, 1375-1380",
+   "use": "Densimetric Froude number of about 0.5 where an inflow plunges, the value the river deltas study carries and the plunge depths here use.",
+   "read": "Read at the source",
+   "url": "https://www.jstage.jst.go.jp/article/prohe1990/48/0/48_0_1375/_pdf"
+  },
+  {
+   "citation": "Hipsey, M. R.; Bruce, L. C.; Boon, C.; et al. (2019), A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON). Geoscientific Model Development 12, 473-523",
+   "use": "The General Lake Model's inflow algorithm (its equations 60-67): the underflow's Richardson number and entrainment depend on the bed's slope, the stream's half-angle and the drag, and gravity enters only through the first thickness of the underflow. Used for the reading that the mixing on the slope is not weaker under the Moon's gravity; the underflow itself is not computed here.",
+   "read": "Read at the source, with the model's code (glm_flow.c)",
+   "url": "https://gmd.copernicus.org/articles/12/473/2019/gmd-12-473-2019.pdf"
+  },
+  {
+   "citation": "Vollmer, M. K.; Bootsma, H. A.; Hecky, R. E.; Patterson, G.; Halfman, J. D.; Edmond, J. M.; Eccles, D. H.; Weiss, R. F. (2005), Deep-water warming trend in Lake Malawi, East Africa. Limnology and Oceanography 50(2), 727-732",
+   "use": "Lake Malawi: anoxic below about 220 m; most river water sinks below the surface, being a few degrees cooler; the largest river settles near 50 m in summer; the deep cooling of 1977-1979 would have needed river water to take in 22 times its volume, which the authors call high. The nearest analogue on Earth.",
+   "read": "Read at the source",
+   "url": "https://people.hws.edu/Halfman/Data/Reprints/Vollmer05a1.pdf"
+  },
+  {
+   "citation": "Boehrer, B.; Schultze, M. (2008), Stratification of lakes. Reviews of Geophysics 46, RG2005",
+   "use": "Review of stratification in lakes: deep water renewed in episodes and in part; Lake Malawi's deep water 20-25 years old; Lake Brienz's rivers reaching the floor by their sediment.",
+   "read": "Read at the source; the studies it quotes were not opened",
+   "url": "https://www.eoas.ubc.ca/~mjelline/453website/eosc453/E_prints/newfer09/boehrer_stratlakeRG08.pdf"
+  },
+  {
+   "citation": "Online limnology text (table citing Bootsma and Hecky; Owen et al.; Gonfiantini et al.; Coulter and Spigel; Eccles; Rzoska), Eutrophication, section 20.1: morphometric and hydrological data for Africa's three largest lakes. Course text hosted at the University of Tartu",
+   "use": "Lake Malawi 8,400 km3 with 29 km3 of river water a year (0.35% of its volume a year); Lake Tanganyika 18,900 km3 with 14 km3 a year (0.074%). The ratios are computed here.",
+   "read": "Read at a secondary source (a table citing Bootsma & Hecky and others)",
+   "url": "https://kodu.ut.ee/~olli/eutr/html/htmlBook_151.html"
+  },
+  {
+   "citation": "Several (Belgian limnology reports; Sterckx et al. 2023; Verburg and Hecky; FAO Lake Tanganyika Research documents), Lake Tanganyika anoxic volume, anoxic depth, Rusizi inflow, turnover time on river inflow. Search results only",
+   "use": "Lake Tanganyika anoxic from about 200 m.",
+   "read": "Search summaries only",
+   "url": "https://edepot.wur.nl/121977"
+  },
+  {
+   "citation": "Borges, A. V.; Darchambeau, F.; Lambert, T.; et al. (2019), Variations in dissolved greenhouse gases (CO2, CH4, N2O) in the Congo River network overwhelmingly driven by fluvial-wetland connectivity. Biogeosciences 16, 3801-3834",
+   "use": "Oxygen in a great tropical river: the Congo's main stem 58-93% of saturation, its tributaries lower; dissolved organic carbon a median 8.6 mg/L. Why saturated river water is the upper case.",
+   "read": "Read at the source",
+   "url": "https://bg.copernicus.org/articles/16/3801/2019/bg-16-3801-2019.pdf"
+  },
+  {
+   "citation": "Sondergaard, M.; Middelboe, M. (1995), A cross-system analysis of labile dissolved organic carbon. Marine Ecology Progress Series 118, 283-294",
+   "use": "The degradable share of dissolved organic carbon in rivers, a mean of 19%: the rivers' own oxygen debt of 2.5 g/m3 with 5 mg/L of carbon.",
+   "read": "Abstract only",
+   "url": "https://int-res.com/abstracts/meps/v118/p283-294"
+  },
+  {
+   "citation": "Meybeck, M. (as cited in a secondary chapter) (1982), Carbon, nitrogen, and phosphorus transport by world rivers. American Journal of Science (as cited by an unidentified secondary chapter in search results)",
+   "use": "Dissolved organic carbon in large rivers, about 5 mg/L in the world mean.",
+   "read": "Search summary of a secondary citation",
+   "url": null
+  },
+  {
+   "citation": "Mueller, Bryant, Matzinger & Wueest (2012), Hypolimnetic oxygen depletion in eutrophic lakes. Environmental Science & Technology 46",
+   "use": "The deep water's areal oxygen demand by nutrient state (0.32, 0.60 and 0.90 g of oxygen for each m2 a day), taken from the sea oxygen study's setting, which takes it from the waters' oxygen study.",
+   "read": "Not opened in this study; carried from research/studies/lake_oxygen",
+   "url": null
+  },
+  {
+   "citation": "research/studies/river_deltas (4 November 2026), the mature rivers' channels, on the research drive in river-deltas/mouths.csv.gz",
+   "use": "The river's channel at its mean flow: depth 0.153 Q^0.535 m, width 3.875 Q^0.465 m at 1.69 m/s, fitted here to that study's 23,015 mature channels (log scatter 0.02).",
+   "read": "Fitted from the study's table",
+   "url": null
+  }
+ ]
+}
