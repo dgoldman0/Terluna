@@ -80,7 +80,9 @@ def carry(receiver, fronts, source, factor):
 
 def lake_bodies(rt, h, row_area, cols):
     """The lakes off the seas, each the cells at one level: the body of every cell (-1 off the lakes), each body's
-    volume (m3) and area (m2), the flow leaving it (m3/s) and the cells where its water leaves."""
+    volume (m3) and area (m2), the flow leaving it (m3/s) and the cells where its water leaves. A lowest point whose
+    lake passes nothing on (keeps) has a receiver like any other, so it is left out of the leaving cells: such a
+    lake has no outflow and keeps what it receives."""
     cell, level = rt['lake_cell'].astype(np.int64), rt['lake_level_m']
     receiver, q = rt['receiver'].astype(np.int64), rt['discharge_m3s']
     values, inverse = np.unique(level, return_inverse=True)
@@ -90,12 +92,14 @@ def lake_bodies(rt, h, row_area, cols):
     depth = np.maximum(level.astype(float) - h.ravel()[cell], 0.0)
     volume = np.bincount(inverse, weights=a * depth, minlength=values.size)
     area = np.bincount(inverse, weights=a, minlength=values.size)
-    leaving = cell[body[receiver[cell]] != inverse]
+    leaving = cell[(body[receiver[cell]] != inverse) & ~rt['keeps'][cell]]
     outflow = np.bincount(body[leaving], weights=q[leaving], minlength=values.size)
     return body, volume, area, outflow, leaving
 
 
-def build(log=print):
+def prepare(log=print):
+    """The design routing made ready for tracers: the receivers and their order, the land's runoff, the lakes with
+    their residences, and the share each cell passes on of what reaches it, by tracer."""
     started = time.time()
     rt = DR.load(log=log)
     meta = rt['meta']
@@ -118,7 +122,6 @@ def build(log=print):
     body, volume, area, outflow, leaving = lake_bodies(rt, h, row_area, cols)
     spills = outflow > 0
     tau = np.where(spills, volume / np.maximum(outflow * YEAR_S, 1e-30), np.inf)
-    gravity = MOON_SURFACE_GRAVITY / STANDARD_GRAVITY
     keep = rt['keeps']
     b = body[leaving]
     factors = {}
@@ -140,6 +143,18 @@ def build(log=print):
     log(f'{len(fronts)} fronts, {time.time() - started:.0f} s')
     into = np.where(donor, sea[receiver], -1)
     mouth = np.flatnonzero(into >= 0)
+    return dict(started=started, meta=meta, h=h, row_area=row_area, rows=rows, cols=cols, names=names, levels=levels,
+                receiver=receiver, discharge=q, sea=sea, donor=donor, local=local, overflow=overflow, runoff=runoff,
+                total=total, body=body, volume=volume, area=area, outflow=outflow, leaving=leaving, spills=spills,
+                tau=tau, keep=keep, factors=factors, fronts=fronts, into=into, mouth=mouth)
+
+
+def build(log=print):
+    c = prepare(log)
+    started, meta, h, row_area, rows, cols = c['started'], c['meta'], c['h'], c['row_area'], c['rows'], c['cols']
+    names, levels, receiver, sea, local, overflow = c['names'], c['levels'], c['receiver'], c['sea'], c['local'], c['overflow']
+    runoff, total, volume, area, outflow, spills, tau, keep = (c[k] for k in ('runoff', 'total', 'volume', 'area', 'outflow', 'spills', 'tau', 'keep'))
+    factors, fronts, into, mouth = c['factors'], c['fronts'], c['into'], c['mouth']
     arrive = {}
     for key, f in factors.items():
         p = carry(receiver, fronts, runoff, f)

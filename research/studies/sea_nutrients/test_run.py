@@ -11,6 +11,7 @@ from research.studies.canopy_colony import column as CL
 from research.studies.canopy_colony import run as CC
 from research.studies.sea_nutrients import dust as DU
 from research.studies.sea_nutrients import loads as LO
+from research.studies.sea_nutrients import people as PE
 from research.studies.sea_nutrients import run as R
 
 HERE = Path(__file__).resolve().parent
@@ -55,11 +56,15 @@ def test_a_lake_is_the_cells_at_one_level():
     cols = 4
     h = np.array([[10.0, 2.0, 3.0, 10.0], [10.0, 10.0, 10.0, 10.0]], np.float32)
     rt = dict(lake_cell=np.array([1, 2], np.int32), lake_level_m=np.array([5.0, 5.0], np.float32),
-              receiver=np.array([1, 2, 3, 3, 4, 5, 6, 7], np.int32), discharge_m3s=np.array([1.0, 2.0, 3.0, 3.0, 0, 0, 0, 0]))
+              receiver=np.array([1, 2, 3, 3, 4, 5, 6, 7], np.int32), discharge_m3s=np.array([1.0, 2.0, 3.0, 3.0, 0, 0, 0, 0]),
+              keeps=np.zeros(8, bool))
     body, volume, area, outflow, leaving = LO.lake_bodies(rt, h, np.array([100.0, 100.0]), cols)
     assert body.tolist() == [-1, 0, 0, -1, -1, -1, -1, -1]
     assert volume.tolist() == [100.0 * 3.0 + 100.0 * 2.0] and area.tolist() == [200.0]
     assert leaving.tolist() == [2] and outflow.tolist() == [3.0]                  # the water leaves by cell 2 alone
+    closed = dict(rt, keeps=np.array([False, False, True, False, False, False, False, False]))
+    _, _, _, outflow, leaving = LO.lake_bodies(closed, h, np.array([100.0, 100.0]), cols)
+    assert leaving.size == 0 and outflow.tolist() == [0.0]                        # a lake that passes nothing on has no exit
 
 
 # --- the budget's rule, by hand
@@ -147,6 +152,22 @@ def test_nitrogen_is_taken_up_with_the_phosphorus():
     assert out['fixing_needed_in_the_sea_mg_m2_yr'] == pytest.approx([0.0, 4.0 * R.N_MG_PER_MG_P - 20.1])
 
 
+def test_a_lakes_share_is_read_where_its_water_leaves():
+    c = dict(leaving=np.array([2, 5]), body=np.array([-1, 0, 0, -1, 1, 1]), volume=np.zeros(2),
+             spills=np.array([True, False]), tau=np.array([4.0, np.inf]), outflow=np.array([2.0, 0.0]))
+    passing = np.array([0.0, 0.0, 6.0, 0.0, 0.0, 3.0])
+    factor = np.array([1.0, 1.0, 1.0 / 3.0, 1.0, 1.0, 0.0])
+    arrives, kept = PE.by_lake(c, passing, factor)
+    assert arrives.tolist() == [6.0, 3.0] and kept == pytest.approx([4.0, 3.0])       # a third passes the first lake
+    tp = PE.lake_phosphorus(np.array([63.1152, 1.0]), c)                            # kg a year into 2 m3/s
+    assert tp[0] == pytest.approx(1e6 * 63.1152 / 3.0 / (2.0 * PE.YEAR_S)) and np.isnan(tp[1])
+    few = PE.how_few(np.array([5.0, 1.2, 3.0, 0.8]), np.array([1e6, 2e6, 3e6, 4e6]))
+    assert few['50%'] == dict(lakes=1, area_km2=1.0) and few['90%'] == dict(lakes=3, area_km2=6.0)
+    over = PE.over_the_lines(np.array([5.0, 20.0, 50.0, np.nan]), np.array([1e6, 1e6, 2e6, 9e6]))
+    assert over['nutrient_poor'] == dict(lakes=2, area_km2=3.0, share_of_lake_area=0.75)
+    assert over['rich']['lakes'] == 1 and over['rich']['share_of_lake_area'] == 0.5
+
+
 # --- the products
 
 def test_the_lakes_keep_most_of_the_lands_phosphorus(loads):
@@ -212,3 +233,33 @@ def test_the_loads_regenerate(loads):
     again = json.loads(json.dumps(LO.build(log=lambda *a: None)))
     for key in ('census', 'transfers', 'seas'):
         assert again[key] == loads[key], key
+
+
+def test_peoples_phosphorus_is_all_accounted_for():
+    people = json.loads(PE.OUT.read_text())
+    for rel, digest in people['inputs'].items():
+        assert PE.sha256(ROOT / rel) == digest, rel
+    for v in people['variants'].values():
+        for key in ('dissolved', 'particles_central'):
+            t = v[key]
+            assert t['reaches_the_seas'] + t['kept_by_spilling_lakes'] + t['kept_where_water_ends'] == pytest.approx(1.0, abs=1e-6)
+            assert t['reaches_the_seas'] == pytest.approx(sum(t['reaches_each_sea'].values()))
+        water = v['runoff']['reaches_the_seas']
+        assert water + v['ends_in_lakes_that_pass_nothing_on'] == pytest.approx(1.0, abs=1e-6)
+        direct = v['runoff_that_crossed_no_lake']['reaches_the_seas']
+        assert direct <= v['dissolved']['reaches_the_seas'] <= water and 0.03 < direct < 0.15
+        few = v['the_lakes_that_keep_it']['dissolved']
+        assert few['50%']['lakes'] < few['90%']['lakes'] < 0.3 * people['setting']['lakes']
+        for end in v['lakes_over_the_lines'].values():
+            shares = [end[k]['nutrient_poor']['share_of_lake_area'] for k in ('the_land_alone', 'with 10 g a person', 'with 30 g a person', 'with 90 g a person')]
+            assert shares == sorted(shares) and shares[-1] < 0.2                    # most of the lakes' area stays poor
+        for sea in v['seas'].values():
+            assert sea['mg_m2_yr_for_each_g_a_person'] >= 0.0 and sea['share_that_crossed_no_lake'] <= sea['share_of_peoples_dissolved_loss'] + 1e-12
+
+
+@pytest.mark.skipif(not os.environ.get('TERLUNA_SEA_NUTRIENTS_REGENERATE'),
+                    reason='reads the design routing and the land-use grid on the research drive; set TERLUNA_SEA_NUTRIENTS_REGENERATE=1')
+def test_peoples_phosphorus_regenerates():
+    people = json.loads(PE.OUT.read_text())
+    again = json.loads(json.dumps(PE.build(log=lambda *a: None)))
+    assert again['variants'] == people['variants']

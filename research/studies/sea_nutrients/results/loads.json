@@ -2,7 +2,7 @@
  "schema": "terluna.research.sea-nutrients-loads/1",
  "producer": {
   "module": "research.studies.sea_nutrients.loads",
-  "code_sha256": "7cfd39ba49ad4ea2fd181d4787592164b9e88b6129b3123518e42aaf1d5d5bae"
+  "code_sha256": "a98130ef8f158eb0fb96c4d8c99cec6461ec95432132c88b7d453de60ee1dd5c"
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
@@ -11,15 +11,15 @@
  "reading_rule": "seas: for each sea of the design surface, the shares of the whole land's dissolved loss and of its particles that reach it through its own rivers, the share of the land's runoff that does, how much of that crossed no lake, and the dissolved share that other seas pass on to it. transfers: the seas that pass water on, with their residence and the share a water of that residence passes on. The particle cases are Brune's upper curve at Earth's settling (low), the median curve with settling slowed by lunar gravity (central) and the lower curve so slowed (high). Multiply the shares by the land's loss to get kilograms.",
  "census": {
   "lakes": 31375,
-  "spilling": 31370,
+  "spilling": 25452,
   "lake_area_km2": 6558333.37083142,
   "lake_volume_km3": 5951748.334875001,
   "land_runoff_m3s": 98293.64520845618,
   "runoff_ending_in_closed_lakes": 0.10137374255420287,
   "residence_yr_by_outflow": {
-   "p10": 0.00010946698297613845,
-   "p50": 0.15492955867274144,
-   "p90": 39.18936178042625
+   "p10": 0.00010945755743897114,
+   "p50": 0.14653440267308473,
+   "p90": 39.18694005279779
   }
  },
  "water_entering_from_upper_seas_m3s": 124947.28055614764,
@@ -33,7 +33,7 @@
     "humboldtianum": 7736.0,
     "smythii_marginis": 14653.0
    },
-   "dissolved_share_passed_on": 0.0004355816846308281
+   "dissolved_share_passed_on": 0.00043536380254379555
   },
   "orientale": {
    "outflow_m3s": 16367.0,
@@ -42,7 +42,7 @@
    "to_m3s": {
     "near_side_main": 16367.0
    },
-   "dissolved_share_passed_on": 0.0002777216573874741
+   "dissolved_share_passed_on": 0.0002776570133822604
   },
   "smythii_marginis": {
    "outflow_m3s": 30094.0,
@@ -51,7 +51,7 @@
    "to_m3s": {
     "near_side_main": 30094.0
    },
-   "dissolved_share_passed_on": 0.0001565993465898873
+   "dissolved_share_passed_on": 0.00015658909858672394
   },
   "near_side_main": {
    "outflow_m3s": 9364.0,
@@ -60,48 +60,48 @@
    "to_m3s": {
     "near_side_south": 9364.0
    },
-   "dissolved_share_passed_on": 0.00024259267308970355
+   "dissolved_share_passed_on": 0.00024257177883661585
   }
  },
  "seas": {
   "near_side_main": {
-   "share_of_the_lands_dissolved_loss": 0.023354441135888606,
+   "share_of_the_lands_dissolved_loss": 0.0233524671267061,
    "share_of_the_lands_particles": {
-    "low": 0.012996357673970694,
-    "central": 0.015473138568486523,
-    "high": 0.01696660223737721
+    "low": 0.012996333383391317,
+    "central": 0.015473023319270088,
+    "high": 0.016966451715706952
    },
    "share_of_the_lands_runoff": 0.24172326108009273,
    "of_it_crossed_no_lake": 0.049565303874083325,
    "volume_km3": 2783880.2057018694,
-   "dissolved_share_from_other_seas": 0.0004343210039773614
+   "dissolved_share_from_other_seas": 0.0004342461119689843
   },
   "near_side_south": {
-   "share_of_the_lands_dissolved_loss": 0.004546363827249972,
+   "share_of_the_lands_dissolved_loss": 0.004540149138447452,
    "share_of_the_lands_particles": {
-    "low": 0.0022321956632588053,
-    "central": 0.002678859053908269,
-    "high": 0.0029947956491601833
+    "low": 0.0022311509723865375,
+    "central": 0.0026777346726056437,
+    "high": 0.0029935833110758593
    },
    "share_of_the_lands_runoff": 0.045297331499830715,
    "of_it_crossed_no_lake": 0.04588617724431692,
    "volume_km3": 369158.010989796,
-   "dissolved_share_from_other_seas": 0.00024259267308970355
+   "dissolved_share_from_other_seas": 0.00024257177883661585
   },
   "south_pole_aitken": {
-   "share_of_the_lands_dissolved_loss": 0.0010420489928406806,
+   "share_of_the_lands_dissolved_loss": 0.0010405925308521614,
    "share_of_the_lands_particles": {
-    "low": 0.0003791346233202223,
-    "central": 0.0004029002851004259,
-    "high": 0.00042810349667160417
+    "low": 0.000379134450440416,
+    "central": 0.00040289876499019034,
+    "high": 0.00042810054792487816
    },
    "share_of_the_lands_runoff": 0.15137517349729898,
    "of_it_crossed_no_lake": 0.0024847525897411533,
    "volume_km3": 5795590.281012714,
-   "dissolved_share_from_other_seas": 0.00023738560014348716
+   "dissolved_share_from_other_seas": 0.000237266857616389
   },
   "humboldtianum": {
-   "share_of_the_lands_dissolved_loss": 1.0896231481436738e-06,
+   "share_of_the_lands_dissolved_loss": 1.0896224165639936e-06,
    "share_of_the_lands_particles": {
     "low": 1.089611284195135e-06,
     "central": 1.089611284195135e-06,
@@ -110,14 +110,14 @@
    "share_of_the_lands_runoff": 0.0004681200015607855,
    "of_it_crossed_no_lake": 0.0023276324031491925,
    "volume_km3": 333400.9019480253,
-   "dissolved_share_from_other_seas": 6.848206304855372e-05
+   "dissolved_share_from_other_seas": 6.844780767155376e-05
   },
   "moscoviense": {
-   "share_of_the_lands_dissolved_loss": 0.013702399752702871,
+   "share_of_the_lands_dissolved_loss": 0.013695545682477205,
    "share_of_the_lands_particles": {
-    "low": 0.010391120278499496,
-    "central": 0.01073606173849813,
-    "high": 0.011018460691638952
+    "low": 0.010388904554221428,
+    "central": 0.010733836117076944,
+    "high": 0.01101622498042486
    },
    "share_of_the_lands_runoff": 0.2616943038149002,
    "of_it_crossed_no_lake": 0.03936378473950837,
@@ -125,11 +125,11 @@
    "dissolved_share_from_other_seas": 0.0
   },
   "orientale": {
-   "share_of_the_lands_dissolved_loss": 0.008646138972287564,
+   "share_of_the_lands_dissolved_loss": 0.008644126449900725,
    "share_of_the_lands_particles": {
-    "low": 0.00617235265504968,
-    "central": 0.006686586606405311,
-    "high": 0.007011847648832038
+    "low": 0.006171859695462969,
+    "central": 0.0066860402633089795,
+    "high": 0.007011242371285381
    },
    "share_of_the_lands_runoff": 0.11474499300445798,
    "of_it_crossed_no_lake": 0.05267579518500965,
@@ -137,17 +137,17 @@
    "dissolved_share_from_other_seas": 0.0
   },
   "smythii_marginis": {
-   "share_of_the_lands_dissolved_loss": 0.004700234335027618,
+   "share_of_the_lands_dissolved_loss": 0.0046999831430128295,
    "share_of_the_lands_particles": {
-    "low": 0.004040931238151542,
-    "central": 0.004132441521532374,
-    "high": 0.004193327050520863
+    "low": 0.004040931193521548,
+    "central": 0.0041324410614760184,
+    "high": 0.004193326040454593
    },
    "share_of_the_lands_runoff": 0.08332307454765531,
    "of_it_crossed_no_lake": 0.0480637353796018,
    "volume_km3": 845785.867138053,
-   "dissolved_share_from_other_seas": 0.0001297140214387872
+   "dissolved_share_from_other_seas": 0.00012964913725585278
   }
  },
- "seconds": 69
+ "seconds": 125
 }

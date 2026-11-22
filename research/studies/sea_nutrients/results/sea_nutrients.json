@@ -5,7 +5,7 @@
   "code_sha256": "84c7acf21e837ca61a8077460deb6c5fbd77a736ce1d7174e2b73a94aacf441c"
  },
  "inputs": {
-  "research/studies/sea_nutrients/results/loads.json": "449abe6a8a2d2c57be341fc6449a1ae82f90aec51d92739218019ca967793ad5",
+  "research/studies/sea_nutrients/results/loads.json": "9a10e2df2fad2b0b782bc3812a79a6615fb53488191b2b19bbb56739fa9e39af",
   "research/studies/sea_nutrients/results/dust.json": "576767a55cf41ec0f9f79bafad25da88492f8fef1e7d52a773b8fcd04e4dc8f9",
   "resources/results/sea_phosphorus.json": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1",
   "research/studies/atmospheric_electricity/results/nitrogen_oxides.json": "d48c3d326d9b498ea3b9ab0ae7712de06f492c2b0f133c752a16340a1018dc53",
@@ -96,12 +96,12 @@
   "area_km2": 9243434.383374676,
   "kt_yr": {
    "rivers_dissolved": [
-    4.008785882459203,
-    10.690095686557875
+    4.007446704178803,
+    10.686524544476807
    ],
    "rivers_particles": [
-    50.69121180459978,
-    169.297798584255
+    50.685923524219625,
+    169.281081807301
    ],
    "dust": [
     0.2812259344026895,
@@ -117,11 +117,11 @@
    ]
   },
   "share_of_the_lands_loss_reaching_the_seas": {
-   "dissolved": 0.05599271663914546,
+   "dissolved": 0.055973953693813035,
    "particles": {
-    "low": 0.036213181743534634,
-    "central": 0.04011107738521523,
-    "high": 0.042614226385485045
+    "low": 0.03620940386070841,
+    "central": 0.04010706381001206,
+    "high": 0.042610018578156716
    }
   },
   "people": {
@@ -133,7 +133,7 @@
     44.0,
     180.0
    ],
-   "through_the_lakes_share": 0.05599271663914546
+   "through_the_lakes_share": 0.055973953693813035
   }
  },
  "seas": {
@@ -150,12 +150,12 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     0.43497645987145117,
-     1.1599372263238696
+     0.4349389958041156,
+     1.1598373221443081
     ],
     "rivers_particles": [
-     4.738538817050419,
-     17.556921970681042
+     4.738529960580309,
+     17.55676621190373
     ],
     "freed_from_particles": [
      0.0,
@@ -170,64 +170,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     0.43497645987145117,
-     1.1599372263238696
+     0.4349389958041156,
+     1.1598373221443081
     ],
     "rivers_and_dust": [
-     0.4654008587191895,
-     3.848170955245794
+     0.46536339465185395,
+     3.8480710510662326
     ],
     "rivers_and_inherited_dust": [
-     1.1349764598714511,
-     29.159937226323873
+     1.1349389958041156,
+     29.159837322144313
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 0.43497645987145117,
-      "export_g_c_m2_yr": 0.09963269527470635,
-      "export_with_the_colony_g_c_m2_yr": 1.9549757473325509,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0014885873554069161,
+      "supply_mg_m2_yr": 0.4349389958041156,
+      "export_g_c_m2_yr": 0.09962411401491657,
+      "export_with_the_colony_g_c_m2_yr": 1.9548073673170918,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0014884591449356318,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 1.1599372263238696,
-      "export_g_c_m2_yr": 0.26568718739921693,
-      "export_with_the_colony_g_c_m2_yr": 5.213268659553468,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.003969566281085109,
+      "supply_mg_m2_yr": 1.1598373221443081,
+      "export_g_c_m2_yr": 0.2656643040397775,
+      "export_with_the_colony_g_c_m2_yr": 5.212819646178911,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.003969224386495017,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.4654008587191895,
-      "export_g_c_m2_yr": 0.10660149735702748,
-      "export_with_the_colony_g_c_m2_yr": 2.091716392773637,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0015927064965530473,
+      "supply_mg_m2_yr": 0.46536339465185395,
+      "export_g_c_m2_yr": 0.1065929160972377,
+      "export_with_the_colony_g_c_m2_yr": 2.091548012758178,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0015925782860817628,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 3.848170955245794,
-      "export_g_c_m2_yr": 0.8814353867845799,
-      "export_with_the_colony_g_c_m2_yr": 17.295374768828555,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.013169307201396467,
+      "supply_mg_m2_yr": 3.8480710510662326,
+      "export_g_c_m2_yr": 0.8814125034251404,
+      "export_with_the_colony_g_c_m2_yr": 17.294925755453995,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.013168965306806375,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 1.1349764598714511,
-      "export_g_c_m2_yr": 0.2599698471125451,
-      "export_with_the_colony_g_c_m2_yr": 5.101083983941985,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.003884144919815775,
+      "supply_mg_m2_yr": 1.1349389958041156,
+      "export_g_c_m2_yr": 0.25996126585275536,
+      "export_with_the_colony_g_c_m2_yr": 5.100915603926526,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.003884016709344491,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 29.159937226323873,
-      "export_g_c_m2_yr": 6.679173260912768,
-      "export_with_the_colony_g_c_m2_yr": 131.05759812393086,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.09979186885743949,
+      "supply_mg_m2_yr": 29.159837322144313,
+      "export_g_c_m2_yr": 6.679150377553329,
+      "export_with_the_colony_g_c_m2_yr": 131.0571491105563,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.09979152696284939,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -249,55 +249,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      78.63149456342184,
-      82.01426465994844
+      78.6315944676014,
+      82.01430212401577
      ],
      "kt_yr": [
-      301.8837471893985,
-      314.8709518494349
+      301.8841307437015,
+      314.87109568229846
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      30.953144215442396,
-      34.335914311969
+      30.95324411962196,
+      34.33595177603634
      ],
      "kt_yr": [
-      118.83598569419037,
-      131.8231903542267
+      118.83636924849331,
+      131.82333418709032
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      12.658920974514608,
-      16.041691071041214
+      12.65902087869417,
+      16.04172853510855
      ],
      "kt_yr": [
-      48.60040522412575,
-      61.5876098841621
+      48.60078877842869,
+      61.58775371702571
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     1.6394817677393803,
-     4.371951380638347
+     1.639343192294768,
+     4.371581846119382
     ],
     "particles_kt_yr": [
-     18.192301472024177,
-     67.40491736865218
+     18.192267470071165,
+     67.40431937616057
     ],
     "floor_km2": {
      "under 20 m": 43546.392418520525,
      "under 50 m": 115568.34390980471
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.03764908357924271,
-     0.10039755621131388
+     0.03764590133068167,
+     0.10038907021515113
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     0.4554173638349199,
-     1.6482850762802437
+     0.4554134007650067,
+     1.6482628579756535
     ]
    },
    "water_above_250_m_per_m2": 229.4956928341122,
@@ -322,8 +322,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     3.36740224863676,
-     27.843394108673255
+     3.367131177833547,
+     27.84267125319802
     ],
     "rivers_mg_m2_yr": [
      6.906299684333643,
@@ -339,11 +339,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     20.864974857971117
+     20.86425200249588
     ],
     "arriving_n_to_p_mol": [
-     4.010096886013391,
-     3331.955190658745
+     4.010200996731214,
+     3332.2234296200736
     ]
    }
   },
@@ -360,12 +360,12 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     0.3455016834122574,
-     0.9213378224326865
+     0.34505181412599084,
+     0.9201381710026422
     ],
     "rivers_particles": [
-     3.2112226073286187,
-     12.227454604266015
+     3.209719721626476,
+     12.222504747705601
     ],
     "freed_from_particles": [
      0.0,
@@ -380,64 +380,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     0.3455016834122574,
-     0.9213378224326865
+     0.34505181412599084,
+     0.9201381710026422
     ],
     "rivers_and_dust": [
-     0.37592608225999574,
-     3.6095715513546107
+     0.3754762129737292,
+     3.608371899924567
     ],
     "rivers_and_inherited_dust": [
-     1.0455016834122572,
-     28.92133782243269
+     1.0450518141259908,
+     28.920138171002645
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 0.3455016834122574,
-      "export_g_c_m2_yr": 0.10081248219351273,
-      "export_with_the_colony_g_c_m2_yr": 8.582063343404773,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.00118238453030604,
+      "supply_mg_m2_yr": 0.34505181412599084,
+      "export_g_c_m2_yr": 0.100681216727703,
+      "export_with_the_colony_g_c_m2_yr": 8.57088884876017,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0011808449763464528,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 0.9213378224326865,
-      "export_g_c_m2_yr": 0.26883328584936733,
-      "export_with_the_colony_g_c_m2_yr": 22.885502249079398,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0031530254141494403,
+      "supply_mg_m2_yr": 0.9201381710026422,
+      "export_g_c_m2_yr": 0.26848324460720796,
+      "export_with_the_colony_g_c_m2_yr": 22.855703596693782,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.003148919936923874,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.37592608225999574,
-      "export_g_c_m2_yr": 0.10968988949524844,
-      "export_with_the_colony_g_c_m2_yr": 9.337787933564725,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0012865036714521712,
+      "supply_mg_m2_yr": 0.3754762129737292,
+      "export_g_c_m2_yr": 0.10955862402943871,
+      "export_with_the_colony_g_c_m2_yr": 9.326613438920122,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0012849641174925838,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 3.6095715513546107,
-      "export_g_c_m2_yr": 1.053221692448162,
-      "export_with_the_colony_g_c_m2_yr": 89.6596838265307,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.012352766334460797,
+      "supply_mg_m2_yr": 3.608371899924567,
+      "export_g_c_m2_yr": 1.0528716512060028,
+      "export_with_the_colony_g_c_m2_yr": 89.62988517414509,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.012348660857235233,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 1.0455016834122572,
-      "export_g_c_m2_yr": 0.3050625363133802,
-      "export_with_the_colony_g_c_m2_yr": 25.96966123020052,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.003577942094714899,
+      "supply_mg_m2_yr": 1.0450518141259908,
+      "export_g_c_m2_yr": 0.30493127084757055,
+      "export_with_the_colony_g_c_m2_yr": 25.95848673555592,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0035764025407553114,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 28.92133782243269,
-      "export_g_c_m2_yr": 8.438835450644069,
-      "export_with_the_colony_g_c_m2_yr": 718.3894177209095,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.09897532799050382,
+      "supply_mg_m2_yr": 28.920138171002645,
+      "export_g_c_m2_yr": 8.43848540940191,
+      "export_with_the_colony_g_c_m2_yr": 718.3596190685239,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.09897122251327825,
       "unaided_sea_holds_through_years": 300.0
      }
     }
@@ -459,55 +459,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      45.132288613831534,
-      48.36593408292615
+      45.133488265261576,
+      48.366383952212416
      ],
      "kt_yr": [
-      43.915233201776154,
-      47.06167888908032
+      43.91640050292416,
+      47.06211662701083
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      14.672858651005052,
-      17.90650412009967
+      14.674058302435096,
+      17.906953989385933
      ],
      "kt_yr": [
-      14.277184454548362,
-      17.423630141852524
+      14.278351755696372,
+      17.424067879783024
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      3.2841114895367483,
-      6.517756958631363
+      3.285311140966792,
+      6.51820682791763
      ],
      "kt_yr": [
-      3.195550820780655,
-      6.341996508084814
+      3.1967181219286647,
+      6.342434246015318
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     0.319154740672948,
-     0.8510793084611947
+     0.3187184695190111,
+     0.8499159187173629
     ],
     "particles_kt_yr": [
-     3.1246274894296757,
-     11.897724154983576
+     3.123165131146675,
+     11.892907778242174
     ],
     "floor_km2": {
      "under 20 m": 22703.216195356566,
      "under 50 m": 60621.47619246773
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.014057688475795069,
-     0.037487169268786855
+     0.014038472204841083,
+     0.03743592587957622
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     0.1516869768789398,
-     0.5615417372474413
+     0.15160334866430272,
+     0.5612783487286613
     ]
    },
    "water_above_250_m_per_m2": 205.70867992338597,
@@ -532,8 +532,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     2.7200085926083863,
-     26.117011025930925
+     2.7167535688631883,
+     26.1083309626104
     ],
     "rivers_mg_m2_yr": [
      4.727364216483592,
@@ -549,11 +549,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     21.317527243078835
+     21.30884717975831
     ],
     "arriving_n_to_p_mol": [
-     2.9402959032865135,
-     3056.9534431229536
+     2.94127344392893,
+     3060.6160705174193
     ]
    }
   },
@@ -570,16 +570,16 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     0.03726426127349386,
-     0.09937136339598363
+     0.03721838254475616,
+     0.09924902011934976
     ],
     "rivers_particles": [
-     0.22018957400547623,
-     0.7056393520383725
+     0.22018947360227228,
+     0.7056344916442264
     ],
     "freed_from_particles": [
-     0.022018957400547625,
-     0.21169180561151174
+     0.02201894736022723,
+     0.21169034749326793
     ],
     "dust": [
      0.03042439884773835,
@@ -590,64 +590,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     0.05928321867404149,
-     0.31106316900749537
+     0.059237329904983385,
+     0.3109393676126177
     ],
     "rivers_and_dust": [
-     0.08970761752177983,
-     2.99929689792942
+     0.08966172875272174,
+     2.999173096534542
     ],
     "rivers_and_inherited_dust": [
-     0.7592832186740415,
-     28.3110631690075
+     0.7592373299049834,
+     28.310939367612622
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 0.05928321867404149,
-      "export_g_c_m2_yr": 0.012110774122445569,
-      "export_with_the_colony_g_c_m2_yr": 0.10561788710673428,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.00020288051848157805,
+      "supply_mg_m2_yr": 0.059237329904983385,
+      "export_g_c_m2_yr": 0.012101399656462616,
+      "export_with_the_colony_g_c_m2_yr": 0.10553613252359509,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.00020272347678466582,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 0.31106316900749537,
-      "export_g_c_m2_yr": 0.06354607360938466,
-      "export_with_the_colony_g_c_m2_yr": 0.5541843948780476,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.001064528182178424,
+      "supply_mg_m2_yr": 0.3109393676126177,
+      "export_g_c_m2_yr": 0.06352078262885186,
+      "export_with_the_colony_g_c_m2_yr": 0.5539638326002174,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0010641045059384476,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.08970761752177983,
-      "export_g_c_m2_yr": 0.018326074682998506,
-      "export_with_the_colony_g_c_m2_yr": 0.15982143399002333,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.00030699965962770914,
+      "supply_mg_m2_yr": 0.08966172875272174,
+      "export_g_c_m2_yr": 0.018316700217015553,
+      "export_with_the_colony_g_c_m2_yr": 0.15973967940688416,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0003068426179307969,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 2.99929689792942,
-      "export_g_c_m2_yr": 0.6127165169066655,
-      "export_with_the_colony_g_c_m2_yr": 5.343491940052116,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.010264269102489782,
+      "supply_mg_m2_yr": 2.999173096534542,
+      "export_g_c_m2_yr": 0.6126912259261327,
+      "export_with_the_colony_g_c_m2_yr": 5.343271377774286,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.010263845426249805,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.7592832186740415,
-      "export_g_c_m2_yr": 0.15511147609721845,
-      "export_with_the_colony_g_c_m2_yr": 1.3527249543059556,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.002598438082890437,
+      "supply_mg_m2_yr": 0.7592373299049834,
+      "export_g_c_m2_yr": 0.15510210163123553,
+      "export_with_the_colony_g_c_m2_yr": 1.3526431997228165,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0025982810411935247,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 28.3110631690075,
-      "export_g_c_m2_yr": 5.783574152600302,
-      "export_with_the_colony_g_c_m2_yr": 50.43846708284691,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.09688683075853281,
+      "supply_mg_m2_yr": 28.310939367612622,
+      "export_g_c_m2_yr": 5.783548861619769,
+      "export_with_the_colony_g_c_m2_yr": 50.43824652056908,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.09688640708229282,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -669,55 +669,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      92.48525144761918,
-      95.39484072802682
+      92.48537524901406,
+      95.39488661679589
      ],
      "kt_yr": [
-      222.91288181048037,
-      229.92572895344227
+      222.9131802032,
+      229.92583955699902
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      42.40624309942207,
-      45.31583237982971
+      42.40636690081695,
+      45.315878268598766
      ],
      "kt_yr": [
-      102.20978705347201,
-      109.2226341964339
+      102.21008544619164,
+      109.22274479999062
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      20.599002159876306,
-      23.508591440283947
+      20.599125961271184,
+      23.508637329053002
      ],
      "kt_yr": [
-      49.64881277831615,
-      56.661659921278044
+      49.64911117103577,
+      56.66177052483475
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     0.07315183929741578,
-     0.1950715714597754
+     0.07304959566582173,
+     0.19479892177552463
     ],
     "particles_kt_yr": [
-     0.5307126457236472,
-     1.700769571576949
+     0.5307124037264944,
+     1.7007578567959558
     ],
     "floor_km2": {
      "under 20 m": 5394.067190919537,
      "under 50 m": 13762.498947234824
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.013561536537876428,
-     0.03616409743433714
+     0.013542581706952897,
+     0.03611355121854106
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     0.11194975213464499,
-     0.3514678397458999
+     0.1119307524401437,
+     0.3514151217401393
     ]
    },
    "water_above_250_m_per_m2": 249.64294573487942,
@@ -742,8 +742,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     0.64907837470269,
-     21.701376199030094
+     0.6487463470727053,
+     21.700480435544304
     ],
     "rivers_mg_m2_yr": [
      0.3453564127796524,
@@ -759,11 +759,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     21.283900219881946
+     21.283004456396156
     ],
     "arriving_n_to_p_mol": [
-     0.307796869890164,
-     17243.3163831421
+     0.3078095752861532,
+     17252.141492520524
     ]
    }
   },
@@ -780,8 +780,8 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     0.0174757094593983,
-     0.0466018918917288
+     0.017467104668664107,
+     0.046578945783104286
     ],
     "rivers_particles": [
      0.005457613239889945,
@@ -800,64 +800,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     0.0174757094593983,
-     0.0466018918917288
+     0.017467104668664107,
+     0.046578945783104286
     ],
     "rivers_and_dust": [
-     0.047900108307136646,
-     2.7348356208136533
+     0.04789150351640246,
+     2.7348126747050285
     ],
     "rivers_and_inherited_dust": [
-     0.7174757094593982,
-     28.046601891891733
+     0.717467104668664,
+     28.046578945783107
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 0.0174757094593983,
-      "export_g_c_m2_yr": 0.003771252848484808,
-      "export_with_the_colony_g_c_m2_yr": 0.04365205216922983,
-      "oxygen_spent_below_250_m_mol_m2_yr": 5.9805811412675786e-05,
+      "supply_mg_m2_yr": 0.017467104668664107,
+      "export_g_c_m2_yr": 0.0037693959372308,
+      "export_with_the_colony_g_c_m2_yr": 0.04363055851972124,
+      "oxygen_spent_below_250_m_mol_m2_yr": 5.9776363881913714e-05,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 0.0466018918917288,
-      "export_g_c_m2_yr": 0.010056674262626155,
-      "export_with_the_colony_g_c_m2_yr": 0.11640547245127955,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.00015948216376713545,
+      "supply_mg_m2_yr": 0.046578945783104286,
+      "export_g_c_m2_yr": 0.010051722499282132,
+      "export_with_the_colony_g_c_m2_yr": 0.11634815605258997,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.00015940363701843658,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.047900108307136646,
-      "export_g_c_m2_yr": 0.010336828974852937,
-      "export_with_the_colony_g_c_m2_yr": 0.11964824842120489,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.00016392495255880687,
+      "supply_mg_m2_yr": 0.04789150351640246,
+      "export_g_c_m2_yr": 0.01033497206359893,
+      "export_with_the_colony_g_c_m2_yr": 0.1196267547716963,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.00016389550502804483,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 2.7348356208136533,
-      "export_g_c_m2_yr": 0.5901767049339763,
-      "export_with_the_colony_g_c_m2_yr": 6.8312641310149145,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.009359223084078494,
+      "supply_mg_m2_yr": 2.7348126747050285,
+      "export_g_c_m2_yr": 0.5901717531706322,
+      "export_with_the_colony_g_c_m2_yr": 6.831206814616224,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.009359144557329793,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.7174757094593982,
-      "export_g_c_m2_yr": 0.1548310424423007,
-      "export_with_the_colony_g_c_m2_yr": 1.7921611235436032,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0024553633758215344,
+      "supply_mg_m2_yr": 0.717467104668664,
+      "export_g_c_m2_yr": 0.15482918553104671,
+      "export_with_the_colony_g_c_m2_yr": 1.7921396298940948,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.002455333928290773,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 28.046601891891733,
-      "export_g_c_m2_yr": 6.052448258015264,
-      "export_with_the_colony_g_c_m2_yr": 70.05676832742624,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0959817847401215,
+      "supply_mg_m2_yr": 28.046578945783107,
+      "export_g_c_m2_yr": 6.052443306251919,
+      "export_with_the_colony_g_c_m2_yr": 70.05671101102755,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0959817062133728,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -879,39 +879,39 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      102.0729280593994,
-      104.75986357190592
+      102.07295100550803,
+      104.75987217669666
      ],
      "kt_yr": [
-      28.52629695584627,
-      29.277214185205715
+      28.526303368589797,
+      29.27721658998454
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      45.450937327944715,
-      48.13787284045123
+      45.450960274053344,
+      48.137881445241966
      ],
      "kt_yr": [
-      12.702162657507072,
-      13.453079886866515
+      12.7021690702506,
+      13.453082291645337
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      21.225011553154125,
-      23.911947065660645
+      21.22503449926275,
+      23.911955670451377
      ],
      "kt_yr": [
-      5.931748936448655,
-      6.682666165808097
+      5.931755349192182,
+      6.6826685705869195
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     7.64915449996859e-05,
-     0.00020397745333249572
+     7.649149364279234e-05,
+     0.0002039773163807796
     ],
     "particles_kt_yr": [
      0.00152523787561635,
@@ -922,12 +922,12 @@
      "under 50 m": 4773.732798948011
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     4.0829484997451994e-05,
-     0.00010887862665987197
+     4.0829457584284765e-05,
+     0.00010887855355809271
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     0.0008549675307158255,
-     0.0024194998782886435
+     0.0008549675033026585,
+     0.002419499805186864
     ]
    },
    "water_above_250_m_per_m2": 238.86501313300084,
@@ -952,8 +952,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     0.34658065064018234,
-     19.78786984734905
+     0.3465183907815583,
+     19.787703821059385
     ],
     "rivers_mg_m2_yr": [
      0.008628378144176229,
@@ -969,11 +969,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     19.707121902836377
+     19.70695587654671
     ],
     "arriving_n_to_p_mol": [
-     0.06529086365381735,
-     1066.411238389263
+     0.06529141146876039,
+     1066.6028432642233
     ]
    }
   },
@@ -990,12 +990,12 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     1.1394056773520511,
-     3.0384151396054695
+     1.1388357358331171,
+     3.0368952955549795
     ],
     "rivers_particles": [
-     17.22951270160277,
-     51.8516119763601
+     17.225838809994446,
+     51.8410909758675
     ],
     "freed_from_particles": [
      0.0,
@@ -1010,64 +1010,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     1.1394056773520511,
-     3.0384151396054695
+     1.1388357358331171,
+     3.0368952955549795
     ],
     "rivers_and_dust": [
-     1.1698300761997895,
-     5.726648868527394
+     1.1692601346808555,
+     5.725129024476904
     ],
     "rivers_and_inherited_dust": [
-     1.839405677352051,
-     31.038415139605473
+     1.838835735833117,
+     31.036895295554984
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 1.1394056773520511,
-      "export_g_c_m2_yr": 0.24442502922857876,
-      "export_with_the_colony_g_c_m2_yr": 2.528711683875224,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0038993026990158655,
+      "supply_mg_m2_yr": 1.1388357358331171,
+      "export_g_c_m2_yr": 0.2443027655123335,
+      "export_with_the_colony_g_c_m2_yr": 2.5274467983241853,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.00389735223084879,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 3.0384151396054695,
-      "export_g_c_m2_yr": 0.6518000779428766,
-      "export_with_the_colony_g_c_m2_yr": 6.743231157000596,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.010398140530708973,
+      "supply_mg_m2_yr": 3.0368952955549795,
+      "export_g_c_m2_yr": 0.6514740413662228,
+      "export_with_the_colony_g_c_m2_yr": 6.739858128864495,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.01039293928226344,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 1.1698300761997895,
-      "export_g_c_m2_yr": 0.2509516638815696,
-      "export_with_the_colony_g_c_m2_yr": 2.59623331762726,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.004003421840161997,
+      "supply_mg_m2_yr": 1.1692601346808555,
+      "export_g_c_m2_yr": 0.25082940016532435,
+      "export_with_the_colony_g_c_m2_yr": 2.5949684320762216,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.004001471371994921,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 5.726648868527394,
-      "export_g_c_m2_yr": 1.228479324698966,
-      "export_with_the_colony_g_c_m2_yr": 12.709295899726968,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.01959788145102033,
+      "supply_mg_m2_yr": 5.725129024476904,
+      "export_g_c_m2_yr": 1.228153288122312,
+      "export_with_the_colony_g_c_m2_yr": 12.705922871590866,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0195926802025748,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 1.839405677352051,
-      "export_g_c_m2_yr": 0.39458885925058745,
-      "export_with_the_colony_g_c_m2_yr": 4.082239293836163,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.006294860263424725,
+      "supply_mg_m2_yr": 1.838835735833117,
+      "export_g_c_m2_yr": 0.3944665955343422,
+      "export_with_the_colony_g_c_m2_yr": 4.080974408285124,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.006292909795257649,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 31.038415139605473,
-      "export_g_c_m2_yr": 6.658353278823227,
-      "export_with_the_colony_g_c_m2_yr": 68.88433555543816,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.10622044310706334,
+      "supply_mg_m2_yr": 31.036895295554984,
+      "export_g_c_m2_yr": 6.658027242246573,
+      "export_with_the_colony_g_c_m2_yr": 68.88096252730206,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.10621524185861782,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -1089,55 +1089,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      103.20080042972285,
-      107.75761922205045
+      103.20232027377334,
+      107.75818916356938
      ],
      "kt_yr": [
-      87.12412554872091,
-      90.97108071682422
+      87.12540863066715,
+      90.97156187255406
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      45.21686512946745,
-      49.773683921795055
+      45.218384973517935,
+      49.77425386331399
      ],
      "kt_yr": [
-      38.17295813652133,
-      42.01991330462464
+      38.17424121846757,
+      42.02039446035448
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      20.399338320456106,
-      24.95615711278371
+      20.400858164506598,
+      24.956727054302647
      ],
      "kt_yr": [
-      17.221518685337433,
-      21.068473853440747
+      17.222801767283677,
+      21.06895500917059
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     0.9619084626397416,
-     2.5650892337059776
+     0.9614273069098999,
+     2.563806151759733
     ],
     "particles_kt_yr": [
-     14.545490165843594,
-     43.77414063574323
+     14.542388594999155,
+     43.76525860223188
     ],
     "floor_km2": {
      "under 20 m": 5003.126393670798,
      "under 50 m": 13094.857240853948
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.19226147551591008,
-     0.5126972680424268
+     0.19216530450363054,
+     0.5124408120096815
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     3.099541648218394,
-     9.262054608108764
+     3.0988255506641105,
+     9.260022855428991
     ]
    },
    "water_above_250_m_per_m2": 239.77494199354652,
@@ -1162,8 +1162,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     8.464291277758353,
-     41.43509818633083
+     8.460167472835149,
+     41.4241013732023
     ],
     "rivers_mg_m2_yr": [
      27.004003462129877,
@@ -1179,11 +1179,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     14.358975157832461
+     14.347978344703925
     ],
     "arriving_n_to_p_mol": [
-     10.455338286102812,
-     6492.445704658196
+     10.45811385388863,
+     6495.610367727391
     ]
    }
   },
@@ -1200,12 +1200,12 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     2.037535384252825,
-     5.433427691340867
+     2.0370611164220707,
+     5.432162977125523
     ],
     "rivers_particles": [
-     29.004311192799477,
-     93.51365010960694
+     29.001994741673386,
+     93.50557781318065
     ],
     "freed_from_particles": [
      0.0,
@@ -1220,64 +1220,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     2.037535384252825,
-     5.433427691340867
+     2.0370611164220707,
+     5.432162977125523
     ],
     "rivers_and_dust": [
-     2.0679597831005636,
-     8.121661420262791
+     2.067485515269809,
+     8.120396706047448
     ],
     "rivers_and_inherited_dust": [
-     2.7375353842528254,
-     33.43342769134087
+     2.737061116422071,
+     33.43216297712553
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 2.037535384252825,
-      "export_g_c_m2_yr": 0.45084189859682283,
-      "export_with_the_colony_g_c_m2_yr": 5.081078521449771,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0069729047178536665,
+      "supply_mg_m2_yr": 2.0370611164220707,
+      "export_g_c_m2_yr": 0.45073695818159704,
+      "export_with_the_colony_g_c_m2_yr": 5.079895821945809,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0069712816665829245,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 5.433427691340867,
-      "export_g_c_m2_yr": 1.2022450629248609,
-      "export_with_the_colony_g_c_m2_yr": 13.549542723866056,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.01859441258094311,
+      "supply_mg_m2_yr": 5.432162977125523,
+      "export_g_c_m2_yr": 1.2019652218175922,
+      "export_with_the_colony_g_c_m2_yr": 13.546388858522159,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.018590084444221135,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 2.0679597831005636,
-      "export_g_c_m2_yr": 0.45757385223364827,
-      "export_with_the_colony_g_c_m2_yr": 5.156948987655173,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.007077023858999798,
+      "supply_mg_m2_yr": 2.067485515269809,
+      "export_g_c_m2_yr": 0.4574689118184225,
+      "export_with_the_colony_g_c_m2_yr": 5.15576628815121,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0070754008077290554,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 8.121661420262791,
-      "export_g_c_m2_yr": 1.7970658486574296,
-      "export_with_the_colony_g_c_m2_yr": 20.253292148895493,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.027794153501254467,
+      "supply_mg_m2_yr": 8.120396706047448,
+      "export_g_c_m2_yr": 1.7967860075501612,
+      "export_with_the_colony_g_c_m2_yr": 20.2501382835516,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.027789825364532495,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 2.7375353842528254,
-      "export_g_c_m2_yr": 0.6057296769671132,
-      "export_with_the_colony_g_c_m2_yr": 6.826694814792878,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.009368462282262527,
+      "supply_mg_m2_yr": 2.737061116422071,
+      "export_g_c_m2_yr": 0.6056247365518874,
+      "export_with_the_colony_g_c_m2_yr": 6.825512115288916,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.009366839230991785,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 33.43342769134087,
-      "export_g_c_m2_yr": 7.3977561977364745,
-      "export_with_the_colony_g_c_m2_yr": 83.37419445759032,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.11441671515729747,
+      "supply_mg_m2_yr": 33.43216297712553,
+      "export_g_c_m2_yr": 7.397476356629207,
+      "export_with_the_colony_g_c_m2_yr": 83.37104059224644,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.11441238702057552,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -1299,55 +1299,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      92.74071257062869,
-      98.79441420779092
+      92.74197728484404,
+      98.79488847562168
      ],
      "kt_yr": [
-      27.626418908902007,
-      29.429748781425715
+      27.626795653092824,
+      29.429890060497275
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      38.641544029167825,
-      44.69524566633005
+      38.64280874338317,
+      44.695719934160806
      ],
      "kt_yr": [
-      11.510882901870879,
-      13.314212774394585
+      11.511259646061696,
+      13.314354053466143
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      15.97276446481519,
-      22.02646610197742
+      15.974029179030534,
+      22.026940369808173
      ],
      "kt_yr": [
-      4.758107523728045,
-      6.561437396251752
+      4.7584842679188615,
+      6.561578675323308
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     0.606958955854587,
-     1.618557215612232
+     0.6068176767830309,
+     1.6181804714214156
     ],
     "particles_kt_yr": [
-     8.640059246538542,
-     27.856668339279924
+     8.639369201709064,
+     27.85426369264256
     ],
     "floor_km2": {
      "under 20 m": 2723.356405950559,
      "under 50 m": 7048.2694649170735
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.2228716573887928,
-     0.5943244197034474
+     0.2228197805682461,
+     0.5941860815153229
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     3.395449153180359,
-     10.82312454238032
+     3.3951438960721743,
+     10.822103232491502
     ]
    },
    "water_above_250_m_per_m2": 234.33124263652996,
@@ -1372,8 +1372,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     14.962697840454364,
-     58.7641823535202
+     14.959266281337491,
+     58.755031529208544
     ],
     "rivers_mg_m2_yr": [
      44.903798810221396,
@@ -1389,11 +1389,11 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     13.78826397693031
+     13.779113152618656
     ],
     "arriving_n_to_p_mol": [
-     12.245804590563328,
-     4562.648080487189
+     12.247711817969162,
+     4563.694722503129
     ]
    }
   },
@@ -1410,12 +1410,12 @@
    },
    "supply_mg_m2_yr": {
     "rivers_dissolved": [
-     0.5657190133765584,
-     1.5085840356708224
+     0.5656819922116243,
+     1.5084853125643316
     ],
     "rivers_particles": [
-     9.437753403514497,
-     27.7956358852845
+     9.437753299279397,
+     27.795629190019874
     ],
     "freed_from_particles": [
      0.0,
@@ -1430,64 +1430,64 @@
      28.000000000000004
     ],
     "rivers_alone": [
-     0.5657190133765584,
-     1.5085840356708224
+     0.5656819922116243,
+     1.5084853125643316
     ],
     "rivers_and_dust": [
-     0.5961434122242968,
-     4.196817764592747
+     0.5961063910593627,
+     4.196719041486256
     ],
     "rivers_and_inherited_dust": [
-     1.2657190133765583,
-     29.508584035670825
+     1.2656819922116243,
+     29.508485312564336
     ]
    },
    "what_the_supply_does": {
     "rivers_alone": {
      "low": {
-      "supply_mg_m2_yr": 0.5657190133765584,
-      "export_g_c_m2_yr": 0.12369603313507753,
-      "export_with_the_colony_g_c_m2_yr": 1.3584238865083758,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0019360178026059014,
+      "supply_mg_m2_yr": 0.5656819922116243,
+      "export_g_c_m2_yr": 0.12368793835456617,
+      "export_with_the_colony_g_c_m2_yr": 1.3583349900181327,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0019358911078463284,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 1.5085840356708224,
-      "export_g_c_m2_yr": 0.32985608836020675,
-      "export_with_the_colony_g_c_m2_yr": 3.6224636973556685,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.005162714140282403,
+      "supply_mg_m2_yr": 1.5084853125643316,
+      "export_g_c_m2_yr": 0.32983450227884314,
+      "export_with_the_colony_g_c_m2_yr": 3.6222266400483543,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.005162376287590209,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_dust": {
      "low": {
-      "supply_mg_m2_yr": 0.5961434122242968,
-      "export_g_c_m2_yr": 0.13034841242408624,
-      "export_with_the_colony_g_c_m2_yr": 1.431479995902238,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0020401369437520324,
+      "supply_mg_m2_yr": 0.5961063910593627,
+      "export_g_c_m2_yr": 0.13034031764357487,
+      "export_with_the_colony_g_c_m2_yr": 1.4313910994119952,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.0020400102489924596,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 4.196817764592747,
-      "export_g_c_m2_yr": 0.9176458577420998,
-      "export_with_the_colony_g_c_m2_yr": 10.077542673911667,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.014362455060593762,
+      "supply_mg_m2_yr": 4.196719041486256,
+      "export_g_c_m2_yr": 0.9176242716607362,
+      "export_with_the_colony_g_c_m2_yr": 10.077305616604352,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.014362117207901568,
       "unaided_sea_holds_through_years": 3000.0
      }
     },
     "rivers_and_inherited_dust": {
      "low": {
-      "supply_mg_m2_yr": 1.2657190133765583,
-      "export_g_c_m2_yr": 0.2767529768601055,
-      "export_with_the_colony_g_c_m2_yr": 3.039287880950294,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.0043315753670147596,
+      "supply_mg_m2_yr": 1.2656819922116243,
+      "export_g_c_m2_yr": 0.2767448820795942,
+      "export_with_the_colony_g_c_m2_yr": 3.039198984460051,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.004331448672255187,
       "unaided_sea_holds_through_years": 3000.0
      },
      "high": {
-      "supply_mg_m2_yr": 29.508584035670825,
-      "export_g_c_m2_yr": 6.452133837361328,
-      "export_with_the_colony_g_c_m2_yr": 70.8570234750324,
-      "oxygen_spent_below_250_m_mol_m2_yr": 0.10098501671663677,
+      "supply_mg_m2_yr": 29.508485312564336,
+      "export_g_c_m2_yr": 6.4521122512799645,
+      "export_with_the_colony_g_c_m2_yr": 70.85678641772509,
+      "oxygen_spent_below_250_m_mol_m2_yr": 0.10098467886394458,
       "unaided_sea_holds_through_years": 1000.0
      }
     }
@@ -1509,55 +1509,55 @@
    "room_beside_rivers_and_dust": {
     "300 years": {
      "mg_m2_yr": [
-      99.12106949555121,
-      102.72174384791967
+      99.1211682186577,
+      102.7217808690846
      ],
      "kt_yr": [
-      59.40798241485965,
-      61.56603821163193
+      59.408041584323875,
+      61.56606040018101
      ]
     },
     "1000 years": {
      "mg_m2_yr": [
-      44.329100345835876,
-      47.92977469820433
+      44.329199068942366,
+      47.929811719369255
      ],
      "kt_yr": [
-      26.56854316861628,
-      28.72659896538855
+      26.568602338080495,
+      28.72662115393763
      ]
     },
     "3000 years": {
      "mg_m2_yr": [
-      20.65782494374471,
-      24.25849929611316
+      20.657923666851204,
+      24.258536317278097
      ],
      "kt_yr": [
-      12.381219323327786,
-      14.539275120100054
+      12.381278492792003,
+      14.539297308649134
      ]
     }
    },
    "river_mouths": {
     "dissolved_kt_yr": [
-     0.3299564503189388,
-     0.8798838675171701
+     0.3299388166395006,
+     0.8798368443720017
     ],
     "particles_kt_yr": [
-     5.656495547164528,
-     16.659249706309282
+     5.656495484691463,
+     16.659245693518006
     ],
     "floor_km2": {
      "under 20 m": 4588.955784105463,
      "under 50 m": 11699.35169569694
     },
     "dissolved_g_per_m2_of_floor_under_20_m": [
-     0.07190229451802356,
-     0.19173945204806284
+     0.07189845188360568,
+     0.19172920502294852
     ],
     "all_river_phosphorus_g_per_m2_of_floor_under_20_m": [
-     1.304534687001876,
-     3.822031503239991
+     1.304530830753671,
+     3.8220203817694762
     ]
    },
    "water_above_250_m_per_m2": 237.02543606626875,
@@ -1582,8 +1582,8 @@
    "levels_above_250_m": 13,
    "nitrogen": {
     "taken_up_with_the_phosphorus_mg_m2_yr": [
-     4.313388403190147,
-     30.366023854148953
+     4.313120537001869,
+     30.365309544313547
     ],
     "rivers_mg_m2_yr": [
      14.787555452476425,
@@ -1599,14 +1599,14 @@
     ],
     "fixing_needed_in_the_sea_mg_m2_yr": [
      0.0,
-     15.506348835304031
+     15.505634525468626
     ],
     "arriving_n_to_p_mol": [
-     7.8296322707075126,
-     5723.177305942723
+     7.829816454021383,
+     5723.532743653454
     ]
    }
   }
  },
- "seconds": 13
+ "seconds": 15
 }

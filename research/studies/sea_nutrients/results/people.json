@@ -1,0 +1,703 @@
+{
+ "schema": "terluna.research.sea-nutrients-people/1",
+ "producer": {
+  "module": "research.studies.sea_nutrients.people",
+  "code_sha256": "70684b6b4c16ae06e88aaff78cc1a4d77e949ecb0d29989c6d5f844c83584e52"
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/land_use.json": "cdfcc5253f68a68949b542685c28eb3f2dfc07d23dd8f59da8e1493fea8e0dc4",
+  "resources/results/sea_phosphorus.json": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1",
+  "research/studies/sea_nutrients/results/sea_nutrients.json": "fc215de81c97d5078a2bbfa864ab686344a80d25c22c61ed4c9a825876db1f56",
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/session-tools/agents/atlas_land_use/land_use_16ppd.npz": "e727274a12fbaf5d7de2869f267980a78b1661a837fdc1c2184b1e757be83771"
+ },
+ "evidence": "Tracers carried down the design routing from the land the land-use screen gives to people, spread by area, with Earth's lake relations for what each lake keeps. The screen places kinds of land and no town; the loss a person is the phosphorus study's. Not validated.",
+ "reading_rule": "variants: for each wild share, the land people fill and, for a loss spread over it, the share that reaches each sea in solution and on particles, the share that would reach a sea crossing no lake, the share kept by lakes, how few lakes keep half and nine tenths of it, the lakes whose phosphorus passes 10 and 35 mg/m3 with the land's loss alone and with each dissolved loss a person, and for each sea what a gram a person a year adds and the grams that would fill its room for a thousand years. People number 8e+09.",
+ "setting": {
+  "people": 8000000000.0,
+  "dissolved_g_a_person": [
+   10.0,
+   30.0,
+   90.0
+  ],
+  "lines_mg_m3": {
+   "nutrient_poor": 10.0,
+   "rich": 35.0
+  },
+  "design_loss_g_a_person": [
+   44.0,
+   180.0
+  ],
+  "eaten_kg_a_person": [
+   0.44,
+   0.6
+  ],
+  "lakes": 25452,
+  "lake_area_km2": 6024874.74175152
+ },
+ "variants": {
+  "A": {
+   "what": "30% of the land wild",
+   "peoples_land_km2": 3238360.0283849216,
+   "dissolved": {
+    "reaches_each_sea": {
+     "near_side_main": 0.0249476736390828,
+     "near_side_south": 0.0006569138635756413,
+     "south_pole_aitken": 0.004535420940160508,
+     "humboldtianum": 5.765392556334682e-05,
+     "moscoviense": 0.03678301875599608,
+     "orientale": 0.0036896868143265543,
+     "smythii_marginis": 0.02147734522728889
+    },
+    "reaches_the_seas": 0.09214771316599382,
+    "kept_by_spilling_lakes": 0.6021863284113629,
+    "kept_where_water_ends": 0.3056659582422515
+   },
+   "particles_central": {
+    "reaches_each_sea": {
+     "near_side_main": 0.019607653635558393,
+     "near_side_south": 0.00025016646805019817,
+     "south_pole_aitken": 0.003792243576710151,
+     "humboldtianum": 5.746996268051507e-05,
+     "moscoviense": 0.03367449814651354,
+     "orientale": 0.002909695589497547,
+     "smythii_marginis": 0.020448570638452655
+    },
+    "reaches_the_seas": 0.080740298017463,
+    "kept_by_spilling_lakes": 0.6168756334718866,
+    "kept_where_water_ends": 0.3023840686380294
+   },
+   "runoff_that_crossed_no_lake": {
+    "reaches_each_sea": {
+     "near_side_main": 0.017376799344688044,
+     "near_side_south": 0.00022306178928678142,
+     "south_pole_aitken": 0.003658653538133085,
+     "humboldtianum": 5.7469961542989736e-05,
+     "moscoviense": 0.03319802202275902,
+     "orientale": 0.002707799098009646,
+     "smythii_marginis": 0.02011338372434392
+    },
+    "reaches_the_seas": 0.07733518947876349
+   },
+   "runoff": {
+    "reaches_each_sea": {
+     "near_side_main": 0.16264018982435616,
+     "near_side_south": 0.017795989696028282,
+     "south_pole_aitken": 0.09953148630378793,
+     "humboldtianum": 0.0022742811213649315,
+     "moscoviense": 0.1835108939674826,
+     "orientale": 0.04945847470371128,
+     "smythii_marginis": 0.10690678392363055
+    },
+    "reaches_the_seas": 0.6221180995403617
+   },
+   "ends_in_lakes_that_pass_nothing_on": 0.3778819004596403,
+   "the_lakes_that_keep_it": {
+    "dissolved": {
+     "50%": {
+      "lakes": 439,
+      "area_km2": 3133957.4660517504
+     },
+     "90%": {
+      "lakes": 4348,
+      "area_km2": 4273056.394867259
+     }
+    },
+    "particles": {
+     "50%": {
+      "lakes": 552,
+      "area_km2": 3175109.862627675
+     },
+     "90%": {
+      "lakes": 4696,
+      "area_km2": 3899394.007465198
+     }
+    }
+   },
+   "lakes_over_the_lines": {
+    "the land's loss at its low end": {
+     "the_land_alone": {
+      "nutrient_poor": {
+       "lakes": 3993,
+       "area_km2": 40591.6090385582,
+       "share_of_lake_area": 0.006737336588471152
+      },
+      "rich": {
+       "lakes": 137,
+       "area_km2": 19336.491087711165,
+       "share_of_lake_area": 0.0032094428376596863
+      }
+     },
+     "with 10 g a person": {
+      "nutrient_poor": {
+       "lakes": 8195,
+       "area_km2": 99628.1953423507,
+       "share_of_lake_area": 0.016536143839131056
+      },
+      "rich": {
+       "lakes": 1333,
+       "area_km2": 29796.169965121262,
+       "share_of_lake_area": 0.004945525217086767
+      }
+     },
+     "with 30 g a person": {
+      "nutrient_poor": {
+       "lakes": 10296,
+       "area_km2": 202481.9090788925,
+       "share_of_lake_area": 0.03360765455847934
+      },
+      "rich": {
+       "lakes": 3494,
+       "area_km2": 56152.23258292669,
+       "share_of_lake_area": 0.009320066389729193
+      }
+     },
+     "with 90 g a person": {
+      "nutrient_poor": {
+       "lakes": 11759,
+       "area_km2": 463237.20270987146,
+       "share_of_lake_area": 0.07688744124416462
+      },
+      "rich": {
+       "lakes": 6993,
+       "area_km2": 153420.70758764772,
+       "share_of_lake_area": 0.02546454725846235
+      }
+     }
+    },
+    "the land's loss at its high end": {
+     "the_land_alone": {
+      "nutrient_poor": {
+       "lakes": 13442,
+       "area_km2": 160142.45573265429,
+       "share_of_lake_area": 0.02658021329852553
+      },
+      "rich": {
+       "lakes": 2073,
+       "area_km2": 28742.807285065875,
+       "share_of_lake_area": 0.004770689602205725
+      }
+     },
+     "with 10 g a person": {
+      "nutrient_poor": {
+       "lakes": 15398,
+       "area_km2": 218781.21253466822,
+       "share_of_lake_area": 0.03631298938358763
+      },
+      "rich": {
+       "lakes": 4014,
+       "area_km2": 44712.51887946322,
+       "share_of_lake_area": 0.007421319246624642
+      }
+     },
+     "with 30 g a person": {
+      "nutrient_poor": {
+       "lakes": 16437,
+       "area_km2": 317299.06109309755,
+       "share_of_lake_area": 0.05266483946865492
+      },
+      "rich": {
+       "lakes": 6245,
+       "area_km2": 77170.485535841,
+       "share_of_lake_area": 0.012808645630598855
+      }
+     },
+     "with 90 g a person": {
+      "nutrient_poor": {
+       "lakes": 17417,
+       "area_km2": 581335.0792233213,
+       "share_of_lake_area": 0.09648915606406759
+      },
+      "rich": {
+       "lakes": 8779,
+       "area_km2": 174880.70652722928,
+       "share_of_lake_area": 0.029026446859605398
+      }
+     }
+    }
+   },
+   "seas": {
+    "near_side_main": {
+     "share_of_peoples_dissolved_loss": 0.0249476736390828,
+     "share_that_crossed_no_lake": 0.017376799344688044,
+     "mg_m2_yr_for_each_g_a_person": 0.05198485529307624,
+     "room_for_a_thousand_years_mg_m2_yr": 30.95324411962196,
+     "g_a_person_that_fills_the_room": 595.4281096891802,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.9852119475826163,
+       4.367919603996995
+      ],
+      "30 g": [
+       2.024909053444141,
+       5.4076167098585195
+      ],
+      "90 g": [
+       5.144000371028716,
+       8.526708027443094
+      ]
+     }
+    },
+    "near_side_south": {
+     "share_of_peoples_dissolved_loss": 0.0006569138635756413,
+     "share_that_crossed_no_lake": 0.00022306178928678142,
+     "mg_m2_yr_for_each_g_a_person": 0.005400955235573952,
+     "room_for_a_thousand_years_mg_m2_yr": 14.674058302435096,
+     "g_a_person_that_fills_the_room": 2716.9375901845824,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.4294857653294687,
+       3.6623814522803064
+      ],
+      "30 g": [
+       0.5375048700409477,
+       3.7704005569917856
+      ],
+      "90 g": [
+       0.8615621841753849,
+       4.094457871126222
+      ]
+     }
+    },
+    "south_pole_aitken": {
+     "share_of_peoples_dissolved_loss": 0.004535420940160508,
+     "share_that_crossed_no_lake": 0.003658653538133085,
+     "mg_m2_yr_for_each_g_a_person": 0.015053757061134392,
+     "room_for_a_thousand_years_mg_m2_yr": 42.40636690081695,
+     "g_a_person_that_fills_the_room": 2816.9955665287835,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.24019929936406567,
+       3.149710667145886
+      ],
+      "30 g": [
+       0.5412744405867534,
+       3.4507858083685736
+      ],
+      "90 g": [
+       1.444499864254817,
+       4.354011232036637
+      ]
+     }
+    },
+    "humboldtianum": {
+     "share_of_peoples_dissolved_loss": 5.765392556334682e-05,
+     "share_that_crossed_no_lake": 5.7469961542989736e-05,
+     "mg_m2_yr_for_each_g_a_person": 0.0016503803505876066,
+     "room_for_a_thousand_years_mg_m2_yr": 45.450960274053344,
+     "g_a_person_that_fills_the_room": 27539.688204522576,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.06439530702227853,
+       2.7513164782109047
+      ],
+      "30 g": [
+       0.09740291403403065,
+       2.7843240852226567
+      ],
+      "90 g": [
+       0.19642573506928704,
+       2.883346906257913
+      ]
+     }
+    },
+    "moscoviense": {
+     "share_of_peoples_dissolved_loss": 0.03678301875599608,
+     "share_that_crossed_no_lake": 0.03319802202275902,
+     "mg_m2_yr_for_each_g_a_person": 0.348563565274926,
+     "room_for_a_thousand_years_mg_m2_yr": 45.218384973517935,
+     "g_a_person_that_fills_the_room": 129.72780140647342,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       4.654895787430116,
+       9.210764677226164
+      ],
+      "30 g": [
+       11.626167092928636,
+       16.182035982724685
+      ],
+      "90 g": [
+       32.539981009424196,
+       37.09584989922024
+      ]
+     }
+    },
+    "orientale": {
+     "share_of_peoples_dissolved_loss": 0.0036896868143265543,
+     "share_that_crossed_no_lake": 0.002707799098009646,
+     "mg_m2_yr_for_each_g_a_person": 0.09908897289987484,
+     "room_for_a_thousand_years_mg_m2_yr": 38.64280874338317,
+     "g_a_person_that_fills_the_room": 389.98091929391654,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       3.0583752442685572,
+       9.111286435046196
+      ],
+      "30 g": [
+       5.040154702266054,
+       11.093065893043693
+      ],
+      "90 g": [
+       10.985493076258544,
+       17.038404267036185
+      ]
+     }
+    },
+    "smythii_marginis": {
+     "share_of_peoples_dissolved_loss": 0.02147734522728889,
+     "share_that_crossed_no_lake": 0.02011338372434392,
+     "mg_m2_yr_for_each_g_a_person": 0.2866762805022051,
+     "room_for_a_thousand_years_mg_m2_yr": 44.329199068942366,
+     "g_a_person_that_fills_the_room": 154.63155511605498,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       3.4628691960814137,
+       7.063481846508307
+      ],
+      "30 g": [
+       9.196394806125516,
+       12.797007456552409
+      ],
+      "90 g": [
+       26.39697163625782,
+       29.997584286684713
+      ]
+     }
+    }
+   }
+  },
+  "B": {
+   "what": "half of the land wild",
+   "peoples_land_km2": 2584433.0072274804,
+   "dissolved": {
+    "reaches_each_sea": {
+     "near_side_main": 0.016206874366137478,
+     "near_side_south": 0.000774547042105232,
+     "south_pole_aitken": 0.002596857206832212,
+     "humboldtianum": 7.209584451159272e-05,
+     "moscoviense": 0.0442222814004534,
+     "orientale": 8.451718640180852e-05,
+     "smythii_marginis": 0.01986996706151105
+    },
+    "reaches_the_seas": 0.08382714010795278,
+    "kept_by_spilling_lakes": 0.5340806591224255,
+    "kept_where_water_ends": 0.3820922006850377
+   },
+   "particles_central": {
+    "reaches_each_sea": {
+     "near_side_main": 0.013904201471918176,
+     "near_side_south": 0.00031131364695089386,
+     "south_pole_aitken": 0.002263052374134429,
+     "humboldtianum": 7.201131819240102e-05,
+     "moscoviense": 0.0405841071384615,
+     "orientale": 7.449647704808802e-08,
+     "smythii_marginis": 0.018429403376361144
+    },
+    "reaches_the_seas": 0.07556416382249559,
+    "kept_by_spilling_lakes": 0.5465426067904495,
+    "kept_where_water_ends": 0.37789322954062987
+   },
+   "runoff_that_crossed_no_lake": {
+    "reaches_each_sea": {
+     "near_side_main": 0.013298990818789212,
+     "near_side_south": 0.0002795020727046271,
+     "south_pole_aitken": 0.0021453979822502055,
+     "humboldtianum": 7.201131767516363e-05,
+     "moscoviense": 0.0399921536425104,
+     "orientale": 0.0,
+     "smythii_marginis": 0.018303690788523324
+    },
+    "reaches_the_seas": 0.07409174662245294
+   },
+   "runoff": {
+    "reaches_each_sea": {
+     "near_side_main": 0.08928469828989873,
+     "near_side_south": 0.016833779606709193,
+     "south_pole_aitken": 0.07560594210073915,
+     "humboldtianum": 0.002868498507687008,
+     "moscoviense": 0.2096270968112189,
+     "orientale": 0.04746481978636499,
+     "smythii_marginis": 0.09462051275327482
+    },
+    "reaches_the_seas": 0.5363053478558928
+   },
+   "ends_in_lakes_that_pass_nothing_on": 0.4636946521441061,
+   "the_lakes_that_keep_it": {
+    "dissolved": {
+     "50%": {
+      "lakes": 351,
+      "area_km2": 2620671.879578958
+     },
+     "90%": {
+      "lakes": 3306,
+      "area_km2": 3520522.0803077635
+     }
+    },
+    "particles": {
+     "50%": {
+      "lakes": 436,
+      "area_km2": 2662091.3533443916
+     },
+     "90%": {
+      "lakes": 3531,
+      "area_km2": 3222265.0480414485
+     }
+    }
+   },
+   "lakes_over_the_lines": {
+    "the land's loss at its low end": {
+     "the_land_alone": {
+      "nutrient_poor": {
+       "lakes": 3993,
+       "area_km2": 40591.6090385582,
+       "share_of_lake_area": 0.006737336588471152
+      },
+      "rich": {
+       "lakes": 137,
+       "area_km2": 19336.491087711165,
+       "share_of_lake_area": 0.0032094428376596863
+      }
+     },
+     "with 10 g a person": {
+      "nutrient_poor": {
+       "lakes": 7553,
+       "area_km2": 103370.74217241038,
+       "share_of_lake_area": 0.017157326351710838
+      },
+      "rich": {
+       "lakes": 1642,
+       "area_km2": 33644.40951148139,
+       "share_of_lake_area": 0.005584250453927357
+      }
+     },
+     "with 30 g a person": {
+      "nutrient_poor": {
+       "lakes": 8885,
+       "area_km2": 177843.6899302932,
+       "share_of_lake_area": 0.029518238561519278
+      },
+      "rich": {
+       "lakes": 3265,
+       "area_km2": 62646.97984422214,
+       "share_of_lake_area": 0.010398055151269377
+      }
+     },
+     "with 90 g a person": {
+      "nutrient_poor": {
+       "lakes": 9836,
+       "area_km2": 394777.02273901267,
+       "share_of_lake_area": 0.0655245195395125
+      },
+      "rich": {
+       "lakes": 5409,
+       "area_km2": 134709.31365251107,
+       "share_of_lake_area": 0.022358857142538553
+      }
+     }
+    },
+    "the land's loss at its high end": {
+     "the_land_alone": {
+      "nutrient_poor": {
+       "lakes": 13442,
+       "area_km2": 160142.45573265429,
+       "share_of_lake_area": 0.02658021329852553
+      },
+      "rich": {
+       "lakes": 2073,
+       "area_km2": 28742.807285065875,
+       "share_of_lake_area": 0.004770689602205725
+      }
+     },
+     "with 10 g a person": {
+      "nutrient_poor": {
+       "lakes": 15380,
+       "area_km2": 224834.74648936663,
+       "share_of_lake_area": 0.037317746198322434
+      },
+      "rich": {
+       "lakes": 4022,
+       "area_km2": 46732.42805829645,
+       "share_of_lake_area": 0.00775658085212086
+      }
+     },
+     "with 30 g a person": {
+      "nutrient_poor": {
+       "lakes": 16136,
+       "area_km2": 296677.00936436024,
+       "share_of_lake_area": 0.049242021134220604
+      },
+      "rich": {
+       "lakes": 5636,
+       "area_km2": 80533.9982307315,
+       "share_of_lake_area": 0.013366916605359845
+      }
+     },
+     "with 90 g a person": {
+      "nutrient_poor": {
+       "lakes": 16757,
+       "area_km2": 502715.23328642076,
+       "share_of_lake_area": 0.0834399476893148
+      },
+      "rich": {
+       "lakes": 7213,
+       "area_km2": 152136.616341572,
+       "share_of_lake_area": 0.025251415649737416
+      }
+     }
+    }
+   },
+   "seas": {
+    "near_side_main": {
+     "share_of_peoples_dissolved_loss": 0.016206874366137478,
+     "share_that_crossed_no_lake": 0.013298990818789212,
+     "mg_m2_yr_for_each_g_a_person": 0.033771165635133674,
+     "room_for_a_thousand_years_mg_m2_yr": 30.95324411962196,
+     "g_a_person_that_fills_the_room": 916.5583579211698,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.8030750510031907,
+       4.1857827074175695
+      ],
+      "30 g": [
+       1.4784983637058642,
+       4.8612060201202425
+      ],
+      "90 g": [
+       3.5047683018138844,
+       6.887475958228263
+      ]
+     }
+    },
+    "near_side_south": {
+     "share_of_peoples_dissolved_loss": 0.000774547042105232,
+     "share_that_crossed_no_lake": 0.0002795020727046271,
+     "mg_m2_yr_for_each_g_a_person": 0.006368101107634606,
+     "room_for_a_thousand_years_mg_m2_yr": 14.674058302435096,
+     "g_a_person_that_fills_the_room": 2304.3067398604308,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.43915722405007523,
+       3.672052911000913
+      ],
+      "30 g": [
+       0.5665192462027674,
+       3.799414933153605
+      ],
+      "90 g": [
+       0.9486053126608438,
+       4.181500999611681
+      ]
+     }
+    },
+    "south_pole_aitken": {
+     "share_of_peoples_dissolved_loss": 0.002596857206832212,
+     "share_that_crossed_no_lake": 0.0021453979822502055,
+     "mg_m2_yr_for_each_g_a_person": 0.008619366984870135,
+     "room_for_a_thousand_years_mg_m2_yr": 42.40636690081695,
+     "g_a_person_that_fills_the_room": 4919.893418536914,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.17585539860142307,
+       3.085366766383243
+      ],
+      "30 g": [
+       0.3482427382988258,
+       3.257754106080646
+      ],
+      "90 g": [
+       0.8654047573910338,
+       3.774916125172854
+      ]
+     }
+    },
+    "humboldtianum": {
+     "share_of_peoples_dissolved_loss": 7.209584451159272e-05,
+     "share_that_crossed_no_lake": 7.201131767516363e-05,
+     "mg_m2_yr_for_each_g_a_person": 0.0020637894814329247,
+     "room_for_a_thousand_years_mg_m2_yr": 45.450960274053344,
+     "g_a_person_that_fills_the_room": 22023.060337770476,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       0.06852939833073171,
+       2.7554505695193576
+      ],
+      "30 g": [
+       0.1098051879593902,
+       2.7967263591480163
+      ],
+      "90 g": [
+       0.23363255684536569,
+       2.9205537280339917
+      ]
+     }
+    },
+    "moscoviense": {
+     "share_of_peoples_dissolved_loss": 0.0442222814004534,
+     "share_that_crossed_no_lake": 0.0399921536425104,
+     "mg_m2_yr_for_each_g_a_person": 0.4190595712599139,
+     "room_for_a_thousand_years_mg_m2_yr": 45.218384973517935,
+     "g_a_person_that_fills_the_room": 107.90443191064135,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       5.359855847279994,
+       9.915724737076044
+      ],
+      "30 g": [
+       13.741047272478273,
+       18.29691616227432
+      ],
+      "90 g": [
+       38.884621548073106,
+       43.44049043786916
+      ]
+     }
+    },
+    "orientale": {
+     "share_of_peoples_dissolved_loss": 8.451718640180852e-05,
+     "share_that_crossed_no_lake": 0.0,
+     "mg_m2_yr_for_each_g_a_person": 0.002269764783402365,
+     "room_for_a_thousand_years_mg_m2_yr": 38.64280874338317,
+     "g_a_person_that_fills_the_room": 17025.027890977235,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       2.090183163103833,
+       8.143094353881471
+      ],
+      "30 g": [
+       2.13557845877188,
+       8.188489649549519
+      ],
+      "90 g": [
+       2.271764345776022,
+       8.324675536553661
+      ]
+     }
+    },
+    "smythii_marginis": {
+     "share_of_peoples_dissolved_loss": 0.01986996706151105,
+     "share_that_crossed_no_lake": 0.018303690788523324,
+     "mg_m2_yr_for_each_g_a_person": 0.2652212454851135,
+     "room_for_a_thousand_years_mg_m2_yr": 44.329199068942366,
+     "g_a_person_that_fills_the_room": 167.14045282405743,
+     "supply_with_people_mg_m2_yr": {
+      "10 g": [
+       3.2483188459104975,
+       6.848931496337391
+      ],
+      "30 g": [
+       8.552743755612768,
+       12.153356406039661
+      ],
+      "90 g": [
+       24.466018484719577,
+       28.066631135146473
+      ]
+     }
+    }
+   }
+  }
+ },
+ "seconds": 129
+}
