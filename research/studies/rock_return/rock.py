@@ -130,9 +130,11 @@ def fill_quantiles(volume, kept_kg, area, ok, rho=SEDIMENT_KG_M3[1]):
     return out
 
 
-def build(log=print):
-    started = time.time()
-    c = LO.prepare(log)
+def fields(c, log=print, started=None):
+    """The fields the rock's account rests on, from the routing's set-up: each cell's area and ground, the water over
+    it, whether it erodes, the rock it loses a year in the central case, and the first cell on its way down where
+    that rock can settle. placement.py reads the same fields."""
+    started = started or time.time()
     rows, cols, n = c['rows'], c['cols'], c['receiver'].size
     receiver, fronts, donor, body, keep, sea = (c[k] for k in ('receiver', 'fronts', 'donor', 'body', 'keep', 'sea'))
     names, levels = c['names'], c['levels']
@@ -160,10 +162,23 @@ def build(log=print):
     total = float(rock.sum())
     land_m2 = float(area[eroding].sum())
     log(f'{total / 1e12:.2f} Gt of rock a year off {land_m2 / 1e12:.2f} million km2, {time.time() - started:.0f} s')
-
-    # where it first settles, and the way back
     settles = ~donor | (body >= 0) | keep
     first = first_settling(receiver, fronts, settles)
+    return dict(rows=rows, cols=cols, n=n, lat_row=lat_row, cell_km=cell_km, area=area, abs_lat=abs_lat, h=h, water=water,
+                relief=relief, eroding=eroding, rock=rock, total=total, land_m2=land_m2, first=first,
+                lake_cell=lake_cell, lake_level=lake_level)
+
+
+def build(log=print):
+    started = time.time()
+    c = LO.prepare(log)
+    f = fields(c, log, started)
+    rows, cols, n, lat_row, area, h, water, relief, eroding, rock, total, land_m2, first, lake_cell, lake_level = (
+        f[k] for k in ('rows', 'cols', 'n', 'lat_row', 'area', 'h', 'water', 'relief', 'eroding', 'rock', 'total', 'land_m2', 'first', 'lake_cell', 'lake_level'))
+    receiver, fronts, donor, body, keep, sea = (c[k] for k in ('receiver', 'fronts', 'donor', 'body', 'keep', 'sea'))
+    names, levels = c['names'], c['levels']
+
+    # where it first settles, and the way back
     spills_at = np.zeros(n, bool)
     spills_at[body >= 0] = c['spills'][body[body >= 0]]
     place = np.where(~donor[first], 0, np.where(body[first] >= 0, np.where(spills_at[first], 1, 2), 3)).astype(np.int8)

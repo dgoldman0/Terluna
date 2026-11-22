@@ -2,7 +2,7 @@
  "schema": "terluna.research.rock-return-rock/1",
  "producer": {
   "module": "research.studies.rock_return.rock",
-  "code_sha256": "7fd25e1da4d98b03a1c72bc841d74431a3128a74e97bf147bd67dd05d6c5a4a0"
+  "code_sha256": "640c9ba51cbfe7d32740103c20852b1d44f7db2118faad36920bc56da4110e6e"
  },
  "inputs": {
   "research/studies/atlas_round/results/land_use.json": "cdfcc5253f68a68949b542685c28eb3f2dfc07d23dd8f59da8e1493fea8e0dc4",
@@ -668,5 +668,5 @@
    }
   }
  },
- "seconds": 162
+ "seconds": 198
 }

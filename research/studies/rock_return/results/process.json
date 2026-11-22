@@ -1,0 +1,4133 @@
+{
+ "schema": "terluna.research.rock-return-process/1",
+ "producer": {
+  "module": "research.studies.rock_return.process",
+  "code_sha256": {
+   "process.py": "45fb0836e354ffd485f3dc8ca53b7a75fbeb4e712b855ecdd077f41f0f15900b",
+   "evolve.py": "61ed66ce6605bcdcab4920256bb2bb07e61d9e6bdf4962feed2430586ee9a7a5"
+  },
+  "compiled": true
+ },
+ "inputs": {
+  "research/studies/rock_return/results/placement.json": "6f96ea3bc43430ea8ed85cae66890c1c4617161766af22fe74d4e9c718861ec7"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/terrain-return/evolution/regions_16ppd.npz": "0d3198ef76c6cafb837a9d362f498b1cb0b49d2aa1cf2d29b21ed43bbc7687dc"
+ },
+ "snapshots": {
+  "path": "/media/projectspace/terluna-research/terrain-return/evolution/process_snapshots.npz",
+  "sha256": "2b531d7b1c0ba8adbd4acfe122a43ce4333433a9b6dd371bcb82786394fea64a"
+ },
+ "pictures": {
+  "korolev, shared_by_wear": "/media/projectspace/terluna-research/terrain-return/evolution/korolev_as_designed_shared_by_wear.png",
+  "korolev, no_more_than_it_lost": "/media/projectspace/terluna-research/terrain-return/evolution/korolev_as_designed_no_more_than_it_lost.png",
+  "southern_highlands, shared_by_wear": "/media/projectspace/terluna-research/terrain-return/evolution/southern_highlands_as_designed_shared_by_wear.png",
+  "southern_highlands, no_more_than_it_lost": "/media/projectspace/terluna-research/terrain-return/evolution/southern_highlands_as_designed_no_more_than_it_lost.png"
+ },
+ "evidence": "evolve.py's landscape model on two squares of the design surface, with the placement the design holds: rock set down on freshly worn ground round where it came to rest, about 86% of it within 20 km, in two readings: shared in proportion to the wear, or offered so and taken only up to what each cell lost. Each cell is 1.9 km, so where on a slope the carriers set the rock is below what the model sees, and the returned rock wears as the ground does. The shares the carriers reach are the study's for lakes whose rivers bring sand. Not validated.",
+ "reading_rule": "regions: for each region under the water the design gives it, each reading of the placement (shared_by_wear, no_more_than_it_lost) and each share of the rock the carriers reach, at each year: evolve.py's measures; heights, the spread of the ground over height (percentiles, the highest and the lowest); by_where_it_stood, the change of the ground that was crest, floor or between on the starting map, and of the steepest quarter; summits, the change of the thirty highest summits; the change of the rims of the largest hollows; change_m, the change of the ground by share of the land, with the most any cell rose or fell; rock, km3 cut, laid in hollows, set down and gone.",
+ "setting": {
+  "years": [
+   1000000.0,
+   3000000.0,
+   10000000.0,
+   30000000.0,
+   100000000.0
+  ],
+  "design": {
+   "korolev": {
+    "water": "wet",
+    "reaches": {
+     "all_of_it": 1.0,
+     "with_divers_at_the_delta_fronts": 0.95,
+     "flyers_and_waders_alone": 0.42
+    }
+   },
+   "southern_highlands": {
+    "water": "dry",
+    "reaches": {
+     "all_of_it": 1.0
+    }
+   }
+  },
+  "readings": {
+   "shared_by_wear": "worn",
+   "no_more_than_it_lost": "healed"
+  },
+  "range_m": 20000.0,
+  "summits": 30,
+  "summit_cells": 5,
+  "percents": [
+   0.1,
+   1.0,
+   10.0,
+   50.0,
+   90.0,
+   99.0,
+   99.9
+  ]
+ },
+ "regions": {
+  "korolev": {
+   "shared_by_wear": {
+    "flyers_and_waders_alone": {
+     "reach": 0.42,
+     "water": "wet",
+     "rule": "worn",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -9.242739872682971,
+       "rms_change_m": 113.24818753885017,
+       "share_of_ground_moved_over_100_m": 0.12494140625,
+       "forms_kept": 0.9815012384384093,
+       "forms_strength_over_start": 0.9304100079860376,
+       "relief_over_start": 0.9542510391354755,
+       "hollow_volume_over_start": 0.6267213870866833,
+       "hollow_area_over_start": 0.8001868616901318,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.8725238149337191,
+         "least": 0.5779351652223584,
+         "most": 0.9858740535836459
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.1778282673225019,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -136.12055828695915,
+         "1%": 1038.864387912637,
+         "10%": 2260.5802001953125,
+         "50%": 4794.939322294695,
+         "90%": 6870.4603975212185,
+         "99%": 8033.949969631869,
+         "99.9%": 8913.60947443072
+        },
+        "highest": 9957.219423805975,
+        "lowest": -136.1352245384856,
+        "mean": 4642.734633214161,
+        "spread": 1795.6033692300653
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -61.10687985850165,
+         "tenth_m": -128.18644610526644,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 114.29426206388877,
+         "tenth_m": 0.0,
+         "ninetieth_m": 416.1480042414445
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -18.957819802145277,
+         "tenth_m": -75.20192147063007,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -17.859668053920043,
+         "tenth_m": -127.06967201961452,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -75.05607253810149,
+        "least_m": -173.22749560179636,
+        "most_m": -13.89109877221199,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -65.55867092478593,
+        "least": -123.53076537058678,
+        "most": -20.6145079386024
+       },
+       "change_m": {
+        "0.1%": -612.9931897763092,
+        "1%": -234.37990582102125,
+        "10%": -84.53314164403162,
+        "50%": 0.0,
+        "90%": 3.5970816790023683,
+        "99%": 498.27211070387546,
+        "99.9%": 968.4103478149297,
+        "most": 1746.58758047239,
+        "least": -1975.3699812774944
+       },
+       "share_risen_over_100_m": 0.051669921875,
+       "share_fallen_over_100_m": 0.073271484375,
+       "rock": {
+        "cut": 29329.62163786104,
+        "laid": 10508.4453361193,
+        "set_down": 12318.441087901643,
+        "gone": 6502.735213840114
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -46.99316989680485,
+       "rms_change_m": 271.02775266805037,
+       "share_of_ground_moved_over_100_m": 0.428662109375,
+       "forms_kept": 0.9175618138269397,
+       "forms_strength_over_start": 0.8416697628995697,
+       "relief_over_start": 0.9703211037066521,
+       "hollow_volume_over_start": 0.4259539182001402,
+       "hollow_area_over_start": 0.6891813524920262,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.7407532391395264,
+         "least": 0.5508542123162685,
+         "most": 0.9351205468179519
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.17351030379348648,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 184.0100458315192,
+         "1%": 1822.1645149886724,
+         "10%": 2273.47412109375,
+         "50%": 4778.805805196395,
+         "90%": 6760.165929448366,
+         "99%": 7874.170780389809,
+         "99.9%": 8620.583997931064
+        },
+        "highest": 9721.655330238289,
+        "lowest": 183.99921951181994,
+        "mean": 4604.984203190038,
+        "spread": 1708.068694636911
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -205.19579255943862,
+         "tenth_m": -416.8042583514848,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 298.7777160614889,
+         "tenth_m": -14.010782139970773,
+         "ninetieth_m": 859.5080695010349
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -71.81037397731941,
+         "tenth_m": -267.8613515839404,
+         "ninetieth_m": 7.274833379957935
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -65.67103743783701,
+         "tenth_m": -407.7336735615976,
+         "ninetieth_m": 228.91225700724067
+        }
+       },
+       "summits": {
+        "median_m": -259.440836479529,
+        "least_m": -511.77605001596567,
+        "most_m": -61.37088288076848,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -198.9933507482815,
+        "least": -357.2984405495117,
+        "most": -55.11235849310833
+       },
+       "change_m": {
+        "0.1%": -1351.8583954545193,
+        "1%": -707.2653412810984,
+        "10%": -290.6499250109663,
+        "50%": -3.390175366035237,
+        "90%": 97.04769500569968,
+        "99%": 1045.1148493542019,
+        "99.9%": 1629.5744115642153,
+        "most": 2475.073009992806,
+        "least": -2818.2000445516787
+       },
+       "share_risen_over_100_m": 0.0991015625,
+       "share_fallen_over_100_m": 0.329560546875,
+       "rock": {
+        "cut": 97847.78144315067,
+        "laid": 26895.9836992147,
+        "set_down": 41096.0682061233,
+        "gone": 29855.729537812716
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -242.8049828173661,
+       "rms_change_m": 725.7105192023918,
+       "share_of_ground_moved_over_100_m": 0.7407421875,
+       "forms_kept": 0.6574626181466844,
+       "forms_strength_over_start": 0.7128703402684046,
+       "relief_over_start": 0.9449778806359762,
+       "hollow_volume_over_start": 0.2239243950901481,
+       "hollow_area_over_start": 0.5790134991462353,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.44736498841289074,
+         "least": 0.14754265690727095,
+         "most": 1.5531358925566354
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.18099322448801702,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 842.055972256106,
+         "1%": 2092.9903212192153,
+         "10%": 2488.0810047644563,
+         "50%": 4503.222038482994,
+         "90%": 6162.153493279844,
+         "99%": 7156.61585035343,
+         "99.9%": 7738.6207109404595
+        },
+        "highest": 8693.99953282048,
+        "lowest": 842.0481490724457,
+        "mean": 4409.172390269477,
+        "spread": 1401.6136744130347
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -806.8150399290757,
+         "tenth_m": -1542.243388413046,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 511.923524160322,
+         "tenth_m": -272.4079249198308,
+         "ninetieth_m": 1464.1531396136634
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -257.1464459315401,
+         "tenth_m": -1008.9785036743257,
+         "ninetieth_m": 309.4982266013743
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -310.1128827886621,
+         "tenth_m": -1329.0874332986268,
+         "ninetieth_m": 716.9664253442214
+        }
+       },
+       "summits": {
+        "median_m": -984.244026215395,
+        "least_m": -1744.1324484107663,
+        "most_m": -318.73179392709153,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -639.4218518424477,
+        "least": -1035.1188715188873,
+        "most": -199.3146462335917
+       },
+       "change_m": {
+        "0.1%": -2869.102307600605,
+        "1%": -2110.953540498136,
+        "10%": -1111.2864308681958,
+        "50%": -102.81493261360106,
+        "90%": 425.3376629085389,
+        "99%": 1664.5948959356251,
+        "99.9%": 2303.3411735753693,
+        "most": 3140.9686792065154,
+        "least": -4497.639610216533
+       },
+       "share_risen_over_100_m": 0.239189453125,
+       "share_fallen_over_100_m": 0.501552734375,
+       "rock": {
+        "cut": 357691.5044778279,
+        "laid": 66395.71110931435,
+        "set_down": 150230.4318806877,
+        "gone": 141065.3614878258
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -786.8623408871298,
+       "rms_change_m": 1575.352720407203,
+       "share_of_ground_moved_over_100_m": 0.921708984375,
+       "forms_kept": 0.27623110567301673,
+       "forms_strength_over_start": 0.4740408587651965,
+       "relief_over_start": 0.585742122085207,
+       "hollow_volume_over_start": 0.0036982452826402764,
+       "hollow_area_over_start": 0.4040722961435613,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.30414280293968365,
+         "least": 0.11248942442160718,
+         "most": 1.0867340102508272
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.3848908512342503,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 1141.422390400338,
+         "1%": 2014.2361065248024,
+         "10%": 2994.176143802938,
+         "50%": 3829.691098777633,
+         "90%": 4991.4881343803145,
+         "99%": 5657.706784644439,
+         "99.9%": 6067.5030469865615
+        },
+        "highest": 6901.498056118518,
+        "lowest": 1141.410225952353,
+        "mean": 3865.1150321997134,
+        "spread": 844.820947685802
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -1991.2165342188543,
+         "tenth_m": -3493.595611086347,
+         "ninetieth_m": -133.65176543117582
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 245.67928674301427,
+         "tenth_m": -1251.3971870866355,
+         "ninetieth_m": 1885.2892655612916
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -727.6745081326342,
+         "tenth_m": -2414.2553661551683,
+         "ninetieth_m": 774.5526682749305
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -891.389011984811,
+         "tenth_m": -2683.6235850149073,
+         "ninetieth_m": 782.3044682963815
+        }
+       },
+       "summits": {
+        "median_m": -3401.559089458268,
+        "least_m": -5425.48056616399,
+        "most_m": -1951.8264088846481,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1793.7868356406254,
+        "least": -3118.4158109316463,
+        "most": -835.4628918962289
+       },
+       "change_m": {
+        "0.1%": -5079.432382710904,
+        "1%": -3956.162365415471,
+        "10%": -2624.6765439900746,
+        "50%": -720.8109422196828,
+        "90%": 811.512765727872,
+        "99%": 1980.4783066313025,
+        "99.9%": 2776.30151731451,
+        "most": 3647.0728588321917,
+        "least": -6022.1992145962395
+       },
+       "share_risen_over_100_m": 0.295048828125,
+       "share_fallen_over_100_m": 0.62666015625,
+       "rock": {
+        "cut": 975112.336654035,
+        "laid": 125207.68241482362,
+        "set_down": 409547.1813946936,
+        "gone": 440357.47284451616
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -2440.1098143974687,
+       "rms_change_m": 3068.2618740737785,
+       "share_of_ground_moved_over_100_m": 0.966416015625,
+       "forms_kept": 0.06770251800308792,
+       "forms_strength_over_start": 0.2643261424972732,
+       "relief_over_start": 0.205855225668457,
+       "hollow_volume_over_start": 2.5172005683379748e-06,
+       "hollow_area_over_start": 0.014014626759882728,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.10964442990730064,
+         "least": 0.02028435877949412,
+         "most": 0.8941875842745599
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.39771565497795647,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 1180.7110479484722,
+         "1%": 1185.0850707559048,
+         "10%": 1363.339901525649,
+         "50%": 2279.6253371333273,
+         "90%": 2952.128806019372,
+         "99%": 3658.0781151420833,
+         "99.9%": 3960.0255823279435
+        },
+        "highest": 4325.4187432296285,
+        "lowest": 1174.3809784400821,
+        "mean": 2211.8675586893746,
+        "spread": 595.1734933830802
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -3909.491628954158,
+         "tenth_m": -5734.117071328183,
+         "ninetieth_m": -1331.76993978912
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -1378.9293708573941,
+         "tenth_m": -3404.1228978036756,
+         "ninetieth_m": 1178.544960910759
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -2337.0977003438734,
+         "tenth_m": -4563.286337672203,
+         "ninetieth_m": 200.2749591764143
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -2614.9634520630816,
+         "tenth_m": -4832.183431837667,
+         "ninetieth_m": -84.73771873284463
+        }
+       },
+       "summits": {
+        "median_m": -5681.437755059396,
+        "least_m": -7343.4235981291295,
+        "most_m": -4411.717449148911,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -4159.1071492686815,
+        "least": -5017.595174690579,
+        "most": -3032.6665409462735
+       },
+       "change_m": {
+        "0.1%": -6870.977770690497,
+        "1%": -5992.016038233517,
+        "10%": -4775.6312716430575,
+        "50%": -2714.779322127776,
+        "90%": 200.7439069221322,
+        "99%": 1352.7866020331785,
+        "99.9%": 2183.762666795009,
+        "most": 3250.697579665369,
+        "least": -7410.156047397437
+       },
+       "share_risen_over_100_m": 0.117666015625,
+       "share_fallen_over_100_m": 0.84875,
+       "rock": {
+        "cut": 2445523.5545648076,
+        "laid": 149391.49551771727,
+        "set_down": 1027119.8929172186,
+        "gone": 1269012.1661298715
+       }
+      }
+     },
+     "seconds": 303
+    },
+    "with_divers_at_the_delta_fronts": {
+     "reach": 0.95,
+     "water": "wet",
+     "rule": "worn",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -1.2728430466443983,
+       "rms_change_m": 37.72623097518915,
+       "share_of_ground_moved_over_100_m": 0.0247265625,
+       "forms_kept": 0.9979068893174053,
+       "forms_strength_over_start": 0.987586289204047,
+       "relief_over_start": 0.9784669490775966,
+       "hollow_volume_over_start": 0.9309635891513585,
+       "hollow_area_over_start": 0.9849866297238957,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9981620385779482,
+         "least": 0.9765029032880279,
+         "most": 1.0177551881300222
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2260.15888671875,
+         "50%": 4818.266562481462,
+         "90%": 6912.832556404767,
+         "99%": 8070.331570154138,
+         "99.9%": 8976.455490514452
+        },
+        "highest": 9976.399988812527,
+        "lowest": -485.301300723342,
+        "mean": 4650.704530040198,
+        "spread": 1825.1418600618638
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -17.022634486956843,
+         "tenth_m": -46.244751674345025,
+         "ninetieth_m": 0.24017914495721016
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 13.959104820244491,
+         "tenth_m": 0.0,
+         "ninetieth_m": 39.27500751380616
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -0.7669895056130445,
+         "tenth_m": -16.573344443659696,
+         "ninetieth_m": 8.072221026435042
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -4.015419784534928,
+         "tenth_m": -29.81085089026674,
+         "ninetieth_m": 5.65156502710625
+        }
+       },
+       "summits": {
+        "median_m": -28.473570449659746,
+        "least_m": -96.81127000285778,
+        "most_m": -0.05909064715979184,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -0.345521208748778,
+        "least": -47.2609426106319,
+        "most": 15.96281575953708
+       },
+       "change_m": {
+        "0.1%": -261.15482320868205,
+        "1%": -101.18643569702324,
+        "10%": -21.212362248145926,
+        "50%": 0.0,
+        "90%": 7.737039099333031,
+        "99%": 131.4080028438337,
+        "99.9%": 374.5865322829307,
+        "most": 1002.5821495858518,
+        "least": -996.0989898532898
+       },
+       "share_risen_over_100_m": 0.014521484375,
+       "share_fallen_over_100_m": 0.010205078125,
+       "rock": {
+        "cut": 26089.650597010197,
+        "laid": 1122.693255226943,
+        "set_down": 24785.168067159673,
+        "gone": 181.78927462356745
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -3.639322603849581,
+       "rms_change_m": 85.8742885354513,
+       "share_of_ground_moved_over_100_m": 0.101435546875,
+       "forms_kept": 0.9901624235176151,
+       "forms_strength_over_start": 0.970353715547137,
+       "relief_over_start": 0.9466564952499206,
+       "hollow_volume_over_start": 0.9179894926939683,
+       "hollow_area_over_start": 1.0025774026225072,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9660531603770425,
+         "least": 0.9370880666449756,
+         "most": 1.0148422566578497
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2263.129052734375,
+         "50%": 4822.717998137126,
+         "90%": 6884.494311244557,
+         "99%": 8015.311807824542,
+         "99.9%": 8785.553617852396
+        },
+        "highest": 9832.10234383066,
+        "lowest": -374.97523831465816,
+        "mean": 4648.338050482994,
+        "spread": 1811.1356590429114
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -48.67954071337021,
+         "tenth_m": -136.6117013215635,
+         "ninetieth_m": 1.5177024601121047
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 39.989023681619244,
+         "tenth_m": 0.0,
+         "ninetieth_m": 144.7929413106205
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -2.2034213159581597,
+         "tenth_m": -46.262787576330446,
+         "ninetieth_m": 28.457859633223244
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -6.661445260452314,
+         "tenth_m": -79.12207771012118,
+         "ninetieth_m": 29.423511848349264
+        }
+       },
+       "summits": {
+        "median_m": -101.10982996528992,
+        "least_m": -290.5465237336339,
+        "most_m": -2.644356324821274,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 8.65214303846733,
+        "least": -110.83540555556738,
+        "most": 46.234397306752726
+       },
+       "change_m": {
+        "0.1%": -541.2665254638035,
+        "1%": -257.68578504049356,
+        "10%": -61.216095622679404,
+        "50%": 0.0,
+        "90%": 30.89864942653782,
+        "99%": 303.2329659703333,
+        "99.9%": 730.4460155247074,
+        "most": 2016.1651054873282,
+        "least": -1457.3816195901372
+       },
+       "share_risen_over_100_m": 0.044921875,
+       "share_fallen_over_100_m": 0.056513671875,
+       "rock": {
+        "cut": 76429.6108791616,
+        "laid": 3219.502224327453,
+        "set_down": 72608.13033520358,
+        "gone": 601.9783196306298
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -9.16469105832097,
+       "rms_change_m": 177.19583368364138,
+       "share_of_ground_moved_over_100_m": 0.2391796875,
+       "forms_kept": 0.9619010194539209,
+       "forms_strength_over_start": 0.9304069475342499,
+       "relief_over_start": 0.8702818209806004,
+       "hollow_volume_over_start": 0.9769128015687751,
+       "hollow_area_over_start": 1.0655787879764167,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.8682623909096799,
+         "least": 0.8114658696835735,
+         "most": 1.0129607653302295
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.174138479201833,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -168.41716316497116,
+         "1%": 958.3616418457032,
+         "10%": 2263.833349609375,
+         "50%": 4846.172866582503,
+         "90%": 6824.7498762079595,
+         "99%": 7866.926609387704,
+         "99.9%": 8417.196146116357
+        },
+        "highest": 9267.780723921775,
+        "lowest": -168.43302846083012,
+        "mean": 4642.812682028522,
+        "spread": 1780.2426276900792
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -132.5439870922981,
+         "tenth_m": -384.11696575690985,
+         "ninetieth_m": 5.5385476316346285
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 101.68173105605439,
+         "tenth_m": 0.0,
+         "ninetieth_m": 355.85725500344466
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -3.8873270059630993,
+         "tenth_m": -109.66404468637612,
+         "ninetieth_m": 79.61697516515005
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -6.97536237127548,
+         "tenth_m": -189.89880679461794,
+         "ninetieth_m": 134.221742692472
+        }
+       },
+       "summits": {
+        "median_m": -338.7007384786193,
+        "least_m": -899.3795889960184,
+        "most_m": 7.568704786680428,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 11.618418395448316,
+        "least": -327.74922615584546,
+        "most": 80.06084471303348
+       },
+       "change_m": {
+        "0.1%": -1015.0568348065979,
+        "1%": -580.2969098620907,
+        "10%": -154.60060279125054,
+        "50%": 0.0,
+        "90%": 98.37972129791018,
+        "99%": 586.0057321261802,
+        "99.9%": 1235.775998626356,
+        "most": 3225.128727331421,
+        "least": -2790.129960075802
+       },
+       "share_risen_over_100_m": 0.098798828125,
+       "share_fallen_over_100_m": 0.140380859375,
+       "rock": {
+        "cut": 234451.3807379077,
+        "laid": 9588.799768416731,
+        "set_down": 222728.81170101257,
+        "gone": 2133.769268478675
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -25.300117489819932,
+       "rms_change_m": 356.51292511975157,
+       "share_of_ground_moved_over_100_m": 0.3932421875,
+       "forms_kept": 0.8542830407248672,
+       "forms_strength_over_start": 0.8657375983514297,
+       "relief_over_start": 0.712106212547012,
+       "hollow_volume_over_start": 0.7627795754055459,
+       "hollow_area_over_start": 0.9985985373240117,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.7306915410711083,
+         "least": 0.5808138535070196,
+         "most": 0.9959866555982203
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12070140148364802,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 232.92972288919393,
+         "1%": 1282.5562129202488,
+         "10%": 2270.1280225827973,
+         "50%": 4874.982666015625,
+         "90%": 6687.946642622588,
+         "99%": 7492.794424820788,
+         "99.9%": 7987.433463472703
+        },
+        "highest": 11455.593252162284,
+        "lowest": 232.91987622730616,
+        "mean": 4626.677255597023,
+        "spread": 1711.0259288088905
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -336.85173990477796,
+         "tenth_m": -979.2786269817789,
+         "ninetieth_m": 24.87754673565405
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 243.85719931378267,
+         "tenth_m": 0.0,
+         "ninetieth_m": 701.0060663773696
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -10.307136901358426,
+         "tenth_m": -259.3781053634046,
+         "ninetieth_m": 191.670531486519
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 2.534729111335563,
+         "tenth_m": -426.7531580748089,
+         "ninetieth_m": 408.803999967419
+        }
+       },
+       "summits": {
+        "median_m": -922.7855135197224,
+        "least_m": -1873.0666559532465,
+        "most_m": -88.34299688518149,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -14.485926002698307,
+        "least": -668.1485126221987,
+        "most": 83.01512637027918
+       },
+       "change_m": {
+        "0.1%": -1886.9435863283254,
+        "1%": -1200.7885591483962,
+        "10%": -381.8783606660462,
+        "50%": 0.0,
+        "90%": 254.94191175302183,
+        "99%": 1028.5325931741816,
+        "99.9%": 2232.9759679750227,
+        "most": 8603.613271693534,
+        "least": -3290.010798632831
+       },
+       "share_risen_over_100_m": 0.182548828125,
+       "share_fallen_over_100_m": 0.210693359375,
+       "rock": {
+        "cut": 639833.9539312848,
+        "laid": 24777.88493279311,
+        "set_down": 607842.256234721,
+        "gone": 7213.812763771165
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -395.8148459557135,
+       "rms_change_m": 2100.593773798489,
+       "share_of_ground_moved_over_100_m": 0.61009765625,
+       "forms_kept": 0.08736483173269038,
+       "forms_strength_over_start": 3.8215387352526355,
+       "relief_over_start": 0.8786288038673616,
+       "hollow_volume_over_start": 0.35147040333012747,
+       "hollow_area_over_start": 0.6920809304423468,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.439850258262535,
+         "least": 0.03987899666465875,
+         "most": 0.7800616115914929
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.29158844073776247,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 1061.6188038396365,
+         "1%": 2038.8144024910769,
+         "10%": 2294.6972412109376,
+         "50%": 4293.035761872752,
+         "90%": 6021.187784390347,
+         "99%": 6491.365612548825,
+         "99.9%": 10606.62409318451
+        },
+        "highest": 334429.0844127475,
+        "lowest": 1061.6111665946798,
+        "mean": 4256.1625271311295,
+        "spread": 2235.943323490554
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -1124.7942300826533,
+         "tenth_m": -2781.410420271824,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 514.4827936620864,
+         "tenth_m": -469.7414924791216,
+         "ninetieth_m": 1395.5564280595327
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -404.24111722131937,
+         "tenth_m": -1708.008682320192,
+         "ninetieth_m": 231.95615012214742
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -242.09355332882268,
+         "tenth_m": -1691.9455134168004,
+         "ninetieth_m": 728.1393575840904
+        }
+       },
+       "summits": {
+        "median_m": -2978.1708337602945,
+        "least_m": -4591.114159729561,
+        "most_m": -1711.5760396543837,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -796.6758954220527,
+        "least": -3398.5102287779696,
+        "most": -46.25995853032964
+       },
+       "change_m": {
+        "0.1%": -4548.051003471019,
+        "1%": -3612.988384046462,
+        "10%": -1863.283598883053,
+        "50%": 0.0,
+        "90%": 386.8775695886862,
+        "99%": 1686.4616523652694,
+        "99.9%": 5716.894199969351,
+        "most": 332377.0138561069,
+        "least": -5442.99441350639
+       },
+       "share_risen_over_100_m": 0.188779296875,
+       "share_fallen_over_100_m": 0.421318359375,
+       "rock": {
+        "cut": 3093959.5264383694,
+        "laid": 70348.62338062019,
+        "set_down": 2939261.550116455,
+        "gone": 84349.35294129836
+       }
+      }
+     },
+     "seconds": 310
+    },
+    "all_of_it": {
+     "reach": 1.0,
+     "water": "wet",
+     "rule": "worn",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -1.0863896888457458,
+       "rms_change_m": 33.22513348840177,
+       "share_of_ground_moved_over_100_m": 0.019345703125,
+       "forms_kept": 0.9984043115158229,
+       "forms_strength_over_start": 0.9956637073871686,
+       "relief_over_start": 0.991949233902093,
+       "hollow_volume_over_start": 0.9501463199857285,
+       "hollow_area_over_start": 1.0010470698153935,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 1.0013581282805528,
+         "least": 0.9873300426218391,
+         "most": 1.0155915867460472
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -294.70352099609374,
+         "1%": 954.3006677246094,
+         "10%": 2258.8532784743597,
+         "50%": 4819.368896484375,
+         "90%": 6916.665212715256,
+         "99%": 8074.714714919778,
+         "99.9%": 8983.096263560394
+        },
+        "highest": 9978.49914802246,
+        "lowest": -652.8958129882812,
+        "mean": 4650.890983397997,
+        "spread": 1827.9208784362847
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -12.963785014471123,
+         "tenth_m": -39.614484636353154,
+         "ninetieth_m": 4.880099051722482
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 3.3725666515525736,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": 0.38511129390704757,
+         "tenth_m": -12.339575477994003,
+         "ninetieth_m": 7.426197262656576
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -3.1343261084766847,
+         "tenth_m": -22.354629306280454,
+         "ninetieth_m": 7.752857827504902
+        }
+       },
+       "summits": {
+        "median_m": -24.371091933145635,
+        "least_m": -90.85802911991414,
+        "most_m": 9.050248714214831,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 2.7739892791037164,
+        "least": -40.180774677740374,
+        "most": 13.25118276255671
+       },
+       "change_m": {
+        "0.1%": -237.9694467670164,
+        "1%": -91.00357480481235,
+        "10%": -16.425477320761,
+        "50%": 0.0,
+        "90%": 5.598241285923096,
+        "99%": 110.00248220600825,
+        "99.9%": 343.4090525327464,
+        "most": 927.137487591423,
+        "least": -888.5535370482967
+       },
+       "share_risen_over_100_m": 0.01107421875,
+       "share_fallen_over_100_m": 0.008271484375,
+       "rock": {
+        "cut": 25829.733019410844,
+        "laid": 0.0,
+        "set_down": 25829.733019410844,
+        "gone": 0.0
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -2.7495928780910734,
+       "rms_change_m": 74.91205818031656,
+       "share_of_ground_moved_over_100_m": 0.0706640625,
+       "forms_kept": 0.9922098331467194,
+       "forms_strength_over_start": 0.991206252247093,
+       "relief_over_start": 0.9784065257594543,
+       "hollow_volume_over_start": 0.9458281470264936,
+       "hollow_area_over_start": 1.0306710912078354,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 1.0068063953717183,
+         "least": 0.9718281189204967,
+         "most": 1.057041177732378
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -294.70352099609374,
+         "1%": 954.3006677246094,
+         "10%": 2259.709423828125,
+         "50%": 4826.522961543444,
+         "90%": 6899.510805437908,
+         "99%": 8030.451854750151,
+         "99.9%": 8809.625633729807
+        },
+        "highest": 9841.777280491464,
+        "lowest": -652.8958129882812,
+        "mean": 4649.227780208752,
+        "spread": 1819.9233580360515
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -35.17141619084313,
+         "tenth_m": -113.03758981886904,
+         "ninetieth_m": 14.578778844851968
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 10.06576226705708,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": 1.1673374647104935,
+         "tenth_m": -31.085430713841014,
+         "ninetieth_m": 21.8131931409529
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -3.8988919946618648,
+         "tenth_m": -55.98775518720813,
+         "ninetieth_m": 26.853412256405377
+        }
+       },
+       "summits": {
+        "median_m": -75.86554708764243,
+        "least_m": -248.9678998985146,
+        "most_m": 19.37528061062767,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 13.819685328101514,
+        "least": -89.34268459772284,
+        "most": 56.67906412397315
+       },
+       "change_m": {
+        "0.1%": -492.53991057099256,
+        "1%": -224.36576906693261,
+        "10%": -43.3656952995193,
+        "50%": 0.0,
+        "90%": 16.524606561613574,
+        "99%": 263.54573381163357,
+        "99.9%": 701.4479177847288,
+        "most": 2029.988659827255,
+        "least": -1271.5480988421668
+       },
+       "share_risen_over_100_m": 0.030771484375,
+       "share_fallen_over_100_m": 0.039892578125,
+       "rock": {
+        "cut": 74921.8537696553,
+        "laid": 0.0,
+        "set_down": 74921.8537696553,
+        "gone": 0.0
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -6.050100533066548,
+       "rms_change_m": 150.45267674680045,
+       "share_of_ground_moved_over_100_m": 0.163671875,
+       "forms_kept": 0.969180921234692,
+       "forms_strength_over_start": 0.9905562206489982,
+       "relief_over_start": 0.9525362292527267,
+       "hollow_volume_over_start": 1.0423651313024913,
+       "hollow_area_over_start": 1.1248590482940817,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 1.0039067236677515,
+         "least": 0.9225573003932944,
+         "most": 1.1245273418574229
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12128882856424679,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -294.70352099609374,
+         "1%": 954.3006677246094,
+         "10%": 2260.2370849609374,
+         "50%": 4840.0028597688215,
+         "90%": 6866.339299799458,
+         "99%": 7929.844373032794,
+         "99.9%": 8518.882270860728
+        },
+        "highest": 9335.48994093789,
+        "lowest": -652.8958129882812,
+        "mean": 4645.927272553777,
+        "spread": 1806.0652581540512
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -85.17354902265015,
+         "tenth_m": -297.1442553476054,
+         "ninetieth_m": 47.05160379942572
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 20.105722992901832,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": 4.3029153413840895,
+         "tenth_m": -67.67250873934807,
+         "ninetieth_m": 49.75388358658299
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 0.6720480631394239,
+         "tenth_m": -117.92706243690144,
+         "ninetieth_m": 84.93583232793186
+        }
+       },
+       "summits": {
+        "median_m": -237.14391199248257,
+        "least_m": -810.5392411039884,
+        "most_m": 44.046643138795844,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 22.55404957159908,
+        "least": -245.59732684630762,
+        "most": 110.91706749628793
+       },
+       "change_m": {
+        "0.1%": -886.7419934492985,
+        "1%": -459.34628957278505,
+        "10%": -101.74814424311452,
+        "50%": 0.0,
+        "90%": 40.637718479265935,
+        "99%": 537.810276175735,
+        "99.9%": 1334.1192148043137,
+        "most": 3360.789632913519,
+        "least": -2513.3852625781337
+       },
+       "share_risen_over_100_m": 0.06232421875,
+       "share_fallen_over_100_m": 0.10134765625,
+       "rock": {
+        "cut": 225572.27815726373,
+        "laid": 0.0,
+        "set_down": 225572.27815726376,
+        "gone": 0.0
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -11.893156115742135,
+       "rms_change_m": 284.13867429795835,
+       "share_of_ground_moved_over_100_m": 0.241875,
+       "forms_kept": 0.8877849266995453,
+       "forms_strength_over_start": 1.034560604206893,
+       "relief_over_start": 0.9403183172343098,
+       "hollow_volume_over_start": 0.9075218898217912,
+       "hollow_area_over_start": 1.1310125970553175,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9880058754715045,
+         "least": 0.8376873922132264,
+         "most": 1.1931467640380469
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12297422213213036,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -294.70352099609374,
+         "1%": 954.3006677246094,
+         "10%": 2260.4673828125,
+         "50%": 4853.861154954369,
+         "90%": 6817.9900187801795,
+         "99%": 7756.757569043615,
+         "99.9%": 8407.921576372197
+        },
+        "highest": 13330.571848214537,
+        "lowest": -652.8958129882812,
+        "mean": 4640.084216971101,
+        "spread": 1789.9114049840566
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -172.1487247035623,
+         "tenth_m": -633.8855698554958,
+         "ninetieth_m": 122.1949579739171
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 39.80778159627284,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": 9.273409854720773,
+         "tenth_m": -127.93308778809387,
+         "ninetieth_m": 97.17697894372422
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 18.157988729901,
+         "tenth_m": -229.06921264184265,
+         "ninetieth_m": 225.2763234039817
+        }
+       },
+       "summits": {
+        "median_m": -553.9849715852106,
+        "least_m": -1605.7832850567047,
+        "most_m": 229.50752458832176,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -10.861380006953823,
+        "least": -514.7488761152781,
+        "most": 180.8079279808444
+       },
+       "change_m": {
+        "0.1%": -1400.156009637965,
+        "1%": -818.7576582872514,
+        "10%": -207.23985915505307,
+        "50%": 0.0,
+        "90%": 85.01993993790525,
+        "99%": 908.8911856916441,
+        "99.9%": 2866.1283915480617,
+        "most": 8638.818918527037,
+        "least": -2846.496245514868
+       },
+       "share_risen_over_100_m": 0.092822265625,
+       "share_fallen_over_100_m": 0.149052734375,
+       "rock": {
+        "cut": 609092.3455635463,
+        "laid": 0.0,
+        "set_down": 609092.3455635463,
+        "gone": 0.0
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -480.24239057275264,
+       "rms_change_m": 12874.426758308087,
+       "share_of_ground_moved_over_100_m": 0.583994140625,
+       "forms_kept": 0.011820756446604935,
+       "forms_strength_over_start": 27.07273051833969,
+       "relief_over_start": 2.9510480540219315,
+       "hollow_volume_over_start": 0.10947278617210193,
+       "hollow_area_over_start": 0.48163600631463643,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.761742749927734,
+         "least": 0.0683149237287387,
+         "most": 2.9970875206181624
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.24828982537318944,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -294.70352099609374,
+         "1%": 947.4038604736328,
+         "10%": 2134.8155483093738,
+         "50%": 3801.220509168686,
+         "90%": 6124.25215329953,
+         "99%": 7128.64980411657,
+         "99.9%": 32643.446137272564
+        },
+        "highest": 2976958.878129361,
+        "lowest": -652.8958129882812,
+        "mean": 4171.73498251409,
+        "spread": 12893.007618119796
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -1219.824415217044,
+         "tenth_m": -3530.9490993892764,
+         "ninetieth_m": 42.01767985722586
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 782.4294466580002,
+         "tenth_m": -1331.0629815341388,
+         "ninetieth_m": 97.12734125003531
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -541.3905485718956,
+         "tenth_m": -2531.5364746370715,
+         "ninetieth_m": 141.95732493360353
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -199.87036304091964,
+         "tenth_m": -2163.298702638455,
+         "ninetieth_m": 414.3285956716745
+        }
+       },
+       "summits": {
+        "median_m": -2241.048022383863,
+        "least_m": -4682.742854853624,
+        "most_m": -1439.3612815079205,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -892.2404479014112,
+        "least": -4090.7320521752486,
+        "most": -256.13582147374746
+       },
+       "change_m": {
+        "0.1%": -5007.957022662759,
+        "1%": -4145.4463608733095,
+        "10%": -2611.84797279966,
+        "50%": -45.268541929805906,
+        "90%": 126.0810406390755,
+        "99%": 1425.0659738156264,
+        "99.9%": 27143.151420140355,
+        "most": 2974834.1610883456,
+        "least": -5546.929103893139
+       },
+       "share_risen_over_100_m": 0.11015625,
+       "share_fallen_over_100_m": 0.473837890625,
+       "rock": {
+        "cut": 4861811.099992102,
+        "laid": 0.0,
+        "set_down": 4861811.099992102,
+        "gone": 0.0
+       }
+      }
+     },
+     "seconds": 314
+    }
+   },
+   "no_more_than_it_lost": {
+    "flyers_and_waders_alone": {
+     "reach": 0.42,
+     "water": "wet",
+     "rule": "healed",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -10.131950035231917,
+       "rms_change_m": 118.58223954668502,
+       "share_of_ground_moved_over_100_m": 0.12919921875,
+       "forms_kept": 0.9798216051157613,
+       "forms_strength_over_start": 0.9310030955981095,
+       "relief_over_start": 0.9593824094363802,
+       "hollow_volume_over_start": 0.5905145171945237,
+       "hollow_area_over_start": 0.7783755919971649,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.8722131152759873,
+         "least": 0.4618964604304989,
+         "most": 0.9857866151098844
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.1778282673225019,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -207.0502559806634,
+         "1%": 1060.8107807437664,
+         "10%": 2259.287036132813,
+         "50%": 4794.396140076205,
+         "90%": 6870.045387175215,
+         "99%": 8034.5565261256725,
+         "99.9%": 8913.587065323843
+        },
+        "highest": 9957.218646384239,
+        "lowest": -207.06884164544084,
+        "mean": 4641.845423051611,
+        "spread": 1795.3808537265297
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -60.718873869104506,
+         "tenth_m": -127.6162984719931,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 116.99149013115796,
+         "tenth_m": 0.0,
+         "ninetieth_m": 428.685222244903
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -20.635885408373014,
+         "tenth_m": -77.99631914224719,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -16.90239590766726,
+         "tenth_m": -126.64581786315138,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -75.18352635014162,
+        "least_m": -173.46151138907953,
+        "most_m": -10.618681002655649,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -65.73980835692191,
+        "least": -123.8458555741854,
+        "most": -17.90477378970445
+       },
+       "change_m": {
+        "0.1%": -652.0307665803912,
+        "1%": -247.03092150038935,
+        "10%": -86.22056987807109,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 527.4049533363279,
+        "99.9%": 1039.8329570518,
+        "most": 1749.1425457043788,
+        "least": -2488.42756902416
+       },
+       "share_risen_over_100_m": 0.052509765625,
+       "share_fallen_over_100_m": 0.076689453125,
+       "rock": {
+        "cut": 29643.995483372997,
+        "laid": 11558.538769906052,
+        "set_down": 11843.806408893814,
+        "gone": 6241.65030457313
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -62.89484170672489,
+       "rms_change_m": 315.4406676939799,
+       "share_of_ground_moved_over_100_m": 0.475166015625,
+       "forms_kept": 0.8923978743580914,
+       "forms_strength_over_start": 0.8518857591687368,
+       "relief_over_start": 1.018163990381946,
+       "hollow_volume_over_start": 0.40811167931469583,
+       "hollow_area_over_start": 0.6549018976126808,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.7402601522494557,
+         "least": 0.4836750485228917,
+         "most": 1.323809677539758
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.20424355570548897,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 105.44106362036337,
+         "1%": 1988.0639274606126,
+         "10%": 2263.675634765625,
+         "50%": 4731.545636600416,
+         "90%": 6744.068356712051,
+         "99%": 7869.912943110438,
+         "99.9%": 8614.910569516644
+        },
+        "highest": 9720.958772532376,
+        "lowest": 105.43216573733422,
+        "mean": 4589.082531380119,
+        "spread": 1699.812275914354
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -214.98978774284896,
+         "tenth_m": -434.8884014391001,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 318.56023855035295,
+         "tenth_m": -57.40812863542814,
+         "ninetieth_m": 997.346857632438
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -94.3589349826893,
+         "tenth_m": -319.746412630037,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -67.66591647600174,
+         "tenth_m": -444.5050903813209,
+         "ninetieth_m": 289.3605319311705
+        }
+       },
+       "summits": {
+        "median_m": -261.4404471264097,
+        "least_m": -512.5308021236433,
+        "most_m": -86.39459283751512,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -217.10040158687025,
+        "least": -360.0215165285972,
+        "most": -90.18234921146723
+       },
+       "change_m": {
+        "0.1%": -1679.6191622569438,
+        "1%": -854.0771386724463,
+        "10%": -332.7787038416095,
+        "50%": -20.93954110389268,
+        "90%": 88.22313460518633,
+        "99%": 1219.777119992349,
+        "99.9%": 1841.5678090061565,
+        "most": 2678.727929385672,
+        "least": -4095.030208317401
+       },
+       "share_risen_over_100_m": 0.0971484375,
+       "share_fallen_over_100_m": 0.378017578125,
+       "rock": {
+        "cut": 102171.17560628986,
+        "laid": 30264.154407034253,
+        "set_down": 35114.4239151344,
+        "gone": 36792.59728412118
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -432.34409221850785,
+       "rms_change_m": 1025.1399358366327,
+       "share_of_ground_moved_over_100_m": 0.86861328125,
+       "forms_kept": 0.5712002580434972,
+       "forms_strength_over_start": 0.8722395529020462,
+       "relief_over_start": 1.2553496552783179,
+       "hollow_volume_over_start": 0.025596662409283683,
+       "hollow_area_over_start": 0.17585940268694222,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.5549357816084426,
+         "least": 0.16567043670111253,
+         "most": 2.1602357673404864
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.3045364901081102,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 862.3589480641782,
+         "1%": 1606.4523849362215,
+         "10%": 2838.1263512602186,
+         "50%": 4123.374361413608,
+         "90%": 5986.965571703977,
+         "99%": 7039.859769846483,
+         "99.9%": 7673.9270140340905
+        },
+        "highest": 8640.74151127866,
+        "lowest": 862.3510063584289,
+        "mean": 4219.6332808683355,
+        "spread": 1313.5314619915
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -986.3521548466273,
+         "tenth_m": -1828.9031072999014,
+         "ninetieth_m": -67.59859674072891
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 324.17828307950504,
+         "tenth_m": -840.6081239563604,
+         "ninetieth_m": 1653.3669482307987
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -448.78531882705545,
+         "tenth_m": -1520.8827678615687,
+         "ninetieth_m": 590.5631504540414
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -496.0863553540064,
+         "tenth_m": -1720.4579499608446,
+         "ninetieth_m": 706.1548789566104
+        }
+       },
+       "summits": {
+        "median_m": -1025.9127844338786,
+        "least_m": -1894.5265211305395,
+        "most_m": -584.9353327771769,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1000.4212057970449,
+        "least": -1374.4254539503754,
+        "most": -553.2032356964519
+       },
+       "change_m": {
+        "0.1%": -4535.685097785313,
+        "1%": -3070.9251774077625,
+        "10%": -1542.2631711460415,
+        "50%": -400.73693276591075,
+        "90%": 643.814774422382,
+        "99%": 1824.614291586191,
+        "99.9%": 2616.804569567632,
+        "most": 3491.0263485806927,
+        "least": -5082.008916736673
+       },
+       "share_risen_over_100_m": 0.266328125,
+       "share_fallen_over_100_m": 0.60228515625,
+       "rock": {
+        "cut": 426338.87865383085,
+        "laid": 85067.51394564555,
+        "set_down": 115570.04725212313,
+        "gone": 225701.3174560622
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -1704.2115178297681,
+       "rms_change_m": 2420.9494155207967,
+       "share_of_ground_moved_over_100_m": 0.958427734375,
+       "forms_kept": 0.20363080133064523,
+       "forms_strength_over_start": 0.5778868232951971,
+       "relief_over_start": 0.7324018391421463,
+       "hollow_volume_over_start": 0.0009021882100512456,
+       "hollow_area_over_start": 0.010035761461387287,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.3721249874916577,
+         "least": 0.08675555920193444,
+         "most": 1.9868141200155274
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.4528386000094971,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 1029.5525578038262,
+         "1%": 1039.5387363272373,
+         "10%": 1929.789480940655,
+         "50%": 2742.0562352465804,
+         "90%": 4315.614769261218,
+         "99%": 5160.955749306079,
+         "99.9%": 5567.779522368117
+        },
+        "highest": 6463.836169198367,
+        "lowest": 1029.3204057442754,
+        "mean": 2947.7658552570747,
+        "spread": 887.036008575873
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -2990.2552421169726,
+         "tenth_m": -4956.862079708049,
+         "ninetieth_m": -716.4430964373676
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -665.0956529665916,
+         "tenth_m": -2642.784505462227,
+         "ninetieth_m": 1525.769798882557
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -1631.166260743053,
+         "tenth_m": -3743.4667280315775,
+         "ninetieth_m": 395.65614450205936
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -1826.3493394073116,
+         "tenth_m": -3998.4640035154835,
+         "ninetieth_m": 324.0349064803739
+        }
+       },
+       "summits": {
+        "median_m": -4537.282942250826,
+        "least_m": -6425.824768706223,
+        "most_m": -2850.712315251477,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -2549.469439261995,
+        "least": -4055.5893721355724,
+        "most": -1806.8323734140013
+       },
+       "change_m": {
+        "0.1%": -6588.331565470129,
+        "1%": -5604.514179310694,
+        "10%": -3941.047873125685,
+        "50%": -1757.8019111508506,
+        "90%": 415.2039236779509,
+        "99%": 1829.2454963441028,
+        "99.9%": 2449.6615546209687,
+        "most": 3291.116609404914,
+        "least": -7220.024844465804
+       },
+       "share_risen_over_100_m": 0.180673828125,
+       "share_fallen_over_100_m": 0.77775390625,
+       "rock": {
+        "cut": 1178453.9310291975,
+        "laid": 99180.8674214762,
+        "set_down": 256855.99688602882,
+        "gone": 822417.0667216927
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -3701.7859697423887,
+       "rms_change_m": 4126.4317726340105,
+       "share_of_ground_moved_over_100_m": 0.997626953125,
+       "forms_kept": 0.1023106942035073,
+       "forms_strength_over_start": 0.07632122104764312,
+       "relief_over_start": 0.07106165562827987,
+       "hollow_volume_over_start": 4.536778752227804e-09,
+       "hollow_area_over_start": 0.00033828409420406583,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.011025388346534016,
+         "least": 0.0033782303903556565,
+         "most": 0.1991649013121936
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.43202436659682325,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 865.0553666906995,
+         "1%": 872.691378796364,
+         "10%": 883.7500403751739,
+         "50%": 932.6735524297645,
+         "90%": 1021.6029114722719,
+         "99%": 1394.5545802403249,
+         "99.9%": 1501.9075521305874
+        },
+        "highest": 1565.2516096109666,
+        "lowest": 863.2959699703925,
+        "mean": 950.191403344454,
+        "spread": 84.54131163897061
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -5110.70112335231,
+         "tenth_m": -6794.466588128204,
+         "ninetieth_m": -2482.4438109747502
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -2565.572206317069,
+         "tenth_m": -4669.317983323687,
+         "ninetieth_m": -169.84545782988047
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -3621.4234605811334,
+         "tenth_m": -5808.295965965685,
+         "ninetieth_m": -1321.9967722843055
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -3800.2543867611475,
+         "tenth_m": -5917.439642268607,
+         "ninetieth_m": -1437.2005720047023
+        }
+       },
+       "summits": {
+        "median_m": -7341.486752654757,
+        "least_m": -8959.580036948111,
+        "most_m": -6780.586636041959,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -5162.041432772863,
+        "least": -6387.865342605286,
+        "most": -4493.822537949327
+       },
+       "change_m": {
+        "0.1%": -8065.0604851024345,
+        "1%": -7115.15758549913,
+        "10%": -5969.114655648241,
+        "50%": -3856.3229487875965,
+        "90%": -1313.854174908793,
+        "99%": -29.707735350034405,
+        "99.9%": 1183.8912745156667,
+        "most": 1582.8295519151873,
+        "least": -9048.896863475387
+       },
+       "share_risen_over_100_m": 0.009013671875,
+       "share_fallen_over_100_m": 0.98861328125,
+       "rock": {
+        "cut": 2442217.710128434,
+        "laid": 99877.48827941157,
+        "set_down": 432983.6994877068,
+        "gone": 1909356.5223613142
+       }
+      }
+     },
+     "seconds": 517
+    },
+    "with_divers_at_the_delta_fronts": {
+     "reach": 0.95,
+     "water": "wet",
+     "rule": "healed",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -2.498719888526479,
+       "rms_change_m": 37.38375415034122,
+       "share_of_ground_moved_over_100_m": 0.017587890625,
+       "forms_kept": 0.9982041500010297,
+       "forms_strength_over_start": 0.9883631046285577,
+       "relief_over_start": 0.9840213606359447,
+       "hollow_volume_over_start": 0.9278979221439873,
+       "hollow_area_over_start": 0.9617094622893779,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9952354727508282,
+         "least": 0.9772308164177311,
+         "most": 1.0
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12170808892727013,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2258.19462890625,
+         "50%": 4812.989013671875,
+         "90%": 6915.103125,
+         "99%": 8081.107540951929,
+         "99.9%": 8972.89981476981
+        },
+        "highest": 9975.138389792606,
+        "lowest": -454.449840848504,
+        "mean": 4649.478653198316,
+        "spread": 1825.5412246954052
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -13.267972623052128,
+         "tenth_m": -38.32259525210611,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 13.686214352168712,
+         "tenth_m": 0.0,
+         "ninetieth_m": 28.96690309879791
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -3.0477158708846543,
+         "tenth_m": -10.229474611733712,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -5.247935869027416,
+         "tenth_m": -21.295201058792735,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -20.213162503197964,
+        "least_m": -104.38553732242508,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -5.218736925177836,
+        "least": -45.04229700709948,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -296.64588885772037,
+        "1%": -96.4660537075191,
+        "10%": -14.243692320088302,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 77.61480177028982,
+        "99.9%": 491.67486309744373,
+        "most": 1163.1614216055468,
+        "least": -713.6259413502003
+       },
+       "share_risen_over_100_m": 0.008046875,
+       "share_fallen_over_100_m": 0.009541015625,
+       "rock": {
+        "cut": 26530.27508696997,
+        "laid": 2064.1904656096235,
+        "set_down": 23380.28897619105,
+        "gone": 1085.7956451692944
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -16.616656139912763,
+       "rms_change_m": 100.74012137244917,
+       "share_of_ground_moved_over_100_m": 0.0994921875,
+       "forms_kept": 0.9893408223512967,
+       "forms_strength_over_start": 0.9723039570535946,
+       "relief_over_start": 0.9781322797539741,
+       "hollow_volume_over_start": 0.840844137289282,
+       "hollow_area_over_start": 0.9155900641128902,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9477160285063553,
+         "least": 0.6920316611442402,
+         "most": 0.9984528019945
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12170808892727013,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2256.9671630859375,
+         "50%": 4794.217775206734,
+         "90%": 6881.1136104088455,
+         "99%": 8033.614846311957,
+         "99.9%": 8780.297992381333
+        },
+        "highest": 9803.359308723342,
+        "lowest": -364.95949867395836,
+        "mean": 4635.36071694693,
+        "spread": 1809.759293824085
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -50.031940122999444,
+         "tenth_m": -142.59474128508828,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 36.46963931166041,
+         "tenth_m": 0.0,
+         "ninetieth_m": 151.80814837296938
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -18.764773468225545,
+         "tenth_m": -59.64950829900699,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -24.91597930935052,
+         "tenth_m": -96.1739760162166,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -61.14541687079691,
+        "least_m": -339.03180641800463,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -23.382958888837493,
+        "least": -145.44583274510114,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -985.6900692377087,
+        "1%": -396.8391781241991,
+        "10%": -71.83214365882377,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 235.11570996388502,
+        "99.9%": 592.1910617287548,
+        "most": 1672.713907305455,
+        "least": -1798.080876647572
+       },
+       "share_risen_over_100_m": 0.025615234375,
+       "share_fallen_over_100_m": 0.073876953125,
+       "rock": {
+        "cut": 81926.50898356402,
+        "laid": 6483.339674312269,
+        "set_down": 67603.3736484236,
+        "gone": 7839.795660828193
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -165.0862115110429,
+       "rms_change_m": 490.6308454507999,
+       "share_of_ground_moved_over_100_m": 0.353779296875,
+       "forms_kept": 0.8825667636407898,
+       "forms_strength_over_start": 0.9754639256106031,
+       "relief_over_start": 1.0952347200702985,
+       "hollow_volume_over_start": 0.6084465778163851,
+       "hollow_area_over_start": 0.7617352363156029,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.8667879659645401,
+         "least": 0.6466122667197767,
+         "most": 2.0124233750558482
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.1593417985477163,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -224.29046829767682,
+         "1%": 1405.6259474517415,
+         "10%": 2240.8513039525474,
+         "50%": 4576.001420986568,
+         "90%": 6714.061652052919,
+         "99%": 7828.107862391007,
+         "99.9%": 8377.734634311051
+        },
+        "highest": 8935.260825147865,
+        "lowest": -224.30849813419474,
+        "mean": 4486.891161575801,
+        "spread": 1724.2990856741767
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -303.4574680051853,
+         "tenth_m": -806.9721156473756,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 73.67511476860918,
+         "tenth_m": -62.02540575046602,
+         "ninetieth_m": 484.03113177018093
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -176.91799819837874,
+         "tenth_m": -615.4073767403761,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -166.2562796122286,
+         "tenth_m": -662.3504109686424,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -400.83757734412757,
+        "least_m": -1288.7872352744107,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -170.8026454136634,
+        "least": -493.2750253586837,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -3564.9247685605706,
+        "1%": -2184.380208388661,
+        "10%": -623.8117963290161,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 708.4933378596872,
+        "99.9%": 1347.4056855622011,
+        "most": 2058.5215031651514,
+        "least": -4478.560850489783
+       },
+       "share_risen_over_100_m": 0.059296875,
+       "share_fallen_over_100_m": 0.294482421875,
+       "rock": {
+        "cut": 308401.27548195136,
+        "laid": 17943.713158438157,
+        "set_down": 208882.34253447808,
+        "gone": 81575.21978903504
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -1047.0425938344401,
+       "rms_change_m": 1904.2762803249304,
+       "share_of_ground_moved_over_100_m": 0.782119140625,
+       "forms_kept": 0.4490326728818011,
+       "forms_strength_over_start": 0.8335135309998186,
+       "relief_over_start": 0.927127521794163,
+       "hollow_volume_over_start": 0.07542826276093242,
+       "hollow_area_over_start": 0.4087277296304649,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.37359603422382404,
+         "least": 0.14755736987806795,
+         "most": 1.9027598522321325
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.39170471726376155,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 608.3746051703888,
+         "1%": 1071.4659379234247,
+         "10%": 2307.496245241764,
+         "50%": 3250.0828352025997,
+         "90%": 5665.829050909834,
+         "99%": 6509.751126481251,
+         "99.9%": 7111.511911765665
+        },
+        "highest": 7867.532880892182,
+        "lowest": 608.3651111489922,
+        "mean": 3604.934779252403,
+        "spread": 1306.621966478583
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -1930.7110536040643,
+         "tenth_m": -4553.414932701372,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -200.20471334241955,
+         "tenth_m": -2213.5036815975827,
+         "ninetieth_m": 1466.6420560464317
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -1017.4547693787493,
+         "tenth_m": -3386.4548284971897,
+         "ninetieth_m": 392.42295027654694
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -948.5073378718258,
+         "tenth_m": -3234.176857944454,
+         "ninetieth_m": 367.4036039176787
+        }
+       },
+       "summits": {
+        "median_m": -3009.308636446401,
+        "least_m": -5708.129162477266,
+        "most_m": -542.5772646691912,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -2143.3748931544396,
+        "least": -3875.654241588191,
+        "most": -61.91881105129505
+       },
+       "change_m": {
+        "0.1%": -6346.199900129784,
+        "1%": -5407.147542529003,
+        "10%": -3457.9004207553653,
+        "50%": -384.52121761189346,
+        "90%": 417.6843595543515,
+        "99%": 1769.6420680958345,
+        "99.9%": 2415.0772164706123,
+        "most": 3287.296883046644,
+        "least": -6989.935987574123
+       },
+       "share_risen_over_100_m": 0.212216796875,
+       "share_fallen_over_100_m": 0.56990234375,
+       "rock": {
+        "cut": 1121900.1748767234,
+        "laid": 58240.09636276956,
+        "set_down": 553935.6174239159,
+        "gone": 509724.4610900376
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -3465.9223915727075,
+       "rms_change_m": 3897.7221179769663,
+       "share_of_ground_moved_over_100_m": 0.995439453125,
+       "forms_kept": 0.08868420580194833,
+       "forms_strength_over_start": 0.21119675221473527,
+       "relief_over_start": 0.1855060311230877,
+       "hollow_volume_over_start": 1.2806084517872774e-08,
+       "hollow_area_over_start": 0.003672798737072715,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.00895761139023269,
+         "least": 0.0027202870381638727,
+         "most": 1.1286237364906428
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.4567678295671389,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 989.7277963452518,
+         "1%": 990.0734588752509,
+         "10%": 997.8957299946619,
+         "50%": 1040.289527866306,
+         "90%": 1961.5498974253471,
+         "99%": 2090.324341110807,
+         "99.9%": 2290.5287446899124
+        },
+        "highest": 2612.6792001860817,
+        "lowest": 989.5106589944548,
+        "mean": 1186.0549815141358,
+        "spread": 333.96209471739087
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -4878.168020683822,
+         "tenth_m": -6493.40957238199,
+         "ninetieth_m": -2352.40199510451
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -2332.3982022335354,
+         "tenth_m": -4375.154620049758,
+         "ninetieth_m": -18.924063229869848
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -3384.5361953675515,
+         "tenth_m": -5549.180263127708,
+         "ninetieth_m": -1184.7848673641936
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -3583.2980355330515,
+         "tenth_m": -5704.821329775888,
+         "ninetieth_m": -1241.139243783187
+        }
+       },
+       "summits": {
+        "median_m": -6834.203931727675,
+        "least_m": -7953.577678200954,
+        "most_m": -5960.501606140384,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -5070.563261346231,
+        "least": -5671.753364785482,
+        "most": -3567.73152273087
+       },
+       "change_m": {
+        "0.1%": -7476.125803685132,
+        "1%": -6777.883790154367,
+        "10%": -5723.005528372182,
+        "50%": -3572.59757847983,
+        "90%": -1169.200405251483,
+        "99%": 164.93142348414213,
+        "99.9%": 1309.9228151939315,
+        "most": 1695.6576338763055,
+        "least": -8743.155151873727
+       },
+       "share_risen_over_100_m": 0.010556640625,
+       "share_fallen_over_100_m": 0.9848828125,
+       "rock": {
+        "cut": 2843868.271528425,
+        "laid": 74089.28906044575,
+        "set_down": 1006646.3537632157,
+        "gone": 1763132.6287047812
+       }
+      }
+     },
+     "seconds": 518
+    },
+    "all_of_it": {
+     "reach": 1.0,
+     "water": "wet",
+     "rule": "healed",
+     "rate": 3.1628449003351895e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -294.70352099609374,
+        "1%": 954.3006677246094,
+        "10%": 2257.300537109375,
+        "50%": 4817.622802734375,
+        "90%": 6927.059228515625,
+        "99%": 8101.322910156247,
+        "99.9%": 9084.819762695333
+       },
+       "highest": 10033.8291015625,
+       "lowest": -652.8958129882812,
+       "mean": 4651.977373086843,
+       "spread": 1833.5337332427498
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -2.3089378048283846,
+       "rms_change_m": 31.9318830067516,
+       "share_of_ground_moved_over_100_m": 0.012373046875,
+       "forms_kept": 0.9988834416011633,
+       "forms_strength_over_start": 0.9949085957530006,
+       "relief_over_start": 0.9968903984614323,
+       "hollow_volume_over_start": 0.9809456212164913,
+       "hollow_area_over_start": 0.9846161280969103,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9988626905620372,
+         "least": 0.9880938211775278,
+         "most": 1.0
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2257.237109375,
+         "50%": 4814.064453125,
+         "90%": 6918.488762466873,
+         "99%": 8089.089125581389,
+         "99.9%": 8978.885950983351
+        },
+        "highest": 9977.052499932895,
+        "lowest": -487.59270494662474,
+        "mean": 4649.668435282015,
+        "spread": 1827.9804822034048
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -8.983361539566282,
+         "tenth_m": -27.71392673377113,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 4.578708667987671,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -2.161675098702284,
+         "tenth_m": -2.9674345430868923,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -4.929412645914202,
+         "tenth_m": -9.735785431293742,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -6.583797350757777,
+        "least_m": -102.72758847421755,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -3.147494646577343,
+        "least": -37.75857126111987,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -282.84590392937844,
+        "1%": -86.53662723896814,
+        "10%": -5.7115166643348845,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 14.778106196192876,
+        "99.9%": 468.6388835659874,
+        "most": 1163.1645294889277,
+        "least": -733.651460504554
+       },
+       "share_risen_over_100_m": 0.00451171875,
+       "share_fallen_over_100_m": 0.007861328125,
+       "rock": {
+        "cut": 26268.23862306689,
+        "laid": 1273.8816100675442,
+        "set_down": 24021.1782375126,
+        "gone": 973.1787754867402
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -14.11136034517461,
+       "rms_change_m": 84.80216213505604,
+       "share_of_ground_moved_over_100_m": 0.05666015625,
+       "forms_kept": 0.9934106365018768,
+       "forms_strength_over_start": 0.9897234132885901,
+       "relief_over_start": 1.0018159112050593,
+       "hollow_volume_over_start": 0.9777166711912962,
+       "hollow_area_over_start": 0.9738232546151616,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9906531249957161,
+         "least": 0.9348621632321784,
+         "most": 1.0
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12139271362349958,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2256.0033935546876,
+         "50%": 4798.9091796875,
+         "90%": 6899.146722093256,
+         "99%": 8062.232379834255,
+         "99.9%": 8815.712047430121
+        },
+        "highest": 9811.790342874783,
+        "lowest": -456.1958698039458,
+        "mean": 4637.866012741668,
+        "spread": 1820.0015072157662
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -33.510192802376785,
+         "tenth_m": -102.3008222761514,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": 7.925243816312669,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -13.996347092864426,
+         "tenth_m": -22.003102233713253,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -22.345103579692815,
+         "tenth_m": -56.76313443494091,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -21.064345767630584,
+        "least_m": -317.63528160843634,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -12.775205353136698,
+        "least": -103.93112977205237,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -953.475316054815,
+        "1%": -353.0420260112382,
+        "10%": -33.465613545218,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 85.94663150811724,
+        "99.9%": 509.5727536996411,
+        "most": 1294.380495890864,
+        "least": -1756.8374208869554
+       },
+       "share_risen_over_100_m": 0.008984375,
+       "share_fallen_over_100_m": 0.04767578125,
+       "rock": {
+        "cut": 79519.63693031284,
+        "laid": 3783.343766109624,
+        "set_down": 69565.66294252916,
+        "gone": 6170.630221674122
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -92.595347316358,
+       "rms_change_m": 350.77216693684727,
+       "share_of_ground_moved_over_100_m": 0.176650390625,
+       "forms_kept": 0.9477226465025773,
+       "forms_strength_over_start": 1.0001392864482448,
+       "relief_over_start": 1.0484397594309034,
+       "hollow_volume_over_start": 0.9508087346834055,
+       "hollow_area_over_start": 0.9148973871580914,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.963534535323888,
+         "least": 0.8182861337059119,
+         "most": 1.0
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.12128882856424679,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -261.3814979858398,
+         "1%": 958.3616418457032,
+         "10%": 2235.9387451171874,
+         "50%": 4686.839785799725,
+         "90%": 6818.622802734375,
+         "99%": 7957.130751953125,
+         "99.9%": 8477.817606227789
+        },
+        "highest": 9044.865236365,
+        "lowest": -446.9498749374294,
+        "mean": 4559.382025770485,
+        "spread": 1792.6027757199315
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -174.78537378348878,
+         "tenth_m": -516.4672682581072,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -5.014580096301899,
+         "tenth_m": 0.0,
+         "ninetieth_m": 17.58336686023257
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -91.21078880873822,
+         "tenth_m": -219.316370491674,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -112.15681060770541,
+         "tenth_m": -303.68787612735656,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -90.06324644520964,
+        "least_m": -1219.9066071041125,
+        "most_m": 0.0,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -39.665394098907655,
+        "least": -364.6860947507812,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -3243.4223201016357,
+        "1%": -1845.7049912686716,
+        "10%": -253.56512985858555,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 180.92618680345007,
+        "99.9%": 729.0001702004834,
+        "most": 1598.0115588711888,
+        "least": -4558.633481765896
+       },
+       "share_risen_over_100_m": 0.017880859375,
+       "share_fallen_over_100_m": 0.15876953125,
+       "rock": {
+        "cut": 277271.01557782217,
+        "laid": 6823.76154493163,
+        "set_down": 223609.75500679546,
+        "gone": 46837.49902609527
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -785.4556340031845,
+       "rms_change_m": 1524.954957562721,
+       "share_of_ground_moved_over_100_m": 0.696689453125,
+       "forms_kept": 0.6039886858653348,
+       "forms_strength_over_start": 0.9696832098329369,
+       "relief_over_start": 1.1171211535728338,
+       "hollow_volume_over_start": 0.06433168351592801,
+       "hollow_area_over_start": 0.21896646154837462,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.6259792491328872,
+         "least": 0.15978561358361743,
+         "most": 0.9920904835326994
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.2183546853942979,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 70.21628506184024,
+         "1%": 1299.2031480454652,
+         "10%": 2421.6535952205477,
+         "50%": 3644.293562554396,
+         "90%": 6064.340365417037,
+         "99%": 6892.880966232583,
+         "99.9%": 7390.721233681372
+        },
+        "highest": 7926.10009765625,
+        "lowest": 70.20516178760639,
+        "mean": 3866.5217390836583,
+        "spread": 1434.7616616397265
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -1375.1174406382343,
+         "tenth_m": -3884.032138064678,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -192.17937837173594,
+         "tenth_m": -1816.872902508465,
+         "ninetieth_m": 1213.2328870882836
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -770.0844198370813,
+         "tenth_m": -2596.8344975495907,
+         "ninetieth_m": 267.1770240544258
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -743.1875386552995,
+         "tenth_m": -2706.2942329369507,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -1858.6026236441385,
+        "least_m": -5909.26564789651,
+        "most_m": -225.06307115858453,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1199.1744300175515,
+        "least": -3946.476884929487,
+        "most": -2.0212090276563686
+       },
+       "change_m": {
+        "0.1%": -5888.839268609152,
+        "1%": -4961.697182407517,
+        "10%": -2689.8922166728375,
+        "50%": -204.65012693048106,
+        "90%": 260.84535591653986,
+        "99%": 1422.5031603407986,
+        "99.9%": 2161.0994444414314,
+        "most": 3182.343333543753,
+        "least": -6878.094583233955
+       },
+       "share_risen_over_100_m": 0.156884765625,
+       "share_fallen_over_100_m": 0.5398046875,
+       "rock": {
+        "cut": 1116796.607850289,
+        "laid": 35997.966847837735,
+        "set_down": 722364.9183839256,
+        "gone": 358433.7226185244
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -3597.029471124119,
+       "rms_change_m": 4039.009608577937,
+       "share_of_ground_moved_over_100_m": 0.995859375,
+       "forms_kept": 0.1141121093669623,
+       "forms_strength_over_start": 0.17958703221374894,
+       "relief_over_start": 0.08592961571016822,
+       "hollow_volume_over_start": 0.001068158953762599,
+       "hollow_area_over_start": 0.007039530912722703,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.004426551657369595,
+         "least": 0.0011795996953756392,
+         "most": 0.8420657948103304
+        },
+        "roundness": {
+         "at_start": 0.12139271362349958,
+         "now": 0.4613567046334032,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": 418.36564535054356,
+         "1%": 989.8290675455089,
+         "10%": 992.137734833592,
+         "50%": 1014.6818360670926,
+         "90%": 1086.3679176740068,
+         "99%": 2077.356424366853,
+         "99.9%": 2326.71575488883
+        },
+        "highest": 4017.7885770503294,
+        "lowest": 418.3514500203126,
+        "mean": 1054.9479019627245,
+        "spread": 173.46102034823286
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.0945773654513889,
+         "mean_change_m": -4999.652333635823,
+         "tenth_m": -6727.535043548351,
+         "ninetieth_m": -2330.0227853423553
+        },
+        "floors": {
+         "share_of_ground": 0.08054606119791667,
+         "mean_change_m": -2464.2187113448767,
+         "tenth_m": -4611.39268108723,
+         "ninetieth_m": -77.09662563168165
+        },
+        "between": {
+         "share_of_ground": 0.5193210177951388,
+         "mean_change_m": -3517.2850955715353,
+         "tenth_m": -5736.551761643664,
+         "ninetieth_m": -1223.3509250779705
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -3694.1331421077134,
+         "tenth_m": -5846.811271866064,
+         "ninetieth_m": -1278.7812964513219
+        }
+       },
+       "summits": {
+        "median_m": -7305.556139286277,
+        "least_m": -8978.70895495011,
+        "most_m": -6424.989033965354,
+        "start_heights_m": [
+         7969.4033203125,
+         10033.8291015625
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -5095.907358700662,
+        "least": -6343.954205120265,
+        "most": -4311.926067317545
+       },
+       "change_m": {
+        "0.1%": -8038.383139248735,
+        "1%": -7064.091745629922,
+        "10%": -5899.774195305488,
+        "50%": -3720.1170423306576,
+        "90%": -1209.632628515329,
+        "99%": 43.42484188831438,
+        "99.9%": 1035.241349552622,
+        "most": 1761.5659012651881,
+        "least": -8994.000411328505
+       },
+       "share_risen_over_100_m": 0.009453125,
+       "share_fallen_over_100_m": 0.98640625,
+       "rock": {
+        "cut": 3290237.1789494776,
+        "laid": 40177.22988854627,
+        "set_down": 1414037.107972827,
+        "gone": 1836022.8410880996
+       }
+      }
+     },
+     "seconds": 535
+    }
+   }
+  },
+  "southern_highlands": {
+   "shared_by_wear": {
+    "all_of_it": {
+     "reach": 1.0,
+     "water": "dry",
+     "rule": "worn",
+     "rate": 1.659798870010248e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -3586.7578503417967,
+        "1%": -3249.177265625,
+        "10%": -2269.5744140624997,
+        "50%": -221.58876037597656,
+        "90%": 847.4296325683598,
+        "99%": 1546.3820690917964,
+        "99.9%": 1886.2835993652352
+       },
+       "highest": 2189.88671875,
+       "lowest": -5164.42724609375,
+       "mean": -453.27487590864723,
+       "spread": 1153.973229363063
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -0.39647920529513914,
+       "rms_change_m": 11.205247562935876,
+       "share_of_ground_moved_over_100_m": 0.00123046875,
+       "forms_kept": 0.9998080437322733,
+       "forms_strength_over_start": 0.9957429232799397,
+       "relief_over_start": 0.9970367137964236,
+       "hollow_volume_over_start": 0.999009573156725,
+       "hollow_area_over_start": 1.0002485310042428,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9984135628659576,
+         "least": 0.9942878046703835,
+         "most": 1.0015947775569793
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.21145662252147557,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3588.9146178567016,
+         "1%": -3250.932179862854,
+         "10%": -2263.9295482731436,
+         "50%": -222.12323794436315,
+         "90%": 842.1982869436268,
+         "99%": 1536.9998815531915,
+         "99.9%": 1874.6206956922001
+        },
+        "highest": 2172.7572937510317,
+        "lowest": -5164.42724609375,
+        "mean": -453.67135511394235,
+        "spread": 1150.89111582526
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -3.7568487623386373,
+         "tenth_m": -12.481960184778018,
+         "ninetieth_m": 4.409884787772833
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 6.630016927892369,
+         "tenth_m": -2.0746916630153462,
+         "ninetieth_m": 19.27534482359072
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -0.9324116418640711,
+         "tenth_m": -7.901599258387045,
+         "ninetieth_m": 6.421535660286374
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 4.17022789828904,
+         "tenth_m": -8.131109827192109,
+         "ninetieth_m": 18.051760928730143
+        }
+       },
+       "summits": {
+        "median_m": -8.240651789415324,
+        "least_m": -26.4204814897721,
+        "most_m": 1.522224947597124,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1.229321026048666,
+        "least": -8.187228834640337,
+        "most": 5.419172497016177
+       },
+       "change_m": {
+        "0.1%": -70.68968969753053,
+        "1%": -27.541261910056203,
+        "10%": -8.176174937069414,
+        "50%": -0.8684877451071067,
+        "90%": 8.10899034269033,
+        "99%": 32.789616688540235,
+        "99.9%": 97.28866872826177,
+        "most": 414.1094124324304,
+        "least": -215.34501747931978
+       },
+       "share_risen_over_100_m": 0.000927734375,
+       "share_fallen_over_100_m": 0.000302734375,
+       "rock": {
+        "cut": 17705.15765834617,
+        "laid": 0.0,
+        "set_down": 17705.154420109542,
+        "gone": 0.0032382366224522705
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -1.077769383036972,
+       "rms_change_m": 30.16734284976603,
+       "share_of_ground_moved_over_100_m": 0.013818359375,
+       "forms_kept": 0.9986885577894927,
+       "forms_strength_over_start": 0.9877827614070803,
+       "relief_over_start": 0.9919157099515766,
+       "hollow_volume_over_start": 0.9970275241014263,
+       "hollow_area_over_start": 1.0011006373045037,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9963708448161162,
+         "least": 0.9824402075654127,
+         "most": 1.018842198773934
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.21001300921091487,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3577.6607033541422,
+         "1%": -3255.113183812418,
+         "10%": -2253.838719674199,
+         "50%": -220.5201685936691,
+         "90%": 830.1932429161869,
+         "99%": 1514.0134755478705,
+         "99.9%": 1856.6892605436974
+        },
+        "highest": 2135.748807825879,
+        "lowest": -5164.42724609375,
+        "mean": -454.35264529168415,
+        "spread": 1145.1997379500515
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -11.200923478832623,
+         "tenth_m": -37.2949073085758,
+         "ninetieth_m": 13.03351962484017
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 19.51766123942235,
+         "tenth_m": -6.02702763725623,
+         "ninetieth_m": 59.14976319839667
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -2.5913370807049567,
+         "tenth_m": -23.078590629916743,
+         "ninetieth_m": 19.464457184312487
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 12.726681044428778,
+         "tenth_m": -23.500250605246354,
+         "ninetieth_m": 53.87458472150761
+        }
+       },
+       "summits": {
+        "median_m": -27.69343266617841,
+        "least_m": -82.01257899353186,
+        "most_m": 4.162279837747292,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1.658004131465077,
+        "least": -21.44575161724009,
+        "most": 21.452462790936437
+       },
+       "change_m": {
+        "0.1%": -193.2435590910953,
+        "1%": -76.49507127422737,
+        "10%": -23.952328893761443,
+        "50%": -2.5628123393734157,
+        "90%": 24.740326368718204,
+        "99%": 93.88669817222302,
+        "99.9%": 230.6670328208215,
+        "most": 723.3795020971725,
+        "least": -450.5442630597421
+       },
+       "share_risen_over_100_m": 0.008583984375,
+       "share_fallen_over_100_m": 0.005234375,
+       "rock": {
+        "cut": 52784.97756274069,
+        "laid": 0.0,
+        "set_down": 52784.941093399066,
+        "gone": 0.03646934161745158
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -3.043099813711087,
+       "rms_change_m": 86.63828464082282,
+       "share_of_ground_moved_over_100_m": 0.143740234375,
+       "forms_kept": 0.9894582594135934,
+       "forms_strength_over_start": 0.962708759838751,
+       "relief_over_start": 0.9779089840926855,
+       "hollow_volume_over_start": 0.988151771570543,
+       "hollow_area_over_start": 1.0067990981874988,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9916396444699582,
+         "least": 0.9306430093451015,
+         "most": 1.0895057075883074
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.20445416491685797,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3572.62455201057,
+         "1%": -3266.9613020460347,
+         "10%": -2219.338844665932,
+         "50%": -218.98684943762896,
+         "90%": 795.6892154079051,
+         "99%": 1453.2941404844535,
+         "99.9%": 1782.495625598836
+        },
+        "highest": 2039.87472443875,
+        "lowest": -5164.42724609375,
+        "mean": -456.3179757223583,
+        "spread": 1127.81766536562
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -37.60478956310465,
+         "tenth_m": -125.21337423328053,
+         "ninetieth_m": 41.801982126810046
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 65.07446893727635,
+         "tenth_m": -18.15372324357359,
+         "ninetieth_m": 198.21186295412036
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -7.822771263767413,
+         "tenth_m": -72.05820178429263,
+         "ninetieth_m": 63.662784255856515
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 43.538008524254984,
+         "tenth_m": -72.05482070646717,
+         "ninetieth_m": 176.79481620753958
+        }
+       },
+       "summits": {
+        "median_m": -75.63576849960884,
+        "least_m": -236.1978087582495,
+        "most_m": 11.972336840903381,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -3.2472107344701726,
+        "least": -96.32255761799024,
+        "most": 80.49671809426296
+       },
+       "change_m": {
+        "0.1%": -510.1907073705135,
+        "1%": -227.21175083446803,
+        "10%": -76.39702972951152,
+        "50%": -8.259789880972846,
+        "90%": 82.46070236999837,
+        "99%": 286.999265032665,
+        "99.9%": 564.7318955739738,
+        "most": 1677.7162822782502,
+        "least": -1057.3412071928658
+       },
+       "share_risen_over_100_m": 0.07986328125,
+       "share_fallen_over_100_m": 0.063876953125,
+       "rock": {
+        "cut": 172837.35074656433,
+        "laid": 0.0,
+        "set_down": 172836.6284241028,
+        "gone": 0.7223224615802553
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -8.318325506924836,
+       "rms_change_m": 223.5597779343151,
+       "share_of_ground_moved_over_100_m": 0.433369140625,
+       "forms_kept": 0.9268333843579915,
+       "forms_strength_over_start": 0.9176267926260446,
+       "relief_over_start": 0.9605236819469496,
+       "hollow_volume_over_start": 0.9442260720570056,
+       "hollow_area_over_start": 0.9942305302586497,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9833370329148803,
+         "least": 0.8333390362010951,
+         "most": 1.1726007526482418
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.19902792903034816,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3575.181997810543,
+         "1%": -3285.995250540503,
+         "10%": -2108.747367787284,
+         "50%": -211.75438185545056,
+         "90%": 713.8522205110185,
+         "99%": 1308.9609097758598,
+         "99.9%": 1671.77720707882
+        },
+        "highest": 3208.829530520929,
+        "lowest": -5164.42724609375,
+        "mean": -461.59320141557214,
+        "spread": 1090.0697261641035
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -115.58849200807008,
+         "tenth_m": -376.6964728192117,
+         "ninetieth_m": 105.62791681170667
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 193.92310233863137,
+         "tenth_m": -41.24997637625929,
+         "ninetieth_m": 561.6776234583962
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -21.53366366291654,
+         "tenth_m": -194.0042121069454,
+         "ninetieth_m": 168.3521461445231
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 125.54803604584588,
+         "tenth_m": -188.5833584564547,
+         "ninetieth_m": 481.99892227324386
+        }
+       },
+       "summits": {
+        "median_m": -225.45074320441734,
+        "least_m": -694.9830150746268,
+        "most_m": 9.152731024267268,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": 1.835659225390657,
+        "least": -257.05932265563524,
+        "most": 142.49457196214033
+       },
+       "change_m": {
+        "0.1%": -1089.6622193601702,
+        "1%": -576.2110153563013,
+        "10%": -211.9337197210677,
+        "50%": -23.369398252974513,
+        "90%": 225.36885154605906,
+        "99%": 734.6742186623921,
+        "99.9%": 1335.3646962744922,
+        "most": 5837.7787702078695,
+        "least": -2029.8770213339435
+       },
+       "share_risen_over_100_m": 0.1874609375,
+       "share_fallen_over_100_m": 0.245908203125,
+       "rock": {
+        "cut": 500355.2537600651,
+        "laid": -5.774835113442368e-15,
+        "set_down": 500344.76187160594,
+        "gone": 10.491888459052753
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -33.75572273758365,
+       "rms_change_m": 1151.6439607952452,
+       "share_of_ground_moved_over_100_m": 0.766103515625,
+       "forms_kept": 0.17251198918595764,
+       "forms_strength_over_start": 2.3267382591256474,
+       "relief_over_start": 1.6408583474115361,
+       "hollow_volume_over_start": 0.7514041999036067,
+       "hollow_area_over_start": 0.8878060037989739,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.908387932881074,
+         "least": 0.5572589171849398,
+         "most": 1.4308078043514836
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.2483154647622651,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3619.0703808012922,
+         "1%": -3379.3774456448164,
+         "10%": -2065.964834089621,
+         "50%": -289.8604391652631,
+         "90%": 516.7597800280015,
+         "99%": 1604.5620916734895,
+         "99.9%": 9406.166988316605
+        },
+        "highest": 140439.4781507366,
+        "lowest": -5164.42724609375,
+        "mean": -487.0305986462309,
+        "spread": 1384.0382640002888
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -427.38185101586515,
+         "tenth_m": -1181.5256867896262,
+         "ninetieth_m": 212.27256293218733
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 781.7807073232601,
+         "tenth_m": -97.21528700511405,
+         "ninetieth_m": 1815.120880478611
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -95.20456936689978,
+         "tenth_m": -584.5739306285144,
+         "ninetieth_m": 355.32765615315253
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": 356.0736967629673,
+         "tenth_m": -638.1542645900442,
+         "ninetieth_m": 1253.2407474246163
+        }
+       },
+       "summits": {
+        "median_m": -1015.7349810302827,
+        "least_m": -2090.428581651702,
+        "most_m": -71.5917342285959,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -132.50515913358402,
+        "least": -657.0773353581486,
+        "most": 30.461311039071276
+       },
+       "change_m": {
+        "0.1%": -2137.306713954162,
+        "1%": -1477.821773436601,
+        "10%": -666.7901138004495,
+        "50%": -119.27219155109708,
+        "90%": 554.9946276505556,
+        "99%": 2859.244990394964,
+        "99.9%": 10692.462515794843,
+        "most": 143173.7808851116,
+        "least": -2718.81704953171
+       },
+       "share_risen_over_100_m": 0.239619140625,
+       "share_fallen_over_100_m": 0.526484375,
+       "rock": {
+        "cut": 1770931.7059519044,
+        "laid": -2.0339330196738496e-12,
+        "set_down": 1770243.1119312188,
+        "gone": 688.5940206860141
+       }
+      }
+     },
+     "seconds": 386
+    }
+   },
+   "no_more_than_it_lost": {
+    "all_of_it": {
+     "reach": 1.0,
+     "water": "dry",
+     "rule": "healed",
+     "rate": 1.659798870010248e-07,
+     "start": {
+      "heights": {
+       "percentiles": {
+        "0.1%": -3586.7578503417967,
+        "1%": -3249.177265625,
+        "10%": -2269.5744140624997,
+        "50%": -221.58876037597656,
+        "90%": 847.4296325683598,
+        "99%": 1546.3820690917964,
+        "99.9%": 1886.2835993652352
+       },
+       "highest": 2189.88671875,
+       "lowest": -5164.42724609375,
+       "mean": -453.27487590864723,
+       "spread": 1153.973229363063
+      }
+     },
+     "years": {
+      "1e+06": {
+       "mean_change_m": -0.9255025814871753,
+       "rms_change_m": 9.183152779604516,
+       "share_of_ground_moved_over_100_m": 0.00130859375,
+       "forms_kept": 0.9998457590697485,
+       "forms_strength_over_start": 0.9985954815238783,
+       "relief_over_start": 0.9970645095657307,
+       "hollow_volume_over_start": 0.9997882363836302,
+       "hollow_area_over_start": 0.9999112389270561,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9999794201248208,
+         "least": 0.997563675557405,
+         "most": 1.0010409228533519
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.21173722013103494,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3586.7578503417967,
+         "1%": -3249.5466761185016,
+         "10%": -2269.6433105468745,
+         "50%": -222.53101750967937,
+         "90%": 845.2677051920782,
+         "99%": 1541.3783159989969,
+         "99.9%": 1875.0432842083103
+        },
+        "highest": 2173.482469212629,
+        "lowest": -4900.036107160231,
+        "mean": -454.20037849013437,
+        "spread": 1153.040960693016
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -1.467465364252879,
+         "tenth_m": -3.4517108353721597,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 1.0411838348052391,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -1.159015237730021,
+         "tenth_m": -2.2182365713908667,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -1.222098635756038,
+         "tenth_m": -0.23606516522144114,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -1.9407919181240914,
+        "least_m": -22.656215166912034,
+        "most_m": 0.0,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -0.04772056838515937,
+        "least": -2.6361306760218213,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -86.0828713406101,
+        "1%": -21.333496705990978,
+        "10%": -2.0460760286349586,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 0.0,
+        "99.9%": 53.778654224502425,
+        "most": 500.63769364593236,
+        "least": -353.9946273644691
+       },
+       "share_risen_over_100_m": 0.000576171875,
+       "share_fallen_over_100_m": 0.000732421875,
+       "rock": {
+        "cut": 17681.987173050886,
+        "laid": 144.2193269383609,
+        "set_down": 17197.943321142247,
+        "gone": 339.82452497028333
+       }
+      },
+      "3e+06": {
+       "mean_change_m": -3.224269799628483,
+       "rms_change_m": 26.683636870597635,
+       "share_of_ground_moved_over_100_m": 0.009072265625,
+       "forms_kept": 0.9989763871000518,
+       "forms_strength_over_start": 0.9966589915876268,
+       "relief_over_start": 0.9941004211008375,
+       "hollow_volume_over_start": 0.9993631875819267,
+       "hollow_area_over_start": 1.0001420177167102,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9993806233403086,
+         "least": 0.9826924901242093,
+         "most": 1.0029003832753014
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.21173722013103494,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3551.5854525166037,
+         "1%": -3249.973947753906,
+         "10%": -2268.310693359374,
+         "50%": -224.46191484844377,
+         "90%": 840.8108196794658,
+         "99%": 1531.9774822033964,
+         "99.9%": 1860.0270368839833
+        },
+        "highest": 2137.6131159645474,
+        "lowest": -4689.665235994349,
+        "mean": -456.49914570827576,
+        "spread": 1151.337264824393
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -5.014865579735867,
+         "tenth_m": -10.853275496145393,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 2.9693955844837023,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -3.9421125672174067,
+         "tenth_m": -6.887428801022734,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -4.6425111830918,
+         "tenth_m": -1.3613354927540622,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -6.104554548934175,
+        "least_m": -74.7029490880634,
+        "most_m": 0.0,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -1.0546921292067282,
+        "least": -11.206051558414401,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -308.1889354250168,
+        "1%": -74.68105208090307,
+        "10%": -6.396269878439191,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 0.4074960922848766,
+        "99.9%": 178.00984500147746,
+        "most": 838.6623282784194,
+        "least": -956.6489515142252
+       },
+       "share_risen_over_100_m": 0.001640625,
+       "share_fallen_over_100_m": 0.007431640625,
+       "rock": {
+        "cut": 52879.49869890938,
+        "laid": 346.4474742056398,
+        "set_down": 51069.02411659352,
+        "gone": 1464.027108110215
+       }
+      },
+      "1e+07": {
+       "mean_change_m": -14.344751724725866,
+       "rms_change_m": 97.43097940091289,
+       "share_of_ground_moved_over_100_m": 0.036748046875,
+       "forms_kept": 0.992078093199804,
+       "forms_strength_over_start": 0.9941171035742821,
+       "relief_over_start": 0.9884748631791309,
+       "hollow_volume_over_start": 0.9975900572343644,
+       "hollow_area_over_start": 1.001242655021214,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9947866199666306,
+         "least": 0.9103543295772211,
+         "most": 1.0040571071223368
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.20981144552069067,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3412.829257240729,
+         "1%": -3242.712795410156,
+         "10%": -2283.245483398436,
+         "50%": -235.26406365638633,
+         "90%": 822.0806844748448,
+         "99%": 1494.032788929889,
+         "99.9%": 1799.3181053570913
+        },
+        "highest": 2044.9352759800513,
+        "lowest": -4247.416883855337,
+        "mean": -467.6196276333731,
+        "spread": 1146.1479423861492
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -23.07503014203234,
+         "tenth_m": -51.263640195559674,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 7.657645562369387,
+         "tenth_m": 0.0,
+         "ninetieth_m": 0.0
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -16.398421394442323,
+         "tenth_m": -26.825954659171323,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -24.00794694559715,
+         "tenth_m": -18.721373834726077,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -26.492699369626166,
+        "least_m": -420.5067397763885,
+        "most_m": 0.0,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -3.978206222018116,
+        "least": -24.68198048564051,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -1373.1349763393039,
+        "1%": -312.3473237105559,
+        "10%": -26.395462531297014,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 46.94536588850896,
+        "99.9%": 406.10413839606946,
+        "most": 1117.9741515964351,
+        "least": -2918.698108182689
+       },
+       "share_risen_over_100_m": 0.005712890625,
+       "share_fallen_over_100_m": 0.03103515625,
+       "rock": {
+        "cut": 175369.15988414656,
+        "laid": 860.8276998861442,
+        "set_down": 167081.70576078873,
+        "gone": 7426.626423471873
+       }
+      },
+      "3e+07": {
+       "mean_change_m": -59.047423396530576,
+       "rms_change_m": 311.8252028745152,
+       "share_of_ground_moved_over_100_m": 0.116279296875,
+       "forms_kept": 0.9470748100431837,
+       "forms_strength_over_start": 0.9955126083869044,
+       "relief_over_start": 0.9834229674745938,
+       "hollow_volume_over_start": 0.962858945596454,
+       "hollow_area_over_start": 0.9586728444373436,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.9697806800633262,
+         "least": 0.7529028991573627,
+         "most": 1.018733173120606
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.2095069264042515,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3319.04966104699,
+         "1%": -3249.143645019531,
+         "10%": -2346.1161376953123,
+         "50%": -284.9043054006107,
+         "90%": 758.8814025878906,
+         "99%": 1420.4497413433414,
+         "99.9%": 1717.8001341654988
+        },
+        "highest": 1970.6246337890625,
+        "lowest": -3555.8915907585497,
+        "mean": -512.3222993051778,
+        "spread": 1133.0887341780465
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -121.06578975675761,
+         "tenth_m": -241.31865302104208,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": 16.92384384318148,
+         "tenth_m": -3.200784152631808,
+         "ninetieth_m": 66.32823307156744
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -59.46065904453366,
+         "tenth_m": -100.54634841193847,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -74.35418414851175,
+         "tenth_m": -97.23696514868963,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -88.16045024167977,
+        "least_m": -1707.8268714430872,
+        "most_m": 0.0,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -15.875540733337402,
+        "least": -81.05374520741904,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -3721.3135278834793,
+        "1%": -1537.6637927932543,
+        "10%": -101.77315192994095,
+        "50%": 0.0,
+        "90%": 0.0,
+        "99%": 147.4684081049844,
+        "99.9%": 677.848806216403,
+        "most": 1608.5421604728563,
+        "least": -4630.218279957855
+       },
+       "share_risen_over_100_m": 0.014990234375,
+       "share_fallen_over_100_m": 0.1012890625,
+       "rock": {
+        "cut": 520641.17683044315,
+        "laid": 1945.347727864372,
+        "set_down": 488579.9741159923,
+        "gone": 30115.854986587747
+       }
+      },
+      "1e+08": {
+       "mean_change_m": -448.8769708347426,
+       "rms_change_m": 1125.80710552594,
+       "share_of_ground_moved_over_100_m": 0.3589453125,
+       "forms_kept": 0.838275964112977,
+       "forms_strength_over_start": 0.9487495116668764,
+       "relief_over_start": 0.9104237804314492,
+       "hollow_volume_over_start": 0.7441580790140698,
+       "hollow_area_over_start": 0.7674282366725249,
+       "followed_hollows": {
+        "depth_over_start": {
+         "median": 0.8956936409138188,
+         "least": 0.01763902678191914,
+         "most": 0.9875922660523749
+        },
+        "roundness": {
+         "at_start": 0.21161011817428077,
+         "now": 0.234154729583275,
+         "counted": 12
+        }
+       },
+       "heights": {
+        "percentiles": {
+         "0.1%": -3293.3755168729413,
+         "1%": -3123.133832848806,
+         "10%": -2797.500451934142,
+         "50%": -695.0747680664062,
+         "90%": 553.635103329074,
+         "99%": 1287.057180620049,
+         "99.9%": 1581.168262910405
+        },
+        "highest": 1840.2850341796875,
+        "lowest": -3293.384281318453,
+        "mean": -902.1518467433898,
+        "spread": 1223.0586887410852
+       },
+       "by_where_it_stood": {
+        "crests": {
+         "share_of_ground": 0.10497368706597222,
+         "mean_change_m": -606.2267390226705,
+         "tenth_m": -2829.454499460634,
+         "ninetieth_m": 0.0
+        },
+        "floors": {
+         "share_of_ground": 0.08841959635416667,
+         "mean_change_m": -114.2694539872156,
+         "tenth_m": -322.0605424730364,
+         "ninetieth_m": 196.52233127880626
+        },
+        "between": {
+         "share_of_ground": 0.5010511610243056,
+         "mean_change_m": -474.9586911611657,
+         "tenth_m": -2430.344733576444,
+         "ninetieth_m": 0.0
+        },
+        "steepest_quarter": {
+         "share_of_ground": 0.1736111111111111,
+         "mean_change_m": -352.6944590078734,
+         "tenth_m": -1388.098176372289,
+         "ninetieth_m": 0.0
+        }
+       },
+       "summits": {
+        "median_m": -718.4765199961089,
+        "least_m": -5253.549098703488,
+        "most_m": 0.0,
+        "start_heights_m": [
+         1663.38330078125,
+         2189.88671875
+        ]
+       },
+       "rims_of_the_followed_hollows_m": {
+        "median": -67.73034286499023,
+        "least": -3012.4359727691663,
+        "most": 0.0
+       },
+       "change_m": {
+        "0.1%": -4897.456769795801,
+        "1%": -4277.934751300908,
+        "10%": -2198.224369687055,
+        "50%": -1.0195027444805174,
+        "90%": 0.0,
+        "99%": 293.1565891954799,
+        "99.9%": 972.7457962194176,
+        "most": 2039.3826258281829,
+        "least": -5253.7553181282165
+       },
+       "share_risen_over_100_m": 0.040107421875,
+       "share_fallen_over_100_m": 0.318837890625,
+       "rock": {
+        "cut": 1658864.303160558,
+        "laid": 4699.10434912453,
+        "set_down": 1469972.1601663406,
+        "gone": 184193.0386450934
+       }
+      }
+     },
+     "seconds": 542
+    }
+   }
+  }
+ },
+ "seconds": 861
+}

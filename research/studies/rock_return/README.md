@@ -4,6 +4,8 @@
 
 **On the design surface the land loses 3.2 Gt of rock a year (0.6–6.5 across the terrain study's range), and flying a kilogram of it the 9.4 km back and the 1.0 km up costs a carrier 18–73 kJ at lunar gravity, against 280–1,900 kJ for the same way on Earth. Carriers weighing about 5 Mt alive, eating 0.05–1.2% of the land's plant growth, would return all of it, and a loop in which they multiply where sediment gathers returns exactly what arrives and recovers from losing half its carriers in 40–550 years, while the lakes take 11,000 years to lose a hundredth of their area. Energy and food do not limit the living return. Reach and placement do: flyers and waders can get at 46–66% of the rock, divers at the delta fronts raise that to 61–97%, and the rest lies on deep floors; and the rock has to be set down within 30–400 m of the slope it left, which asks for carriers that are many and spread, or that scatter their loads.**
 
+**Followed on the map for a hundred million years, the return as designed keeps the ground's forms for about ten million years and then turns on two things the design had left open. If worn ground can be given more than it lost, the fastest-wearing ground draws the rock to itself: the walls of craters and the steps above lakes rise into ramparts, 1% of the ground gains 0.7–0.9 km in thirty million years, single spots grow without limit, and the plains between are drained. If ground takes no more than it lost, nothing grows and the craters stay round, and country where hollows lie close keeps its map for the whole hundred million years; high country farther from any hollow than the carriers' range still wastes away. Neither reading raises the map's own summits, which stand farthest from where rock comes to rest and lose height in every run.**
+
 Two runners write two products. [rock.py](rock.py) follows the rock on the design surface and writes [results/rock.json](results/rock.json) (schema `terluna.research.rock-return-rock/1`) in about four minutes. [run.py](run.py) sizes the carriers from it with the functions in [carriers.py](carriers.py) and writes [results/rock_return.json](results/rock_return.json) (schema `terluna.research.rock-return/1`) in seconds. [sources.json](sources.json) records each source and how far it was read. Nothing here is validated: no animal carries sediment kilometres uphill, and flight with a load at lunar gravity has not been measured.
 
 ## What it finds
@@ -64,7 +66,7 @@ The sky ecology study already counts on 1.8–4.8 million flyers of the albatros
 | 0.01 m² a year | 514 m | 103 m | 51 m |
 | 0.04 m² a year, dry grassland | 2,055 m | 411 m | 205 m |
 
-Feeding a kilometre to each side would need slopes of 1.4–19, which no soil holds. So the rock has to be set down every 60–800 m at the central erosion, on every spur and slope: the smaller carriers of the table above stand that close, and the great ones would have to scatter a thousand loads a year over the 7 km² each serves. What is set down more thickly has to stand as rock, and that is the work of cement. The rock that leaves the land in solution is the stock for it: the seas would otherwise shed 150 Mt of calcite, 95 Mt of magnesite and 280 Mt of opal a year, lime at 4–38% of the particles' mass (8% at the central erosion) and opal at 4–44%. The carriers' own nitrogen is no source of cement. Bacteria that split urea lay one calcite for two nitrogen atoms, and the 0.2–0.7 Mt of nitrogen a year in the albatross-scale carriers' food could lay 0.7–2.4 Mt of calcite, 0.02–0.07% of the rock they return. The cement has to be laid by organisms that calcify with light, as the terrain study's stonewort meadows carry 440–690 g of calcium carbonate per m² and Plitvice's barriers rise 13.5 mm a year, and by the living crusts and roots that hold ordinary ground. That step is not sized here.
+Feeding a kilometre to each side would need slopes of 1.4–19, which no soil holds. So the rock has to be set down every 60–800 m at the central erosion, on every spur and slope: the smaller carriers of the table above stand that close, and the great ones would have to scatter a thousand loads a year over the 7 km² each serves. What is set down more thickly has to stand as rock, and that is the work of cement. The rock that leaves the land in solution is the stock for it: the seas would otherwise shed 150 Mt of calcite, 95 Mt of magnesite and 280 Mt of opal a year, lime at 4–38% of the particles' mass (8% at the central erosion) and opal at 4–44%. The carriers' own nitrogen is no source of cement. Bacteria that split urea lay one calcite for two nitrogen atoms, and the 0.2–0.7 Mt of nitrogen a year in the albatross-scale carriers' food could lay 0.7–2.4 Mt of calcite, 0.02–0.07% of the rock they return. What can lay it is sized under "The cement" below.
 
 **The loop holds itself** *(a two-variable model: [carriers.py](carriers.py); its rates are design guesses)*. Let sediment arrive at a steady rate, let carriers take it at a rate that saturates with the deposit standing in reach, and let them multiply in proportion to what they find and die at a steady rate. The loop then rests where the carriers return exactly what arrives, whatever the erosion: doubling the erosion doubles the carriers and leaves the standing deposit unchanged, since the deposit at rest is set by the carriers' own rates alone. Every setting with growth above death gives a stable rest, approached through damped swings.
 
@@ -89,6 +91,69 @@ Over hundreds of millions of years every percent left on the floors counts: lake
 
 **The wild and the managed.** At a thousand trips and a load 0.6 of the body, the wild land's rock takes 1.0 million carriers of the albatross scale with 30% of the land wild and 1.65 million with half, or 1.7–2.8 billion of a crow's weight. The hybrid and used land's 1.1–1.3 Gt a year would cost machines 0.25–1.6 GW at the terrain study's rates, and the same carriers would serve it where people prefer. The open land beyond people's need, 0.4–0.9 Gt, belongs to neither aim yet. Because most lakes are fed from land of several kinds, the wild's carriers and the managed land's upkeep meet at the same deltas.
 
+## The return on the map
+
+**One moment, the whole surface** *(computed: [placement.py](placement.py); the rules and ranges are design guesses, and a range here is a square on the grid)*. Every cell's rock is gathered where it first settles, and carriers set it down on the land in range by a rule. The share of the rock set down on the wrong cell, which is half the summed difference between what cells get back and what they lost:
+
+| Rule of placement | Range 10 km | 20 km | 50 km |
+|---|---|---|---|
+| On worn ground, in proportion to its wear | 30% | 12% | 5% |
+| On ground worn by district (wear judged over 10 km) | 32% | 16% | 12% |
+| Evenly over the land in range | 33% | 22% | 21% |
+| On crests | 64% | 57% | 56% |
+
+The worn-ground rule gives each cell back what it lost once the carriers' range covers the way from the hollows; with 20 km half the land is left unbalanced by under 7 m a million years and a tenth by over 33. It does not return a catchment's own rock to it, and need not: at 20 km only 14% of the rock is set down on land draining to the place it was taken from, since worn ground takes rock from whichever hollow is near. The misplacing is local. Taken in blocks of 240 km, under 1.5% of the rock is in the wrong block under any rule.
+
+**Through time, two regions** *(a landscape model: [evolve.py](evolve.py) and [process.py](process.py); not validated)*. Two squares of the design surface, 730 km from north to south at 1.9 km a cell, are stepped forward: water cuts the ground it crosses by the stream-power law, scaled so that each region's first mean lowering is the rock module's; what is cut is laid in the first hollow on its way from the bottom up; carriers take the rock where it comes to rest and set it down round that place, 86% of it within 20 km. Korolev's country (4° S, 203° E) is the Moon's highest ground, lowering 96 m a million years, and stands mostly under lakes in the design, so it is run with a lake in every hollow that spills and cuts its outlet. The southern highlands (45° S, 350° E) are dry, lowering 48 m a million years, crowded with craters, and are run with dry hollows that keep what enters them.
+
+The design says that carriers set rock down on bare, freshly worn ground. It does not say whether ground can be given more than it lost, and that decides the shapes, so the return is run in two readings: **shared by wear**, each place's rock divided over the ground round it in proportion to the wear; and **no more than it lost**, the rock offered in the same way but each cell taking only what it lost, what it turns away being offered again to ground still short and otherwise left lying. With all the rock reached:
+
+| | 10 million years | 30 million | 100 million |
+|---|---|---|---|
+| **Southern highlands, shared by wear:** forms kept | 0.99 | 0.93 | 0.17 |
+| ground moved (root mean square) | 87 m | 224 m | 1,150 m |
+| highest ground, from 2,190 m | 2,040 m | 3,210 m | no limit |
+| 1% of the ground has risen over | 290 m | 740 m | 2,860 m |
+| the thirty highest summits (median) | −76 m | −225 m | −1,020 m |
+| **Southern highlands, no more than it lost:** forms kept | 0.99 | 0.95 | 0.84 |
+| ground moved | 97 m | 312 m | 1,130 m |
+| highest ground | 2,045 m | 1,970 m | 1,840 m |
+| the thirty highest summits | −26 m | −88 m | −718 m |
+| largest hollows: depth kept, roundness (0.21 at the start) | 0.99, 0.21 | 0.97, 0.21 | 0.90, 0.23 |
+| **Korolev, shared by wear:** forms kept | 0.97 | 0.89 | 0.01 |
+| highest ground, from 10,030 m | 9,340 m | 13,330 m | no limit |
+| 1% of the ground has risen over | 540 m | 910 m | 1,430 m |
+| the thirty highest summits | −237 m | −554 m | −2,240 m |
+| **Korolev, no more than it lost:** forms kept | 0.95 | 0.60 | 0.11 |
+| highest ground | 9,045 m | 7,930 m | 4,020 m |
+| the thirty highest summits | −90 m | −1,860 m | −7,310 m |
+
+"Forms kept" is the correlation between the starting ground and the later ground once each is taken against its own mean over about 30 km: 1 when the map's forms are unchanged. With nothing returned it is 0.3–0.5 at ten million years and 0.1–0.2 at thirty, the hollows filled and their outlines broken (roundness 0.4, where a disc is 0).
+
+- **In plan.** For ten million years the ground moves by 90–350 m and the map is its own under either reading. After that, shared by wear, the rock gathers where wear is fastest: on the walls and rims of craters in the dry region, which become ring ramparts round every crater, and on the steps where rivers drop to lakes in the wet one, which become walls along the shores. The plains and uplands between them are drained. Taken no more than it lost, the crowded southern highlands keep their craters, rims and plains for a hundred million years, changed mainly along the model's open edge; Korolev's wide uplands, tens of kilometres from the nearest lake, are not reached by rock set down within 20 km of where it lies: the region's ground lowers by 0.8 km on average in thirty million years, its crests by 1.4 km.
+- **In height.** No reading grows the map's own peaks. The highest summits lose height in every run, by 26–240 m in ten million years, because they stand farthest from the hollows. What grows, shared by wear, is new: ground on steep walls and shore steps that starts low or in the middle of the range and climbs past the old summits, by 1–3 km within thirty million years in the model's worst cells. The spread of heights narrows from the top and gains a thin tail of spikes. The model sets no limit to a slope, so its spikes stand for ground that in fact would steepen to what its cement holds and then shed. Taken no more than it lost, the spread of heights keeps its shape and loses a little from the top.
+- **Craters.** In the southern highlands the largest hollows keep their depth and roundness for thirty million years under both readings, and for a hundred million taken no more than it lost. In Korolev they keep them shared by wear (depth 0.99 of its start at thirty million years) and lose a third of their depth taken no more than it lost, as the country round them wastes. Shared by wear the craters grow sharper than they began; with nothing returned they are gone.
+- **Reach decides as much as placement.** In Korolev's lake country, with the rock of the delta fronts reached (95%), forms kept is 0.88 at ten million years and 0.45 at thirty; with flyers and waders alone (42%), 0.57 and 0.20.
+- **Range.** Shared by wear with 86% of the rock set down within 50 km in place of 20, forms kept at thirty million years is 0.94–0.98 in both regions under either water.
+
+**Other rules, for comparison** *(evolve.py)*. Rock set down on crests runs away within ten million years (relief 3–57 times its start by thirty). Rock set down evenly, or by wear judged over a district of 10 km, blurs the map: forms kept 0.2–0.6 at thirty million years, the hollows' depth 0.4–0.9 of its start. Pictures of every case are on the research drive, `terrain-return/evolution/`: the files ending `_as_designed_shared_by_wear.png` and `_as_designed_no_more_than_it_lost.png` show each region's map at the start and after 30 and 100 million years, where the ground rose and fell, and how it is spread over height; `korolev_wet.png` and the three like it set the rules side by side.
+
+**What the model cannot see.** A cell is 1.9 km, so where on a slope rock is set down, and soil creep, are below it. No slope fails, rain is even, the rock has one strength, and returned rock wears as the ground does. The region's edge is open: rock that crosses it is offered only to ground near the edge, which wastes the margins of the long runs. Straight valleys aligned with the grid in the runs with nothing returned are the grid's.
+
+## The cement
+
+*(computed: [cement.py](cement.py), the arithmetic of a delegated sizing, read and run before it was adopted; its outside sources were read mostly as search summaries, as [sources.json](sources.json) records)*
+
+**Thinly spread rock needs a living cover and no mineral cement.** A year's return is a layer 0.11 mm thick as loose soil. Bare on dry land it would be stripped in 2–10 months at the storm-water study's upper rates, and its loose grains blow at a wind of 3.3 m/s where storms gust to 5–9. A living cover with 1.5–7.3 g of organic binder per m² a year, 0.08–0.5% of the plants' growth, holds it, if the load is set down on that cover and not on bare ground.
+
+**Rim rock needs little strength at lunar gravity.** A layer steeper than its friction angle stands by cohesion in proportion to its weight, a sixth of Earth's, while a cement is as strong on either world. Each metre of thickness needs 0.2–0.8 kPa dry and 0.9–1.2 kPa saturated at slopes of 35–60°, against 1.1–5.1 kPa dry on Earth. A cohesion of 10 kPa holds 16 m at 45°, against 2.7 m on Earth, and the roots of a natural forest give 26–94 kPa. On two tentative anchors from sand cemented by bacteria, 12 kPa takes a cement of 0.2–4% of the mass and 120 kPa 2–8% *(design guess)*.
+
+**The stock is there; water decides whether carbonate stays.** Weathering frees calcium worth 10.8 g of calcite per m² a year, 7.4% of the returned rock, and the seas' calcite carried up with the mud would add 4.6%; highland particles carry iron worth 6.3% of their mass as goethite. A cement of 3% needs 4.4 g per m² a year and 0.5 g of fixed carbon. Water leaving the dry classes of land can carry off 0.02–18 g of calcite per m² a year, so a 3% cement lasts 390–21,000 years in semi-arid ground. Water leaving the humid land, 42% of all the land, can carry off 37–169 g, so there it lasts 23–105 years.
+
+**The rates.** Earth's soils lay carbonate at 1–5 g per m² a year, which would cement a century of return in 88–438 years, and iron crusts thicken 3–140 times more slowly than the rock returns. The fast calcifiers, stoneworts at 440–690 g per m² and tufa at millimetres a year, work under water held above saturation, which the uplands lack. One fed trial cemented a metre of crushed iron crust in 16 months.
+
+So the dry 58% of the land can rest on carbonate laid 1–15 times faster than Earth's soils lay it, and the humid 42% needs an iron cement laid far faster than Earth's, or roots alone. No organism turns upland soil to rock within centuries, and none is known to lay silica as cement, though opal is the largest stock.
+
 ## What the design asks of the organisms
 
 The sizing turns the aim into requirements, each a target no organism meets today:
@@ -98,7 +163,10 @@ The sizing turns the aim into requirements, each a target no organism meets toda
 3. **Numbers that follow the sediment**: carriers that multiply where sediment stands, as the loop assumes.
 4. **Upland plants that feed it**, 0.05–1.2% of their growth by the carrier's size, in exchange for the phosphorus returned.
 5. **Divers for the delta fronts and floors**, of a bird's breath to 200 m and of a seal's or whale's beyond.
-6. **Builders that lay the dissolved rock within reach**, in barriers upstream and reefs in the shallows, and calcifiers that cement what is set down.
+6. **Builders that lay the dissolved rock within reach**, in barriers upstream and reefs in the shallows.
+7. **Placement that stops when the ground is made good.** A carrier that goes on setting rock down where wear is fastest builds ramparts and drains the plains; one that leaves ground once it is covered keeps the map.
+8. **A range that covers the way from the hollows to the highest ground**: 20 km serves country crowded with hollows, and wide uplands need 50 km or more.
+9. **A cover that takes the fall and binds it**, with 1.5–7.3 g of binder per m² a year, and for rim rock a carbonate cement on dry land and an iron cement, or roots, on wet land.
 
 ## How far Earth's organisms go toward each part
 
@@ -130,7 +198,8 @@ The last row bears on the size of the job: the central case here lowers the land
 - **Lakes are boxes.** They do not shrink, shoal or pass more on as they fill, and their own deposits are not added, so the years to fill run long beside the terrain study's.
 - **The loop is a model of the whole.** It shows that the return can follow the supply; it does not show that the rock goes back to the slope it left. Where it is set down depends on the carrier's choice of ground.
 - **Dust.** Sediment set down dry on open slopes could blow, and the seas' phosphorus budget rests on little dust. The returned rock must be bound or wet when it is placed.
-- **Cement and the deep divers are named, not sized.**
+- **The landscape model is coarse.** See "What the model cannot see" above. It shows the kinds of change each reading makes and how large; it predicts no place.
+- **The cement's sources were read thinly**, and its link from cement to strength is a guess on two anchors. The deep divers are named and not sized.
 - **No independent review.**
 
 ## Files, running and checks
@@ -140,7 +209,11 @@ The last row bears on the size of the job: the central case here lowers the land
 | [rock.py](rock.py) | The rock on the design surface: where it settles, the way back, whose land, the lakes and floors |
 | [carriers.py](carriers.py) | Flight cost, reach, creep's limit, the urea route, the loop and its recovery |
 | [run.py](run.py) | The sizing from the products |
-| [test_run.py](test_run.py) | 24 tests, and the regeneration of rock.json from the research drive when `TERLUNA_ROCK_RETURN_REGENERATE=1` |
+| [placement.py](placement.py) | The rules of placement on the whole surface at one moment, and the regions cut for the runs through time; writes [results/placement.json](results/placement.json) |
+| [evolve.py](evolve.py) | The landscape model and the rules side by side on two regions for 30 million years; writes [results/evolution.json](results/evolution.json) |
+| [process.py](process.py) | The return as designed, in two readings, for 100 million years; writes [results/process.json](results/process.json) |
+| [cement.py](cement.py) | The cement's arithmetic, with its own checks |
+| [test_run.py](test_run.py), [test_map.py](test_map.py), [test_cement.py](test_cement.py) | 59 tests, and the regeneration of rock.json from the research drive when `TERLUNA_ROCK_RETURN_REGENERATE=1` |
 | [sources.json](sources.json) | Each source and how far it was read |
 
-`ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.rock_return.rock` reads the design routing and the land-use grid on the research drive; `python -m research.studies.rock_return.run` reads only committed products. The tests check the arithmetic of each function, that the loop rests where the return equals the supply and is stable over its settings, that the stored sizing is what the code gives, that the way back agrees with the terrain study's within a tenth, and the figures this page states.
+`ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.rock_return.rock` reads the design routing and the land-use grid on the research drive, as does `placement`; `python -m research.studies.rock_return.run` reads only committed products. `evolve` and `process` read the regions `placement` writes to the drive and want numba for speed (the research drive's `venvs/optics`); each takes about twelve minutes on six cores, and their snapshots and pictures stay on the drive. The tests check the arithmetic of each function, that the loop rests where the return equals the supply and is stable over its settings, that the stored sizing is what the code gives, that the way back agrees with the terrain study's within a tenth, and the figures this page states.

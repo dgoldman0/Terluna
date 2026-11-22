@@ -1,0 +1,338 @@
+{
+ "schema": "terluna.research.rock-return-placement/1",
+ "producer": {
+  "module": "research.studies.rock_return.placement",
+  "code_sha256": {
+   "placement.py": "f1832df61653ab35e9b38055fc27f911acf078c9708fbb6d82568fb9e71a904f",
+   "rock.py": "640c9ba51cbfe7d32740103c20852b1d44f7db2118faad36920bc56da4110e6e"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/land_use.json": "cdfcc5253f68a68949b542685c28eb3f2dfc07d23dd8f59da8e1493fea8e0dc4",
+  "research/studies/terrain_through_time/results/terrain_through_time.json": "69768211e77dab706e1e83a1c0e68a712c093012026033f9727f2f05eb17a19a",
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/terrain-return/evolution/regions_16ppd.npz",
+  "sha256": "0d3198ef76c6cafb837a9d362f498b1cb0b49d2aa1cf2d29b21ed43bbc7687dc",
+  "schema": "terluna.research.rock-return-regions/1"
+ },
+ "evidence": "Arithmetic on the rock module's fields: the rock each cell loses and the place it first settles on the design surface. The rules of placement are design guesses for what a carrier might do; no animal's choice of ground is behind them. A range is a square on the grid, and all the rock that settles is taken as within the carriers' reach. Not validated.",
+ "reading_rule": "rules: for each rule and range, returned_share is the rock set down over the rock lost; set_down_on_the_wrong_cell is half the summed difference between what cells get back and what they lost, over the rock lost (0 when every cell gets back its own, 1 when none does); wrong_at_blocks is the same with the map taken in blocks of that many cells to a side; set_down_in_the_catchment_it_left is the share of the rock that carriers set down on land that drains to the place they took it from; ground_left_unbalanced_m_per_myr gives the rate at which the ground rises or falls where the return and the loss differ, by share of the land. regions: the squares of the design surface written for evolve.py.",
+ "setting": {
+  "rules": [
+   "worn",
+   "worn_by_district",
+   "crest",
+   "even"
+  ],
+  "ranges_km": [
+   10.0,
+   20.0,
+   50.0
+  ],
+  "district_km": 10.0,
+  "surroundings_km": 5.0,
+  "blocks_cells": [
+   8,
+   32,
+   128
+  ],
+  "block_km": [
+   15.161675212074742,
+   60.64670084829897,
+   242.58680339319588
+  ],
+  "rock_kg_yr": 3233428111939.108,
+  "mean_lowering_m_per_myr": 56.194971004014
+ },
+ "rules": {
+  "worn": {
+   "10 km": {
+    "returned_share": 1.0,
+    "set_down_on_the_wrong_cell": 0.2969609565620849,
+    "wrong_at_blocks": {
+     "8 cells": 0.21187333324437874,
+     "32 cells": 0.07190426801732336,
+     "128 cells": 0.011721075420628746
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 16.474507620328147,
+     "90%": 82.1392509462657,
+     "99%": 232.77467085056514
+    },
+    "mean_unbalanced_over_mean_lowering": 0.5939219131241698,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.3061350090394763
+   },
+   "20 km": {
+    "returned_share": 0.9999999999999999,
+    "set_down_on_the_wrong_cell": 0.1202275107727846,
+    "wrong_at_blocks": {
+     "8 cells": 0.09743354679968391,
+     "32 cells": 0.04668691690514024,
+     "128 cells": 0.008473613280674766
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 7.044277171867803,
+     "90%": 32.966955390688064,
+     "99%": 92.35864985336454
+    },
+    "mean_unbalanced_over_mean_lowering": 0.24045502154556916,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.13681323155181224
+   },
+   "50 km": {
+    "returned_share": 0.9999999999999999,
+    "set_down_on_the_wrong_cell": 0.05027963302981759,
+    "wrong_at_blocks": {
+     "8 cells": 0.04570157743848548,
+     "32 cells": 0.03107515530910821,
+     "128 cells": 0.008127193059631364
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 3.1864067920494414,
+     "90%": 13.782052050589233,
+     "99%": 34.532267380900926
+    },
+    "mean_unbalanced_over_mean_lowering": 0.10055926605963517,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.03337220109518235
+   }
+  },
+  "worn_by_district": {
+   "10 km": {
+    "returned_share": 1.0000000000000002,
+    "set_down_on_the_wrong_cell": 0.3159661105559569,
+    "wrong_at_blocks": {
+     "8 cells": 0.23016179480671045,
+     "32 cells": 0.07706734350560904,
+     "128 cells": 0.012431818458632372
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 18.48247859499705,
+     "90%": 86.62220598635102,
+     "99%": 237.15278639861648
+    },
+    "mean_unbalanced_over_mean_lowering": 0.6319322211119138,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.29581597195070714
+   },
+   "20 km": {
+    "returned_share": 0.9999999999999999,
+    "set_down_on_the_wrong_cell": 0.16120670823124306,
+    "wrong_at_blocks": {
+     "8 cells": 0.11268386934723075,
+     "32 cells": 0.04947772577614748,
+     "128 cells": 0.008829043584217273
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 10.997992068813307,
+     "90%": 42.9034057601155,
+     "99%": 103.23130955070025
+    },
+    "mean_unbalanced_over_mean_lowering": 0.32241341646248617,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.1309050985524832
+   },
+   "50 km": {
+    "returned_share": 0.9999999999999999,
+    "set_down_on_the_wrong_cell": 0.11562030688812706,
+    "wrong_at_blocks": {
+     "8 cells": 0.07201502143769502,
+     "32 cells": 0.03212865576909616,
+     "128 cells": 0.008148967539697164
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 8.507023289340658,
+     "90%": 30.554377294137417,
+     "99%": 65.35126128815945
+    },
+    "mean_unbalanced_over_mean_lowering": 0.23124061377625413,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.03170878675508707
+   }
+  },
+  "crest": {
+   "10 km": {
+    "returned_share": 0.9998207728288963,
+    "set_down_on_the_wrong_cell": 0.6442780624015678,
+    "wrong_at_blocks": {
+     "8 cells": 0.29913928013059954,
+     "32 cells": 0.09438349430547395,
+     "128 cells": 0.015211869616471672
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 39.038299851631976,
+     "90%": 141.99055937469862,
+     "99%": 590.0609992855601
+    },
+    "mean_unbalanced_over_mean_lowering": 1.2885561248031356,
+    "rock_with_no_land_in_range": 0.00017922717105849377,
+    "set_down_in_the_catchment_it_left": 0.26131337946430166
+   },
+   "20 km": {
+    "returned_share": 1.0,
+    "set_down_on_the_wrong_cell": 0.5666527664666914,
+    "wrong_at_blocks": {
+     "8 cells": 0.2343310278582899,
+     "32 cells": 0.06420502657626959,
+     "128 cells": 0.011647309462929478
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 38.001263702921186,
+     "90%": 141.64139438486603,
+     "99%": 413.932746966318
+    },
+    "mean_unbalanced_over_mean_lowering": 1.133305532933383,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.12498022843968186
+   },
+   "50 km": {
+    "returned_share": 1.0000000000000002,
+    "set_down_on_the_wrong_cell": 0.5584893718665667,
+    "wrong_at_blocks": {
+     "8 cells": 0.2281908704726264,
+     "32 cells": 0.05956097494390965,
+     "128 cells": 0.010573387050316263
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 38.996497593126385,
+     "90%": 143.56402776620118,
+     "99%": 371.3541551567392
+    },
+    "mean_unbalanced_over_mean_lowering": 1.1169787437331333,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.0296800685141524
+   }
+  },
+  "even": {
+   "10 km": {
+    "returned_share": 0.9999999999999982,
+    "set_down_on_the_wrong_cell": 0.33346602482029075,
+    "wrong_at_blocks": {
+     "8 cells": 0.25253499352364017,
+     "32 cells": 0.08585688856356259,
+     "128 cells": 0.013534942443767673
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 20.35288650714325,
+     "90%": 89.98370497929135,
+     "99%": 244.99593319342566
+    },
+    "mean_unbalanced_over_mean_lowering": 0.6669320496405815,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.2809285472327908
+   },
+   "20 km": {
+    "returned_share": 0.9999999999999987,
+    "set_down_on_the_wrong_cell": 0.21563210121408602,
+    "wrong_at_blocks": {
+     "8 cells": 0.1685978551461054,
+     "32 cells": 0.07019519253355067,
+     "128 cells": 0.011303347584039626
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 15.452514793173053,
+     "90%": 56.140556259478096,
+     "99%": 130.94317737595796
+    },
+    "mean_unbalanced_over_mean_lowering": 0.4312642024281719,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.11953205545390755
+   },
+   "50 km": {
+    "returned_share": 0.9999999999999983,
+    "set_down_on_the_wrong_cell": 0.21178428594518345,
+    "wrong_at_blocks": {
+     "8 cells": 0.17478501703246616,
+     "32 cells": 0.0787417106130182,
+     "128 cells": 0.013684635491682093
+    },
+    "ground_left_unbalanced_m_per_myr": {
+     "50%": 16.942806457557356,
+     "90%": 52.83886635701313,
+     "99%": 111.07068704001315
+    },
+    "mean_unbalanced_over_mean_lowering": 0.4235685718903669,
+    "rock_with_no_land_in_range": 0.0,
+    "set_down_in_the_catchment_it_left": 0.026945699211164194
+   }
+  }
+ },
+ "regions": {
+  "korolev": {
+   "row0": 1312,
+   "col0": 3050,
+   "lat_centre": -4.0,
+   "lon_centre": 202.6,
+   "north_south_m": 1895.2094015093428,
+   "east_west_m": 1890.5927666601574,
+   "stats": {
+    "land_share": 0.4156629774305556,
+    "sea_share": 0.0,
+    "lake_share": 0.5843370225694444,
+    "mean_lowering_m_per_myr": 96.19909870698726,
+    "ground_range_m": [
+     -1093.3671875,
+     10033.8291015625
+    ]
+   }
+  },
+  "southern_highlands": {
+   "row0": 1968,
+   "col0": 5408,
+   "lat_centre": -45.0,
+   "lon_centre": 350.0,
+   "north_south_m": 1895.2094015093428,
+   "east_west_m": 1340.1154195757547,
+   "stats": {
+    "land_share": 0.9985487196180556,
+    "sea_share": 0.0,
+    "lake_share": 0.0014512803819444445,
+    "mean_lowering_m_per_myr": 48.42089071541087,
+    "ground_range_m": [
+     -5164.42724609375,
+     2189.88671875
+    ]
+   }
+  },
+  "mendeleev": {
+   "row0": 1157,
+   "col0": 2062,
+   "lat_centre": 5.7,
+   "lon_centre": 140.9,
+   "north_south_m": 1895.2094015093428,
+   "east_west_m": 1885.8386712147537,
+   "stats": {
+    "land_share": 0.4045681423611111,
+    "sea_share": 0.08009847005208333,
+    "lake_share": 0.5153333875868056,
+    "mean_lowering_m_per_myr": 93.66382785482291,
+    "ground_range_m": [
+     -3904.162353515625,
+     6862.59130859375
+    ]
+   }
+  },
+  "northern_far_side": {
+   "row0": 608,
+   "col0": 1408,
+   "lat_centre": 40.0,
+   "lon_centre": 100.0,
+   "north_south_m": 1895.2094015093428,
+   "east_west_m": 1451.814630573076,
+   "stats": {
+    "land_share": 0.8125,
+    "sea_share": 0.032368977864583336,
+    "lake_share": 0.15513102213541666,
+    "mean_lowering_m_per_myr": 55.71544102253237,
+    "ground_range_m": [
+     -6333.896484375,
+     3107.751220703125
+    ]
+   }
+  }
+ },
+ "seconds": 277
+}

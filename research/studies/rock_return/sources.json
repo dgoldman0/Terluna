@@ -1,5 +1,5 @@
 {
- "source_admission": "The study's quantities come from committed project products, each named below with what is read from it. The outside sources are Earth's evidence for the parts of a carrier; each was checked on 22 November 2026 by a search summary only, and none was read in full. Values the README marks as recalled were not looked up, and those it marks as design guesses rest on no source.",
+ "source_admission": "The study's quantities come from committed project products, each named below with what is read from it. The outside sources are Earth's evidence for the parts of a carrier; each was checked on 22 November 2026 by a search summary only, and none was read in full. Values the README marks as recalled were not looked up, and those it marks as design guesses rest on no source. The entries whose use begins \"Cement sizing\" were gathered by a delegated agent for cement.py on the same day: Project values were read in the ecology worktree and on the research drive. Outside sources were found by generic web searches on 22 November 2026; most were read only as the search tool's summary of result pages, which can garble units and attributions, and two were read in part through a page-fetch tool that returns an extraction, not the page. No outside paper was read in full by eye. Identifiers are given only where a search result or a fetched page showed them; bibliographic details beyond that are recalled and marked so.",
  "sources": [
   {
    "key": "terrain_through_time",
@@ -98,6 +98,321 @@
    "doi_or_url": "https://pubs.usgs.gov/publication/70024865",
    "use": "A forested old range loses 25 to 30 m of rock a million years",
    "access": "search summary of the abstract"
+  },
+  {
+   "key": "cement_terrain_through_time",
+   "citation": "The terrain through time, research/studies/terrain_through_time/README.md (ecology worktree)",
+   "doi_or_url": "research/studies/terrain_through_time/README.md",
+   "use": "Cement sizing: Plitvice's barriers rising 13.5 mm a year; stonewort meadows carrying 440-690 g of calcium carbonate per m2 (Pelechaty et al. 2013, as that study read it); tufa needing 2 to 5.6 times calcite saturation; the lowering by band of latitude, 77-79 m a million years within 30 degrees; rock at 2,600 kg/m3",
+   "access": "full text: README read in-tree; its own sources not re-read"
+  },
+  {
+   "key": "carbon_cycle",
+   "citation": "The Open Moon's carbon cycle, research/studies/carbon_cycle/README.md, run.py and results/carbon_cycle.json (ecology worktree)",
+   "doi_or_url": "research/studies/carbon_cycle/README.md",
+   "use": "Cement sizing: Dessert's basalt law as carried there (323.44 exp(0.0642 T) mol CO2 per km2 a year per mm of runoff), the land air at 294.3 K, runoff of 265.1 mm a year, 9.1e12 equivalents a year at the catchment rate, the highland soil's cation shares by equivalent (Ca 0.6501, Mg 0.3284, Na and K 0.0214), its 5.1% FeO, the young soils' factor of 1-10, the air's CO2 at 48.6 Pa, the kilns' return of 0.012-0.017 Gt C a year at year 10,000",
+   "access": "full text: README, the constants in run.py and the product's setting read in-tree"
+  },
+  {
+   "key": "sea_chemistry",
+   "citation": "The seas' make-up through time, research/studies/sea_chemistry/README.md (ecology worktree)",
+   "doi_or_url": "research/studies/sea_chemistry/README.md",
+   "use": "Cement sizing: 0.87 mol of silica for each equivalent of weathering; 59% of the catchment rate reaching the waters in the mature Moon, which makes the seas' 150 Mt of calcite, 95 Mt of magnesite and 282 Mt of opal a year",
+   "access": "full text: README read in-tree"
+  },
+  {
+   "key": "lunar_cycle_ecology",
+   "citation": "Lunar-cycle ecology study, research/studies/lunar_cycle_ecology/run.py (ROCK_WT_PCT) and results/lunar_cycle_ecology.json (ecology worktree); the oxides are average lunar soils from the Lunar Sourcebook, Table 7.15, as that study records them",
+   "doi_or_url": "research/studies/lunar_cycle_ecology/run.py",
+   "use": "Cement sizing: Highland soil (Apollo 16 average): SiO2 45.0, CaO 15.7, MgO 5.7, Na2O 0.46, K2O 0.17 weight %; mare soil (median of six): SiO2 43.05, CaO 11.4, MgO 9.35, Na2O 0.365, K2O 0.16; 42 g of highland rock weathered per m2 a year at the catchment rate, which the script's 39 g reproduces on the carbon cycle's cooler land",
+   "access": "code lines and product keys read in-tree; the Lunar Sourcebook itself not opened"
+  },
+  {
+   "key": "springs",
+   "citation": "The springs' load, research/studies/springs/README.md (ecology worktree)",
+   "doi_or_url": "research/studies/springs/README.md",
+   "use": "Cement sizing: Soil CO2 of 2.6% within 15 degrees of the equator (2.0% at 15-30, 0.54% at 30-45); under 1% of the springs' flow reaching twice calcite saturation; 72 Mt of calcite a year laid in the rock by groundwater",
+   "access": "first 80 lines of the README read in-tree"
+  },
+  {
+   "key": "storm_water",
+   "citation": "Storm water study, research/studies/storm_water/README.md as it stands in the ecology worktree",
+   "doi_or_url": "research/studies/storm_water/README.md",
+   "use": "Cement sizing: Bare dryland soils detaching 0.13-0.63 mm a year (an upper bound on Earth's bare-cropland erodibilities), the study's crust losing 0.013 mm a year, lunar drops striking with 0.143 of Earth's energy and sheet flow shearing at 0.28 of Earth's, Earth's crusts cutting sediment by 68% on average and 85% on loams (Eldridge et al. 2020 as read there)",
+   "access": "the finding and method paragraphs on erosion read in-tree; the rest not read"
+  },
+  {
+   "key": "soils_note",
+   "citation": "Soils the Open Moon can keep, by climate zone: scoping note of 3 November 2026 on the research drive, session-tools/agents/soils/soils_maintenance.md",
+   "doi_or_url": "/media/projectspace/terluna-research/session-tools/agents/soils/soils_maintenance.md",
+   "use": "Cement sizing: The aridity classes' shares of the land and rain (hyper-arid 4.2%, 19 mm; arid 19.1%, 70; semi-arid 25.1%, 243; dry sub-humid 9.4%, 433; humid 42.2%, 1,717 against a demand of 1,022); recharge of 1.3-17% of the rain on maintained drylands; storm gusts of 5-9 m/s; mare basalt at about 15% FeO; crust thresholds 2.9, 5.4 and 23.5 times bare sand at 1, 5 and 20 years and 73-92% lower after trampling (Belnap and Gillette 1997); the crust multiplier e^(0.0157 cover%) (Rodriguez-Caballero et al. 2022); crust recovery in 5-10 and 10-20 years (Kidron et al. 2020); soil loss falling as e^(-0.0435 to -0.053 cover%) (Elwell and Stocking 1976); native-cover erosion of 0.013 (median) and 0.053 (mean) mm a year (Montgomery 2007); rain falling by day",
+   "access": "sections 1-2.3 and the source list read on the drive; the note's own sources taken secondhand at the depth it records"
+  },
+  {
+   "key": "cement_sand_study",
+   "citation": "Wind-blown sand on the Open Moon, research/studies/atlas_round/sand.md (ecology worktree)",
+   "doi_or_url": "research/studies/atlas_round/sand.md",
+   "use": "Cement sizing: Shao and Lu's threshold with A = 0.111 and grain cohesion 3e-4 N/m, surface air of 1.35 kg/m3, feldspar at 2,730 kg/m3, the easiest grain of 260 micrometres starting at 0.145 m/s, a 10 m wind of 3.3 m/s over a 1 mm roughness, and Earth's quartz at 0.237 m/s and 5.5 m/s; the script reproduces these",
+   "access": "part A read in-tree"
+  },
+  {
+   "key": "conservation",
+   "citation": "Conservation study, research/studies/conservation/README.md, section 6.3 (ecology worktree)",
+   "doi_or_url": "research/studies/conservation/README.md",
+   "use": "Cement sizing: The stable height of cohesive slopes being 6 times Earth's, which the slope arithmetic here reproduces",
+   "access": "the erosion table of section 6.3 read in-tree"
+  },
+  {
+   "key": "shared_constants",
+   "citation": "shared/constants.json (ecology worktree)",
+   "doi_or_url": "shared/constants.json",
+   "use": "Cement sizing: Standard gravity 9.80665 m/s2; the Moon's GM and radius, which give 1.62422 m/s2 beside the brief's 1.624; the synodic month of 29.53059 days, 12.4 lunar days a year",
+   "access": "read in-tree"
+  },
+  {
+   "key": "schmidt_2001",
+   "citation": "Schmidt and colleagues (2001). The variability of root cohesion as an influence on shallow landslide susceptibility in the Oregon Coast Range. Canadian Geotechnical Journal 38(5), 995-1024.",
+   "doi_or_url": "doi:10.1139/cgj-38-5-995; https://pubs.usgs.gov/publication/70023764",
+   "use": "Cement sizing: Median lateral root cohesion of 6.8-23.2 kPa in industrial forests, 25.6-94.3 kPa in natural conifer forests and 10 kPa or less in clearcuts; a disturbance legacy of at least a century. A 2022 study at the CB1 landslide (https://pubs.usgs.gov/publication/70236341) finds fibre-bundle estimates under 30% of this method's values",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "collins_sitar_2009",
+   "citation": "Collins and Sitar (2009). Geotechnical properties of cemented sands in steep slopes. Journal of Geotechnical and Geoenvironmental Engineering (volume and pages not read), as summarised by the USGS",
+   "doi_or_url": "https://www.usgs.gov/publications/geotechnical-properties-cemented-sands-steep-slopes",
+   "use": "Cement sizing: Weakly cemented sand as unconfined compressive strength under 100 kPa and moderately cemented as 100-400 kPa; weakly cemented sands losing their compressive, cohesive and tensile strength on wetting",
+   "access": "search summary of the USGS abstract page"
+  },
+  {
+   "key": "clough_1981",
+   "citation": "Clough, Sitar, Bachus and Rad (1981). Cemented sands under static loading. Journal of the Geotechnical Engineering Division 107(6), 799-817.",
+   "doi_or_url": "doi:10.1061/AJGEB6.0001152",
+   "use": "Cement sizing: No number taken. Background for cementation adding a cohesion intercept while the friction angle stays near the uncemented sand's, which is why the slope arithmetic keeps a friction angle of 30 degrees",
+   "access": "search summary; its cohesion values were not found"
+  },
+  {
+   "key": "cheng_2013",
+   "citation": "Cheng, L., Cord-Ruwisch, R. and Shahin, M. A. (2013). Cementation of sand soil by microbially induced calcite precipitation at various degrees of saturation. Canadian Geotechnical Journal 50(1), 81-90.",
+   "doi_or_url": "doi:10.1139/cgj-2012-0023",
+   "use": "Cement sizing: Two specimen values used as anchors for cement against strength: 1.14 MPa unconfined at 0.057 g of calcite per g of sand, and 1 MPa at 0.143 g/g. The abstract says more strength comes at the same calcite when the sand is treated at a low degree of saturation; the pairing of the two values with low and full saturation is this sizing's reading of that statement and is tentative",
+   "access": "search summary (abstract and a preprint excerpt); the open manuscript returned HTTP 403"
+  },
+  {
+   "key": "whiffin_2007",
+   "citation": "Whiffin, van Paassen and Harkes (2007). Microbial carbonate precipitation as a soil improvement technique. Geomicrobiology Journal 24, 417-423; the threshold as cited in a conference paper by van Paassen and colleagues",
+   "doi_or_url": "https://ebooks.iospress.nl/pdf/doi/10.3233/978-1-60750-031-5-2328",
+   "use": "Cement sizing: At least 60 kg of calcium carbonate per m3 of soil for a threshold gain of strength in loose granular material, 3.75% of the mass at 1,600 kg/m3; sandstone of up to 12 MPa in the large-scale trial",
+   "access": "search summary of a secondary citation; the 2007 paper not read"
+  },
+  {
+   "key": "elbert_2012",
+   "citation": "Elbert and colleagues: Contribution of cryptogamic covers to the global cycles of carbon and nitrogen (Nature Geoscience, 2012; journal details recalled) and its 2009 discussion paper in Biogeosciences Discussions 6, 6983",
+   "doi_or_url": "https://bg.copernicus.org/preprints/6/6983/2009/bgd-6-6983-2009.pdf",
+   "use": "Cement sizing: A median net carbon uptake of about 16 g per m2 a year for soil crusts in arid and semi-arid regions; global uptake of about 3.9 Pg C and nitrogen fixation of about 49 Tg a year. Field values of 2.75 g C per m2 a year (an Australian crust) and 11.7 (a Mojave crust) come from other studies in the same search summary, not identified individually",
+   "access": "search summary"
+  },
+  {
+   "key": "felde_2018",
+   "citation": "Felde and colleagues (2018). Ongoing oversanding induces biological soil crust layering. Geoderma (volume not read)",
+   "doi_or_url": "https://e-space.mmu.ac.uk/619632",
+   "use": "Cement sizing: Penetration resistance of crusts: 1.5-3.6 MPa in the Negev; 0.108, 0.126 and 0.165 MPa on physical, algal and moss crusts in Inner Mongolia (Guo et al. 2008); 0.055-0.147 MPa in the Kalahari (Thomas and Dougill 2007)",
+   "access": "search summary"
+  },
+  {
+   "key": "biocrust_inoculation",
+   "citation": "Cyanobacterial biocrust alters soil physical properties reducing soil erosion and aerosol production (2024), a wind-tunnel study of Microcoleus vaginatus on sandy soil",
+   "doi_or_url": "https://pubmed.ncbi.nlm.nih.gov/38922531/",
+   "use": "Cement sizing: Inoculated crusts measured for aggregate stability, shear strength and wind erosion at 15, 30, 60 and 90 days; only the time span is used, the values were not read",
+   "access": "search summary, truncated"
+  },
+  {
+   "key": "lambkin_2011",
+   "citation": "Lambkin and colleagues (2011). Production and dissolution rates of earthworm-secreted calcium carbonate. Pedobiologia 54 (Supplement), S119-S129.",
+   "doi_or_url": "doi:10.1016/j.pedobi.2011.09.003; https://centaur.reading.ac.uk/23616/",
+   "use": "Cement sizing: Lumbricus terrestris secreting 0-4.3 mg of calcium carbonate a worm a day, 0.8 mg on average, rising with soil pH; 18-3,139 mol per hectare a year at 10-20 worms per m2, which is 0.18-31.4 g per m2 a year; granules preserved where the soil solution nears saturation",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "earthworm_casts",
+   "citation": "Field studies of surface cast production: northern Vietnam (16-219 t per hectare a year), southern Cameroon (30.1-35.7 Mg per hectare a year), West and Central Africa (25,000-49,000 kg per hectare a year); the individual papers were not identified beyond the search result pages",
+   "doi_or_url": "https://hal.inrae.fr/hal-03143172/document; https://buscador.una.edu.ni/Record/CGSpace92647; https://ilcym.cipotato.org/publications/effect-of-land-use-change-cropping-systems-and-soil-type-on-earthworm-cast-production-in-west-and-central-africa/",
+   "use": "Cement sizing: Earthworm casts of 1.6-22 kg per m2 a year, eleven to 150 times the 146 g returned",
+   "access": "search summary"
+  },
+  {
+   "key": "termite_turnover",
+   "citation": "Studies of soil turned by mound-building termites: a semi-arid woodland in Queensland (300-400 kg per hectare a year; Australian Journal of Soil Research) and a Macrotermes bellicosus savanna plot (clay turnover of 169 kg per hectare a year)",
+   "doi_or_url": "https://publish.csiro.au/sr/SR9880375",
+   "use": "Cement sizing: Termites turning 17-40 g of soil per m2 a year, 12-27% of the 146 g returned",
+   "access": "search summary; the second value came from an author-index page and is unverified"
+  },
+  {
+   "key": "zachariah_2020",
+   "citation": "Zachariah, Murthy and Borges (2020). Moisture alone is sufficient to impart strength but not weathering resistance to termite mound soil. Royal Society Open Science 7(8), 200485.",
+   "doi_or_url": "doi:10.1098/rsos.200485",
+   "use": "Cement sizing: A soil and water mixture reaching compressive strength comparable to in situ mound soil, with the termites' secretions adding resistance to water erosion. No strength value was obtained",
+   "access": "search summary; the open full text returned a browser check and was not read"
+  },
+  {
+   "key": "termite_mound_ages",
+   "citation": "Martin and colleagues (2018) for Brazil's mounds of 690-3,820 years, as the rock return study cites them; Francis and colleagues (2024), Science of the Total Environment, for Namaqualand's inhabited mounds, as news reports give it",
+   "doi_or_url": "https://theconversation.com/worlds-oldest-termite-mounds-discovered-in-south-africa-and-theyve-been-storing-precious-carbon-for-thousands-of-years-230988",
+   "use": "Cement sizing: Mound ages: organic carbon of 13,000-19,000 years and carbonate up to 34,000 years in Namaqualand; earlier records of 4,000 years (Brazil) and 2,300 years (Congo)",
+   "access": "search summary of news reports; the 2024 paper not read"
+  },
+  {
+   "key": "marion_1985",
+   "citation": "Marion and colleagues (1985; co-authors recalled as Schlesinger and Fonteyn). CALDEP: a regional model for soil CaCO3 (caliche) deposition in southwestern deserts. Soil Science (volume recalled as 139; not checked)",
+   "doi_or_url": "https://agris.fao.org/search/en/records/65df85566eef00c2cea2f784",
+   "use": "Cement sizing: Soil carbonate deposition of 1 to 5 g per m2 a year in most field studies. The carbon cycle's 0.12-0.42 g C per m2 a year (Schlesinger 1985) is 1.0-3.5 g of calcite and lies inside it",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "pedogenic_extremes",
+   "citation": "Bockheim and Douglass (2006), Patagonia: 0.16-0.18 g CaCO3 per m2 a year; Dahms and Egli (2016), Wind River Range: 2.13 g per m2 a year in cold stages; a calciaquoll beside a recharge wetland: 0.1-0.2 mol per m2 a year (10-20 g)",
+   "doi_or_url": "https://agris.fao.org/search/en/records/65dff758b766d82b1803a7bd",
+   "use": "Cement sizing: The ends of the range of soil carbonate accumulation, 0.16-20 g per m2 a year",
+   "access": "search summary; the three papers not opened"
+  },
+  {
+   "key": "fenske_2025",
+   "citation": "Fenske, C., Braun, J., Guillocheau, F. and Robin, C. (2025). A numerical model for duricrust formation by water table fluctuations. Earth Surface Dynamics 13, 119-146.",
+   "doi_or_url": "doi:10.5194/esurf-13-119-2025",
+   "use": "Cement sizing: Its review of formation rates, each from the source it cites: pedogenic calcretes 0.5-350 mm and groundwater calcretes 10-3,000 mm a thousand years (Goudie 1985); calcrete 5-50 m a million years in southern Africa (Netterberg 1978) and 1-2 m a million years in the Thar (Dhir et al. 2010); ferricrete 0.4 mm (Uganda) to 17 mm (Liberian Shield) a thousand years (Trendall 1962 and Mikhaylov 1964 through Goudie 1985); calcrete ages from 3,000 to over a million years; iron duricrust at about 1,450 mm of rain, 28 C and a dry season of about six months (Tardy 1993); calcrete at about 200-600 mm of rain",
+   "access": "full text in part: the first 100,000 of 269,000 characters, through a page-fetch tool's extraction; the cited originals not read"
+  },
+  {
+   "key": "caliche_strength",
+   "citation": "A study of caliche in Tucson, Arizona, reporting unconfined compressive strengths from under 1.03 MPa to over 20.67 MPa, falling with clay content; the paper was not identified beyond the search summary",
+   "doi_or_url": "",
+   "use": "Cement sizing: Caliche of 1-21 MPa unconfined, in the table of processes only",
+   "access": "search summary; source not identified"
+  },
+  {
+   "key": "cailleau_2004",
+   "citation": "Cailleau, Braissant and Verrecchia (2004). Biomineralization in plants as a long-term carbon sink. Naturwissenschaften 91, 191-194.",
+   "doi_or_url": "https://doc.rero.ch/record/313033",
+   "use": "Cement sizing: About one tonne of mineral carbon as calcium carbonate round an 80-year-old iroko stump in Ivory Coast, 12.5 kg of carbon a year, 104 kg of calcite. A companion paper in Geobiology (Braissant and colleagues, 2004; not located) is summarised as 500 kg of inorganic carbon inside an 80-year-old tree and about 1,000 kg in its soil",
+   "access": "abstract, through a search summary; the PDF returned HTTP 410"
+  },
+  {
+   "key": "cailleau_2011",
+   "citation": "Cailleau and colleagues (2011). Turning sunlight into stone: the oxalate-carbonate pathway in a tropical tree ecosystem. Biogeosciences 8, 1755-1767.",
+   "doi_or_url": "https://bg.copernicus.org/articles/8/1755/2011/",
+   "use": "Cement sizing: The pathway: oxalate eaten by soil bacteria raises an acid soil of about pH 5 to about pH 9, and the system is a lasting sink where the calcium comes from rock that is not carbonate. A figure of 5.76 kg of carbon a tree a year appeared in a search summary of a University of Neuchatel thesis and is the low end used",
+   "access": "abstract; the PDF exceeded the fetch tool's size limit. The 5.76 kg figure: search summary of a thesis, not confirmed in a paper"
+  },
+  {
+   "key": "mcconnaughey_falk_1991",
+   "citation": "McConnaughey and Falk (1991). Calcium-proton exchange during algal calcification. Biological Bulletin (volume not read)",
+   "doi_or_url": "https://bvbvf1.bib-bvb.de/vufind/PrimoRecord/cdi_pubmed_primary_29303642",
+   "use": "Cement sizing: A ratio of calcification to photosynthesis near 1.0 in Chara corallina in moderately alkaline water with enough calcium; field studies in the same summary find lower and variable ratios, and charophyte dry mass 30% to over 80% calcium carbonate",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "chivas_1990",
+   "citation": "Chivas and colleagues (1990). Growth rates and Holocene development of stromatolites from Shark Bay, Western Australia. Australian Journal of Earth Sciences 37.",
+   "doi_or_url": "doi:10.1080/08120099008727913",
+   "use": "Cement sizing: Stromatolites growing 0.4 mm a year or less; Collins and Jahnert's 2014 review (https://www.rswa.org.au/wp-content/uploads/2023/10/14.-ROY-SOC-97.1-COLLINS-JAHNERT-189-219-LOW.pdf) gives under 0.1 to 0.5 mm a year",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "tufa_rates",
+   "citation": "Stream tufa deposition: Pedley and colleagues (2009), about 1 mm a year for Holocene tufas; the River Piedra, Spain, 3 mm a year in slow water and 9 mm at stepped falls; the River Mesa, Spain, 2 mm a year; Pentecost's estimate of about 5 mm a year for meteogene limestone and about 9 with eukaryotic algae",
+   "doi_or_url": "https://raco.cat/index.php/GeologicaActa/article/download/263720/351223; https://researchportal.northumbria.ac.uk/en/publications/freshwater-calcite-precipitates-from-in-vitro-mesocosm-flume-expe/",
+   "use": "Cement sizing: Stream tufa at 1-9 mm a year, turned to 1,000-18,000 g per m2 a year with a bulk density of 1,000-2,000 kg/m3, which is recalled",
+   "access": "search summary"
+  },
+  {
+   "key": "beachrock",
+   "citation": "Beachrock cementation: a Durban beach cemented in under 5 years between erosional events; cementation described as months to years (Scientia Marina); a start after 5 months in pouches of ooids on Turks and Caicos",
+   "doi_or_url": "https://pure.ulster.ac.uk/en/publications/rapid-beachrock-cementation-on-a-south-african-beach-linking-morp/; https://scientiamarina.revistas.csic.es/index.php/scientiamarina/article/view/1909",
+   "use": "Cement sizing: Sand turned to rock in under 5 years on a sea shore, in the table of processes only",
+   "access": "search summary"
+  },
+  {
+   "key": "gagen_2020",
+   "citation": "Gagen, Levett and colleagues (2020). Accelerating microbial iron cycling promotes re-cementation of surface crusts in iron ore regions. Microbial Biotechnology 13.",
+   "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7533318/",
+   "use": "Cement sizing: Crushed canga in 1 m3 containers wetted once a month for 10 months with 20-47 L of medium holding 30 mM glucose, then dried for 6 months (harvest at week 64); ferrous iron of 290-445 ppm; cemented lumps of 5-20 cm through the 1 m depth while controls stayed loose; no strength measured. The glucose masses (108-254 g a month) and the dose per kg are computed here, the second on a guessed bulk density",
+   "access": "full text in part: methods and results through a page-fetch tool's extraction; the supplement with the iron content not read"
+  },
+  {
+   "key": "levett_2020",
+   "citation": "Levett and colleagues (2020). Biocement stabilization of an experimental-scale artificial slope and the reformation of iron-rich crusts. Proceedings of the National Academy of Sciences (year and volume not confirmed)",
+   "doi_or_url": "https://uq.academia.edu/AlanLevett",
+   "use": "Cement sizing: No number taken. An artificial slope of crushed iron crust fed from a bioreactor formed a surface biofilm and iron cements that resisted deformation better than a control",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "shuster_2012",
+   "citation": "Shuster and colleagues (2012). Cosmogenic 3He in hematite and goethite from Brazilian canga duricrust demonstrates the extreme stability of these surfaces. Earth and Planetary Science Letters (authors and volume recalled).",
+   "doi_or_url": "https://resolver.caltech.edu/CaltechAUTHORS:20120606-110644084",
+   "use": "Cement sizing: A canga surface at Carajas eroding at about 0.16-0.54 m a million years over millions of years",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "monteiro_2018",
+   "citation": "Monteiro and colleagues (2018). Two papers combining (U-Th)/He and cosmogenic 3He on the Carajas plateaus (authors recalled)",
+   "doi_or_url": "https://resolver.caltech.edu/CaltechAUTHORS:20180130-105653677; https://resolver.caltech.edu/CaltechAUTHORS:20180308-091037841",
+   "use": "Cement sizing: Erosion as low as 0.08 and 0.09 m a million years on cemented plateau surfaces; scarp retreat as fast as 20 km a million years along river valleys",
+   "access": "abstract, through a search summary"
+  },
+  {
+   "key": "arid_erosion",
+   "citation": "Cosmogenic erosion rates in arid lands: central Australia (Earth Surface Dynamics 6, 329, 2018), silcrete-dominant areas as slow as 0.2 m a million years; Australian sites at about 1 m a million years; Namib bedrock averaging about 2.5 and inselberg summits 5.07 m a million years",
+   "doi_or_url": "https://esurf.copernicus.org/articles/6/329/2018/; https://serc.carleton.edu/31893; https://www.osti.gov/biblio/352651",
+   "use": "Cement sizing: Silcrete ground at 0.2 m a million years and arid bedrock at 1-5.1 m a million years",
+   "access": "search summary"
+  },
+  {
+   "key": "phytoliths",
+   "citation": "Phytolith production: a Lei bamboo forest in subtropical China, 292 kg per hectare a year (PLoS ONE 2014); temperate forests of northern China, 16.9-37.7 kg per hectare a year (Frontiers in Plant Science 2019)",
+   "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4154810; https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2019.00581/full",
+   "use": "Cement sizing: Phytoliths of 1.7-3.8 g per m2 a year under temperate forest and 29 under bamboo, 66-91% of it silica",
+   "access": "search summary"
+  },
+  {
+   "key": "glomalin",
+   "citation": "Rillig and colleagues (2001). Large contribution of arbuscular mycorrhizal fungi to soil carbon pools in tropical forest soils. Plant and Soil (title recalled)",
+   "doi_or_url": "https://link.springer.com/article/10.1023%2FA%3A1010364221169",
+   "use": "Cement sizing: Glomalin turning over in several years to decades along a Hawaiian chronosequence; a long bare-fallow study in the same summary disputes that it is stable or fungal",
+   "access": "search summary"
+  },
+  {
+   "key": "plummer_busenberg_1982",
+   "citation": "Plummer, L. N. and Busenberg, E. (1982). The solubilities of calcite, aragonite and vaterite in CO2-H2O solutions between 0 and 90 C. Geochimica et Cosmochimica Acta 46, 1011-1040.",
+   "doi_or_url": "",
+   "use": "Cement sizing: The temperature fits for Henry's constant of CO2, the two dissociation constants of carbonic acid and the solubility product of calcite, written from memory; they return log K of -1.468, -6.352, -10.329 and -8.480 at 25 C, which the script asserts. The carbon cycle study uses the same constants through its own solver",
+   "access": "recalled and not looked up; checked numerically against the 25 C values, which are also recalled"
+  },
+  {
+   "key": "slope_formulas",
+   "citation": "The infinite-slope factor of safety, dry and with seepage parallel to the slope, Culmann's critical height of a planar face and the Mohr-Coulomb unconfined strength, as soil mechanics textbooks give them",
+   "doi_or_url": "",
+   "use": "Cement sizing: The slope arithmetic of cohesion_needed_pa, culmann_height_m and ucs_from_cohesion",
+   "access": "recalled and not looked up"
+  },
+  {
+   "key": "recalled_values",
+   "citation": "Values from memory, each a guess until checked",
+   "doi_or_url": "",
+   "use": "Cement sizing: Tufa and stromatolite bulk density of 1,000-2,000 kg/m3; the Davies activity equation with A = 0.507; organic matter of 1-5% in a bound mineral soil; nitrogen of 3-16% in a secreted binder; an iroko's ground of 200-700 m2; crushed canga at 2,000-3,000 kg/m3; deposits at 1,300-1,800 kg/m3 dry and 1,800-2,100 saturated",
+   "access": "recalled and not looked up, or design guesses"
+  },
+  {
+   "key": "braun_willett2013",
+   "citation": "Braun J, Willett SD 2013, A very efficient O(n), implicit and parallel method to solve the stream power equation governing fluvial incision and landscape evolution, Geomorphology 180-181, 170-179",
+   "doi_or_url": "https://doi.org/10.1016/j.geomorph.2012.10.008",
+   "use": "The landscape model in evolve.py: the stream-power law for cutting, with the land drained to the power 0.5 and the slope to the first power, solved implicitly down the drainage",
+   "access": "recalled; not looked up on 22 November 2026"
+  },
+  {
+   "key": "barnes2014",
+   "citation": "Barnes R, Lehman C, Mulla D 2014, Priority-flood: an optimal depression-filling and watershed-labeling algorithm for digital elevation models, Computers & Geosciences 62, 117-127",
+   "doi_or_url": "https://doi.org/10.1016/j.cageo.2013.04.024",
+   "use": "The landscape model in evolve.py: filling every hollow to its lip from the outlets inward, with a small rise per cell so that water crosses the fill",
+   "access": "recalled; not looked up on 22 November 2026"
   }
  ]
 }
