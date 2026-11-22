@@ -1,0 +1,54 @@
+{
+ "source_admission": "Sources beyond the project's own studies. Each entry says how far it was checked on 22 November 2026: a search summary confirms that the work exists and says what the entry uses; nothing here was read in full. Values the README marks as recalled have no entry and were not looked up.",
+ "sources": [
+  {
+   "key": "author_brief_2026_11_22",
+   "citation": "The author's brief, Oxygen capsules and a floating canopy colony for Terluna's seas, 22 November 2026 (15 pages)",
+   "doi_or_url": "research drive: conversation-exports/author-brief-oxygen-capsules-2026-11-22/ (sha256 985d34ee92caf671955ee73971b7e5c10f2f1b5010a3acec63169a0fc3d591d6)",
+   "use": "The design refined here: the capsules, the canopy, the trunk and the feeders, the delivery routes, the placeholder that 70% of capsules deliver, the reef carbonate rates of 10-100 mol per m2 a year, the alkalinity ceiling, the comparison of fresh and salt seas, and the open questions the README answers",
+   "access": "read in full"
+  },
+  {
+   "key": "marsay2015",
+   "citation": "Marsay CM, Sanders RJ, Henson SA, Pabortsava K, Achterberg EP, Lampitt RS 2015, Attenuation of sinking particulate organic carbon flux through the mesopelagic ocean, PNAS 112(4), 1089-1094",
+   "doi_or_url": "https://doi.org/10.1073/pnas.1415311112",
+   "use": "That the sinking flux is spent at shallower depths in warmer water, with the attenuation's exponent tied to the temperature of the upper 500 m: the direction the faster-decay case assumes. Its coefficients were not retrieved and are not used",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "roder2013",
+   "citation": "Roder C, Berumen ML, Bouwmeester J, Papathanassiou E, Al-Suwailem A, Voolstra CR 2013, First biological measurements of deep-sea corals from the Red Sea, Scientific Reports 3, 2802",
+   "doi_or_url": "https://doi.org/10.1038/srep02802",
+   "use": "Corals without algae living at 200-1,000 m in the central Red Sea at more than 20 C (21.5 C in the dark zone) in water poor in food and oxygen, with low respiration, low calcification and little tissue: the reference for feeders in warm deep water",
+   "access": "search summary of the abstract"
+  },
+  {
+   "key": "stommel1956",
+   "citation": "Stommel H, Arons AB, Blanchard D 1956, An oceanographical curiosity: the perpetual salt fountain, Deep Sea Research 3, 152-153",
+   "doi_or_url": "https://ui.adsabs.harvard.edu/abs/1956DSR.....3..152S/abstract",
+   "use": "Water in a pipe that passes heat and no salt takes its surroundings' temperature, keeps its own salt and so keeps moving: upward in their case of fresher water below, downward here where the surface is the saltier",
+   "access": "search summary; the paper has no abstract"
+  },
+  {
+   "key": "westcott1983",
+   "citation": "Westcott MP, Mikkelsen DS 1983, The response of rice seedlings to O2 released from CaO2 in flooded soils, Plant and Soil 74, 31-39; and Mei J and colleagues 2017, Scientific Reports 7, 4878, on rice seed pelleted with calcium peroxide sown into flooded soil",
+   "doi_or_url": "https://doi.org/10.1007/BF02178737 ; https://doi.org/10.1038/s41598-017-04966-1",
+   "use": "Calcium peroxide as a seed coating that releases oxygen to rice sown straight into flooded soil: an existing use for a harvested share of the capsules",
+   "access": "search summaries"
+  },
+  {
+   "key": "siphonophore_lengths",
+   "citation": "Reports of the Schmidt Ocean Institute's 2020 sighting of an Apolemia siphonophore off Western Australia, its stem estimated at about 46 m; Guinness World Records on Praya dubia at 40-50 m",
+   "doi_or_url": "https://www.discovermagazine.com/does-the-spiral-siphonophore-reign-as-the-longest-animal-in-the-world-45322 ; https://www.guinnessworldrecords.com/world-records/675993-longest-bioluminescent-animal",
+   "use": "That colonial animals with specialised members reach tens of metres in length; popular reports, an estimate from video",
+   "access": "search summaries of news reports"
+  },
+  {
+   "key": "coral_peroxide",
+   "citation": "Armoza-Zvuloni R, Shaked Y 2014, Release of hydrogen peroxide and antioxidants by the coral Stylophora pistillata to its external milieu, Biogeosciences 11, 4587-4598; Suggett DJ and colleagues 2008, Photosynthesis and production of hydrogen peroxide by Symbiodinium, Journal of Phycology 44, 948-956",
+   "doi_or_url": "https://doi.org/10.5194/bg-11-4587-2014 ; https://doi.org/10.1111/j.1529-8817.2008.00537.x",
+   "use": "That corals release hydrogen peroxide to the water and that their algae make it in the light when electrons pass to oxygen (the Mehler reaction). No rate was retrieved and none is used",
+   "access": "search summaries"
+  }
+ ]
+}

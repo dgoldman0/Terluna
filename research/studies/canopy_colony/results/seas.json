@@ -1,0 +1,772 @@
+{
+ "schema": "terluna.research.canopy-colony-seas/1",
+ "producer": {
+  "module": "research.studies.canopy_colony.seas",
+  "code_sha256": "6b826fa7d9f7d86f6bb34c29321d659735e42060aec0a2b05da90285bb477382"
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
+ },
+ "evidence": "Measured on the design surface's routing and redrawn floor at 16 pixels per degree; the rivers are the design climate's estimate as the routing carries them. Not a survey of any real water.",
+ "reading_rule": "seas: each of the design surface's seven seas at its own level, with the area of water deeper than each depth (below), the latitudes of its cells on the design surface, and the river water that cells off the seas send straight into it (m3/s, and as metres of water over the sea a year). salt marks the salt sea.",
+ "climate": {
+  "run": "A28D_301k_design_l15_snow_s936_settled",
+  "years": [
+   45,
+   59
+  ],
+  "climatology": "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz",
+  "budget": "closed_budget",
+  "open_water_evaporation_factor": 1.043
+ },
+ "levels_m": {
+  "moscoviense": 1833.744638671875,
+  "orientale": 726.3026220703125,
+  "smythii_marginis": -895.0762231445312,
+  "south_pole_aitken": -1615.026790149126,
+  "humboldtianum": -1615.026790149126,
+  "near_side_main": -1680.23291015625,
+  "near_side_south": -1681.6331787109375
+ },
+ "seas": {
+  "near_side_main": {
+   "area_km2": 3839221.7884897003,
+   "volume_km3": 2783880.2057018694,
+   "mean_depth_m": 725.1157549814312,
+   "deepest_m": 3921.99658203125,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 3839221.7884897003
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 3818031.8538182187
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 3795675.39607118
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 3723653.4445798956
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 3593513.5757326605
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 3461149.264764193
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 3329170.3651706083
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 3187072.8830747777
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 3028139.2825830714
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 2679823.821112925
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 2295629.7442664113
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 1951445.7313635307
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 1550563.5389641018
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 1297038.4243395943
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 1027149.6112709865
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 600123.6923812635
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 247493.80156626116
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 123549.77186047987
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 5873.066565461586
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 1362.7465355856161
+    }
+   ],
+   "latitudes": [
+    -22.90625,
+    70.84375
+   ],
+   "mean_latitude": 30.041005908831547,
+   "share_poleward_of_45": 0.24888746531549988,
+   "level_m": -1680.23291015625,
+   "salt": false,
+   "rivers_m3s": 77578.34795720901,
+   "rivers_m_yr": 0.6376777921073177
+  },
+  "near_side_south": {
+   "area_km2": 973033.5985735413,
+   "volume_km3": 369158.010989796,
+   "mean_depth_m": 379.3887606049559,
+   "deepest_m": 3145.62841796875,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 973033.5985735413
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 962027.0283996289
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 950330.3823781847
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 912412.1223810735
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 847272.3325347534
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 776282.9018819851
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 686809.5174076747
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 588155.3459420586
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 497916.40721247485
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 354991.53804984875
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 270728.9064418471
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 213753.74486957074
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 122828.63354648188
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 70810.7622176561
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 9094.9128625465
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 3202.623394659319
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 2541.4503784276703
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 1629.130761691646
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 1028.0564589428511
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 577.7778428854504
+    }
+   ],
+   "latitudes": [
+    -31.53125,
+    9.15625
+   ],
+   "mean_latitude": -13.405117541034667,
+   "share_poleward_of_45": 0.0,
+   "level_m": -1681.6331787109375,
+   "salt": false,
+   "rivers_m3s": 6020.115216361243,
+   "rivers_m_yr": 0.1952454552754922
+  },
+  "south_pole_aitken": {
+   "area_km2": 2410253.292512606,
+   "volume_km3": 5795590.281012714,
+   "mean_depth_m": 2404.556524833542,
+   "deepest_m": 7334.66552734375,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 2410253.292512606
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 2407644.282633421
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 2404859.2253216864
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 2396490.793565371
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 2381538.429740859
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 2365873.525000493
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 2349276.964842158
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 2331500.4914845773
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 2312828.2214801386
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 2271796.9625197607
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 2227572.9486629693
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 2184383.725852383
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 2119665.442717316
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 2074909.366398112
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 2007077.09523677
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 1888143.2678449273
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 1757534.9172468605
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 1471241.75111367
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 1163690.6823823461
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 814111.8001109078
+    },
+    {
+     "depth_m": 4000,
+     "area_km2": 235263.21555086257
+    },
+    {
+     "depth_m": 5000,
+     "area_km2": 63338.802038060094
+    },
+    {
+     "depth_m": 6000,
+     "area_km2": 6668.8858092765695
+    },
+    {
+     "depth_m": 7000,
+     "area_km2": 25.429097331309453
+    }
+   ],
+   "latitudes": [
+    -87.71875,
+    -21.28125
+   ],
+   "mean_latitude": -53.10642191420714,
+   "share_poleward_of_45": 0.666560010960914,
+   "level_m": -1615.026790149126,
+   "salt": true,
+   "rivers_m3s": 51564.88152051167,
+   "rivers_m_yr": 0.6751422807415118
+  },
+  "humboldtianum": {
+   "area_km2": 279469.76243540243,
+   "volume_km3": 333400.9019480253,
+   "mean_depth_m": 1192.9766535121619,
+   "deepest_m": 4479.400390625,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 279469.76243540243
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 278568.70498235594
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 277596.3235467057
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 274696.0296364544
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 269782.2982509958
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 264665.6521189433
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 259294.96033979632
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 253866.27628545405
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 247832.59161142982
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 234288.56073732142
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 220811.52949309515
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 207807.0318496996
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 186458.14920463288
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 171899.4577846476
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 150111.6270056429
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 116277.79596258933
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 87632.6659198866
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 55473.78138217529
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 17053.543209609677
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 863.5401638798652
+    },
+    {
+     "depth_m": 4000,
+     "area_km2": 18.56635476827596
+    }
+   ],
+   "latitudes": [
+    47.84375,
+    66.15625
+   ],
+   "mean_latitude": 57.152686239404865,
+   "share_poleward_of_45": 1.0,
+   "level_m": -1615.026790149126,
+   "salt": false,
+   "rivers_m3s": 6237.571964172073,
+   "rivers_m_yr": 0.7043438234648213
+  },
+  "moscoviense": {
+   "area_km2": 844219.4749065948,
+   "volume_km3": 1440480.985479986,
+   "mean_depth_m": 1706.287320177448,
+   "deepest_m": 7464.173828125,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 844219.4749065948
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 841746.3026765676
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 839216.348512924
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 831124.6176657409
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 817259.8319032772
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 802913.9999148811
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 788211.0618354069
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 773485.4163139092
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 758126.6184664571
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 725888.3811637297
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 693337.796371336
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 660162.0246200388
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 610580.711765757
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 577530.4102804078
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 528761.2426543414
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 448102.1518348683
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 374729.35100314405
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 258952.91867663842
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 188626.1522686189
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 142057.30126345766
+    },
+    {
+     "depth_m": 4000,
+     "area_km2": 80319.4515772319
+    },
+    {
+     "depth_m": 5000,
+     "area_km2": 28586.970930318137
+    },
+    {
+     "depth_m": 6000,
+     "area_km2": 431.31009486286735
+    },
+    {
+     "depth_m": 7000,
+     "area_km2": 189.3345052427687
+    }
+   ],
+   "latitudes": [
+    -12.28125,
+    36.84375
+   ],
+   "mean_latitude": 15.898347853645916,
+   "share_poleward_of_45": 0.0,
+   "level_m": 1833.744638671875,
+   "salt": false,
+   "rivers_m3s": 52759.06882061612,
+   "rivers_m_yr": 1.9721762405418173
+  },
+  "orientale": {
+   "area_km2": 297888.7927765544,
+   "volume_km3": 468964.7625043579,
+   "mean_depth_m": 1574.2947498401763,
+   "deepest_m": 5424.796875,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 297888.7927765544
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 296568.3421299846
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 295165.43637060386
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 290840.52331163734
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 283056.5937550723
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 275476.4799972714
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 267893.17454441113
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 259663.3137658668
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 251868.54526098107
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 236816.59305438356
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 222377.20881231892
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 208326.15110148073
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 189756.70441083252
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 178828.79882394988
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 161712.18126800546
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 139823.25635195212
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 117169.44349620769
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 99348.52911923181
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 87183.90905529707
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 69257.35596883022
+    },
+    {
+     "depth_m": 4000,
+     "area_km2": 1317.5540026699719
+    },
+    {
+     "depth_m": 5000,
+     "area_km2": 631.9897342025881
+    }
+   ],
+   "latitudes": [
+    -31.84375,
+    -5.46875
+   ],
+   "mean_latitude": -18.929893659115326,
+   "share_poleward_of_45": 0.0,
+   "level_m": 726.3026220703125,
+   "salt": false,
+   "rivers_m3s": 18558.947560691748,
+   "rivers_m_yr": 1.9660888819694526
+  },
+  "smythii_marginis": {
+   "area_km2": 599347.6736802767,
+   "volume_km3": 845785.867138053,
+   "mean_depth_m": 1411.1773587849766,
+   "deepest_m": 5187.73828125,
+   "below": [
+    {
+     "depth_m": 0,
+     "area_km2": 599347.6736802767
+    },
+    {
+     "depth_m": 10,
+     "area_km2": 597090.3869525183
+    },
+    {
+     "depth_m": 20,
+     "area_km2": 594758.7178961713
+    },
+    {
+     "depth_m": 50,
+     "area_km2": 587648.3219845798
+    },
+    {
+     "depth_m": 100,
+     "area_km2": 575389.6377241308
+    },
+    {
+     "depth_m": 150,
+     "area_km2": 562524.9356687578
+    },
+    {
+     "depth_m": 200,
+     "area_km2": 548833.3959816721
+    },
+    {
+     "depth_m": 250,
+     "area_km2": 534317.5163293115
+    },
+    {
+     "depth_m": 300,
+     "area_km2": 518923.7213335473
+    },
+    {
+     "depth_m": 400,
+     "area_km2": 488764.37997967517
+    },
+    {
+     "depth_m": 500,
+     "area_km2": 462181.5740573568
+    },
+    {
+     "depth_m": 600,
+     "area_km2": 437810.411644349
+    },
+    {
+     "depth_m": 750,
+     "area_km2": 402845.76538710116
+    },
+    {
+     "depth_m": 850,
+     "area_km2": 379071.18906894093
+    },
+    {
+     "depth_m": 1000,
+     "area_km2": 339062.9398984419
+    },
+    {
+     "depth_m": 1250,
+     "area_km2": 269026.21784721693
+    },
+    {
+     "depth_m": 1500,
+     "area_km2": 220773.76656030555
+    },
+    {
+     "depth_m": 2000,
+     "area_km2": 166634.3814780312
+    },
+    {
+     "depth_m": 2500,
+     "area_km2": 135213.8162534654
+    },
+    {
+     "depth_m": 3000,
+     "area_km2": 80660.42316795189
+    },
+    {
+     "depth_m": 4000,
+     "area_km2": 1330.996628782595
+    },
+    {
+     "depth_m": 5000,
+     "area_km2": 3.5121020253685518
+    }
+   ],
+   "latitudes": [
+    -9.28125,
+    27.28125
+   ],
+   "mean_latitude": 8.53165439124165,
+   "share_poleward_of_45": 0.0,
+   "level_m": -895.0762231445312,
+   "salt": false,
+   "rivers_m3s": 30898.637515281484,
+   "rivers_m_yr": 1.6269135362864677
+  }
+ },
+ "seconds": 8
+}
