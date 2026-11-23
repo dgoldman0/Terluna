@@ -413,6 +413,55 @@
    "doi_or_url": "https://doi.org/10.1016/j.cageo.2013.04.024",
    "use": "The landscape model in evolve.py: filling every hollow to its lip from the outlets inward, with a small rise per cell so that water crosses the fill",
    "access": "recalled; not looked up on 22 November 2026"
+  },
+  {
+   "key": "atlas_sand_seas",
+   "citation": "Made sand seas on the Open Moon: a siting study, research/studies/atlas_round/sand_seas.md, sand_seas.py and results/sand_seas.json, with the sand study's fields (sand.py)",
+   "doi_or_url": "research/studies/atlas_round/sand_seas.md",
+   "use": "dryness.py: the dryness (rain over demand), the rain and the plant cover on the 1.9 km grid; the lasting sand each end of drainage gathers; the wind's own sand by class of dryness in the open case; the made seas' sand, centres and radii of building; what the wind takes of the rivers' sand",
+   "access": "product and code read in-tree; fields rebuilt from the research drive"
+  },
+  {
+   "key": "lieth1975_miami",
+   "citation": "Lieth H 1975, Modeling the primary productivity of the world, in Lieth H and Whittaker RH (eds), Primary Productivity of the Biosphere, Springer",
+   "doi_or_url": "no link looked up",
+   "use": "dryness.py: the rain branch of the Miami rule, 3000 (1 - exp(-0.000664 P)) g of dry matter per m2 a year, used for its shape alone to spread the land's mean plant growth by rain, as one side of a bracket",
+   "access": "recalled; not looked up on 22 or 23 November 2026"
+  },
+  {
+   "key": "kilgore_knudsen1977",
+   "citation": "Kilgore DL, Knudsen KL 1977, Analysis of materials in Cliff and Barn Swallow nests: relationship between mud selection and nest architecture, Wilson Bulletin 89(4), 562-571",
+   "doi_or_url": "https://sora.unm.edu/sites/default/files/journals/wilson/v089n04/p0562-p0571.pdf",
+   "use": "The mud of swallows' nests is over half sand (about 61% in Cliff Swallows' and 56% in Barn Swallows'): a carrier that builds with wet cohesive sediment takes sand with it",
+   "access": "search summary on 22 November 2026; title recalled; not read"
+  },
+  {
+   "key": "ucipm_cliff_swallows",
+   "citation": "University of California Statewide Integrated Pest Management Program, Cliff Swallows (pest notes)",
+   "doi_or_url": "https://ipm.ucanr.edu/home-and-landscape/cliff-swallows/",
+   "use": "Cliff swallows gather mud at sources up to half a mile from the nest: how near its material a mud builder breeds",
+   "access": "search summary on 22 November 2026; not read"
+  },
+  {
+   "key": "mit2023_sandgrouse",
+   "citation": "MIT News, 11 April 2023, Scientists uncover the amazing way sandgrouse hold water in their feathers (on Mueller and Gibson 2023)",
+   "doi_or_url": "https://news.mit.edu/2023/scientists-uncover-sandgrouse-hold-water-feathers-0411",
+   "use": "Male Namaqua sandgrouse carry about 25 ml of water in their belly feathers more than 20 km to their chicks (other accounts give up to 30 km): a bird that carries a load that is not food over tens of kilometres to its young",
+   "access": "search summary on 22 November 2026; not read"
+  },
+  {
+   "key": "forest_reproductive_allocation2025",
+   "citation": "Forest age rivals climate to explain reproductive allocation patterns in forest ecosystems globally, Ecology Letters 2025",
+   "doi_or_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12377453/",
+   "use": "Forests put a mean 0.11 (boreal) to 0.14 (tropical) of their growth into flowers, fruit and seed: the scale of what plants spend on reproduction, against the return's food",
+   "access": "search summary on 22 November 2026; authors not noted; not read"
+  },
+  {
+   "key": "australian_museum_brush_turkey",
+   "citation": "Australian Museum, Australian Brush-turkey (animal fact sheet)",
+   "doi_or_url": "https://australianmuseum.net.au/Australian-Brush-turkey",
+   "use": "A male brush-turkey builds an incubation mound of earth and litter about 4 m across and 1 m high: a bird that breeds on a mound it builds",
+   "access": "search summary on 22 November 2026; not read"
   }
  ]
 }

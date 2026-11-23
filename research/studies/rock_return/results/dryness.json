@@ -1,0 +1,998 @@
+{
+ "schema": "terluna.research.rock-return-dryness/1",
+ "producer": {
+  "module": "research.studies.rock_return.dryness",
+  "code_sha256": {
+   "dryness.py": "5488907d11d85f4634b999b84d81283b3d77c5f2e2cfcc044c06ecd96b86999a",
+   "rock.py": "640c9ba51cbfe7d32740103c20852b1d44f7db2118faad36920bc56da4110e6e",
+   "carriers.py": "1bce1886b230a635d104930c7de33aa2a1a9115641fd46e8ddcbf92c458c6b44",
+   "run.py": "a79548ce87181d48906cc25c4a6d62b06144b7843ee8c5d8ecf2ae526cee9997"
+  },
+  "sand_study": {
+   "research/studies/atlas_round/sand_seas.py": "01b9449a2356543b9bc664a4b4c9def9dc18d33f3ad8ea8610e7e0d6b69ea282",
+   "research/studies/atlas_round/sand.py": "b39ea58f937c4dc18f803c20b7e982ad9171e6b01976eb4962f17cb634378daa"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/sand_seas.json": "3f3935e29498b5078015c7b4d2d36685e720939f7b770ef7f3c7e2523b540d32",
+  "research/studies/light_limitation/results/biomass_comparison.json": "0637782ab2db465735aaaf8df349ed281e149dbd8750e0dd6d5955ae36964dcd",
+  "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
+  "research/studies/rock_return/results/placement.json": "6f96ea3bc43430ea8ed85cae66890c1c4617161766af22fe74d4e9c718861ec7",
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/sand/sand_16ppd.npz": "32ecde617443144cd8fa0611e06452e5afef8e3a61753c5e7220e5305373df9f",
+  "/media/projectspace/terluna-research/atlas-round/sand/winds_A28D_y45-59.npz": "59897f0911821470c78e7807b0fc4acfb3bd8cd704faeab744d5ba59ce454216",
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "0028db20a7b57d38b0bf5f279f0e998b368022b38541a047cd48e35a6575fd93",
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
+  "/media/projectspace/terluna-research/atlas-round/fine_surface/look_fields.npz": "8b53480bb327f97001e5bcca1158d6a94772e3972c4e4d429f1a1de4a165c567",
+  "/media/projectspace/terluna-research/atlas-round/corrected_rule/districts_redrawn/districts_8ppd.npz": "1de4578bd9dd891c6dbe6fc3a84167058e502c0654fd17917470ead40541c902",
+  "/media/projectspace/terluna-research/atlas-round/corrected_rule/districts_redrawn/districts.json": "55ae7a730c7dec42f5cd42dad6078533c34e999dc70533040a9cc11bffd055b3",
+  "/media/projectspace/terluna-research/terrain-return/evolution/regions_16ppd.npz": "0d3198ef76c6cafb837a9d362f498b1cb0b49d2aa1cf2d29b21ed43bbc7687dc"
+ },
+ "evidence": "A first look, nothing in it observed. The dryness, the rain and the plant cover are the sand study's fields on the 1.9 km grid, from one climate run; the rock is this study's, spread by relief and not by rain; the lasting sand at the ends of drainage is the sand seas study's. Plant growth by dryness is no project product: the biomass comparison's mean for the land is spread by the globe's plant cover curve, a display rule, and by the rain branch of Earth's Miami rule, as a bracket. A haul is one typical trip at the rock's mean climb; loads, trips and food are design guesses. No carrier, plant or cover is designed here, so this says what energy and food allow and nothing of what an ecology of them would do.",
+ "reading_rule": "by_dryness: for each class of rain over demand, its share of the dry land, the rock it sheds (by this study's rule, and with the sand study's rule of rain beside it), the rock that settles in it by kind of place, the plants' growth there over the land's mean by each shape, food_over_the_lands_mean_share (the return's food as a share of the plants' growth there, over that share on the land's mean; multiply by the sizing's shares, 0.05-1.2% by the carrier's size), the lasting sand its ends of drainage gather and the wind's own sand in the sand study's open case. sand: each made sea's need a year against the lasting sand at the ends within its radius of building, by the dryness of the end; the made seas' rock over the whole return while they are built; what the wind takes a year. hauls: for each mean haul, the energy for a kilogram delivered, the flying hours for a thousand trips, and by size the carriers and their food at the same trips and in the same flying hours. regions: the classes of each region's dry ground and its middle dryness, rain and plant cover (10th, 50th, 90th percentile).",
+ "setting": {
+  "classes": [
+   "hyper-arid",
+   "arid",
+   "semi-arid",
+   "dry sub-humid",
+   "humid",
+   "wet"
+  ],
+  "class_edges": [
+   0.05,
+   0.2,
+   0.5,
+   0.65,
+   1.0
+  ],
+  "hauls_m": [
+   9400.0,
+   12500.0,
+   31000.0,
+   100000.0
+  ],
+  "lift_m": 1000.0,
+  "load_over_body": 0.6,
+  "trips_a_year": 1000.0,
+  "cruise_m_s": 15.0,
+  "handling_s": 1200.0,
+  "food_kj_per_g": 15.0,
+  "sizes_kg": {
+   "hornero": 0.06,
+   "crow": 1.0,
+   "goose": 10.0,
+   "albatross_scale": 1720.0
+  },
+  "miami": {
+   "g_m2": 3000.0,
+   "per_mm": 0.000664
+  },
+  "build_years": 5000.0
+ },
+ "land_m2": 22130560345174.387,
+ "rock_kg_yr": 3233428111939.108,
+ "mean_rock_g_m2_yr": 146.10692461043644,
+ "plant_growth_land_mean_g_dry_m2_yr": [
+  1441.1830623262922,
+  1903.8436762701974
+ ],
+ "the_two_studies_water_agrees": 1.0,
+ "by_dryness": {
+  "hyper-arid": {
+   "land_share": 0.016378133106129462,
+   "aridity": 0.036382297395742294,
+   "rain_mm_yr": 33.85310579297811,
+   "plant_cover": 0.0394496756266743,
+   "rock_shed_gt_yr": 0.024797642877391602,
+   "rock_shed_share": 0.0076691492802418585,
+   "rock_shed_g_m2_yr": 68.41535652773089,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 49.272114800439475,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.000375275461938919,
+    "lake_that_spills": 0.0002519822285499034,
+    "lake_that_passes_nothing_on": 0.001121312028931302,
+    "dry_hollow": 0.023317020363745423
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.960460254098443,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 0.05411987275769227,
+    "by_rain": 0.08749784378936039
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     77.99664395364022,
+     103.03577751028016
+    ],
+    "by_rain": [
+     126.10041045929795,
+     166.58221658565134
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 8.652189608634096,
+    "by_rain": 5.351622170507061,
+    "by_cover_with_the_rule_of_rain": 6.231227918822452,
+    "by_rain_with_the_rule_of_rain": 3.8541894004004913
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 3.429228145051954e-05,
+    "closed hollows": 0.0026655241074512773,
+    "sea shores": 7.768733973306406e-05
+   },
+   "winds_sand_km2": 61954
+  },
+  "arid": {
+   "land_share": 0.20481098275778808,
+   "aridity": 0.12530459480393094,
+   "rain_mm_yr": 50.04155689202109,
+   "plant_cover": 0.24481355312068265,
+   "rock_shed_gt_yr": 0.35030079485645366,
+   "rock_shed_share": 0.108337276330036,
+   "rock_shed_g_m2_yr": 77.2850462026831,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 61.985662189316685,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.015974296235369105,
+    "lake_that_spills": 0.0046384358261556515,
+    "lake_that_passes_nothing_on": 0.0010778779511850917,
+    "dry_hollow": 0.3278729481453342
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.9830035146246432,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 0.3358526561696555,
+    "by_rain": 0.12817015981319177
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     484.0251595090034,
+     639.4109556071475
+    ],
+    "by_rain": [
+     184.71666341842598,
+     244.01594824688573
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 1.5749830493786419,
+    "by_rain": 4.127031138347364,
+    "by_cover_with_the_rule_of_rain": 1.2631986658409358,
+    "by_rain_with_the_rule_of_rain": 3.3100421175333357
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 0.0010969145410231957,
+    "closed hollows": 0.0337000939369546,
+    "sea shores": 0.0021281615860035278
+   },
+   "winds_sand_km2": 184687
+  },
+  "semi-arid": {
+   "land_share": 0.2569403115523978,
+   "aridity": 0.33957101620882846,
+   "rain_mm_yr": 204.98761113348658,
+   "plant_cover": 0.7011620372532685,
+   "rock_shed_gt_yr": 0.6487034518280892,
+   "rock_shed_share": 0.20062405266806985,
+   "rock_shed_g_m2_yr": 114.08316258788452,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 104.17293184212387,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.02917324026303987,
+    "lake_that_spills": 0.05113349285617043,
+    "lake_that_passes_nothing_on": 0.08010560879191782,
+    "dry_hollow": 0.49364049582745595
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.9722511784331829,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 0.9619039861765825,
+    "by_rain": 0.4939997140526598
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     1386.2797324618346,
+     1831.314821261382
+    ],
+    "by_rain": [
+     711.9440206867249,
+     940.4982316784422
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 0.8117438896425202,
+    "by_rain": 1.5806075610772308,
+    "by_cover_with_the_rule_of_rain": 0.7412289330938578,
+    "by_rain_with_the_rule_of_rain": 1.4433025872893384
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 0.006432647625225442,
+    "closed hollows": 0.06547779029940341,
+    "sea shores": 0.005018101180318981
+   },
+   "winds_sand_km2": 378
+  },
+  "dry sub-humid": {
+   "land_share": 0.08988617686507416,
+   "aridity": 0.5713972102660984,
+   "rain_mm_yr": 396.48639310138304,
+   "plant_cover": 0.8913944684344364,
+   "rock_shed_gt_yr": 0.3133047207131727,
+   "rock_shed_share": 0.09689552693512084,
+   "rock_shed_g_m2_yr": 157.50038485059926,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 154.23745784971095,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.010977422155174558,
+    "lake_that_spills": 0.06755427253225522,
+    "lake_that_passes_nothing_on": 0.06955979150982022,
+    "dry_hollow": 0.16428255931841515
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.9304999591521236,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 1.222878374593352,
+    "by_rain": 0.9051316777913933
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     1762.3916007490457,
+     2328.169260317131
+    ],
+    "by_rain": [
+     1304.460443207935,
+     1723.229220954978
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 0.8815106323162575,
+    "by_rain": 1.1909651553286,
+    "by_cover_with_the_rule_of_rain": 0.8632484239636671,
+    "by_rain_with_the_rule_of_rain": 1.1662919942685492
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 0.008347351598849969,
+    "closed hollows": 0.025600742762681563,
+    "sea shores": 0.0011673843445007273
+   },
+   "winds_sand_km2": 0
+  },
+  "humid": {
+   "land_share": 0.19331359501405407,
+   "aridity": 0.8242404742419334,
+   "rain_mm_yr": 653.2536659876179,
+   "plant_cover": 0.9467859922654381,
+   "rock_shed_gt_yr": 0.7888717008854575,
+   "rock_shed_share": 0.2439737868216795,
+   "rock_shed_g_m2_yr": 184.3960310990352,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 187.03384255833842,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.03485303393139926,
+    "lake_that_spills": 0.30607677596632316,
+    "lake_that_passes_nothing_on": 0.23330232108726243,
+    "dry_hollow": 0.21246340389521617
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.9753795111046242,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 1.2988684093393283,
+    "by_rain": 1.3698783437287085
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     1871.9071517305333,
+     2472.8424074278105
+    ],
+    "by_rain": [
+     1974.2454664294094,
+     2608.0342219673935
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 0.9716628882275468,
+    "by_rain": 0.9212951177919422,
+    "by_cover_with_the_rule_of_rain": 0.9855626640842716,
+    "by_rain_with_the_rule_of_rain": 0.9344743755266516
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 0.042306859395421434,
+    "closed hollows": 0.04736065656790954,
+    "sea shores": 0.0044729449451928515
+   },
+   "winds_sand_km2": 0
+  },
+  "wet": {
+   "land_share": 0.23867080070455643,
+   "aridity": 1.773485257842921,
+   "rain_mm_yr": 1205.966659543031,
+   "plant_cover": 0.983938397555729,
+   "rock_shed_gt_yr": 1.107449800778543,
+   "rock_shed_share": 0.3425002079648519,
+   "rock_shed_g_m2_yr": 209.66809478351107,
+   "rock_shed_with_the_rule_of_rain_g_m2_yr": 233.87179884831608,
+   "rock_settling_here_gt_yr": {
+    "sea": 0.10041498650181253,
+    "lake_that_spills": 0.8329461070559544,
+    "lake_that_passes_nothing_on": 0.06036102578153465,
+    "dry_hollow": 0.1119544262241467
+   },
+   "of_the_rock_settling_here_shed_in_this_class": 0.9932922667803704,
+   "plant_growth_over_the_lands_mean": {
+    "by_cover": 1.3498367231470396,
+    "by_rain": 2.091638009060849
+   },
+   "plant_growth_g_dry_m2_yr": {
+    "by_cover": [
+     1945.361822305538,
+     2569.8781093607768
+    ],
+    "by_rain": [
+     3014.433271176383,
+     3982.1517965968833
+    ]
+   },
+   "food_over_the_lands_mean_share": {
+    "by_cover": 1.0631151575084699,
+    "by_rain": 0.6860804184675889,
+    "by_cover_with_the_rule_of_rain": 1.1858392404726041,
+    "by_rain_with_the_rule_of_rain": 0.7652802959233984
+   },
+   "lasting_sand_at_ends_km3_yr": {
+    "lake deltas": 0.11348264688556836,
+    "closed hollows": 0.015374333579055082,
+    "sea shores": 0.012212717635197882
+   },
+   "winds_sand_km2": 0
+  }
+ },
+ "rock_from_class_to_class_gt_yr": [
+  [
+   0.024074503020405345,
+   0.0007231398569870407,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0009910870627609844,
+   0.3436222062539837,
+   0.005687501539638313,
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.005218212047002614,
+   0.6359036422488415,
+   0.0075815975321792,
+   0.0,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   0.012461693950038148,
+   0.2906640365924939,
+   0.010178990170623362,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.014128411390974756,
+   0.7673267061996185,
+   0.007416583294840894
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.009189838509935778,
+   1.09825996226856
+  ]
+ ],
+ "sand": {
+  "made_seas": {
+   "plain": {
+    "sand_km3": 390.0,
+    "radius_km": 1782,
+    "need_km3_yr": 0.078,
+    "at_ends_within_the_radius_km3_yr": {
+     "hyper-arid": 0.0007940472227183843,
+     "arid": 0.0074453270094463776,
+     "semi-arid": 0.015667742059141013,
+     "dry sub-humid": 0.008543589866456478,
+     "humid": 0.02568248372601526,
+     "wet": 0.019812329024798445
+    }
+   },
+   "walled": {
+    "sand_km3": 100.8,
+    "radius_km": 924,
+    "need_km3_yr": 0.020164032806561313,
+    "at_ends_within_the_radius_km3_yr": {
+     "hyper-arid": 0.001905769166183413,
+     "arid": 0.008389025010469942,
+     "semi-arid": 0.007561703727154835,
+     "dry sub-humid": 0.001588079905784994,
+     "humid": 0.0007403045329991169,
+     "wet": 0.0
+    }
+   }
+  },
+  "made_seas_rock_over_the_return": 0.04857259681144186,
+  "winds_take_km3_yr": [
+   0.00172,
+   0.00271
+  ],
+  "winds_sand_km2": 247018
+ },
+ "hauls": {
+  "9.4 km": {
+   "kj_per_kg_delivered": [
+    23.839201857575237,
+    35.22750274496341
+   ],
+   "hours_a_year": 681.4814814814814,
+   "share_of_the_year": 0.07774144210375102,
+   "trips_in_the_first_hauls_hours": 1000.0000000000001,
+   "by_size": {
+    "hornero": {
+     "at_the_same_trips": {
+      "carriers": 89817447553.8641,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       378.3631771842811,
+       380.8180606667145
+      ],
+      "of_the_lands_plant_growth": [
+       0.008980182598415673,
+       0.011940045376272756
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 89817447553.8641,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       378.3631771842811,
+       380.8180606667145
+      ],
+      "of_the_lands_plant_growth": [
+       0.008980182598415673,
+       0.011940045376272756
+      ]
+     }
+    },
+    "crow": {
+     "at_the_same_trips": {
+      "carriers": 5389046853.231847,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       157.26369441424316,
+       159.7185778966766
+      ],
+      "of_the_lands_plant_growth": [
+       0.0037325426391942723,
+       0.005007764243590034
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 5389046853.231847,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       157.26369441424316,
+       159.7185778966766
+      ],
+      "of_the_lands_plant_growth": [
+       0.0037325426391942723,
+       0.005007764243590034
+      ]
+     }
+    },
+    "goose": {
+     "at_the_same_trips": {
+      "carriers": 538904685.3231846,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       78.1182122026616,
+       80.57309568509507
+      ],
+      "of_the_lands_plant_growth": [
+       0.0018540805557830818,
+       0.002526262585609794
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 538904685.3231846,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       78.1182122026616,
+       80.57309568509507
+      ],
+      "of_the_lands_plant_growth": [
+       0.0018540805557830818,
+       0.002526262585609794
+      ]
+     }
+    },
+    "albatross_scale": {
+     "at_the_same_trips": {
+      "carriers": 3133166.7751347944,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       19.26636640949426,
+       21.721249891927727
+      ],
+      "of_the_lands_plant_growth": [
+       0.00045727359002742954,
+       0.0006810409907684442
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 3133166.775134794,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       19.266366409494257,
+       21.721249891927723
+      ],
+      "of_the_lands_plant_growth": [
+       0.00045727359002742943,
+       0.0006810409907684441
+      ]
+     }
+    }
+   }
+  },
+  "12.5 km": {
+   "kj_per_kg_delivered": [
+    25.987502024973008,
+    39.703128093708756
+   ],
+   "hours_a_year": 796.2962962962964,
+   "share_of_the_year": 0.090839185066883,
+   "trips_in_the_first_hauls_hours": 855.8139534883719,
+   "by_size": {
+    "hornero": {
+     "at_the_same_trips": {
+      "carriers": 89817447553.8641,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       378.8262687945575,
+       381.78283485479045
+      ],
+      "of_the_lands_plant_growth": [
+       0.008991173750490843,
+       0.011970294591772975
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 104949734913.48256,
+      "live_mass_mt": 6.296984094808954,
+      "dry_food_mt_yr": [
+       441.70645889660994,
+       444.6630249568429
+      ],
+      "of_the_lands_plant_growth": [
+       0.010483590621344257,
+       0.01394181958135125
+      ]
+     }
+    },
+    "crow": {
+     "at_the_same_trips": {
+      "carriers": 5389046853.231847,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       157.72678602451964,
+       160.6833520847526
+      ],
+      "of_the_lands_plant_growth": [
+       0.0037435337912694426,
+       0.005038013459090257
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 6296984094.808952,
+      "live_mass_mt": 6.296984094808952,
+      "dry_food_mt_yr": [
+       183.35651979031542,
+       186.31308585054842
+      ],
+      "of_the_lands_plant_growth": [
+       0.004351837408123593,
+       0.005841599779575239
+      ]
+     }
+    },
+    "goose": {
+     "at_the_same_trips": {
+      "carriers": 538904685.3231846,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       78.58130381293807,
+       81.53786987317109
+      ],
+      "of_the_lands_plant_growth": [
+       0.0018650717078582525,
+       0.0025565118011100173
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 629698409.4808953,
+      "live_mass_mt": 6.296984094808952,
+      "dry_food_mt_yr": [
+       90.87674438004353,
+       93.83331044027653
+      ],
+      "of_the_lands_plant_growth": [
+       0.0021568952997898664,
+       0.002942019037913546
+      ]
+     }
+    },
+    "albatross_scale": {
+     "at_the_same_trips": {
+      "carriers": 3133166.7751347944,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       19.729458019770757,
+       22.686024080003754
+      ],
+      "of_the_lands_plant_growth": [
+       0.0004682647421026005,
+       0.0007112902062686672
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 3661037.26442381,
+      "live_mass_mt": 6.296984094808954,
+      "dry_food_mt_yr": [
+       22.109641958679497,
+       25.066208018912498
+      ],
+      "of_the_lands_plant_growth": [
+       0.0005247567256732066,
+       0.0007859177178543593
+      ]
+     }
+    }
+   }
+  },
+  "31 km": {
+   "kj_per_kg_delivered": [
+    41.40675322645699,
+    80.85000629991602
+   ],
+   "hours_a_year": 1481.4814814814813,
+   "share_of_the_year": 0.1690031350081544,
+   "trips_in_the_first_hauls_hours": 460.00000000000006,
+   "by_size": {
+    "hornero": {
+     "at_the_same_trips": {
+      "carriers": 89817447553.8641,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       382.15007148121947,
+       390.65253303548957
+      ],
+      "of_the_lands_plant_growth": [
+       0.009070061858127152,
+       0.012248392218146
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 195255320769.26978,
+      "live_mass_mt": 11.715319246156184,
+      "dry_food_mt_yr": [
+       820.2830089664859,
+       828.7854705207561
+      ],
+      "of_the_lands_plant_growth": [
+       0.01946883747439605,
+       0.025985469564884883
+      ]
+     }
+    },
+    "crow": {
+     "at_the_same_trips": {
+      "carriers": 5389046853.231847,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       161.05058871118155,
+       169.55305026545167
+      ],
+      "of_the_lands_plant_growth": [
+       0.003822421898905749,
+       0.005316111085463279
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 11715319246.156189,
+      "live_mass_mt": 11.71531924615619,
+      "dry_food_mt_yr": [
+       339.63195946640377,
+       348.1344210206738
+      ],
+      "of_the_lands_plant_growth": [
+       0.008060924519566925,
+       0.010915293189487665
+      ]
+     }
+    },
+    "goose": {
+     "at_the_same_trips": {
+      "carriers": 538904685.3231846,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       81.90510649960002,
+       90.40756805387011
+      ],
+      "of_the_lands_plant_growth": [
+       0.0019439598154945602,
+       0.0028346094274830373
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 1171531924.6156187,
+      "live_mass_mt": 11.715319246156188,
+      "dry_food_mt_yr": [
+       167.57656335426995,
+       176.07902490854005
+      ],
+      "of_the_lands_plant_growth": [
+       0.00397731129475999,
+       0.005520724367791491
+      ]
+     }
+    },
+    "albatross_scale": {
+     "at_the_same_trips": {
+      "carriers": 3133166.7751347944,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       23.053260706432702,
+       31.55572226070277
+      ],
+      "of_the_lands_plant_growth": [
+       0.000547152849738908,
+       0.0009893878326416876
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 6811232.119858248,
+      "live_mass_mt": 11.715319246156188,
+      "dry_food_mt_yr": [
+       39.63776815173228,
+       48.14022970600235
+      ],
+      "of_the_lands_plant_growth": [
+       0.0009407744126824854,
+       0.0015093730746581209
+      ]
+     }
+    }
+   }
+  },
+  "100 km": {
+   "kj_per_kg_delivered": [
+    119.10938428112625,
+    242.73048766381035
+   ],
+   "hours_a_year": 4037.0370370370374,
+   "share_of_the_year": 0.46053354289722076,
+   "trips_in_the_first_hauls_hours": 168.80733944954127,
+   "by_size": {
+    "hornero": {
+     "at_the_same_trips": {
+      "carriers": 89817447553.8641,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       398.89979625613944,
+       425.5477929832396
+      ],
+      "of_the_lands_plant_growth": [
+       0.009467604737620226,
+       0.013342486827166171
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 532070749096.26025,
+      "live_mass_mt": 31.924244945775616,
+      "dry_food_mt_yr": [
+       2236.6240618193415,
+       2263.2720585464417
+      ],
+      "of_the_lands_plant_growth": [
+       0.0530846913503037,
+       0.07096189458709871
+      ]
+     }
+    },
+    "crow": {
+     "at_the_same_trips": {
+      "carriers": 5389046853.231847,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       177.8003134861016,
+       204.44831021320172
+      ],
+      "of_the_lands_plant_growth": [
+       0.004219964778398828,
+       0.0064102056944834495
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 31924244945.77561,
+      "live_mass_mt": 31.924244945775612,
+      "dry_food_mt_yr": [
+       926.8499519316167,
+       953.497948658717
+      ],
+      "of_the_lands_plant_growth": [
+       0.021998128548394308,
+       0.029895663964141297
+      ]
+     }
+    },
+    "goose": {
+     "at_the_same_trips": {
+      "carriers": 538904685.3231846,
+      "live_mass_mt": 5.389046853231846,
+      "dry_food_mt_yr": [
+       98.65483127452005,
+       125.30282800162016
+      ],
+      "of_the_lands_plant_growth": [
+       0.002341502694987638,
+       0.003928704036503208
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 3192424494.5775614,
+      "live_mass_mt": 31.924244945775612,
+      "dry_food_mt_yr": [
+       457.9989975260522,
+       484.6469942531524
+      ],
+      "of_the_lands_plant_growth": [
+       0.010870282510795415,
+       0.015195463925019219
+      ]
+     }
+    },
+    "albatross_scale": {
+     "at_the_same_trips": {
+      "carriers": 3133166.7751347944,
+      "live_mass_mt": 5.3890468532318465,
+      "dry_food_mt_yr": [
+       39.80298548135272,
+       66.45098220845281
+      ],
+      "of_the_lands_plant_growth": [
+       0.0009446957292319856,
+       0.0020834824416618588
+      ]
+     },
+     "in_the_same_hours": {
+      "carriers": 18560607.52661373,
+      "live_mass_mt": 31.924244945775616,
+      "dry_food_mt_yr": [
+       109.36578059913711,
+       136.0137773262372
+      ],
+      "of_the_lands_plant_growth": [
+       0.0025957195071342146,
+       0.004264531651230788
+      ]
+     }
+    }
+   }
+  }
+ },
+ "regions": {
+  "korolev": {
+   "dry_ground_share": 0.4156629774305556,
+   "aridity": [
+    2.2940516471862793,
+    4.235490798950195,
+    6.139800548553467
+   ],
+   "rain_mm_yr": [
+    1057.853759765625,
+    2393.39599609375,
+    3854.1396484375
+   ],
+   "plant_cover": [
+    0.9943928718566895,
+    0.9985387921333313,
+    0.99935382604599
+   ],
+   "classes": {
+    "hyper-arid": 0.0,
+    "arid": 0.0,
+    "semi-arid": 0.0,
+    "dry sub-humid": 0.0,
+    "humid": 0.0,
+    "wet": 1.0
+   }
+  },
+  "southern_highlands": {
+   "dry_ground_share": 0.9985487196180556,
+   "aridity": [
+    0.23528359830379486,
+    0.4549736976623535,
+    0.6570028066635132
+   ],
+   "rain_mm_yr": [
+    95.36334991455078,
+    279.0516357421875,
+    437.2663879394531
+   ],
+   "plant_cover": [
+    0.546135663986206,
+    0.8351788520812988,
+    0.919007420539856
+   ],
+   "classes": {
+    "hyper-arid": 0.0,
+    "arid": 0.011939528123769033,
+    "semi-arid": 0.5604447100691379,
+    "dry sub-humid": 0.3119626193613235,
+    "humid": 0.11565314244576955,
+    "wet": 0.0
+   }
+  },
+  "mendeleev": {
+   "dry_ground_share": 0.4045681423611111,
+   "aridity": [
+    2.1775107383728027,
+    2.91332745552063,
+    3.3357067108154297
+   ],
+   "rain_mm_yr": [
+    1175.732177734375,
+    1519.129638671875,
+    1863.73388671875
+   ],
+   "plant_cover": [
+    0.9937158226966858,
+    0.996677815914154,
+    0.9975314140319824
+   ],
+   "classes": {
+    "hyper-arid": 0.0,
+    "arid": 0.0,
+    "semi-arid": 0.0,
+    "dry sub-humid": 0.0,
+    "humid": 0.0,
+    "wet": 1.0
+   }
+  },
+  "northern_far_side": {
+   "dry_ground_share": 0.8125,
+   "aridity": [
+    0.1891310065984726,
+    0.3855140209197998,
+    0.9113826751708984
+   ],
+   "rain_mm_yr": [
+    119.49591827392578,
+    398.279541015625,
+    696.6574096679688
+   ],
+   "plant_cover": [
+    0.429252952337265,
+    0.7790429592132568,
+    0.9588304758071899
+   ],
+   "classes": {
+    "hyper-arid": 0.0,
+    "arid": 0.12949051816239315,
+    "semi-arid": 0.48536825587606836,
+    "dry sub-humid": 0.11436631944444445,
+    "humid": 0.1912560096153846,
+    "wet": 0.07951889690170941
+   }
+  }
+ },
+ "seconds": 142
+}
